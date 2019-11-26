@@ -28,6 +28,7 @@ else
 	FPFLAGS := $(FPFLAGS) -D __FFT_SP
 endif
 CFLAGS := $(CFLAGS) $(SRCS) $(FPFLAGS)
+OMPFLAGS := -DOMP -fopenmp
 
 # Include Directories 
 INC := -Icommon 
@@ -38,6 +39,7 @@ LIB_DIRS :=  $(FFTW_DIR) -lm
 
 # Libraries
 LIBS := -lrt -lpthread -lfftw3 -lfftw3f
+OMPLIBS := -lfftw3_omp
 
 # Target
 TARGETDIR := .
@@ -46,6 +48,10 @@ TARGET := host
 all : info
 	mkdir -p $(TARGETDIR)
 	$(CC) $(CFLAGS) $(INC_DIRS) $(LIB_DIRS)	$(LIBS) -o $(TARGETDIR)/$(TARGET)
+
+omp : info
+	mkdir -p $(TARGETDIR)
+	$(CC) $(CFLAGS) $(OMPFLAGS) $(INC_DIRS) $(LIB_DIRS) $(LIBS) $(OMPLIBS) -o $(TARGETDIR)/$(TARGET)_omp
 
 clean : 
 	rm -f $(TARGETDIR)/$(TARGET)

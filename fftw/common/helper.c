@@ -231,7 +231,7 @@ void compute_metrics( double fftw_runtime, unsigned iter, int N[3]){
   }
 
   printf("\nNumber of runs: %d\n\n", iter);
-  printf("\tFFT Size\tRuntime(ms)\tThroughput(GFLOPS/sec)\t\n");
+  printf("\tFFT Size\tAvg Runtime(ms)\tThroughput(GFLOPS/sec)\t\n");
 
   printf("fftw:"); 
   fprintf(fp, "fftw,"); 

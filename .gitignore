@@ -12,5 +12,5 @@ tags
 slurm*
 *.swp
 *.vscode
-host
+host*
 *.log
