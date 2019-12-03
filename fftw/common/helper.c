@@ -27,52 +27,26 @@ unsigned coord(unsigned N[3], unsigned i, unsigned j, unsigned k);
  * \param  fft_data  : pointer to fft3d sized allocation of sp complex data 
  * \param  fftw_data : pointer to fft3d sized allocation of sp complex data for fftw cpu computation
  * \param  N : 3 element integer array containing the size of FFT3d  
- * \param  fname : path to input file to read from or write into
  *****************************************************************************/
-void get_sp_input_data(float2 *fft_data, fftwf_complex *fftw_data, unsigned N[3], char *fname){
+void get_sp_input_data(float2 *fft_data, fftwf_complex *fftw_data, unsigned N[3]){
   unsigned i = 0, j = 0, k = 0, where = 0;
   float a, b;
 
-  // If file exists, read in the values
-  // Else randomly generate values and write to a file 
-  FILE *fp = fopen(fname,"r");
-  if(fp != NULL){
-      printf("-> Scanning from file - %s\n\n",fname);
-      for (i = 0; i < N[0]; i++) {
-        for (j = 0; j < N[1]; j++) {
-          for ( k = 0; k < N[2]; k++) {
-            where = coord(N, i, j, k);
-            fscanf(fp, "%f %f ", &a, &b);
-            fftw_data[where][0] = fft_data[where].x = a;
-            fftw_data[where][1] = fft_data[where].y = b;
-#ifdef DEBUG
-            printf(" %d %d %d : fft[%d] = (%f, %f) fftw[%d] = (%f, %f) \n", i, j, k, where, fft_data[where].x, fft_data[where].y, where, fftw_data[where][0], fftw_data[where][1]);
-#endif
-          }
-        }
-      }
-  }
-  else{
-      printf("-> Data not available. Printing random floats to file - %s\n",fname);
-      fp = fopen(fname,"w");
-      for (i = 0; i < N[0]; i++) {
-        for (j = 0; j < N[1]; j++) {
-          for ( k = 0; k < N[2]; k++) {
-            where = coord(N, i, j, k);
+  for (i = 0; i < N[0]; i++) {
+    for (j = 0; j < N[1]; j++) {
+      for ( k = 0; k < N[2]; k++) {
+        where = coord(N, i, j, k);
 
-            fft_data[where].x = (float)((float)rand() / (float)RAND_MAX);
-            fft_data[where].y = (float)((float)rand() / (float)RAND_MAX);
-            fprintf(fp, "%f %f ", fft_data[where].x, fft_data[where].y);
+        fft_data[where].x = (float)where;
+        fft_data[where].y = (float)where;
 
-            fftw_data[where][0] = fft_data[where].x;
-            fftw_data[where][1] = fft_data[where].y;
+        fftw_data[where][0] = fft_data[where].x;
+        fftw_data[where][1] = fft_data[where].y;
 #ifdef DEBUG
-            printf(" %d %d %d : fft[%d] = (%f, %f) fftw[%d] = (%f, %f) \n", i, j, k, where, fft_data[where].x, fft_data[where].y, where, fftw_data[where][0], fftw_data[where][1]);
+        printf(" %d %d %d : fft[%d] = (%f, %f) fftw[%d] = (%f, %f) \n", i, j, k, where, fft_data[where].x, fft_data[where].y, where, fftw_data[where][0], fftw_data[where][1]);
 #endif
-          }
-        }
       }
-      fclose(fp);
+    }
   }
 }
 /******************************************************************************
@@ -81,54 +55,25 @@ void get_sp_input_data(float2 *fft_data, fftwf_complex *fftw_data, unsigned N[3]
  * \param  fft_data  : pointer to fft3d sized allocation of dp complex data
  * \param  fftw_data : pointer to fft3d sized allocation of dp complex data for fftw cpu computation
  * \param  N : 3 element integer array containing the size of FFT3d  
- * \param  fname : path to input file to read from or write into
  *****************************************************************************/
-void get_dp_input_data(double2 *fft_data, fftw_complex *fftw_data, unsigned N[3], char* fname){
+void get_dp_input_data(double2 *fft_data, fftw_complex *fftw_data, unsigned N[3]){
   unsigned i = 0, j = 0, k = 0, where = 0;
 
-  // If file exists, read in the values
-  // Else randomly generate values and write to a file s
-  FILE *fp = fopen(fname,"r");
-  if(fp != NULL){
-    printf("-> Scanning from file - %s\n\n",fname);
+  for (i = 0; i < N[0]; i++) {
+    for (j = 0; j < N[1]; j++) {
+      for ( k = 0; k < N[2]; k++) {
+        where = coord(N, i, j, k);
 
-    for (i = 0; i < N[0]; i++) {
-      for (j = 0; j < N[1]; j++) {
-        for ( k = 0; k < N[2]; k++) {
-          where = coord(N, i, j, k);
-          fscanf(fp, "%lf %lf ", &fft_data[where].x, &fft_data[where].y);
+        fft_data[where].x = (double)where;
+        fft_data[where].y = (double)where;
 
-          fftw_data[where][0] = fft_data[where].x;
-          fftw_data[where][1] = fft_data[where].y;
-#ifdef DEBUG
-          printf(" %d %d %d : fft[%d] = (%lf, %lf) fftw[%d] = (%lf, %lf) \n", i, j, k, where, fft_data[where].x, fft_data[where].y, where, fftw_data[where][0], fftw_data[where][1]);
-#endif
-        }
-      }
-    }
-  }
-  else{
-    printf("-> Data not available. Printing random doubles to file - %s\n",fname);
-
-    fp = fopen(fname,"w");
-    for (i = 0; i < N[0]; i++) {
-      for (j = 0; j < N[1]; j++) {
-        for ( k = 0; k < N[2]; k++) {
-          where = coord(N, i, j, k);
-
-          fft_data[where].x = (double)((double)rand() / (double)RAND_MAX);
-          fft_data[where].y = (double)((double)rand() / (double)RAND_MAX);
-          fprintf(fp, "%lf %lf ", fft_data[where].x, fft_data[where].y);
-
-          fftw_data[where][0] = fft_data[where].x;
-          fftw_data[where][1] = fft_data[where].y;
+        fftw_data[where][0] = fft_data[where].x;
+        fftw_data[where][1] = fft_data[where].y;
 #ifdef DEBUG          
           printf(" %d %d %d : fft[%d] = (%lf, %lf) fftw[%d] = (%lf, %lf) \n", i, j, k, where, fft_data[where].x, fft_data[where].y, where, fftw_data[where][0], fftw_data[where][1]);
 #endif
-        }
       }
     }
-    fclose(fp);
   }
 }
 /******************************************************************************
@@ -214,38 +159,20 @@ double compute_dp_fftw(fftw_complex *fftw_data, int N[3], int inverse){
  * \param  N - fft size
  *****************************************************************************/
 void compute_metrics( double fftw_runtime, unsigned iter, int N[3]){
-  char filename[] = "outputfiles/output.csv";
-  printf("Printing metrics to %s\n", filename);
-
-  FILE *fp = fopen(filename,"r");
-  if(fp == NULL){
-    fp = fopen(filename,"w");
-    if(fp == NULL){
-      printf("Unable to create file - %s\n", filename);
-      exit(1);
-    }
-    fprintf(fp,"device, N, runtime, throughput\n");
-  }
-  else{
-    fp = fopen(filename,"a");
-  }
+  double avg_fftw_runtime = 0.0;
 
   printf("\nNumber of runs: %d\n\n", iter);
-  printf("\tFFT Size\tAvg Runtime(ms)\tThroughput(GFLOPS/sec)\t\n");
+  printf("\tFFT Size\tTotal Runtime(ms)\tAvg Runtime(ms)\tThroughput(GFLOPS/sec)\t\n");
 
   printf("fftw:"); 
-  fprintf(fp, "fftw,"); 
   if(fftw_runtime != 0.0){
-    fftw_runtime = fftw_runtime / iter;
+    avg_fftw_runtime = fftw_runtime / iter;
     double gpoints_per_sec = ( N[0] * N[1] * N[2] / (fftw_runtime * 1E-3)) * 1E-9;
     double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(fftw_runtime * 1E-3 * 1E9);
-    printf("\t  %d³ \t\t %.4f \t  %.4f \t\n", N[0], fftw_runtime, gflops);
-    fprintf(fp, "%d,%.4f,%.4f\n", N[0], fftw_runtime, gflops);
+    printf("\t  %d³ \t\t%lf \t\t %lf \t  %.4f \t\n", N[0], fftw_runtime, avg_fftw_runtime, gflops);
   }
   else{
     printf("ERROR in FFT3d\n");
   }
-
-  fclose(fp);
 }
 

@@ -4,7 +4,6 @@
 # Compiles Code to run FFTW FFT3d
 
 # Variables
-FFT_DP := 0
 DEBUG := 0
 
 # Compilers
@@ -16,19 +15,12 @@ CFLAGS := -march=native
 ifeq ($(DEBUG),1)
 	CFLAGS := $(CFLAGS) -O1 -fsanitize=leak -ggdb3 -DDEBUG
 else
-	CFLAGS := $(CFLAGS) -O3 -funroll-loops
+	CFLAGS := $(CFLAGS) -O3 -funroll-loops -mtune=native
 endif
 
 SRCS := $(wildcard main.c common/*.c)
-
-# Pass FFT_DP=1 as cmd line arg to activate double precision compilation 
-ifeq ($(FFT_DP),1)
- 	FPFLAGS :=  $(FPFLAGS)
-else
-	FPFLAGS := $(FPFLAGS) -D __FFT_SP
-endif
-CFLAGS := $(CFLAGS) $(SRCS) $(FPFLAGS)
-OMPFLAGS := -DOMP -fopenmp
+CFLAGS := $(CFLAGS) $(SRCS) 
+OMPFLAGS := -DOMP -fopenmp -D __FFT_DP
 
 # Include Directories 
 INC := -Icommon 
@@ -45,9 +37,15 @@ OMPLIBS := -lfftw3_omp
 TARGETDIR := .
 TARGET := host
 
-all : info
+all : info 
 	mkdir -p $(TARGETDIR)
-	$(CC) $(CFLAGS) $(INC_DIRS) $(LIB_DIRS)	$(LIBS) -o $(TARGETDIR)/$(TARGET)
+	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS)	$(LIBS) -o $(TARGETDIR)/$(TARGET)
+
+dp : info
+	$(CC) $(CFLAGS) -D __FFT_DP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET)_dp
+
+sp : info
+	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET)_sp
 
 omp : info
 	mkdir -p $(TARGETDIR)
@@ -61,7 +59,6 @@ info :
 	$(info FFTW Version     : $(FFTW_VERSION))
 	$(info FFTW Include Dir : $(FFTW_INC) ) 
 	$(info FFTW Shared Libs : $(FFTW_DIR) ) 
-	$(info Precision        : $(FPGA_DP) (0/sp 1/dp))
 	$(info -------------------------------)
 
-.PHONY : all clean # ---------------
+.PHONY : all clean dp sp omp info # ---------------
