@@ -21,7 +21,7 @@
 #include "common/helper.h"  // Cmd-line Args to set some global vars
 
 static const char *const usage[] = {
-    "bin/host [options]",
+    "./host [options]",
     NULL,
 };
 
