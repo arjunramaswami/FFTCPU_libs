@@ -36,23 +36,26 @@ OMPLIBS := -lfftw3_omp
 # Target
 TARGETDIR := .
 TARGET := host
+TARGET_DP := host_dp
+TARGET_SP := host_sp
+TARGET_OMP := host_omp
 
 all : info 
 	mkdir -p $(TARGETDIR)
 	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS)	$(LIBS) -o $(TARGETDIR)/$(TARGET)
 
 dp : info
-	$(CC) $(CFLAGS) -D __FFT_DP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET)_dp
+	$(CC) $(CFLAGS) -D __FFT_DP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET_DP)
 
 sp : info
-	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET)_sp
+	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET_SP)
 
 omp : info
 	mkdir -p $(TARGETDIR)
-	$(CC) $(CFLAGS) $(OMPFLAGS) $(INC_DIRS) $(LIB_DIRS) $(LIBS) $(OMPLIBS) -o $(TARGETDIR)/$(TARGET)_omp
+	$(CC) $(CFLAGS) $(OMPFLAGS) $(INC_DIRS) $(LIB_DIRS) $(LIBS) $(OMPLIBS) -o $(TARGETDIR)/$(TARGET_OMP)
 
 clean : 
-	rm -f $(TARGETDIR)/$(TARGET)
+	rm -f $(TARGETDIR)/$(TARGET) $(TARGETDIR)/$(TARGET_DP) $(TARGETDIR)/$(TARGET_SP) $(TARGETDIR)/$(TARGET_OMP)
 
 info :
 	$(info -------------------------------)
