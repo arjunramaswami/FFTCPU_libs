@@ -12,9 +12,10 @@
 ## Performance results are output to a timestamped file in data/ folder
 
 module load toolchain/gompi
+module load numlib/FFTW
 
 current_time=$(date "+%Y.%m.%d-%H.%M")
-iteration=10000
+iteration=1
 
 echo "Passed $# FFT3d Sizes"
 for arg in $@
