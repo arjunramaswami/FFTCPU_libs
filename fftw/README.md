@@ -86,7 +86,21 @@ fftw      32<sup>3<sup>     30.051          0.300               23.51
 
 ## Results
 
+### Best Runtime and Throughput
+
+This is required to compare each FFT size with other FFT libraries and implementations.
+
+| FFT3d Size | Best Runtime (ms) | Throughput (GFLOPS) |
+|:----------:|:-----------------:|:-------------------:|
+|     16     |   0.021           |     11.39           |
+|     32     |   0.0619          |     39.68           |
+|     64     |   0.181           |    130.06           |
+|     128    |   1.529           |    143.99           |
+|     256    |   106.702         |     18.86           |
+
 ### Speedup with Multithreading
+
+Maximum speedup obtained per size when strong scaling to 40 threads. 
 
 | FFT3d Size | Max Speedup |
 |:----------:|:-----------:|
@@ -95,8 +109,6 @@ fftw      32<sup>3<sup>     30.051          0.300               23.51
 |     64     |     16.5    |
 |     128    |     24.7    |
 |     256    |     9.1     |
-
-Maximum speedup obtained per size when strong scaling to 40 threads.
 
 #### Notes
 
