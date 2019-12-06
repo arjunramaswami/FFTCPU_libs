@@ -81,16 +81,35 @@ fftw      32<sup>3<sup>     30.051          0.300               23.51
 - Runtime only measures the walltime of the FFTW execution, not the
   initialization and plan creation. Measured using `clock_gettime` to provide
   nanosecond resolution.
-- Iterations are made on the same input data. Input data is $[0, N^3 - 1]$ where
+- Iterations are made on the same input data. Input data is [0, N^3 - 1] where
   N is the number of data points in a dimension.
 
-#  Results
+## Results
 
-# Configuring FFTW with OpenMP
+### Speedup with Multithreading
+
+| FFT3d Size | Max Speedup |
+|:----------:|:-----------:|
+|     16     |   1.0       |
+|     32     |     3.25    |
+|     64     |     16.5    |
+|     128    |     24.7    |
+|     256    |     9.1     |
+
+Maximum speedup obtained per size when strong scaling to 40 threads.
+
+#### Notes
+
+- Better Speedup with increase in FFT size i.e., more data
+- Could 256<sup>3</sup> offer better speedup with more threads?
+- Can one estimate the maximum speedup possible?
+
+
+## Configuring FFTW with OpenMP
 
 Steps to configure multithreaded execution of FFTW with OpenMPI
 
-## Code Modification
+### Code Modification
 
 Initialize the environment:
 
@@ -118,14 +137,14 @@ Cleanup plan and threads after execution
   void fftw_cleanup_threads(void);
   ```
 
-### FFTW API for multithreading works only with double precision
+#### FFTW API for multithreading works only with double precision
 
 - Creating a single precision plan after initializing threads produces single
    threaded outcomes.
 - Creating fftwf alternatives throw linker error due to lack of such
    functionalities.
 
-## Compilation
+### Compilation
 
 To compile with OpenMPI, link this additional flag `-lfftw3_omp` along with
 `-fopenmp` other than the regular `fftw` flags. These are added to the makefile.
