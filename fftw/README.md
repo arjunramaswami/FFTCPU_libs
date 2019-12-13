@@ -171,7 +171,7 @@ single thread for the latter.
 Pin OpenMP threads using environment variables as opposed to using `srun bind`.
 There is also an environment variable to output the pinning results at runtime.
 
-[Link1]{http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-affinity.html}
+[Link1](http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-affinity.html)
 
-[Link2]{https://groups.uni-paderborn.de/pc2/lectures/hpccourse03/material/hpcadv.pdf}
+[Link2](https://groups.uni-paderborn.de/pc2/lectures/hpccourse03/material/hpcadv.pdf)
 
