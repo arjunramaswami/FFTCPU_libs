@@ -10,7 +10,7 @@ Link to the official FFTW [website](http://www.fftw.org/).
 
 ### Prerequisites
 
-- easyload FFTW `module load numlib/FFTW`
+- easybuild FFTW `module load numlib/FFTW`
 - C compiler that implements OpenMPI (tested with gcc 8.3.0)
 
 ### Targets
@@ -165,3 +165,13 @@ To compile with OpenMPI, link this additional flag `-lfftw3_omp` along with
 
 Execution is thread-safe but not plan creation and destruction, therefore use a
 single thread for the latter.
+
+## TODO
+
+Pin OpenMP threads using environment variables as opposed to using `srun bind`.
+There is also an environment variable to output the pinning results at runtime.
+
+[Link1]{http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-affinity.html}
+
+[Link2]{https://groups.uni-paderborn.de/pc2/lectures/hpccourse03/material/hpcadv.pdf}
+
