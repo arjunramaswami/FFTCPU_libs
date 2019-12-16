@@ -37,7 +37,7 @@ void main(int argc, const char **argv) {
 
   // Cmd line argument declarations
   int N[3] = {64, 64, 64};
-  unsigned iter = 1, inverse = 0;
+  unsigned iter = 1;
   int nthreads = 1;
 
   struct argparse_option options[] = {
@@ -47,7 +47,6 @@ void main(int argc, const char **argv) {
     OPT_INTEGER('n',"n2", &N[1], "FFT 2nd Dim Size"),
     OPT_INTEGER('p',"n3", &N[2], "FFT 3rd Dim Size"),
     OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
-    OPT_BOOLEAN('b',"back", &inverse, "Backward/inverse FFT"),
     OPT_INTEGER('t',"threads", &nthreads, "Num Threads"),
     OPT_END(),
   };
@@ -62,7 +61,7 @@ void main(int argc, const char **argv) {
   **********************************************/
   printf("------------------------------\n");
   printf("Configuration: \n\n");
-  printf("%s FFT3d Size : %d %d %d\n", inverse ? "Backward":"Forward", N[0], N[1], N[2]);
+  printf("FFT3d Size : %d %d %d\n", N[0], N[1], N[2]);
   printf("Number of Iterations %d \n", iter);
   printf("Number of Threads %d \n", nthreads);
 #ifdef __FFT_SP
@@ -93,20 +92,17 @@ void main(int argc, const char **argv) {
   get_dp_input_data(fft_data, fftw_dp_data, N);
 #endif
 
-
-  /**********************************************
-  * Create plan - distinct plans for omp, sp and dp
-  **********************************************/
+  /*********************************************************************
+  * Create plan - distinct forward and backward plans for omp, sp and dp
+  *********************************************************************/
 #ifdef __FFT_SP
   printf("Creating in-place plan for SP FFT\n");
-  fftwf_plan plan;
+  fftwf_plan plan, plan_inverse;
 
-  if(inverse){
-    plan = fftwf_plan_dft_3d( N[0], N[1], N[2], &fftw_sp_data[0], &fftw_sp_data[0], FFTW_BACKWARD, FFTW_ESTIMATE);
-  }
-  else{
-    plan = fftwf_plan_dft_3d( N[0], N[1], N[2], &fftw_sp_data[0], &fftw_sp_data[0], FFTW_FORWARD, FFTW_ESTIMATE);
-  }
+  plan_inverse = fftwf_plan_dft_3d( N[0], N[1], N[2], &fftw_sp_data[0],
+            &fftw_sp_data[0], FFTW_BACKWARD, FFTW_ESTIMATE);
+  plan = fftwf_plan_dft_3d( N[0], N[1], N[2], &fftw_sp_data[0], &fftw_sp_data[0], FFTW_FORWARD, FFTW_ESTIMATE);
+
 #elif __FFT_DP
 
 #ifdef OMP
@@ -116,20 +112,16 @@ void main(int argc, const char **argv) {
      printf("Something went wrong with Multithreaded FFTW! Exiting... \n");
      exit(EXIT_FAILURE);
    }
-   //int nthreads = omp_get_max_threads();
    printf("Using OMP with %d threads \n", nthreads);
    fftw_plan_with_nthreads(nthreads);
 #endif
 
   printf("Creating in-place plan for DP FFT\n");
-  fftw_plan plan;
+  fftw_plan plan, plan_inverse;
 
-  if(inverse){
-    plan = fftw_plan_dft_3d( N[0], N[1], N[2], &fftw_dp_data[0], &fftw_dp_data[0], FFTW_BACKWARD, FFTW_ESTIMATE);
-  }
-  else{
-    plan = fftw_plan_dft_3d( N[0], N[1], N[2], &fftw_dp_data[0], &fftw_dp_data[0], FFTW_FORWARD, FFTW_ESTIMATE);
-  }
+  plan_inverse = fftw_plan_dft_3d( N[0], N[1], N[2], &fftw_dp_data[0],
+          &fftw_dp_data[0], FFTW_BACKWARD, FFTW_ESTIMATE);
+  plan = fftw_plan_dft_3d( N[0], N[1], N[2], &fftw_dp_data[0], &fftw_dp_data[0], FFTW_FORWARD, FFTW_ESTIMATE);
 #endif
 
   printf("Executing %d number of FFTW\n", iter);
@@ -142,9 +134,11 @@ void main(int argc, const char **argv) {
   for( i = 0; i < iter; i++){
 #ifdef __FFT_SP
     fftwf_execute(plan);
+    fftwf_execute(plan_inverse);
     //fftw_runtime += compute_sp_fftw(fftw_sp_data, N, inverse);
 #else
     fftw_execute(plan);
+    fftw_execute(plan_inverse);
     //fftw_runtime += compute_dp_fftw(fftw_dp_data, N, inverse);
 #endif
   }
@@ -176,8 +170,10 @@ void main(int argc, const char **argv) {
 #ifdef __FFT_SP
     fftwf_free(fftw_sp_data);
     fftwf_destroy_plan(plan);
+    fftwf_destroy_plan(plan_inverse);
 #else
     fftw_free(fftw_dp_data);
     fftw_destroy_plan(plan);
-#endif 
+    fftw_destroy_plan(plan_inverse);
+#endif
 }
