@@ -7,7 +7,7 @@
 inputname=$1
 outputname=$2
 
-echo "Parsing file $0 to $1"
+echo "Parsing file $1 to $2"
 
 cat ${inputname} | grep "FFTSize" | head -n 1 | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/^,//g" > ${outputname}
 cat ${inputname} | grep "fftw" | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/fftw:,//g" >> ${outputname}

@@ -27,7 +27,7 @@ export OMP_PROC_BIND=close
 
 # Execute applications from 1 to 40 threads one after another
 echo "Passed $# FFT3d Sizes"
-for arg in $@
+for arg in "$@"
 do
     echo "Executing FFT Size : $arg $arg $arg"
     for thread in {1..40}
@@ -35,7 +35,7 @@ do
         echo "Running with number of threads : $thread"
         export OMP_NUM_THREADS=${thread}
         #echo " Num of threads : $thread " >> omp_${arg}_fft_${current_time}
-        srun ./host_omp -m $arg -n $arg -p $arg -i ${iteration} -t ${thread} >> data/omp_${arg}_fft_${current_time}
+        ./host_omp -m $arg -n $arg -p $arg -i ${iteration} -t ${thread} >> data/omp_${arg}_fft_${current_time}
     done
 done
 
