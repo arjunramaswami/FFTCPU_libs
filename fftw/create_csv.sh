@@ -9,7 +9,7 @@ outputname=$2
 
 echo "Parsing file $0 to $1"
 
-cat ${inputname} | grep "FFT Size" | head -n 1 | tr -d "\t" | sed -e "s/ /,/g" > ${outputname}
-cat ${inputname} | grep "fftw" | tr -d "\t" | sed -e "s/ /,/g" >> ${outputname}
+cat ${inputname} | grep "FFTSize" | head -n 1 | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/^,//g" > ${outputname}
+cat ${inputname} | grep "fftw" | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/fftw:,//g" >> ${outputname}
 
 echo "Completed"

@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
 #SBATCH -J fftw_ref
-#SBATCH -p batch
+#SBATCH -p short
 #SBATCH -N 1
-#SBATCH -t 1:29:00
+#SBATCH -t 29:00
 
 ## Execute fftw multithreaded code 
 ##   Arg : Sizes of FFT to execute

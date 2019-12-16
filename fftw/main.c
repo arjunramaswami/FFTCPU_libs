@@ -37,7 +37,7 @@ void main(int argc, const char **argv) {
 
   // Cmd line argument declarations
   int N[3] = {64, 64, 64};
-  unsigned iter = 1, inverse = 0;
+  unsigned iter = 1;
   int nthreads = 1;
 
   struct argparse_option options[] = {
@@ -47,7 +47,6 @@ void main(int argc, const char **argv) {
     OPT_INTEGER('n',"n2", &N[1], "FFT 2nd Dim Size"),
     OPT_INTEGER('p',"n3", &N[2], "FFT 3rd Dim Size"),
     OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
-    OPT_BOOLEAN('b',"back", &inverse, "Backward/inverse FFT"),
     OPT_INTEGER('t',"threads", &nthreads, "Num Threads"),
     OPT_END(),
   };

@@ -162,14 +162,14 @@ void compute_metrics( double fftw_runtime, unsigned iter, int N[3]){
   double avg_fftw_runtime = 0.0;
 
   printf("\nNumber of runs: %d\n\n", iter);
-  printf("\tFFT Size\tTotal Runtime(ms)\tAvg Runtime(ms)\tThroughput(GFLOPS)\t\n");
+  printf("      FFTSize  TotalRuntime(ms)  AvgRuntime(ms)  Throughput(GFLOPS)    \n");
 
   printf("fftw:"); 
   if(fftw_runtime != 0.0){
     avg_fftw_runtime = fftw_runtime / (iter * 2);  // * 2 to remove inverse
     double gpoints_per_sec = ( N[0] * N[1] * N[2] / (fftw_runtime * 1E-3)) * 1E-9;
-    double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(fftw_runtime * 1E-3 * 1E9);
-    printf("\t  %d³ \t\t%lf \t\t %lf \t  %.4f \t\n", N[0], fftw_runtime, avg_fftw_runtime, gflops);
+    double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(avg_fftw_runtime * 1E-3 * 1E9);
+    printf("%5d³       %.4f            %.4f          %.4f    \n", N[0], fftw_runtime, avg_fftw_runtime, gflops);
   }
   else{
     printf("ERROR in FFT3d\n");
