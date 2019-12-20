@@ -49,12 +49,11 @@ unsigned coord(unsigned N[3], unsigned i, unsigned j, unsigned k) {
 void compute_metrics( double mkl_fft_runtime, int iter, int N1, int N2, int N3){
   double avg_fft_runtime = 0.0;
 
-  printf("\nNumber of runs: %d\n\n", iter);
   printf("      FFTSize  TotalRuntime(ms)  AvgRuntime(ms)  Throughput(GFLOPS)    \n");
 
   printf("mkl:"); 
   if(mkl_fft_runtime != 0.0){
-    avg_fft_runtime = mkl_fft_runtime / (iter * 2);  // * 2 to remove inverse
+    avg_fft_runtime = mkl_fft_runtime / (iter);  // * 2 to remove inverse
     double gpoints_per_sec = ( N1 * N2 * N3 / (mkl_fft_runtime * 1E-3)) * 1E-9;
     double gflops = 3 * 5 * N1 * N2 * N3 * (log((double)N1)/log((double)2))/(avg_fft_runtime * 1E-3 * 1E9);
     printf("%5d³       %.4f            %.4f          %.4f    \n", N1, mkl_fft_runtime, avg_fft_runtime, gflops);

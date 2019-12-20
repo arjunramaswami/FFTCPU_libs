@@ -23,25 +23,87 @@
 #include <omp.h>
 #endif
 
-/* 
-*  Initialize input array to FFT
-*  Input  : pointer to 3d array of MKL_Complex16 type
-*         : size of FFT3d - N1, N2, N3
-*  Output : 1 if error in initialization
-*/
-static void init(MKL_Complex16 *fft_data, int N1, int N2, int N3){
-    int where = 0, i, j, k;
+/* Compute (K*L)%M accurately */
+static double moda(int K, int L, int M)
+{
+    return (double)(((long long)K * L) % M);
+}
 
-    for(i = 0; i < N1; i++){
-        for(j = 0; j < N2; j++){
-            for(k = 0; k < N3; k++){
-                where = (i * N1 * N2) + (j * N3) + k;
-                fft_data[where].real = where;
-                fft_data[where].imag = where;
+/* Initialize array with harmonic {H1, H2, H3} */
+static void init(MKL_Complex16 *x, int N1, int N2, int N3,
+                 int H1, int H2, int H3)
+{
+    double TWOPI = 6.2831853071795864769, phase;
+    int n1, n2, n3, index;
+
+    /* Generalized strides for row-major addressing of x */
+    int S1 = N2*N3, S2 = N3, S3 = 1;
+
+    for (n1 = 0; n1 < N1; n1++)
+    {
+        for (n2 = 0; n2 < N2; n2++)
+        {
+            for (n3 = 0; n3 < N3; n3++)
+            {
+                phase =  moda(n1,H1,N1) / N1;
+                phase += moda(n2,H2,N2) / N2;
+                phase += moda(n3,H3,N3) / N3;
+                index = n1*S1 + n2*S2 + n3*S3;
+                x[index].real = cos( TWOPI * phase ) / (N1*N2*N3);
+                x[index].imag = sin( TWOPI * phase ) / (N1*N2*N3);
             }
         }
     }
 }
+
+/* Verify that x(n1,n2,n3) is a peak at H1,H2,H3 */
+static int verify(MKL_Complex16 *x, int N1, int N2, int N3,
+                  int H1, int H2, int H3)
+{
+    double err, errthr, maxerr;
+    int n1, n2, n3, index;
+
+    /* Generalized strides for row-major addressing of x */
+    int S1 = N2*N3, S2 = N3, S3 = 1;
+
+    /*
+     * Note, this simple error bound doesn't take into account error of
+     * input data
+     */
+    errthr = 5.0 * log( (double)N1*N2*N3 ) / log(2.0) * DBL_EPSILON;
+    printf("Verify the result, errthr = %.3lg\n", errthr);
+
+    maxerr = 0;
+    for (n1 = 0; n1 < N1; n1++){
+        for (n2 = 0; n2 < N2; n2++){
+            for (n3 = 0; n3 < N3; n3++){
+                double re_exp = 0.0, im_exp = 0.0, re_got, im_got;
+
+                if ((n1-H1)%N1==0 && (n2-H2)%N2==0 && (n3-H3)%N3==0) {
+                    re_exp = 1;
+                }
+
+                index = n1*S1 + n2*S2 + n3*S3;
+                re_got = x[index].real;
+                im_got = x[index].imag;
+                err  = fabs(re_got - re_exp) + fabs(im_got - im_exp);
+                if (err > maxerr) maxerr = err;
+                if (!(err < errthr))
+                {
+                    printf(" x[%i][%i][%i]: ",n1,n2,n3);
+                    printf(" expected (%.17lg,%.17lg), ",re_exp,im_exp);
+                    printf(" got (%.17lg,%.17lg), ",re_got,im_got);
+                    printf(" err %.3lg\n", err);
+                    printf(" Verification FAILED\n");
+                    return 1;
+                }
+            }
+        }
+    }
+    printf("Verified, maximum error was %.3lg\n", maxerr);
+    return 0;
+}
+
 
 static void error_msg(MKL_LONG status){
     if(status != DFTI_NO_ERROR){
@@ -62,6 +124,9 @@ int main(int argc, const char **argv){
     int N1 = 8, N2 = 8, N3 = 8;
     MKL_LONG status = 0;
     int thread_id = 0, team = 1; // Multi threaded 
+    
+    /* Arbitrary harmonic used to verify FFT */
+    int H1 = -2, H2 = -3, H3 = -4;
 
     // Cmd Line arguments
     struct argparse_option options[] = {
@@ -106,29 +171,17 @@ int main(int argc, const char **argv){
     printf("THREADS             = %i \n", team);
     printf("------------------------------------\n\n");
 
-    printf("Create DFTI descriptor\n");
     DFTI_DESCRIPTOR_HANDLE ffti_desc_handle = 0;
+
     status = DftiCreateDescriptor( &ffti_desc_handle, DFTI_DOUBLE, DFTI_COMPLEX, dim, size);
     error_msg(status);
 
-    //status = DftiSetValue(ffti_desc_handle, DFTI_CONJUGATE_EVEN_STORAGE, DFTI_COMPLEX_COMPLEX);
-    //status = DftiSetValue(ffti_desc_handle, DFTI_OUTPUT_STRIDES, strides_out);
     status = DftiSetValue(ffti_desc_handle, DFTI_PLACEMENT, DFTI_INPLACE);  // this is the default
-    if(status != DFTI_NO_ERROR){
-        char *error_message = DftiErrorMessage(status);
-        printf("MKL FFT Description Creation Failed with message %s \n", error_message);
-        return 1;
-    }
+    error_msg(status);
 
-    printf("Setting thread limit %i\n", team);
     status = DftiSetValue(ffti_desc_handle, DFTI_THREAD_LIMIT, team);
     error_msg(status);
 
-    /* Initializes the descriptor
-    * Performs optimization
-    * Computes Twiddle Factors
-    */
-    printf("Committing Descriptor\n");
     status = DftiCommitDescriptor(ffti_desc_handle);
     error_msg(status);
 
@@ -138,24 +191,39 @@ int main(int argc, const char **argv){
         exit(1);
     }
 
-    printf("Initializing Input of %ix%ix%i FFT\n\n", N1, N2, N3);
-    init(fft_data, N1, N2, N3);
+    printf("Computing Forward followed by Backward Transforms for %d iterations\n\n", iter);
+    double start_fwd = 0.0, stop_fwd = 0.0;
+    double start_bwd = 0.0, stop_bwd = 0.0;
+    double diff_fwd = 0.0, diff_bwd = 0.0;
 
-    printf("Computing Forward followed by Backward Transforms for %d iterations\n", iter);
-    double start = getTimeinMilliSec();
     for(i = 0; i < iter; i++){
+
+        init(fft_data, N1, N2, N3, H1, H2, H3);
+
+        start_fwd = getTimeinMilliSec();
         status = DftiComputeForward(ffti_desc_handle, fft_data);
+        stop_fwd = getTimeinMilliSec();
         error_msg(status);
 
+        status = verify(fft_data, N1, N2, N3, H1, H2, H3);
+        diff_fwd += stop_fwd - start_fwd;
+
+        init(fft_data, N1, N2, N3, -H1, -H2, -H3);
+
+        start_bwd = getTimeinMilliSec();
         status = DftiComputeBackward(ffti_desc_handle, fft_data);
+        stop_bwd = getTimeinMilliSec();
         error_msg(status);
+
+        status = verify(fft_data, N1, N2, N3, H1, H2, H3);
+
+        diff_bwd += stop_bwd - start_bwd;
     }
-    double stop = getTimeinMilliSec();
 
-    double mkl_runtime = stop - start;
-    compute_metrics(mkl_runtime, iter, N1, N2, N3);
-
-    //printf("Average runtime %.4f \n", mkl_avg_runtime);
+    printf("\nForward Transform Performance: \n");
+    compute_metrics(diff_fwd, iter, N1, N2, N3);
+    printf("\nBackward Transform Performance: \n");
+    compute_metrics(diff_bwd, iter, N1, N2, N3);
 
 #ifdef DEBUG
     for(i = 0; i < N1; i++){
@@ -168,7 +236,6 @@ int main(int argc, const char **argv){
     }
 #endif
 
-    printf("\nFree descriptor\n");
     status = DftiFreeDescriptor(&ffti_desc_handle);
     error_msg(status);
 
