@@ -153,9 +153,9 @@ int main(int argc, const char **argv){
     double stop = getTimeinMilliSec();
 
     double mkl_runtime = stop - start;
-    double mkl_avg_runtime = mkl_runtime / iter;
+    compute_metrics(mkl_runtime, iter, N1, N2, N3);
 
-    printf("Average runtime %.4f \n", mkl_avg_runtime);
+    //printf("Average runtime %.4f \n", mkl_avg_runtime);
 
 #ifdef DEBUG
     for(i = 0; i < N1; i++){
@@ -168,7 +168,7 @@ int main(int argc, const char **argv){
     }
 #endif
 
-    printf("Free descriptor\n");
+    printf("\nFree descriptor\n");
     status = DftiFreeDescriptor(&ffti_desc_handle);
     error_msg(status);
 
