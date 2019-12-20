@@ -1,3 +1,8 @@
+/* Author : Arjun Ramaswami
+* email   : ramaswami.arjun@gmail.com
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

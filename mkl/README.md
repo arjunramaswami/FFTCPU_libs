@@ -15,6 +15,28 @@ Link to the official [MKL FFT](https://software.intel.com/en-us/node/521955).
 
 ## Execution
 
+Running the program with `-h` to print the options available.
+Options:
+
+```bash
+  -m : FFT 1st Dim Size
+  -n : FFT 2nd Dim Size
+  -p : FFT 3rd Dim Size
+
+  -i : Number of iterations of the FFT computation
+
+  -t : number of threads in a multithreaded execution
+```
+
+### Example
+
+```bash
+  module load intel
+  make
+  ./host_dp -m 16 -n 16 -p 16 
+  ./host_dp -m 256 -n 256 -p 256 -i 100 -t 20
+```
+
 ## Interpreting Results
 
 ## Results
