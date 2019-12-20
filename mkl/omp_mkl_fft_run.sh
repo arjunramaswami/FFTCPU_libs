@@ -15,7 +15,7 @@
 module load intel
 
 current_time=$(date "+%Y.%m.%d-%H.%M")
-iteration=1000
+iteration=10
 
 ## Set OMP Environment Variables
 export OMP_DISPLAY_AFFINITY=TRUE
