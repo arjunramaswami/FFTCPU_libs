@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
+#include "common/argparse.h"
 
 /*
 *  Include FFT Files
@@ -45,23 +46,42 @@ static void error_msg(MKL_LONG status){
     }
 }
 
-int main(){
+static const char *const usage[] = {
+    "./host [options]",
+    NULL,
+};
+
+int main(int argc, const char **argv){
     int err = 0, where = 0, iter = 1;
     int i, j, k;
     int N1 = 8, N2 = 8, N3 = 8;
     MKL_LONG status = 0;
+    int thread_id = 0, team = 1; // Multi threaded 
+
+    // Cmd Line arguments
+    struct argparse_option options[] = {
+        OPT_HELP(),
+        OPT_GROUP("Basic Options"),
+        OPT_INTEGER('m',"n1", &N1, "FFT 1st Dim Size"),
+        OPT_INTEGER('n',"n2", &N2, "FFT 2nd Dim Size"),
+        OPT_INTEGER('p',"n3", &N3, "FFT 3rd Dim Size"),
+        OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
+        OPT_INTEGER('t',"threads", &team, "Num Threads"),
+        OPT_END(),
+    };
+
+    struct argparse argparse;
+    argparse_init(&argparse, options, usage, 0);
+    argparse_describe(&argparse, "Computing FFT3d using MKL", "FFT size is mandatory, default number of iterations is 1");
+    argc = argparse_parse(&argparse, argc, argv);
+
+#if defined(_OPENMP)
+    printf("Total number of threads %d \n", team);
+#endif
 
     // Print Version of Intel MKL
     char version[DFTI_VERSION_LENGTH];
     DftiGetValue(0, DFTI_VERSION, version);
-
-    // Multi threaded
-    int thread_id = 0, team = 1;
-#if defined(_OPENMP)
-    thread_id = omp_get_thread_num();
-    team  = omp_get_num_threads();
-    printf("Total number of threads %d \n", team);
-#endif
 
     // Command Line Arguments
     MKL_LONG dim = 3;
@@ -116,16 +136,16 @@ int main(){
     printf("Initializing Input of %ix%ix%i FFT\n\n", N1, N2, N3);
     init(fft_data, N1, N2, N3);
 
+    printf("Computing Forward followed by Backward Transforms for %d iterations\n", iter);
     for(i = 0; i < iter; i++){
-        printf("Computing Forward Transform\n");
         status = DftiComputeForward(ffti_desc_handle, fft_data);
         error_msg(status);
 
-        printf("Computing Backward Transform\n");
         status = DftiComputeBackward(ffti_desc_handle, fft_data);
         error_msg(status);
     }
 
+#ifdef DEBUG
     for(i = 0; i < N1; i++){
         for(j = 0; j < N2; j++){
             for(k = 0; k < N3; k++){
@@ -134,6 +154,7 @@ int main(){
             }
         }
     }
+#endif
 
     printf("Free descriptor\n");
     status = DftiFreeDescriptor(&ffti_desc_handle);
