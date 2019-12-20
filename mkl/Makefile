@@ -17,9 +17,14 @@ SRCS     := main.c $(wildcard common/*.c)
 INC_DIRS := -Icommon
 LIB_DIRS := 
 
-LIBS := -mkl
+LIBS := -mkl -lm
 
 TARGET := host_dp
 
 all: 
 	$(CC) $(CFLAGS) $(SRCS) $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGET)
+
+clean: 
+	rm $(TARGET)
+
+.PHONY : all clean

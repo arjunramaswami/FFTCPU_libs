@@ -2,12 +2,12 @@
 * email   : ramaswami.arjun@gmail.com
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <float.h>
 #include "common/argparse.h"
+#include "common/helper.h"
 
 /*
 *  Include FFT Files
@@ -142,6 +142,7 @@ int main(int argc, const char **argv){
     init(fft_data, N1, N2, N3);
 
     printf("Computing Forward followed by Backward Transforms for %d iterations\n", iter);
+    double start = getTimeinMilliSec();
     for(i = 0; i < iter; i++){
         status = DftiComputeForward(ffti_desc_handle, fft_data);
         error_msg(status);
@@ -149,6 +150,12 @@ int main(int argc, const char **argv){
         status = DftiComputeBackward(ffti_desc_handle, fft_data);
         error_msg(status);
     }
+    double stop = getTimeinMilliSec();
+
+    double mkl_runtime = stop - start;
+    double mkl_avg_runtime = mkl_runtime / iter;
+
+    printf("Average runtime %.4f \n", mkl_avg_runtime);
 
 #ifdef DEBUG
     for(i = 0; i < N1; i++){
