@@ -10,6 +10,6 @@ outputname=$2
 echo "Parsing file $1 to $2"
 
 cat ${inputname} | grep "FFTSize" | head -n 1 | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/^,//g" > ${outputname}
-cat ${inputname} | grep "mkl" | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/fftw:,//g" >> ${outputname}
+cat ${inputname} | grep "mkl:" | tr -s " " | sed -e "s/ /,/g" | sed "s/.$//" | sed -e "s/mkl:,//g" >> ${outputname}
 
 echo "Completed"
