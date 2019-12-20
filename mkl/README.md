@@ -81,8 +81,8 @@ FFT Size    Total Runtime(ms)   Avg Runtime(ms)     Throughput(GFLOPS)
 |     16     |   0.012           |     19.25           |
 |     32     |   0.056           |     43.58           |
 |     64     |   0.197           |    119.80           |
-|     128    |              |               |
-|     256    |             |                |
+|     128    |   1.393           |    158.08           |
+|     256    |    23.19          |     86.80           |
 
 ### Speedup with Multithreading
 
@@ -91,13 +91,12 @@ FFT Size    Total Runtime(ms)   Avg Runtime(ms)     Throughput(GFLOPS)
 |     16     |     1.27    |
 |     32     |     2.24    |
 |     64     |     7.01    |
-|     128    |        |
-|     256    |        |
+|     128    |     12.25   |
+|     256    |     9.83    |
 
 #### Notes
 
 - Better Speedup with increase in FFT size i.e., more data
-- Could 256<sup>3</sup> offer better speedup with more threads?
 - Can one estimate the maximum speedup possible
 
 ### Details on execution
