@@ -5,7 +5,7 @@
 
 CC := icc
 
-CFLAGS :=
+CFLAGS := -qopenmp
 # debug flag enables heap memory leak sanitization along with prints
 ifeq ($(DEBUG),1)
 	CFLAGS := $(CFLAGS) -O1 -DDEBUG -g -check-pointers=rw -check-pointers-dangling=all
