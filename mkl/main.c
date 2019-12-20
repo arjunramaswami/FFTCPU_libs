@@ -119,7 +119,7 @@ static const char *const usage[] = {
 };
 
 int main(int argc, const char **argv){
-    int err = 0, where = 0, iter = 1;
+    int err = 0, where = 0, iter = 1, inverse = 0;
     int i, j, k;
     int N1 = 8, N2 = 8, N3 = 8;
     MKL_LONG status = 0;
@@ -137,6 +137,7 @@ int main(int argc, const char **argv){
         OPT_INTEGER('p',"n3", &N3, "FFT 3rd Dim Size"),
         OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
         OPT_INTEGER('t',"threads", &team, "Num Threads"),
+        OPT_BOOLEAN('b',"inverse", &inverse, "Backward FFT"),
         OPT_END(),
     };
 
@@ -161,7 +162,7 @@ int main(int argc, const char **argv){
     printf("MKL Configuration: \n");
     printf("------------------------------------\n");
     printf("MKL VERSION : %s\n", version);
-    printf("Forward and Backward Double precision complex 3d FFT");
+    printf("%sDOUBLE PRECISION COMPLEX 3d FFT", inverse?"BACKWARD ":"FORWARD ");
     printf("Parameters: \n");
     printf("DFTI_DIMENSION      =  3\n");
     printf("DFTI_PRECISION      = DFTI_DOUBLE \n");
@@ -191,39 +192,47 @@ int main(int argc, const char **argv){
         exit(1);
     }
 
-    printf("Computing Forward followed by Backward Transforms for %d iterations\n\n", iter);
     double start_fwd = 0.0, stop_fwd = 0.0;
     double start_bwd = 0.0, stop_bwd = 0.0;
     double diff_fwd = 0.0, diff_bwd = 0.0;
 
     for(i = 0; i < iter; i++){
+        if(!inverse){
+            // Computing Forward
+            init(fft_data, N1, N2, N3, H1, H2, H3);
 
-        init(fft_data, N1, N2, N3, H1, H2, H3);
+            start_fwd = getTimeinMilliSec();
+            status = DftiComputeForward(ffti_desc_handle, fft_data);
+            stop_fwd = getTimeinMilliSec();
+            error_msg(status);
 
-        start_fwd = getTimeinMilliSec();
-        status = DftiComputeForward(ffti_desc_handle, fft_data);
-        stop_fwd = getTimeinMilliSec();
-        error_msg(status);
+            status = verify(fft_data, N1, N2, N3, H1, H2, H3);
+            diff_fwd += stop_fwd - start_fwd;
+        }
+        else{
+            // Computing Backward
 
-        status = verify(fft_data, N1, N2, N3, H1, H2, H3);
-        diff_fwd += stop_fwd - start_fwd;
+            init(fft_data, N1, N2, N3, -H1, -H2, -H3);
 
-        init(fft_data, N1, N2, N3, -H1, -H2, -H3);
+            start_bwd = getTimeinMilliSec();
+            status = DftiComputeBackward(ffti_desc_handle, fft_data);
+            stop_bwd = getTimeinMilliSec();
+            error_msg(status);
 
-        start_bwd = getTimeinMilliSec();
-        status = DftiComputeBackward(ffti_desc_handle, fft_data);
-        stop_bwd = getTimeinMilliSec();
-        error_msg(status);
+            status = verify(fft_data, N1, N2, N3, H1, H2, H3);
 
-        status = verify(fft_data, N1, N2, N3, H1, H2, H3);
-
-        diff_bwd += stop_bwd - start_bwd;
+            diff_bwd += stop_bwd - start_bwd;
+        }
     }
 
-    printf("\nForward Transform Performance: \n");
-    compute_metrics(diff_fwd, iter, N1, N2, N3);
-    printf("\nBackward Transform Performance: \n");
-    compute_metrics(diff_bwd, iter, N1, N2, N3);
+    if(!inverse){
+        printf("\nForward Transform Performance: \n");
+        compute_metrics(diff_fwd, iter, N1, N2, N3);
+    }
+    else{
+        printf("\nBackward Transform Performance: \n");
+        compute_metrics(diff_bwd, iter, N1, N2, N3);
+    }
 
 #ifdef DEBUG
     for(i = 0; i < N1; i++){
