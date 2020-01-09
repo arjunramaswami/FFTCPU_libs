@@ -33,7 +33,7 @@ static double moda(int K, int L, int M)
 static void init(MKL_Complex16 *x, int N1, int N2, int N3,
                  int H1, int H2, int H3)
 {
-    double TWOPI = 6.2831853071795864769, phase;
+    double TWOPI = 6.2831853071795864769, phase, phase1, phase2, phase3;
     int n1, n2, n3, index;
 
     /* Generalized strides for row-major addressing of x */
@@ -45,10 +45,11 @@ static void init(MKL_Complex16 *x, int N1, int N2, int N3,
         {
             for (n3 = 0; n3 < N3; n3++)
             {
-                phase =  moda(n1,H1,N1) / N1;
-                phase += moda(n2,H2,N2) / N2;
-                phase += moda(n3,H3,N3) / N3;
+                phase1 = moda(n1,H1,N1) / N1;
+                phase2 = moda(n2,H2,N2) / N2;
+                phase3 = moda(n3,H3,N3) / N3;
                 index = n1*S1 + n2*S2 + n3*S3;
+                phase = phase1 + phase2 + phase3;
                 x[index].real = cos( TWOPI * phase ) / (N1*N2*N3);
                 x[index].imag = sin( TWOPI * phase ) / (N1*N2*N3);
             }
@@ -126,7 +127,8 @@ int main(int argc, const char **argv){
     int thread_id = 0, team = 1; // Multi threaded 
     
     /* Arbitrary harmonic used to verify FFT */
-    int H1 = -2, H2 = -3, H3 = -4;
+    //int H1 = -2, H2 = -3, H3 = -4;
+    int H1 = 1, H2 = 1, H3 = 1;
 
     // Cmd Line arguments
     struct argparse_option options[] = {

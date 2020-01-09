@@ -1,7 +1,7 @@
 # MKL FFT3d
 
 This folder contains the code to execute 3d FFT using MKL. Currently executes
-multi threaded configurations on double precision floating point data.  
+multi threaded configurations on **double precision floating point** data.  
 
 The program and bash scripts can be used to evaluate and consolidate performance of FFT3d using MKL for different uniform sized transformations. Distinct backward or forward transformations can be executed a number of times to find the average performance using a multithreaded environment.
 
@@ -125,11 +125,13 @@ To compile with Intel OpenMP, link this additional flag `-qopenmp`. These are ad
 
 ## Input Data and Validation
 
-Describe the method used to create input data and also in validating the data.
+Generate a discrete signal of a single specific frequency by creating N<sup>3</sup> discrete points of a cosine and sine wave. Modify the frequency by creating its harmonic (positive multiple of a fundamental frequency) for variations.
 
-### Input Data
+Validate by checking the particular frequency's value after transformation.
 
-### Validation method
+### Error Bound
+
+Why is the error bound calculated as $5 * \log _{2}(N1*N2*N3) * DBL\_EPLISON$ ?
 
 ## Configuring FFT with MKL
 
