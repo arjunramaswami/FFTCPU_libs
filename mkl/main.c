@@ -52,9 +52,23 @@ static void init(MKL_Complex16 *x, int N1, int N2, int N3,
                 phase = phase1 + phase2 + phase3;
                 x[index].real = cos( TWOPI * phase ) / (N1*N2*N3);
                 x[index].imag = sin( TWOPI * phase ) / (N1*N2*N3);
+
             }
         }
     }
+
+#ifdef DEBUG
+    printf("Input Discrete Time Signal Data: \n");
+    for(n1 = 0; n1 < N1; n1++){
+        for(n2 = 0; n2 < N2; n2++){
+            for(n3 = 0; n3 < N3; n3++){
+                index = (n1 * N1 * N2) + (n2 * N3) + n3;
+                printf(" %d %d %d : fft[%d] = (%lf, %lf)\n", n1, n2, n3, index, x[index].real, x[index].imag);
+            }
+        }
+    }
+#endif
+
 }
 
 /* Verify that x(n1,n2,n3) is a peak at H1,H2,H3 */
@@ -104,7 +118,6 @@ static int verify(MKL_Complex16 *x, int N1, int N2, int N3,
     printf("Verified, maximum error was %.3lg\n", maxerr);
     return 0;
 }
-
 
 static void error_msg(MKL_LONG status){
     if(status != DFTI_NO_ERROR){
@@ -164,7 +177,7 @@ int main(int argc, const char **argv){
     printf("MKL Configuration: \n");
     printf("------------------------------------\n");
     printf("MKL VERSION : %s\n", version);
-    printf("%sDOUBLE PRECISION COMPLEX 3d FFT", inverse?"BACKWARD ":"FORWARD ");
+    printf("\n%sDOUBLE PRECISION COMPLEX 3d FFT\n\n", inverse?"BACKWARD ":"FORWARD ");
     printf("Parameters: \n");
     printf("DFTI_DIMENSION      =  3\n");
     printf("DFTI_PRECISION      = DFTI_DOUBLE \n");
@@ -213,7 +226,6 @@ int main(int argc, const char **argv){
         }
         else{
             // Computing Backward
-
             init(fft_data, N1, N2, N3, -H1, -H2, -H3);
 
             start_bwd = getTimeinMilliSec();
@@ -237,6 +249,7 @@ int main(int argc, const char **argv){
     }
 
 #ifdef DEBUG
+    printf("Output Frequencies: \n");
     for(i = 0; i < N1; i++){
         for(j = 0; j < N2; j++){
             for(k = 0; k < N3; k++){
