@@ -1,8 +1,9 @@
 # FFTW
 
 This folder contains the code to execute 3d FFT using FFTW. Currently executes
-single threaded, multi threaded configurations on single and double precision
-complex numbers.
+single and double precision complex FFT with the latter configurable to use multiple threads.
+
+The program and bash scripts can be used to evaluate and consolidate performance of FFT3d using FFTW for different uniform sized transformations. Distinct backward or forward transformations can be executed a number of times to find the average performance using a multithreaded environment.
 
 Link to the official FFTW [website](http://www.fftw.org/).
 
@@ -43,6 +44,7 @@ Options:
   -i : Number of iterations of the FFT computation
 
   -t : number of threads in a multithreaded execution
+  -b : toggle backward transformation
 ```
 
 ### Example multithreaded execution
@@ -51,6 +53,7 @@ Options:
   module load numlib/FFTW
   make omp
   ./host_omp -m 256 -n 256 -p 256 -t 40
+  ./host_omp -m 256 -n 256 -p 256 -t 40 -b
 ```
 
 ## Interpreting Results
@@ -92,10 +95,10 @@ This is required to compare each FFT size with other FFT libraries and implement
 | FFT3d Size | Best Runtime (ms) | Throughput (GFLOPS) |
 |:----------:|:-----------------:|:-------------------:|
 |     16     |   0.022           |     11.13           |
-|     32     |   0.054           |     45.38           |
-|     64     |   0.234           |    100.55           |
-|     128    |   1.779           |    123.77           |
-|     256    |    72.462         |     27.78           |
+|     32     |   0.060           |     40.56           |
+|     64     |   0.270           |     87.09           |
+|     128    |   1.591           |    138.39           |
+|     256    |    90.415         |     22.26           |
 
 ### Speedup with Multithreading
 
@@ -104,10 +107,10 @@ Maximum speedup obtained per size when strong scaling to 40 threads.
 | FFT3d Size | Max Speedup |
 |:----------:|:-----------:|
 |     16     |     1.0     |
-|     32     |     3.74    |
-|     64     |     13.14   |
-|     128    |     21.33   |
-|     256    |     12.03   |
+|     32     |     3.34    |
+|     64     |     10.67   |
+|     128    |     24.48   |
+|     256    |     10.58   |
 
 #### Notes
 
@@ -178,6 +181,16 @@ Cleanup plan and threads after execution
 
 To compile with OpenMPI, link this additional flag `-lfftw3_omp` along with
 `-fopenmp` other than the regular `fftw` flags. These are added to the makefile.
+
+## Input Data and Validation
+
+Generate a discrete signal of a single specific frequency by creating N<sup>3</sup> discrete points of a cosine and sine wave. Modify the frequency by creating its harmonic (positive multiple of a fundamental frequency) for variations.
+
+Validate by checking the particular frequency's value after transformation.
+
+### Error Bound
+
+Why is the error bound calculated as $5 * \log _{2}(N1*N2*N3) * DBL\_EPSILSON$ or $FLT\_EPSILON$ ?
 
 ## Note
 
