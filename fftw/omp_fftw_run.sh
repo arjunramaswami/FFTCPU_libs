@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
 #SBATCH -J fftw_ref
-#SBATCH -p short
+#SBATCH -p batch 
 #SBATCH -N 1
-#SBATCH -t 29:00
+#SBATCH -t 11:29:00
 
 ## Execute fftw multithreaded code 
 ##   Arg : Sizes of FFT to execute
@@ -12,8 +12,8 @@
 ## Each size is scaled from 1 to 40 threads, each performed iteration times
 ## Performance results are output to a timestamped file in data/ folder
 
-module load toolchain/gompi
-module load numlib/FFTW
+module load toolchain/gompi/2019b
+module load numlib/FFTW/3.3.8-gompi-2019b
 
 current_time=$(date "+%Y.%m.%d-%H.%M")
 iteration=10

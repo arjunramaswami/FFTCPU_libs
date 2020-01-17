@@ -12,7 +12,7 @@
 ## Each size is scaled from 1 to 40 threads, each performed iteration times
 ## Performance results are output to a timestamped file in data/ folder
 
-module load intel
+module load intel/20.0.0
 
 current_time=$(date "+%Y.%m.%d-%H.%M")
 iteration=10

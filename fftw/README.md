@@ -11,8 +11,8 @@ Link to the official FFTW [website](http://www.fftw.org/).
 
 ### Prerequisites
 
-- easybuild FFTW `module load numlib/FFTW`
-- C compiler that implements OpenMPI (tested with gcc 8.3.0)
+- easybuild FFTW - `module load numlib/FFTW/3.3.8-gompi-2019b`
+- C compiler that implements OpenMPI (tested with gcc 8.3.0) - `module load toolchain/gompi/2019b`
 
 ### Targets
 
@@ -50,7 +50,7 @@ Options:
 ### Example multithreaded execution
 
 ```bash
-  module load numlib/FFTW
+  module load numlib/FFTW/3.3.8-gompi-2019b
   make omp
   ./host_omp -m 256 -n 256 -p 256 -t 40
   ./host_omp -m 256 -n 256 -p 256 -t 40 -b
