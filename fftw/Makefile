@@ -24,10 +24,10 @@ OMPFLAGS := -DOMP -fopenmp -D __FFT_DP
 
 # Include Directories 
 INC := -Icommon 
-INC_DIRS :=  $(FFTW_INC) $(INC)
+INC_DIRS := $(INC)
 
 # Linker Directories
-LIB_DIRS :=  $(FFTW_DIR) -lm
+LIB_DIRS := -lm
 
 # Libraries
 LIBS := -lrt -lpthread -lfftw3 -lfftw3f
@@ -40,28 +40,21 @@ TARGET_DP := host_dp
 TARGET_SP := host_sp
 TARGET_OMP := host_omp
 
-all : info 
+all :
 	mkdir -p $(TARGETDIR)
 	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS)	$(LIBS) -o $(TARGETDIR)/$(TARGET)
 
-dp : info
+dp :
 	$(CC) $(CFLAGS) -D __FFT_DP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET_DP)
 
-sp : info
+sp :
 	$(CC) $(CFLAGS) -D __FFT_SP $(INC_DIRS) $(LIB_DIRS) $(LIBS) -o $(TARGETDIR)/$(TARGET_SP)
 
-omp : info
+omp :
 	mkdir -p $(TARGETDIR)
 	$(CC) $(CFLAGS) $(OMPFLAGS) $(INC_DIRS) $(LIB_DIRS) $(LIBS) $(OMPLIBS) -o $(TARGETDIR)/$(TARGET_OMP)
 
 clean : 
 	rm -f $(TARGETDIR)/$(TARGET) $(TARGETDIR)/$(TARGET_DP) $(TARGETDIR)/$(TARGET_SP) $(TARGETDIR)/$(TARGET_OMP)
 
-info :
-	$(info -------------------------------)
-	$(info FFTW Version     : $(FFTW_VERSION))
-	$(info FFTW Include Dir : $(FFTW_INC) ) 
-	$(info FFTW Shared Libs : $(FFTW_DIR) ) 
-	$(info -------------------------------)
-
-.PHONY : all clean dp sp omp info # ---------------
+.PHONY : all clean dp sp omp # ---------------

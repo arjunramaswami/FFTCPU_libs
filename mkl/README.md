@@ -11,7 +11,7 @@ Link to the official [MKL FFT](https://software.intel.com/en-us/node/521955).
 
 ### Prerequisites
 
-`module load intel` : loads icc and mkl libraries
+`module load intel/20.0.0` : loads icc and mkl libraries. icc version loaded is 19.1.0.166, compatible with gcc 8.3.0
 
 ## Target
 
@@ -40,9 +40,9 @@ Options:
 ### Example
 
 ```bash
-  module load intel
+  module load intel/20.0.0
   make
-  ./host_dp -m 16 -n 16 -p 16 
+  ./host_dp -m 16 -n 16 -p 16
   ./host_dp -m 256 -n 256 -p 256 -i 100 -t 20
   ./host_dp -m 256 -n 256 -p 256 -i 100 -t 20 -b
 ```

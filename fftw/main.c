@@ -26,11 +26,9 @@ static const char *const usage[] = {
 };
 
 void main(int argc, const char **argv) {
-  unsigned i = 0;
-  double fftw_runtime = 0.0;
-  int status;
+  int i = 0, status;
+  double fftw_runtime = 0.0, start = 0.0, stop = 0.0, diff = 0.0;
 
-  cmplx *fft_data;
   // Need distinct data for sp and dp FFTW for separate function calls
   fftwf_complex *fftw_sp_data;
   fftw_complex *fftw_dp_data;
@@ -39,6 +37,8 @@ void main(int argc, const char **argv) {
   int N[3] = {64, 64, 64};
   unsigned iter = 1;
   int nthreads = 1;
+  int inverse = 0;
+  int H1 = 1, H2 = 1, H3 = 1;
 
   struct argparse_option options[] = {
     OPT_HELP(),
@@ -48,6 +48,7 @@ void main(int argc, const char **argv) {
     OPT_INTEGER('p',"n3", &N[2], "FFT 3rd Dim Size"),
     OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
     OPT_INTEGER('t',"threads", &nthreads, "Num Threads"),
+    OPT_BOOLEAN('b',"inverse", &inverse, "Backward FFT"),
     OPT_END(),
   };
 
@@ -59,37 +60,32 @@ void main(int argc, const char **argv) {
   /**********************************************
   * Print configuration chosen by user
   **********************************************/
+  printf("\n------------------------------\n");
+  printf("FFTW Configuration: \n");
   printf("------------------------------\n");
-  printf("Configuration: \n\n");
-  printf("FFT3d Size : %d %d %d\n", N[0], N[1], N[2]);
-  printf("Number of Iterations %d \n", iter);
-  printf("Number of Threads %d \n", nthreads);
 #ifdef __FFT_SP
-  printf("Single Precision Complex Floating Points\n");
+  printf("\n%sSINGLE PRECISION COMPLEX 3d FFT\n\n", inverse?"BACKWARD ":"FORWARD ");
 #else
-  printf("Double Precision Complex Floating Points\n");
+  printf("\n%sDOUBLE PRECISION COMPLEX 3d FFT\n\n", inverse?"BACKWARD ":"FORWARD ");
 #endif
-  printf("------------------------------\n\n");
+  printf("Parameters: \n");
+  printf("FFT_DIMENSION      =  3\n");
+  printf("FFT_LENGTHS        = {%i, %i, %i} \n", N[0], N[1], N[2]);
+  printf("FFT_FORWARD_DOMAIN = DFTI_COMPLEX\n");
+  printf("FFT_PLACEMENT      = DFTI_INPLACE\n");
+  printf("THREADS            = %i \n", nthreads);
+  printf("Iterations         = %d \n", iter);
+  printf("------------------------------------\n\n");
 
   /**********************************************
   * Allocate memory for input buffers
   **********************************************/
-  fft_data = (cmplx *)malloc(sizeof(cmplx) * N[0] * N[1] * N[2]);
 #ifdef __FFT_SP
-  printf("Obtaining SP Data\n");
-  // Allocate memory for fftw data
   // fftw_malloc 16-byte aligns to take advantage of SIMD instructions such as AVX, SSE
   fftw_sp_data = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * N[0] * N[1] * N[2]);
-
-  // Fill allocated memory
-  get_sp_input_data(fft_data, fftw_sp_data, N);
 #else
-  // Allocate memory for fftw data
   // fftw_malloc 16-byte aligns to take advantage of SIMD instructions such as AVX, SSE
   fftw_dp_data = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N[0] * N[1] * N[2]);
-
-  // Fill allocated memory
-  get_dp_input_data(fft_data, fftw_dp_data, N);
 #endif
 
   /*********************************************************************
@@ -129,22 +125,72 @@ void main(int argc, const char **argv) {
   /**********************************************
   * Execute Plan
   **********************************************/
-  double start = getTimeinMilliSec();
   // execute FFT3d iter number of times
   for( i = 0; i < iter; i++){
 #ifdef __FFT_SP
-    fftwf_execute(plan);
-    fftwf_execute(plan_inverse);
-    //fftw_runtime += compute_sp_fftw(fftw_sp_data, N, inverse);
+    if(inverse){
+      get_sp_input_data(fftw_sp_data, N, -H1, -H2, -H3);
+
+      start = getTimeinMilliSec();
+      fftwf_execute(plan_inverse);
+      stop = getTimeinMilliSec();
+
+      diff += stop - start;
+      status = verify_sp(fftw_sp_data, N, H1, H2, H3);
+      if(status == 1){
+        printf("Error in transformation \n");
+        exit(0);
+      }
+    }
+    else{
+      get_sp_input_data(fftw_sp_data, N, H1, H2, H3);
+
+      start = getTimeinMilliSec();
+      fftwf_execute(plan);
+      stop = getTimeinMilliSec();
+
+      diff += stop - start;
+      status = verify_sp(fftw_sp_data, N, H1, H2, H3);
+      if(status == 1){
+        printf("Error in transformation \n");
+        exit(0);
+      }
+    }
+
 #else
-    fftw_execute(plan);
-    fftw_execute(plan_inverse);
-    //fftw_runtime += compute_dp_fftw(fftw_dp_data, N, inverse);
+    if(inverse){
+      get_dp_input_data(fftw_dp_data, N, -H1, -H2, -H3);
+
+      start = getTimeinMilliSec();
+      fftw_execute(plan_inverse);
+      stop = getTimeinMilliSec();
+
+      diff += stop - start;
+      status = verify_dp(fftw_dp_data, N, H1, H2, H3);
+      if(status == 1){
+        printf("Error in transformation \n");
+        exit(0);
+      }
+    }
+    else{
+      get_dp_input_data(fftw_dp_data, N, H1, H2, H3);
+
+      start = getTimeinMilliSec();
+      fftw_execute(plan);
+      stop = getTimeinMilliSec();
+
+      diff += stop - start;
+      printf(" Time : %lf %lf - %lf \n", start, stop, diff);
+      status = verify_dp(fftw_dp_data, N, H1, H2, H3);
+      if(status == 1){
+        printf("Error in transformation \n");
+        exit(0);
+      }
+    }
 #endif
   }
-  double stop = getTimeinMilliSec();
 
-  fftw_runtime = stop - start;
+  fftw_runtime = diff;
 
   /**********************************************
   * Print performance metrics
@@ -155,9 +201,6 @@ void main(int argc, const char **argv) {
   * Cleanup
   **********************************************/
   printf("\nCleaning up\n\n");
-  if(fft_data)
-    free(fft_data);
-
 #ifdef OMP
     fftw_cleanup_threads();
 #endif
