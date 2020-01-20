@@ -3,7 +3,7 @@
 This repository contains implementations of different FFT libraries in
 order to compare their performance with the FPGA implementation.
 
-# Libraries 
+## Libraries 
 These libraries are self composed within their respective folders. The READMEs
 to configure and execute them are also available.
 
@@ -27,7 +27,7 @@ Different configurations when using the code:
 
 ![Performance Comparison](common/fftw_mkl_perf.png)
 
-#### Runtime Comparison
+### Runtime Comparison
 
 Runtime is reported in milliseconds.
 
@@ -39,7 +39,7 @@ Runtime is reported in milliseconds.
 |     128    |   1.591  |  1.393   |    0.8         |                |
 |     256    |  90.415  |  23.19   |    6.9         |                |
 
-#### Throughput Comparison
+### Throughput Comparison
 
 Throughput is reported in GFLOPS.
 
@@ -51,6 +51,18 @@ Throughput is reported in GFLOPS.
 |     128    |  138.39  | 158.08   |
 |     256    |   22.26  |  86.80   |
 
+### Experimental Setup
+
+#### CPU used 
+
+2x Intel Xeon Gold "Skylake" 6148, 2.4 GHz, 40 cores
+
+Cache Hierarchy:
+
+- L0, L1I (32KB), L1D (32KB) private per core.
+- L2 private - 1MB/core
+- L3 non inclusive - 1.375 MB/core or 27.5 MB per CPU
+
 ## Analysis
 
-1. Reason for loss in performance when scaling from 128 to 256 cube FFT
+1. Reason for loss in performance when scaling from 128 to 256 cube FFT - 128 cube requires only 2MB of memory whereas 256 cube FFT uses 128 MB of memory. The latter cannot be stored in the L3 cache, which has only 27.5 MB of memory per CPU. Thereby, the loss in performance.
