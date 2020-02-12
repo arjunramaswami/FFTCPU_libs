@@ -51,17 +51,22 @@ Throughput is reported in GFLOPS.
 |     128    |  138.39  | 158.08   |
 |     256    |   22.26  |  86.80   |
 
-### Experimental Setup
+### Environment
 
 #### CPU used 
 
-2x Intel Xeon Gold "Skylake" 6148, 2.4 GHz, 40 cores
+2x Intel Xeon Gold "Skylake" 6148, 2.4 GHz, each with 20 cores, hyperthreading disabled
 
 Cache Hierarchy:
 
 - L0, L1I (32KB), L1D (32KB) private per core.
 - L2 private - 1MB/core
 - L3 non inclusive - 1.375 MB/core or 27.5 MB per CPU
+
+#### Library Versions
+
+- FFTW 3.3.8 linked with GCC v8.3.0
+- Intel MKL as part of Intel Parallel Studio XE 2020, linked with icc v19.1
 
 ## Analysis
 
