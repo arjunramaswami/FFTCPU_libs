@@ -114,7 +114,7 @@ fftw:     3       64³       0.6434            2.56
 
 | # points | Best Runtime (ms) SP | Best Runtime (ms) DP | FPGA Execution (ms) | FPGA PCIe Transfer (ms) | FPGA Total (ms) |
 |:--------:|:--------------------:|:--------------------:|:-------------------:|-------------------------|-----------------|
-| 32^3     | -                    | -                    | 0.22                | 0.215                   | 0.43            |
+| 32^3     | 0.0289               | 0.05                 | 0.22                | 0.215                   | 0.43            |
 | 64^3     | 0.141                | 0.22                 | 0.74                | 0.87                    | 1.61            |
 | 128^3    | 0.711                | 1.16                 | -                   | 5.5                     |                 |
 | 256^3    | 6.94                 | 17.23                | -                   | 42.6                    |                 |
@@ -128,7 +128,7 @@ Just for fun: Given below is the time taken to plan and the plans used to obtain
 
 | # points | Plan Time (sec) SP | Plan Time (ms) DP |
 |:--------:|:------------------:|-------------------|
-| 32^3     | -                  | -                 |
+| 32^3     | 4.23 (patient)     | 2.17 (patient)    |
 | 64^3     | 0.0012 (estimate)  | 0.0018 (estimate) |
 | 128^3    | 53.3 (patient)     | 65.5 (patient)    |
 | 256^3    | 360 (patient)      | 6.60 (measure)    |

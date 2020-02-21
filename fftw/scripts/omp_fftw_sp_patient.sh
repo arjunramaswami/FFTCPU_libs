@@ -33,7 +33,7 @@ echo "Passed $# FFT3d Sizes"
 for arg in "$@"
 do
   echo "Executing FFT Size : $arg $arg $arg"
-  for thread in {4..40}
+  for thread in {1..40}
   do
     echo "Running with number of threads : $thread"
     outfile="${outdir}sp_${arg}_${ctime}"

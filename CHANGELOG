@@ -2,9 +2,12 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- 512^3 point 3d FFT
+- Scripts to graph
+
+## [1.1] - [05.03.2020]
 - Exhaustive planning
 - 32^3 point 3d FFT
-- Scripts to graph
 
 ## [1.0.0] - [03.03.2020]
 

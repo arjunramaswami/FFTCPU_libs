@@ -33,7 +33,7 @@ The FPGA runtime includes PCIe transfer latencies.
 
 | FFT3d Size |   FFTW   |    MKL   | FPGA Obtained |
 |:----------:|:--------:|:--------:|:-------------:|
-|     32     |   -      |  0.056   |    0.43       |
+|     32     |   0.02   |  0.056   |    0.43       |
 |     64     |   0.14   |  0.197   |    1.61       |
 |     128    |   0.71   |  1.393   |               |
 |     256    |   6.94   |  23.19   |               |
@@ -62,6 +62,7 @@ Cache Hierarchy:
 |  32 |       0.25      |       0.5      |
 |  64 |        2        |        4       |
 | 128 |        16       |       32       |
+| 256 |       128       |       256      |
 
 Reason for loss in performance when scaling from 128 to 256 cube sp FFT - 128 cube requires only 16 MB of memory whereas 256 cube FFT uses 128 MB of memory. The latter cannot be stored in the L3 cache, which has only 27.5 MB of memory per CPU. Thereby, the loss in performance.
 

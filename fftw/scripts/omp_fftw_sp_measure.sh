@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
-#SBATCH -J meas_sp_fftw_red
+#SBATCH -J meas_sp_fftw_ref
 #SBATCH -p short
 #SBATCH -N 1
 #SBATCH -t 29:00
@@ -19,7 +19,7 @@ ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/measure/"
 iter=100
 
-make MEASURE=1 -C ../ 
+make MEASURE=1 -C ../
 
 ## Set OMP Environment Variables
 export OMP_DISPLAY_AFFINITY=TRUE
@@ -31,14 +31,14 @@ export OMP_PROC_BIND=close
 echo "Passed $# FFT3d Sizes"
 for arg in "$@"
 do
-    echo "Executing FFT Size : $arg $arg $arg"
-    for thread in {28..40}
-    do
-      echo "Running with number of threads : $thread"
-      outfile="${outdir}sp_${arg}_${ctime}"
-      echo "Writing to file : ${outfile}"
+  echo "Executing FFT Size : $arg $arg $arg"
+  for thread in {1..40}
+  do
+    echo "Running with number of threads : ${thread}"
+    outfile="${outdir}sp_${arg}_${ctime}"
+    echo "Writing to file : ${outfile}"
 
-      ../bin/fftw -m $arg -n $arg -p $arg -i ${iter} -t ${thread} -s >> ${outfile}
-    done
+    ../bin/fftw -m $arg -n $arg -p $arg -i ${iter} -t ${thread} -s >> ${outfile}
+  done
 done
 

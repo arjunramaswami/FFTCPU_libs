@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
-#SBATCH -J fftw_ref
-#SBATCH -p short
+#SBATCH -J est_sp_fftw_ref
+#SBATCH -p batch
 #SBATCH -N 1
-#SBATCH -t 29:00
+#SBATCH -t 11:29:00
 
 ## Execute fftw multithreaded code 
 ##   Arg : Sizes of FFT to execute
@@ -33,7 +33,7 @@ echo "Passed $# FFT3d Sizes"
 for arg in "$@"
 do
   echo "Executing FFT Size : $arg $arg $arg"
-  for thread in {30..40}
+  for thread in {1..40}
   do
     echo "Running with number of threads : $thread"
     outfile="${outdir}sp_${arg}_${ctime}"
