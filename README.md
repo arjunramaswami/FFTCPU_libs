@@ -25,31 +25,18 @@ Different configurations when using the code:
 
 ## Performance
 
-![Performance Comparison](common/fftw_mkl_perf.png)
-
 ### Runtime Comparison
 
-Runtime is reported in milliseconds.
+Runtime is reported in milliseconds for single precision complex floating points.
 
-| FFT3d Size |   FFTW   |    MKL   | FPGA Best Case |  FPGA Obtained |
-|:----------:|:--------:|:--------:|:--------------:|:--------------:|
-|     16     |   0.022  |  0.012   |    0.001       |     0.11       |
-|     32     |   0.060  |  0.056   |    0.01        |     0.22       |
-|     64     |   0.270  |  0.197   |    0.1         |     0.74       |
-|     128    |   1.591  |  1.393   |    0.8         |                |
-|     256    |  90.415  |  23.19   |    6.9         |                |
+The FPGA runtime includes PCIe transfer latencies.
 
-### Throughput Comparison
-
-Throughput is reported in GFLOPS.
-
-| FFT3d Size |   FFTW   |    MKL   |
-|:----------:|:--------:|:--------:|
-|     16     |   11.13  |  19.25   |
-|     32     |   40.56  |  43.58   |
-|     64     |   87.09  | 119.80   |
-|     128    |  138.39  | 158.08   |
-|     256    |   22.26  |  86.80   |
+| FFT3d Size |   FFTW   |    MKL   | FPGA Obtained |
+|:----------:|:--------:|:--------:|:-------------:|
+|     32     |   -      |  0.056   |    0.43       |
+|     64     |   0.14   |  0.197   |    1.61       |
+|     128    |   0.71   |  1.393   |               |
+|     256    |   6.94   |  23.19   |               |
 
 ### Environment
 
@@ -70,7 +57,13 @@ Cache Hierarchy:
 
 ## Analysis
 
-Reason for loss in performance when scaling from 128 to 256 cube FFT - 128 cube requires only 2MB of memory whereas 256 cube FFT uses 128 MB of memory. The latter cannot be stored in the L3 cache, which has only 27.5 MB of memory per CPU. Thereby, the loss in performance.
+|  sz |  sp cmplex (MB) | dp cmplex (MB) |
+|:---:|:---------------:|:--------------:|
+|  32 |       0.25      |       0.5      |
+|  64 |        2        |        4       |
+| 128 |        16       |       32       |
+
+Reason for loss in performance when scaling from 128 to 256 cube sp FFT - 128 cube requires only 16 MB of memory whereas 256 cube FFT uses 128 MB of memory. The latter cannot be stored in the L3 cache, which has only 27.5 MB of memory per CPU. Thereby, the loss in performance.
 
 #### Justifying the performance loss using FFT and cache sizes
 

@@ -1,0 +1,920 @@
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 1 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 1: time to plan - 0.330772 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     1       64³       1.9436            1.67 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 2 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 2: time to plan - 0.450165 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     2       64³       1.0233            3.17 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 3 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 3: time to plan - 0.504868 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     3       64³       0.8545            3.80 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 4 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 4: time to plan - 0.397744 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     4       64³       0.5797            5.60 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 5 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 5: time to plan - 0.449553 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     5       64³       0.6084            5.33 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 6 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 6: time to plan - 0.451225 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     6       64³       0.4435            7.31 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 7 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 7: time to plan - 0.437912 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     7       64³       0.4200            7.72 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 8 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 8: time to plan - 0.360707 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     8       64³       0.3662            8.86 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 9 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 9: time to plan - 0.433512 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     9       64³       0.3653            8.88 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 10 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 10: time to plan - 0.430297 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    10       64³       0.3569            9.07 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 11 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 11: time to plan - 0.453182 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    11       64³       0.3137           10.33 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 12 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 12: time to plan - 0.429512 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    12       64³       0.3130           10.34 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 13 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 13: time to plan - 0.431462 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    13       64³       0.2830           11.46 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 14 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 14: time to plan - 0.428744 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    14       64³       0.2801           11.57 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 15 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 15: time to plan - 0.426083 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    15       64³       0.2829           11.44 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 16 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 16: time to plan - 0.400828 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    16       64³       0.2517           12.89 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 17 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 17: time to plan - 0.446614 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    17       64³       0.2547           12.72 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 18 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 18: time to plan - 0.450698 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    18       64³       0.2462           13.18 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 19 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 19: time to plan - 0.443545 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    19       64³       0.2537           12.79 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 20 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 20: time to plan - 0.440105 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    20       64³       0.2628           12.32 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 21 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 21: time to plan - 0.465126 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    21       64³       0.2982           10.88 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 22 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 22: time to plan - 0.457348 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    22       64³       0.2588           12.51 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 23 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 23: time to plan - 0.514019 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    23       64³       0.2560           12.65 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 24 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 24: time to plan - 0.518192 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    24       64³       0.2637           12.28 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 25 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 25: time to plan - 0.520376 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    25       64³       0.2516           12.90 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 26 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 26: time to plan - 0.510922 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    26       64³       0.2645           12.27 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 27 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 27: time to plan - 0.526042 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    27       64³       0.2683           12.09 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 28 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 28: time to plan - 0.531098 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    28       64³       0.2732           11.85 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 29 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 29: time to plan - 0.516377 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    29       64³       0.2750           11.79 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 30 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 30: time to plan - 0.537566 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    30       64³       0.2803           11.54 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 31 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 31: time to plan - 0.537362 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    31       64³       0.2701           11.98 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 32 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 32: time to plan - 0.475232 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    32       64³       0.9076            3.57 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 33 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 33: time to plan - 0.496309 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    33       64³       0.3806            8.50 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 34 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 34: time to plan - 0.495347 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    34       64³       0.2611           12.39 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 35 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 35: time to plan - 0.506734 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    35       64³       0.4187            7.75 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 36 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 36: time to plan - 0.513732 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    36       64³       0.4468            7.26 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 37 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 37: time to plan - 0.544810 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    37       64³       0.2929           11.04 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 38 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 38: time to plan - 0.527064 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    38       64³       0.3637            8.92 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 39 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 39: time to plan - 0.525936 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    39       64³       0.2742           11.83 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {64, 64, 64} 
+Precision          = Double 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Measure     
+Threads            = 40 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for double precision FFT
+
+Threads 40: time to plan - 0.505068 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    40       64³       0.2760           11.71 
+
+Cleaning up 
