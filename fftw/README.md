@@ -1,208 +1,160 @@
 # FFTW
 
-This folder contains the code to execute 3d FFT using FFTW. Currently executes
-single and double precision complex FFT with the latter configurable to use multiple threads.
+This folder contains the code to execute 3d FFT using [FFTW](http://www.fftw.org/) that executes single process multi-threaded variant of single and double precision complex 3FFT.
 
-The program and bash scripts can be used to evaluate and consolidate performance of FFT3d using FFTW for different uniform sized transformations. Distinct backward or forward transformations can be executed a number of times to find the average performance using a multithreaded environment.
+## Build
 
-Link to the official FFTW [website](http://www.fftw.org/).
+#### Prerequisites
 
-## Builds
+The following libraries have to be loaded in noctua in order to build the target
 
-### Prerequisites
+- FFTW:
+  
+   `module load numlib/FFTW/3.3.8-gompi-2019b`
 
-- easybuild FFTW - `module load numlib/FFTW/3.3.8-gompi-2019b`
-- C compiler that implements OpenMPI (tested with gcc 8.3.0) - `module load toolchain/gompi/2019b`
+- C compiler that implements OpenMPI (tested with gcc 8.3.0):
 
-### Targets
+    `module load toolchain/gompi/2019b`
 
-1. Single precision single threaded FFTW
+#### Targets
 
-   `make` and `make sp` : Creates an executable named `host_sp` in the FFTW directory
+Use the makefile along with the targets mentioned below to build different configurations of the FFTW library.
 
-2. For double precision single threaded FFTW
+| Target | Description                            |
+|:------:|----------------------------------------|
+|   all  | builds multithreaded single and double precision binary                      |
 
-   `make dp` : Creates an executable named `host_dp` in the FFTW directory
+#### Build Parameters
 
-3. Multi threaded FFTW (always uses double precision)
+| Target    | Description                            |
+|:---------:|----------------------------------------|
+| DEBUG     | output debug information on execution  |
+| VERBOSE   | output runtime of every iteration      |
+| MEASURE   | Plan FFT with type FFTW_MEASURE        |
+| PATIENT   | Plan FFT with type FFTW_PATIENT        |
+| EXHAUSTIVE| Plan FFT with type FFTW_EXHAUSTIVE     |
 
-   `make omp` : Creates an executable named `host_omp` in the FFTW directory
+The default FFTW plan is **FFTW_ESTIMATE**.
 
-Compiling with DEBUG macro set say, `make DEBUG=1 omp`, prints data input to
-  FFTW
+The program is compiled to the `bin` folder. The following is an example of compilation:
+
+```bash
+module load toolchain/gompi/2019b
+module load numlib/FFTW/3.3.8-gompi-2019b
+make DEBUG=1 VERBOSE=1
+make PATIENT=1
+```
 
 ## Execution
 
-Running the program with `-h` to print the options available.
-Options:
+The arguments available to the program:
+
+|   Argument  | Default | Description                                      |
+|:-----------:|---------|--------------------------------------------------|
+| -h / --help | -       | displays the cmd line parameter options          |
+|      -m     | 64      | number of points in the first dim of 3d fft      |
+|      -n     | 64      | number of points in the second dim of 3d fft     |
+|      -p     | 64      | number of points in the third dim of 3d fft      |
+|      -b     | -       | compute backward 3d fft                          |
+|      -s     | -       | call single precision functions instead of double|
+|      -t     | 1       | number of threads if multithreading is available |
+|      -i     | 1       | number of iterations of the application          |
+
+To execute:
 
 ```bash
-  -m : FFT 1st Dim Size
-  -n : FFT 2nd Dim Size
-  -p : FFT 3rd Dim Size
+# executing a single threaded dp backward fftw. Note '-t' is 1
+bin/fftw -m 16 -n 16 -p 16 -t 1 -i 2
 
-  -i : Number of iterations of the FFT computation
+# executing a 40 threaded dp fftw
+bin/fftw -m 256 -n 256 -p 256 -t 40 -i 2
 
-  -t : number of threads in a multithreaded execution
-  -b : toggle backward transformation
-```
-
-### Example multithreaded execution
-
-```bash
-  module load numlib/FFTW/3.3.8-gompi-2019b
-  make omp
-  ./host_omp -m 256 -n 256 -p 256 -t 40
-  ./host_omp -m 256 -n 256 -p 256 -t 40 -b
+# executing a 20 threaded sp fftw
+bin/fftw -m 256 -n 256 -p 256 -t 20 -s -i 2
 ```
 
 ## Interpreting Results
 
-The output shows configuration of execution and the series of steps the program
-executes followed by the consolidation of some performance metrics such as:
+The following metrics are measured:
+
+1. Runtime of the fftw execution
+2. Throughput based on the plan
+
+### Runtime
+
+Runtime is measured for the following:
+
+1. `fftw(f)_execute()` method over a number of iterations, then its average runtime is considered.
+
+2. `fftw_plan_dft_3d()` method that creates a plan for the fft configuration.
+
+### Throughput
+
+The `fftw(f)_flops` method is used to obtain the number of add, mul and fused-multiply-accumulate floating point operations performed for the specific plan. Their total would be total flops. This is divided by the runtime to find the throughput.
+
+### Console Output
+
+The console output shows the configuration of execution followed by the following results:
 
 ```bash
-Number of runs : 100
+Threads 3: time to plan - 0.319790 sec
 
-FFT Size    Total Runtime(ms)   Avg Runtime(ms)     Throughput(GFLOPS)
-   32          30.051               0.300               23.51
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     3       64³       0.6434            2.56 
 ```
 
-- FFT Size is the size of the 3d FFT
-- Total Runtime (milliseconds) : total amount of time to execute the given
-  number of iterations.
-- Avg Runtime (milliseconds) : average runtime for a single iteration of execution i.e.,
-  total runtime by the number of iterations
-- Throughput (GFLOPS): Calculated by *3 * 5 * N * logN / (time for one FFT)* as described
-  by the [FFTW Benchmark Methodology](http://www.fftw.org/speed/method.html).
-  This is not the actual flop count rather an asymptotic measurement using the
-  radix-2 Cooley Tukey algorithm.
+### Note
 
-### Important Points
-
-- Runtime only measures the walltime of the FFTW execution, not the
-  initialization and plan creation. Measured using `clock_gettime` to provide
-  nanosecond resolution.
-- Iterations are made on the same input data. Input data is [0, N^3 - 1] where
-  N is the number of data points in a dimension.
+- Runtime only measures the walltime of the FFTW execution, measured using `clock_gettime` to provide nanosecond resolution.
+- Iterations are made on the same input data. 
 
 ## Results
 
-### Best Runtime and Throughput
+### Best Runtime
 
-This is required to compare each FFT size with other FFT libraries and implementations.
+| # points | Best Runtime (ms) SP | Best Runtime (ms) DP | FPGA Execution (ms) | FPGA PCIe Transfer (ms) | FPGA Total (ms) |
+|:--------:|:--------------------:|:--------------------:|:-------------------:|-------------------------|-----------------|
+| 32^3     | -                    | -                    | 0.22                | 0.215                   | 0.43            |
+| 64^3     | 0.141                | 0.22                 | 0.74                | 0.87                    | 1.61            |
+| 128^3    | 0.711                | 1.16                 | -                   | 5.5                     |                 |
+| 256^3    | 6.94                 | 17.23                | -                   | 42.6                    |                 |
 
-| FFT3d Size | Best Runtime (ms) | Throughput (GFLOPS) |
-|:----------:|:-----------------:|:-------------------:|
-|     16     |   0.022           |     11.13           |
-|     32     |   0.060           |     40.56           |
-|     64     |   0.270           |     87.09           |
-|     128    |   1.591           |    138.39           |
-|     256    |    90.415         |     22.26           |
+SP - Complex Single Precision Points
+DP - Complex Double Precision Points
 
-### Speedup with Multithreading
+### Plans
 
-Maximum speedup obtained per size when strong scaling to 40 threads. 
+Just for fun: Given below is the time taken to plan and the plans used to obtain the best runtime given above.
 
-| FFT3d Size | Max Speedup |
-|:----------:|:-----------:|
-|     16     |     1.0     |
-|     32     |     3.34    |
-|     64     |     10.67   |
-|     128    |     24.48   |
-|     256    |     10.58   |
+| # points | Plan Time (sec) SP | Plan Time (ms) DP |
+|:--------:|:------------------:|-------------------|
+| 32^3     | -                  | -                 |
+| 64^3     | 0.0012 (estimate)  | 0.0018 (estimate) |
+| 128^3    | 53.3 (patient)     | 65.5 (patient)    |
+| 256^3    | 360 (patient)      | 6.60 (measure)    |
 
-#### Notes
+The `common/fftw_plans` directory has illustrations on the comparison of different runtimes of plans.
 
-- Better Speedup with increase in FFT size i.e., more data
-- Could 256<sup>3</sup> offer better speedup with more threads?
-- Can one estimate the maximum speedup possible?
+## Additional Scripts
 
-### Details on execution
+- Bash scripts for different precisions and plans.
 
-The bash file `omp_fftw_run.sh` can be used to execute on NOCTUA cluster :
 ```
-sbatch omp_fftw_run.sh <array of sizes of fft3d>
+sbatch omp_fftw_dp_run.sh <array of sizes of fft3d>
 
-sbatch omp_fftw_run.sh 16 32 64
+sbatch omp_fftw_dp_run.sh 16 32 64
 ```
 
-1. loads `gcc/8.3.0` and `numlib/FFTW`
+- Bash script `create_csv.sh` can be used to create a csv output from the reports generated by the above bash file.
 
-2. Sets openmp thread affinity env variables
+```
+./create_csv.sh <generated_report> <output.csv>
+./create_csv.sh ../raw/measure/sp_128_* ../csv/measure/sp_128.csv
+```
 
-3. Executes the application using srun on the same node from 1 to 40 threads
-one after another and saves the output in distinct reports.
+- Bash script `plan.sh` can be used to tabulate the time to plan using different planning schemes for different number of threads.
 
-The bash file `create_csv.sh` can be used to create a csv output from the reports generated by the above bash file.
-
-`./create_csv.sh <generated_report> <output.csv>`
-
-## Configuring FFTW with OpenMP
-
-Steps to configure multithreaded execution of FFTW with OpenMPI
-
-### Code Modification
-
-Initialize the environment:
-
-  ```C
-  #include<omp.h>
-  int fftw_init_threads(void);
-  ```
-
-Make the plan with the necessary number of threads to execute
-
-  ```C
-  void fftw_plan_with_nthreads(int nthreads);
-  ```
-
-Execute with the normal API call
-
-  ```C
-  fftw_execute(plan)
-  ```
-
-Cleanup plan and threads after execution
-
-  ```C
-  fftw_destroy_plan()
-  void fftw_cleanup_threads(void);
-  ```
-
-#### FFTW API for multithreading works only with double precision
-
-- Creating a single precision plan after initializing threads produces single
-   threaded outcomes.
-- Creating fftwf alternatives throw linker error due to lack of such
-   functionalities.
-
-### Compilation
-
-To compile with OpenMPI, link this additional flag `-lfftw3_omp` along with
-`-fopenmp` other than the regular `fftw` flags. These are added to the makefile.
-
-## Input Data and Validation
-
-Generate a discrete signal of a single specific frequency by creating N<sup>3</sup> discrete points of a cosine and sine wave. Modify the frequency by creating its harmonic (positive multiple of a fundamental frequency) for variations.
-
-Validate by checking the particular frequency's value after transformation.
-
-### Error Bound
-
-Why is the error bound calculated as $5 * \log _{2}(N1*N2*N3) * DBL\_EPSILSON$ or $FLT\_EPSILON$ ?
-
-## Note
-
-Execution is thread-safe but not plan creation and destruction, therefore use a
-single thread for the latter.
-
-## TODO
-
-Pin OpenMP threads using environment variables as opposed to using `srun bind`.
-There is also an environment variable to output the pinning results at runtime.
-
-[Link1](http://pages.tacc.utexas.edu/~eijkhout/pcse/html/omp-affinity.html)
-
-[Link2](https://groups.uni-paderborn.de/pc2/lectures/hpccourse03/material/hpcadv.pdf)
-
+```
+./plan.sh <generate report> <output.csv>
+./plan.sh ../raw/measure/sp_128_* ../csv/measure/plans/sp_128_plan.csv
+```
