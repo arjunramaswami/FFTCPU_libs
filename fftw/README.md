@@ -112,12 +112,13 @@ fftw:     3       64³       0.6434            2.56
 
 ### Best Runtime
 
-| # points | Best Runtime (ms) SP | Best Runtime (ms) DP | FPGA Execution (ms) | FPGA PCIe Transfer (ms) | FPGA Total (ms) |
-|:--------:|:--------------------:|:--------------------:|:-------------------:|-------------------------|-----------------|
-| 32^3     | 0.0289               | 0.05                 | 0.22                | 0.215                   | 0.43            |
-| 64^3     | 0.141                | 0.22                 | 0.74                | 0.87                    | 1.61            |
-| 128^3    | 0.711                | 1.16                 | -                   | 5.5                     |                 |
-| 256^3    | 6.94                 | 17.23                | -                   | 42.6                    |                 |
+| # points | Best Runtime (ms) SP | Best Runtime (ms) DP | FPGA Execution (ms) | FPGA PCIe Transfer (ms) | FPGA Total (ms) | SVM Transfer (ms) |
+|:--------:|:--------------------:|:--------------------:|:-------------------:|-------------------------|-----------------|-------------------|
+| 32^3 | 0.0289 | 0.05 | 0.22 | 0.215 | 0.43 | 0.110 |
+| 64^3 | 0.141 | 0.22 | 0.74 | 0.87 | 1.61 | 0.227 |
+| 128^3 | 0.711 | 1.16 | - | 5.5 |  | 1.60 |
+| 256^3 | 6.94 | 17.23 | - | 42.6 |  | 12.62 |
+| 512^3 | 109.63 | 203.66 |  |  |  | 98.71 |
 
 SP - Complex Single Precision Points
 DP - Complex Double Precision Points
@@ -132,6 +133,7 @@ Just for fun: Given below is the time taken to plan and the plans used to obtain
 | 64^3     | 0.0012 (estimate)  | 0.0018 (estimate) |
 | 128^3    | 53.3 (patient)     | 65.5 (patient)    |
 | 256^3    | 360 (patient)      | 6.60 (measure)    |
+| 512^3    | 1449 (patient)     | 2240 (patient)    |
 
 The `common/fftw_plans` directory has illustrations on the comparison of different runtimes of plans.
 
