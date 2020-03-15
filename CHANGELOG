@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 - Scripts to graph
 
+## [1.2] - [15.03.2020]
+- 1024^3 point sp 3d FFT
+
 ## [1.2] - [10.03.2020]
 - 512^3 point 3d FFT
 

@@ -119,6 +119,7 @@ fftw:     3       64³       0.6434            2.56
 | 128^3 | 0.711 | 1.16 | - | 5.5 |  | 1.60 |
 | 256^3 | 6.94 | 17.23 | - | 42.6 |  | 12.62 |
 | 512^3 | 109.63 | 203.66 |  |  |  | 98.71 |
+| 1024^3 | 717.13 |  |  |  |  | |
 
 SP - Complex Single Precision Points
 DP - Complex Double Precision Points
@@ -134,6 +135,7 @@ Just for fun: Given below is the time taken to plan and the plans used to obtain
 | 128^3    | 53.3 (patient)     | 65.5 (patient)    |
 | 256^3    | 360 (patient)      | 6.60 (measure)    |
 | 512^3    | 1449 (patient)     | 2240 (patient)    |
+| 1024^3    | 17320 (patient)     |    |
 
 The `common/fftw_plans` directory has illustrations on the comparison of different runtimes of plans.
 

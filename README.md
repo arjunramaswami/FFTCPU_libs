@@ -38,6 +38,7 @@ The FPGA runtime includes PCIe transfer latencies.
 |     128    |   0.71   |  1.393   |               |
 |     256    |   6.94   |  23.19   |               |
 |     512    |   109.63 |          |               |
+|    1024    |   717.13 |          |               |
 
 ### Environment
 
