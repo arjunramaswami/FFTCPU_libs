@@ -7,7 +7,8 @@
 DEBUG := 0
 
 # Compilers
-CC := gcc
+CC := gcc -std=c99
+MPICC := mpicc 
 
 # Compiler Flags
 CFLAGS := -march=native -Wall
@@ -41,7 +42,7 @@ CFLAGS := $(CFLAGS)
 
 INC := -Iinclude 
 
-LIBS := -lfftw3 -lfftw3f -lfftw3_omp -lfftw3f_omp -lm -fopenmp
+LIBS := -lfftw3 -lfftw3f -lfftw3_omp -lfftw3f_omp -lfftw3_mpi -lfftw3f_mpi -lm -fopenmp
 
 # Target
 TARGETDIR := bin
@@ -49,9 +50,9 @@ TARGET := fftw
 
 all :
 	mkdir -p $(TARGETDIR)
-	$(CC) $(LIBS) $(CFLAGS) $(SRCS) $(INC) -o $(TARGETDIR)/$(TARGET)
+	$(MPICC) $(LIBS) $(CFLAGS) $(SRCS) $(INC) -o $(TARGETDIR)/$(TARGET)
 
 clean : 
-	rm -f $(TARGETDIR)/$(TARGET)
+	rm -rf $(TARGETDIR)/
 
 .PHONY : all clean

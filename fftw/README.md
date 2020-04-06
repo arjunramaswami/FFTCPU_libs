@@ -1,6 +1,6 @@
 # FFTW
 
-This folder contains the code to execute 3d FFT using [FFTW](http://www.fftw.org/) that executes single process multi-threaded variant of single and double precision complex 3FFT.
+This folder contains code to execute 3d FFT using [FFTW](http://www.fftw.org/) that executes hybrid (MPI + OpenMP) single and double precision complex configurations.
 
 ## Build
 
@@ -22,7 +22,7 @@ Use the makefile along with the targets mentioned below to build different confi
 
 | Target | Description                            |
 |:------:|----------------------------------------|
-|   all  | builds multithreaded single and double precision binary                      |
+|   all  | builds multiprocess multithreaded single and double precision binary                      |
 
 #### Build Parameters
 
@@ -64,13 +64,13 @@ To execute:
 
 ```bash
 # executing a single threaded dp backward fftw. Note '-t' is 1
-bin/fftw -m 16 -n 16 -p 16 -t 1 -i 2
+mpirun -n 2 ./bin/fftw -m 16 -n 16 -p 16 -t 1 -i 2
 
 # executing a 40 threaded dp fftw
-bin/fftw -m 256 -n 256 -p 256 -t 40 -i 2
+mpirun -n 16 ./bin/fftw -m 256 -n 256 -p 256 -t 40 -i 2
 
 # executing a 20 threaded sp fftw
-bin/fftw -m 256 -n 256 -p 256 -t 20 -s -i 2
+mpirun -n 8 ./bin/fftw -m 256 -n 256 -p 256 -t 20 -s -i 2
 ```
 
 ## Interpreting Results
@@ -79,36 +79,44 @@ The following metrics are measured:
 
 1. Runtime of the fftw execution
 2. Throughput based on the plan
+3. Time to transfer data to master node
 
 ### Runtime
 
 Runtime is measured for the following:
 
-1. `fftw(f)_execute()` method over a number of iterations, then its average runtime is considered.
+1. `fftw(f)_execute()` collective routine over a number of iterations, then its average runtime is considered.
 
 2. `fftw_plan_dft_3d()` method that creates a plan for the fft configuration.
 
 ### Throughput
 
-The `fftw(f)_flops` method is used to obtain the number of add, mul and fused-multiply-accumulate floating point operations performed for the specific plan. Their total would be total flops. This is divided by the runtime to find the throughput.
+The `fftw(f)_flops` collective routine is used to obtain the number of add, mul and fused-multiply-accumulate floating point operations performed for the specific plan in every process. Their total would be total flops aggregated at the master node. This is divided by the runtime to find the throughput.
+
+### Transfer time
+
+In a distributed FFT, each process contains its respective transformed subset of points that could be gathered to the master node to form the complete set of transformed points. This transfer is performed using `MPI_Gather` and is timed using `MPI_Wtime()`.
 
 ### Console Output
 
 The console output shows the configuration of execution followed by the following results:
 
 ```bash
-Threads 3: time to plan - 0.319790 sec
+Time to plan: 0.002379sec
 
-       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
-fftw:     3       64³       0.6434            2.56 
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       2        2       16³       0.1071            1.1476              0.0515 
 ```
 
 ### Note
 
-- Runtime only measures the walltime of the FFTW execution, measured using `clock_gettime` to provide nanosecond resolution.
-- Iterations are made on the same input data. 
+- Execution and transfer times are measured using `MPI_Wtime()`.
+- Iterations are made on the same input data.
 
-## Results
+## Results of Distributed Multithreaded 3d FFT
+
+## Results of Single Process Multithreaded 3d FFT
 
 ### Best Runtime
 

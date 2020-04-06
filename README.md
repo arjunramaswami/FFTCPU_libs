@@ -17,13 +17,16 @@ Different configurations when using the code:
 - Forward / Backward FFT
 - Precision of floating point numbers : single precision, double precision
 - Single Threaded, multi threaded using OpenMP
+- Distributed FFT using MPI
 
 ### Metrics measured
 
 - Runtime (milliseconds)
 - Throughput (GFLOPS)
 
-## Performance
+## Performance - Distributed Multithreaded Evaluation
+
+## Performance - Single process Multithreaded Evaluation
 
 ### Runtime Comparison
 
@@ -40,9 +43,9 @@ The FPGA runtime includes PCIe transfer latencies.
 |     512    |   109.63 |          |               |
 |    1024    |   717.14 |          |               |
 
-### Environment
+## Environment
 
-#### CPU used 
+### CPU used 
 
 2x Intel Xeon Gold "Skylake" 6148, 2.4 GHz, each with 20 cores, hyperthreading disabled
 
@@ -52,7 +55,7 @@ Cache Hierarchy:
 - L2 private - 1MB/core
 - L3 non inclusive - 1.375 MB/core or 27.5 MB per CPU
 
-#### Library Versions
+### Library Versions
 
 - FFTW 3.3.8 linked with GCC v8.3.0
 - Intel MKL as part of Intel Parallel Studio XE 2020, linked with icc v19.1
@@ -70,7 +73,7 @@ Cache Hierarchy:
 
 Reason for loss in performance when scaling from 128 to 256 cube sp FFT - 128 cube requires only 16 MB of memory whereas 256 cube FFT uses 128 MB of memory. The latter cannot be stored in the L3 cache, which has only 27.5 MB of memory per CPU. Thereby, the loss in performance.
 
-#### Justifying the performance loss using FFT and cache sizes
+### Justifying the performance loss using FFT and cache sizes
 
 To clearly understand if the loss in performance is due to cache misses, one can estimate the maximum FFT size that can fit into the L3 cache and obtain its performance. Then, calculate the performance of the FFT that is just larger than the cache.
 
