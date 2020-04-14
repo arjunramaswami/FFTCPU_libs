@@ -1,9 +1,12 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
-#SBATCH -J exhaust_sp_fftw_ref
+#SBATCH -J exh_sp_fftw_ref
 #SBATCH -p long
-#SBATCH -N 1
-#SBATCH -t 3-00:29:00
+#SBATCH --nodes=8
+#SBATCH -t 3-00:00:00
+#SBATCH --ntasks=8
+#SBATCH --ntasks-per-node=1
+#SBATCH --switches=1
 
 ## Execute fftw multithreaded code 
 ##   Arg : Sizes of FFT to execute
@@ -39,7 +42,7 @@ do
     outfile="${outdir}sp_${arg}_${ctime}"
     echo "Writing to file : ${outfile}"
 
-    ../bin/fftw_exh -m $arg -n $arg -p $arg -i ${iter} -t ${thread} -s >> ${outfile}
+    srun ../bin/fftw_exh -m $arg -n $arg -p $arg -i ${iter} -t ${thread} -s >> ${outfile}
   done
 done
 

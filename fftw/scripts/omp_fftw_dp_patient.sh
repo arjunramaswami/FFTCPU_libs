@@ -1,9 +1,12 @@
 #!/bin/bash
 #SBATCH -A pc2-mitarbeiter
 #SBATCH -J patient_dp
-#SBATCH -p batch
-#SBATCH -N 1
-#SBATCH -t 11:29:00
+#SBATCH -p long
+#SBATCH --nodes=8
+#SBATCH -t 3-00:00:00
+#SBATCH --ntasks=8
+#SBATCH --ntasks-per-node=1
+#SBATCH --switches=1
 
 ## Execute fftw multithreaded code 
 ##   Arg : Sizes of FFT to execute
@@ -17,7 +20,7 @@ module load numlib/FFTW/3.3.8-gompi-2019b
 
 ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/patient/"
-iter=100
+iter=10
 
 make PATIENT=1 -C ../
 
@@ -39,7 +42,7 @@ do
     outfile="${outdir}dp_${arg}_${ctime}"
     echo "Writing to file : ${outfile}"
 
-    ../bin/fftw -m $arg -n $arg -p $arg -i ${iter} -t ${thread} >> ${outfile}
+    srun ../bin/fftw -m $arg -n $arg -p $arg -i ${iter} -t ${thread} >> ${outfile}
     done
 done
 
