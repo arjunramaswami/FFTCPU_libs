@@ -13,6 +13,44 @@
 #include "helper.h"
 
 /**
+ * \brief  create double precision floating points values for FFT computation for each process level block
+ * 
+ * \param  fftw_data : pointer to 3d number of dp points
+ * \param  n0, n1, n2  : number of points in each dimension
+ * \param  local_n0    : number of points in the n0 dim
+ * \param  local_start : starting point in the n0 dim
+ * \param  H1, H2, H3 : harmonic to modify frequency of discrete time signal
+ */
+void get_mpi_dp_input_data(fftw_complex *fftw_data, ptrdiff_t n0, ptrdiff_t n1, ptrdiff_t n2, ptrdiff_t local_n0, ptrdiff_t local_start, int H1, int H2, int H3){
+  int i, j, k, index;
+  int N1 = n0, N2 = n1, N3 = n2;
+  int S1 = N2*N3, S2 = N3, S3 = 1;
+
+  double TWOPI = 6.2831853071795864769;
+  double phase, phase1, phase2, phase3;
+
+  for (i = 0; i < local_n0; i++) {
+    for (j = 0; j < N2; j++) {
+      for (k = 0; k < N3; k++) {
+        phase1 = moda(i + local_start, H1, N1) / N1;  // phase values between 0 and 1
+        phase2 = moda(j, H2, N2) / N2;
+        phase3 = moda(k, H3, N3) / N3;
+        phase = phase1 + phase2 + phase3;
+
+        index = i*S1 + j*S2 + k*S3;
+
+        fftw_data[index][0] = cos( TWOPI * phase ) / (N1*N2*N3); 
+        fftw_data[index][1] = sin( TWOPI * phase ) / (N1*N2*N3);
+
+#ifdef DEBUG    
+        printf(" %d %d %d : fftw[%d] = (%lf, %lf) \n", i, j, k, index, fftw_data[index][0], fftw_data[index][1]);
+#endif
+      }
+    }
+  }
+}
+
+/**
  * \brief  Verify double precision FFT3d computation
  * \param  x : fftw_complex - 3d FFT data after transformation
  * \param  N - fft size
@@ -81,44 +119,6 @@ int verify_dp(fftw_complex *x, int N1, int N2, int N3, int H1, int H2, int H3){
   return 0;
 }
 
-/**
- * \brief  create double precision floating points values for FFT computation for each process level block
- * 
- * \param  fftw_data : pointer to 3d number of dp points
- * \param  n0, n1, n2  : number of points in each dimension
- * \param  local_n0    : number of points in the n0 dim
- * \param  local_start : starting point in the n0 dim
- * \param  H1, H2, H3 : harmonic to modify frequency of discrete time signal
- */
-void get_mpi_dp_input_data(fftw_complex *fftw_data, ptrdiff_t n0, ptrdiff_t n1, ptrdiff_t n2, ptrdiff_t local_n0, ptrdiff_t local_start, int H1, int H2, int H3){
-  int i, j, k, index;
-  int N1 = n0, N2 = n1, N3 = n2;
-  int S1 = N2*N3, S2 = N3, S3 = 1;
-
-  double TWOPI = 6.2831853071795864769;
-  double phase, phase1, phase2, phase3;
-
-  for (i = 0; i < local_n0; i++) {
-    for (j = 0; j < N2; j++) {
-      for (k = 0; k < N3; k++) {
-        phase1 = moda(i + local_start, H1, N1) / N1;  // phase values between 0 and 1
-        phase2 = moda(j, H2, N2) / N2;
-        phase3 = moda(k, H3, N3) / N3;
-        phase = phase1 + phase2 + phase3;
-
-        index = i*S1 + j*S2 + k*S3;
-
-        fftw_data[index][0] = cos( TWOPI * phase ) / (N1*N2*N3); 
-        fftw_data[index][1] = sin( TWOPI * phase ) / (N1*N2*N3);
-
-#ifdef DEBUG    
-        printf(" %d %d %d : fftw[%d] = (%lf, %lf) \n", i, j, k, index, fftw_data[index][0], fftw_data[index][1]);
-#endif
-      }
-    }
-  }
-}
-
 void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
 
   int H1 = 1, H2 = 1, H3 = 1, status;
@@ -136,9 +136,21 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   }
   fftw_mpi_init();
 
-  int world_size, myrank;
+  int world_size, myrank, namelen;
+  char processor_name[MPI_MAX_PROCESSOR_NAME];
   MPI_Comm_size(MPI_COMM_WORLD, &world_size); 
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
+  MPI_Get_processor_name(processor_name, &namelen);
+
+#ifdef VERBOSE
+    #pragma omp parallel 
+    {
+        int num_th = omp_get_num_threads();
+        int thr_num = omp_get_thread_num();
+        printf("Hybrid: Hello from thread %d out of %d from process %d out of %d on %s\n",
+                thr_num, num_th, myrank, world_size, processor_name);
+    }
+#endif
 
   ptrdiff_t alloc_local, local_n0, local_0_start;
   ptrdiff_t n0 = N1;

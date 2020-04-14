@@ -136,9 +136,21 @@ void fftwf_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   }
   fftwf_mpi_init();
 
-  int world_size, myrank;
+  int world_size, myrank, namelen;
+  char processor_name[MPI_MAX_PROCESSOR_NAME];
   MPI_Comm_size(MPI_COMM_WORLD, &world_size); 
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
+  MPI_Get_processor_name(processor_name, &namelen);
+
+#ifdef VERBOSE
+    #pragma omp parallel 
+    {
+        int num_th = omp_get_num_threads();
+        int thr_num = omp_get_thread_num();
+        printf("Hybrid: Hello from thread %d out of %d from process %d out of %d on %s\n",
+                thr_num, num_th, myrank, world_size, processor_name);
+    }
+#endif
 
   ptrdiff_t alloc_local, local_n0, local_0_start;
   ptrdiff_t n0 = N1;
@@ -245,6 +257,11 @@ void fftwf_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   double add, mul, fma, flops;
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma; 
+
+#ifdef VERBOSE
+  printf("Rank %d: Flops - %lf\n", myrank, flops);
+#endif
+
   double tot_flops;
   status = MPI_Reduce(&flops, &tot_flops, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   if(!checkStatus(status)){
