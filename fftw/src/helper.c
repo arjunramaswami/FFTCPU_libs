@@ -37,8 +37,9 @@ double getTimeinMilliSec(){
  * \param  nprocs       : number of processes used
  * \param  nthreads     : number of threads used
  * \param  iter         : number of iterations
+ * \return  0 if successful, 1 otherwise
  */
-void print_results(double exec_time, double gather_time, double flops, int N1, int N2, int N3, int nprocs, int nthreads, int iter){
+int print_results(double exec_time, double gather_time, double flops, int N1, int N2, int N3, int nprocs, int nthreads, int iter){
   double avg_fftw_runtime = 0.0, avg_transfer_time = 0.0;
 
   printf("\n");
@@ -55,33 +56,35 @@ void print_results(double exec_time, double gather_time, double flops, int N1, i
   }
   else{
     fprintf(stderr, "ERROR in FFT3d\n");
+    return 1;
   }
+  return 0;
 }
 
 /*
  * \brief Check return value of MPI function calls
  * \param status: value returned by the call
- * \return 1 if successful, 0 on error
+ * \return 0 if successful, 1 on error
  */
 int checkStatus(int status){
   switch (status){
     case MPI_SUCCESS:
-      return 1;
+      return 0;
     case MPI_ERR_COMM:
       fprintf(stderr, "Invalid communicator\n");
-      return 0;
+      return 1;
     case MPI_ERR_COUNT:
       fprintf(stderr, "Invalid count arg\n");
-      return 0;
+      return 1;
     case MPI_ERR_TYPE:
       fprintf(stderr, "Invalid datatype arg\n");
-      return 0;
+      return 1;
     case MPI_ERR_BUFFER:
       fprintf(stderr, "Invalid buffer pointer\n");
-      return 0;
+      return 1;
     default:
       fprintf(stderr, "Unknown Error\n");
-      return 0;
+      return 1;
   }
 }
 

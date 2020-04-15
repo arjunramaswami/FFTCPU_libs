@@ -22,7 +22,7 @@ int main(int argc, const char **argv){
 
   // Cmd line argument declarations
   int N1 = 64, N2 = 64, N3 = 64;
-  int iter = 1, nthreads = 1, inverse = 0, sp = 0;
+  int iter = 1, nthreads = 1, inverse = 0, sp = 0, status;
 
   struct argparse_option options[] = {
     OPT_HELP(),
@@ -46,12 +46,15 @@ int main(int argc, const char **argv){
   // Set the default number of threads to be used
   omp_set_num_threads(nthreads);
   if(sp == 1){
-    fftwf_mpi(N1, N2, N3, nthreads, inverse, iter);
+    status = fftwf_mpi(N1, N2, N3, nthreads, inverse, iter);
   }
   else{
-    fftw_mpi(N1, N2, N3, nthreads, inverse, iter);
+    status = fftw_mpi(N1, N2, N3, nthreads, inverse, iter);
+  }
+  if(status){
+    return EXIT_FAILURE;
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 

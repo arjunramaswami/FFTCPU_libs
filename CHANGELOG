@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 - Scripts to graph
 - Fix DEBUG prints
 
+## [2.0.1] - [15.04.2020]
+- Propagate errors back to main for CI
+
 ## [2.0] - [07.04.2020]
 - Hybrid (MPI + OpenMP) FFTW execution
 

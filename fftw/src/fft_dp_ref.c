@@ -53,8 +53,9 @@ void get_mpi_dp_input_data(fftw_complex *fftw_data, ptrdiff_t n0, ptrdiff_t n1, 
 /**
  * \brief  Verify double precision FFT3d computation
  * \param  x : fftw_complex - 3d FFT data after transformation
- * \param  N - fft size
+ * \param  N1, N2, N3 - fft size
  * \param  H1, H2, H3 : harmonic to modify frequency of discrete time signal
+ * \return 0 if successful, 1 otherwise
  */
 int verify_dp(fftw_complex *x, int N1, int N2, int N3, int H1, int H2, int H3){
   /* Verify that x(n1,n2,n3) is a peak at H1,H2,H3 */
@@ -89,11 +90,11 @@ int verify_dp(fftw_complex *x, int N1, int N2, int N3, int H1, int H2, int H3){
               err  = fabs(re_got - re_exp) + fabs(im_got - im_exp);
               if (err > maxerr) maxerr = err;
               if (!(err < errthr)){
-                  printf(" x[%i][%i][%i]: ",n1,n2,n3);
-                  printf(" expected (%.17lg,%.17lg), ",re_exp,im_exp);
-                  printf(" got (%.17lg,%.17lg), ",re_got,im_got);
-                  printf(" err %.3lg\n", err);
-                  printf(" Verification FAILED\n");
+                  fprintf(stderr," x[%i][%i][%i]: ",n1,n2,n3);
+                  fprintf(stderr," expected (%.17lg,%.17lg), ",re_exp,im_exp);
+                  fprintf(stderr," got (%.17lg,%.17lg), ",re_got,im_got);
+                  fprintf(stderr," err %.3lg\n", err);
+                  fprintf(stderr," Verification FAILED\n");
                   return 1;
               }
           }
@@ -119,7 +120,15 @@ int verify_dp(fftw_complex *x, int N1, int N2, int N3, int H1, int H2, int H3){
   return 0;
 }
 
-void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
+/**
+ * \brief  Distributed Double precision FFTW execution
+ * \param  N1, N2, N3 - fft size
+ * \param  nthreads   - number of threads
+ * \param  inverse    - 1 if backward transform
+ * \param  iter       - number of iterations of execution
+ * \return 0 if successful, 1 otherwise
+ */
+int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
 
   int H1 = 1, H2 = 1, H3 = 1, status;
   double gather_diff = 0.0, exec_diff = 0.0;
@@ -130,8 +139,8 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   if (threads_ok){ 
     threads_ok = fftw_init_threads();
     if(threads_ok == 0){
-      printf("Something went wrong with DP Multithreaded FFTW! Exiting... \n");
-      exit(EXIT_FAILURE);
+      fprintf(stderr, "Something went wrong with DP Multithreaded FFTW! Exiting... \n");
+      return 1;
     }
   }
   fftw_mpi_init();
@@ -228,8 +237,8 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
     MPI_Barrier(MPI_COMM_WORLD);
     double gather_end = MPI_Wtime();
     
-    if(!checkStatus(status)){
-      exit(EXIT_FAILURE);
+    if(checkStatus(status)){
+      return 1;
     }
 
     // verify gathered transformed data
@@ -237,7 +246,7 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
       status = verify_dp(total_data, N1, N2, N3, H1, H2, H3);
       if(status == 1){
         fprintf(stderr, "Error in transformation\n");
-        exit(EXIT_FAILURE);
+        return 1;
       }
     }
 
@@ -264,15 +273,19 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
 
   double tot_flops;
   status = MPI_Reduce(&flops, &tot_flops, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-  if(!checkStatus(status)){
-    exit(EXIT_FAILURE);
+  if(checkStatus(status)){
+    return 1;
   }
 
   if(myrank == 0){
     // Print to console the configuration chosen to execute during runtime
     print_config(N1, N2, N3, 0, world_size, nthreads, inverse, iter);
     printf("\nTime to plan: %lfsec\n\n", plan_end - plan_start);
-    print_results(exec_diff, gather_diff, tot_flops, N1, N2, N3, world_size, nthreads, iter);
+    status = print_results(exec_diff, gather_diff, tot_flops, N1, N2, N3, world_size, nthreads, iter);
+    if(status){
+      return 1;
+    }
+    
   }
 
   // Cleanup
@@ -283,6 +296,8 @@ void fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   fftw_mpi_cleanup();
 
   MPI_Finalize();
+
+  return 0;
 }
 
 
