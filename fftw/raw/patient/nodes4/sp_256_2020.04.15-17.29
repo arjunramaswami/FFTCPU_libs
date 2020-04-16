@@ -1,0 +1,189 @@
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 32 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 133.432683sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       32      256³      30.4060           21.2778             19.1348 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 33 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 204.859079sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       33      256³      32.1271           23.9987             19.0542 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 34 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 199.234895sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       34      256³      32.0031           21.8271             18.9518 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 35 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 199.862042sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       35      256³      31.5585           23.8970             19.1405 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 36 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 194.321589sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       36      256³      31.3230           20.6507             19.1556 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 37 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 194.140424sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       37      256³      31.6582           21.9723             19.0939 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 38 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 195.540856sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       38      256³      31.5328           20.5499             19.1247 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 39 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 208.667292sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       39      256³      32.2267           21.3764             19.1348 
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {256, 256, 256} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 40 
+Iterations         = 10 
+--------------------------------------------
+
+
+Time to plan: 214.473252sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:       4       40      256³      33.5097           21.1008             19.2530 
+

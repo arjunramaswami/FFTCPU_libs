@@ -2,8 +2,14 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
-- Scripts to graph
+- Additional measurements for PCIe and SVM
+- Update main Readme env with network details for hybrid measurements
+- Scripts to graph, data transfer
+- Fix scripts to plan
 - Fix DEBUG prints
+
+## [2.0.2] - [16.04.2020] 
+- Measurements for distributed sp FFTW over 4 and 8 nodes
 
 ## [2.0.1] - [15.04.2020]
 - Propagate errors back to main for CI

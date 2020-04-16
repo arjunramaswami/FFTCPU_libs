@@ -1,12 +1,9 @@
 bin/
-fpgabitstream/
+data/
 samples/
-inputfiles/
-outputfiles/
-reports/
 vscode/
-test/
 tags
+
 *.DS_Store
 slurm*
 *.swp

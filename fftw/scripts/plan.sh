@@ -8,4 +8,4 @@ inputname=$1
 outputname=$2
 
 echo "Threads,PlanTime(sec)" > $2
-grep -ri "time to plan" $1 | sed -e "s/Threads //g;s/: time to plan -//g;s/ sec//g;s/ /,/g" >> $2
+grep -ri "Time to plan:" $1 | sed -e "s/Threads //g;s/: time to plan -//g;s/ sec//g;s/ /,/g" >> $2

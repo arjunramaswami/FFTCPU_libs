@@ -11,41 +11,52 @@ to configure and execute them are also available.
 2. MKL FFT
 
 ### Configurations
+
 Different configurations when using the code:
 
-- FFT3d sizes
+- 3d FFT points
 - Forward / Backward FFT
 - Precision of floating point numbers : single precision, double precision
-- Single Threaded, multi threaded using OpenMP
-- Distributed FFT using MPI
+- Hybrid (MPI + OpenMP)
+- Plans: estimate, measure, patient, exhaustive
 
-### Metrics measured
+## FFTW Measurements
 
-- Runtime (milliseconds)
-- Throughput (GFLOPS)
+### Runtime: Single Precision FFTW
 
-## Performance - Distributed Multithreaded Evaluation
+| # points | 1 Node | 4 Nodes | 8 Nodes | FPGA Total<br> PCIe Transfer | FPGA Kernel<br>+ PCIe | FPGA <br>SVM Transfer |
+|:--------:|:------:|:-------:|:-------:|:----------------------------:|:---------------------:|:---------------------:|
+| 32^3 | 0.0289 | 0.093 | 0.07 | 0.215 | 0.43 | 0.110 |
+| 64^3 | 0.141 | 0.46 | 0.35 | 0.87 | 1.61 | 0.227 |
+| 128^3 | 0.711 | 3.07 | 1.64 | 5.5 |  | 1.60 |
+| 256^3 | 6.94 | 30.41 | 13.72 | 42.6 |  | 12.62 |
+| 512^3 | 109.63 | 327.60 | 184.5 |  |  | 98.71 |
+| 1024^3 | 717.14 | 2356.55 | 1253.83 |  |  |  |
 
-## Performance - Single process Multithreaded Evaluation
+- Runtime is in milliseconds.
+- Best runtime:
+  - 1 Node with 1 process and 1-40 threads per node, best of all the plans.
+  - 4 and 8 Nodes with 1 process and 32-40 threads per node. Using patient plan.
+- PCIe Transfer is the summation of read and write average over 100 iterations.
+- SVM Transfer is full duplex average over 100 iterations i.e. parallel reads and writes.
 
-### Runtime Comparison
+### Runtime: Double Precision FFTW
 
-Runtime is reported in milliseconds for single precision complex floating points.
+| # points | 1 Node |
+|:--------:|:------:|
+| 32^3 | 0.05 |
+| 64^3 | 0.22 |
+| 128^3 | 1.16 |
+| 256^3 | 17.23 |
+| 512^3 | 203.66 |
+| 1024^3 |  |
 
-The FPGA runtime includes PCIe transfer latencies.
-
-| FFT3d Size |   FFTW   |    MKL   | FPGA Obtained |
-|:----------:|:--------:|:--------:|:-------------:|
-|     32     |   0.02   |  0.056   |    0.43       |
-|     64     |   0.14   |  0.197   |    1.61       |
-|     128    |   0.71   |  1.393   |               |
-|     256    |   6.94   |  23.19   |               |
-|     512    |   109.63 |          |               |
-|    1024    |   717.14 |          |               |
+- Runtime is in milliseconds.
+- Best runtime using 1 Node with 1 process and 1-40 threads per node, best of all the plans.
 
 ## Environment
 
-### CPU used 
+### CPU used
 
 2x Intel Xeon Gold "Skylake" 6148, 2.4 GHz, each with 20 cores, hyperthreading disabled
 

@@ -2,7 +2,7 @@
 
 ## Consolidates Performance Data from different input files
 ##  Args: ./max_perf.sh <inp_fname1> <inp_fname2> <out_fname>
-##   e.g. ./max_perf.sh data/fft_16_omp.sh data/fft_32_omp.sh perf.csv
+##   e.g. ./max_perf.sh data/fft_16_omp.csv data/fft_32_omp.csv perf.csv
 ##
 ## Outputs 2 files for runtime and throughput performance numbers respectively.
 ## These files are named runtime_<out_fname> and throughput_<out_fname>
@@ -29,11 +29,11 @@ echo "Parsing runtime results to ${out_runtime}"
 echo "Parsing throughput results to ${out_throughput}"
 printf "\n"
 
-head -1 $1 | cut -f 1,3 -d "," > ${out_runtime}
-head -1 $1 | cut -f 1,4 -d "," > ${out_throughput}
+head -1 $1 | cut -f 3,4 -d "," > ${out_runtime}
+head -1 $1 | cut -f 3,5 -d "," > ${out_throughput}
 
 for arg in ${array}
 do
-    cut -f 1,3 -d "," ${arg} | sort -t "," -n -k 2 | head -2 | tail -1 >> ${out_runtime}
-    cut -f 1,4 -d "," ${arg} | sort -t "," -r -n -k 2 | head -1 >> ${out_throughput} 
+    cut -f 3,4 -d "," ${arg} | sort -t "," -n -k 2 | head -2 | tail -1 >> ${out_runtime}
+    cut -f 3,5 -d "," ${arg} | sort -t "," -r -n -k 2 | head -1 >> ${out_throughput} 
 done

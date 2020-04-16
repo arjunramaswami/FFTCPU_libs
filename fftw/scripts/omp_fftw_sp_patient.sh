@@ -2,9 +2,9 @@
 #SBATCH -A pc2-mitarbeiter
 #SBATCH -J patient_sp
 #SBATCH -p long
-#SBATCH --nodes=8
+#SBATCH --nodes=4
 #SBATCH -t 3-00:00:00
-#SBATCH --ntasks=8
+#SBATCH --ntasks=4
 #SBATCH --ntasks-per-node=1
 #SBATCH --switches=1
 
@@ -19,7 +19,7 @@ module load toolchain/gompi/2019b
 module load numlib/FFTW/3.3.8-gompi-2019b
 
 ctime=$(date "+%Y.%m.%d-%H.%M")
-outdir="../data/patient/"
+outdir="../data/patient/nodes4/"
 iter=10
 
 make PATIENT=1 -C ../ 
@@ -36,7 +36,7 @@ echo "Passed $# FFT3d Sizes"
 for arg in "$@"
 do
   echo "Executing FFT Size : $arg $arg $arg"
-  for thread in {35..40}
+  for thread in {32..40}
   do
     echo "Running with number of threads : $thread"
     outfile="${outdir}sp_${arg}_${ctime}"
