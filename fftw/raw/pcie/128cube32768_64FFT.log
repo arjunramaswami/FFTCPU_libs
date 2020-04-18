@@ -1,0 +1,36 @@
+Using AOCX: fft1d.aocx
+
+Launching FFT transform for 32768 iterations
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+PCIe Write Transfer Time of 2.786121ms for 2097152 points of 16777216 bytes
+PCIe Read Transfer Time of 2.953752ms for 2097152 points of 16777216 bytes
+	Processing time = 1.1417ms
+	Throughput = 1.8369 Gpoints / sec (55.1072 Gflops)
+	Signal to noise ratio on output sample: 138.327445 --> PASSED
+
+Launching inverse FFT transform for 32768 iterations
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+	Inverse FFT kernel initialization is complete.
+PCIe Write Transfer Time of 2.781730ms for 2097152 points of 16777216 bytes
+PCIe Read Transfer Time of 2.704676ms for 2097152 points of 16777216 bytes
+	Processing time = 1.1328ms
+	Throughput = 1.8513 Gpoints / sec (55.5380 Gflops)
+	Signal to noise ratio on output sample: 138.484932 --> PASSED
+
