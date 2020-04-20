@@ -30,8 +30,8 @@ double getTimeinMilliSec(){
 
 /**
  * \brief  print time taken for 3d fft execution and data transfer
- * \param  exec_time    : time in seconds to execute iter number of parallel 3d FFT
- * \param  gather_time  : time in seconds to gather results to the master node after transformation
+ * \param  exec_time    : average time in seconds to execute a parallel 3d FFT
+ * \param  gather_time  : average time in seconds to gather results to the master node after transformation
  * \param  flops        : fftw_flops 
  * \param  N1, N2, N3   : fft size
  * \param  nprocs       : number of processes used
@@ -47,8 +47,8 @@ int print_results(double exec_time, double gather_time, double flops, int N1, in
 
   printf("fftw:"); 
   if(exec_time != 0.0){
-    avg_fftw_runtime = (exec_time / iter) * 1E3;  
-    avg_transfer_time = (gather_time / iter) * 1E3;  
+    avg_fftw_runtime = (exec_time) * 1E3;  
+    avg_transfer_time = (gather_time) * 1E3;  
     //double gpoints_per_sec = ( N[0] * N[1] * N[2] / (fftw_runtime * 1E-3)) * 1E-9;
     double gflops = (flops / avg_fftw_runtime) * 1E-6;
     //double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(avg_fftw_runtime * 1E-3 * 1E9);

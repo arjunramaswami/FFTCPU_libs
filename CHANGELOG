@@ -2,6 +2,7 @@
 All notable changes to this project will be documented in this file.
 
 ## Unreleased
+- Gathering data from non-divisible number of processes using gatherv
 - Additional measurements for PCIe and SVM
 - Update main Readme env with network details for hybrid measurements
 - Scripts to graph, data transfer

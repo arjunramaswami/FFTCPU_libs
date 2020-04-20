@@ -12,6 +12,8 @@
 
 #include "helper.h"
 
+static fftw_plan plan;
+
 /**
  * \brief  create double precision floating points values for FFT computation for each process level block
  * 
@@ -120,6 +122,14 @@ int verify_dp(fftw_complex *x, int N1, int N2, int N3, int H1, int H2, int H3){
   return 0;
 }
 
+static void cleanup(fftw_complex *per_process_data){
+  // Cleanup 
+  fftw_free(per_process_data);
+  fftw_destroy_plan(plan);
+  //fftwf_cleanup_threads();
+  fftw_mpi_cleanup();
+}
+
 /**
  * \brief  Distributed Double precision FFTW execution
  * \param  N1, N2, N3 - fft size
@@ -133,15 +143,10 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   int H1 = 1, H2 = 1, H3 = 1, status;
   double gather_diff = 0.0, exec_diff = 0.0;
 
-  int provided, threads_ok;
-  MPI_Init_thread(NULL, NULL, MPI_THREAD_FUNNELED, &provided); // instead of MPI_Init
-  threads_ok = provided >= MPI_THREAD_FUNNELED;
-  if (threads_ok){ 
-    threads_ok = fftw_init_threads();
-    if(threads_ok == 0){
-      fprintf(stderr, "Something went wrong with DP Multithreaded FFTW! Exiting... \n");
-      return 1;
-    }
+  int threads_ok = fftw_init_threads();
+  if(threads_ok == 0){
+    fprintf(stderr, "Something went wrong with DP Multithreaded FFTW! Exiting... \n");
+    return 1;
   }
   fftw_mpi_init();
 
@@ -170,14 +175,16 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   alloc_local = fftw_mpi_local_size_3d(n0, n1, n2, MPI_COMM_WORLD,
     &local_n0, &local_0_start);
 #ifdef VERBOSE
-  printf("Rank %d of %d:\n\ttotal pts: %d\n\tpts in local transform: %td\n\t%td blocks starting from %td\n\teach block of %d pts \n\n", 
+  for(size_t i = 0; i < world_size; i++){
+    if(myrank == i){
+      printf("Rank %d of %d:\n\ttotal pts: %d\n\tpts in local transform: %td\n\t%td blocks starting from %td\n\teach block of %d pts \n\n", 
     myrank, world_size, N1*N2*N3, alloc_local, local_n0, local_0_start, N2*N3);
+    }
+  }
 #endif
   
   // allocate
   fftw_complex *per_process_data = fftw_alloc_complex(alloc_local);
-  size_t data_sz = N1 * N2 * N3;
-  fftw_complex *total_data = fftw_alloc_complex(data_sz);
 
   // direction of FFT for the plan
   int direction = FFTW_FORWARD;
@@ -202,19 +209,22 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
   MPI_Barrier(MPI_COMM_WORLD);
   double plan_start = MPI_Wtime();
 #ifdef MEASURE
-  fftw_plan plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_MEASURE);
+  plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_MEASURE);
 #elif PATIENT
-  fftw_plan plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
+  plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
 #elif EXHAUSTIVE
-  fftw_plan plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_EXHAUSTIVE);
+  plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_EXHAUSTIVE);
 #else
-  fftw_plan plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_ESTIMATE);
+  plan = fftw_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_ESTIMATE);
 #endif
   MPI_Barrier(MPI_COMM_WORLD);
-  double plan_end = MPI_Wtime();
+  double plan_time = MPI_Wtime() - plan_start;
 
   // iterate iter times
   for(size_t it = 0; it < iter; it++){
+
+    size_t data_sz = N1 * N2 * N3;
+    fftw_complex *total_data = fftw_alloc_complex(data_sz);
     // fill data
     if(inverse){
       get_mpi_dp_input_data(per_process_data, n0, n1, n2, local_n0, local_0_start, -H1, -H2, -H3);
@@ -231,13 +241,11 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
     double exec_end = MPI_Wtime();
 
     // gather to master process
-    MPI_Barrier(MPI_COMM_WORLD);
     double gather_start = MPI_Wtime();
     status = MPI_Gather(&per_process_data[0], alloc_local, MPI_C_DOUBLE_COMPLEX, &total_data[0], alloc_local, MPI_C_DOUBLE_COMPLEX, 0, MPI_COMM_WORLD);
-    MPI_Barrier(MPI_COMM_WORLD);
     double gather_end = MPI_Wtime();
-    
     if(checkStatus(status)){
+      cleanup(per_process_data);
       return 1;
     }
 
@@ -246,12 +254,17 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
       status = verify_dp(total_data, N1, N2, N3, H1, H2, H3);
       if(status == 1){
         fprintf(stderr, "Error in transformation\n");
+        cleanup(per_process_data);
         return 1;
       }
     }
 
 #ifdef VERBOSE
-    printf("Rank: %d\n\titer %zu\n\texec time: %lfsec\n\tgather time: %lfsec\n\n", myrank, it, (exec_end - exec_start), (gather_end - gather_start));
+    for(size_t i = 0; i < world_size; i++){
+      if(myrank == i){
+        printf("Rank: %d\n\titer %zu\n\texec time: %lfsec\n\tgather time: %lfsec\n\n", myrank, it, (exec_end - exec_start), (gather_end - gather_start));
+      }
+    }
 #endif
 #ifdef DEBUG
     for(size_t d = 0; d < data_sz; d++){
@@ -261,43 +274,43 @@ int fftw_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
 
     exec_diff += (exec_end - exec_start);
     gather_diff += (gather_end - gather_start);
+
+    free(total_data);
   }
+
+  exec_diff = exec_diff / iter;
+  gather_diff = gather_diff / iter;
 
   double add, mul, fma, flops;
   fftw_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma; 
 
 #ifdef VERBOSE
-  printf("Rank %d: Flops - %lf\n", myrank, flops);
+  for(size_t i = 0; i < world_size; i++){
+    if(myrank == i){
+      printf("Rank %d: Flops - %lf Exec Time - %lf Gather Time - %lf\n", myrank, flops, exec_diff, gather_diff);
+    }
+  }
 #endif
 
+  // calculating total flops
   double tot_flops;
   status = MPI_Reduce(&flops, &tot_flops, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
   if(checkStatus(status)){
+    cleanup(per_process_data);
     return 1;
   }
 
   if(myrank == 0){
     // Print to console the configuration chosen to execute during runtime
     print_config(N1, N2, N3, 0, world_size, nthreads, inverse, iter);
-    printf("\nTime to plan: %lfsec\n\n", plan_end - plan_start);
+    printf("\nTime to plan: %lfsec\n\n", plan_time);
     status = print_results(exec_diff, gather_diff, tot_flops, N1, N2, N3, world_size, nthreads, iter);
     if(status){
+      cleanup(per_process_data);
       return 1;
     }
-    
   }
-
-  // Cleanup
-  fftw_free(per_process_data);
-  fftw_free(total_data);
-  fftw_destroy_plan(plan);
-  fftw_cleanup_threads();
-  fftw_mpi_cleanup();
-
-  MPI_Finalize();
 
   return 0;
 }
-
-

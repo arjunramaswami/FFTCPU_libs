@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <mpi.h>
 #include <omp.h>
 
 #include "include/argparse.h"    // Cmd-line Args to set some global vars
@@ -45,12 +46,39 @@ int main(int argc, const char **argv){
   // Initialize
   // Set the default number of threads to be used
   omp_set_num_threads(nthreads);
+
+  // initialize hybrid implementation
+  int provided, threads_ok;
+  MPI_Init_thread(NULL, NULL, MPI_THREAD_FUNNELED, &provided); // instead of MPI_Init
+  threads_ok = provided >= MPI_THREAD_FUNNELED;
+
+  if(!threads_ok){
+    fprintf(stderr, "Cannot initialize hybrid execution.\n");
+    MPI_Finalize();
+    return EXIT_FAILURE;
+  }
+
+  int world_size, myrank;
+  MPI_Comm_size(MPI_COMM_WORLD, &world_size); 
+  MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
+
+  if((N1 % world_size != 0) && (N2 % world_size !=0) && (N3 % world_size != 0)){
+    if(myrank == 0){
+      fprintf(stderr, "\nNumber of processes should divide the 3d FFT equally\n");
+    }
+    MPI_Finalize();
+    return EXIT_FAILURE;
+  }
+
   if(sp == 1){
     status = fftwf_mpi(N1, N2, N3, nthreads, inverse, iter);
   }
   else{
     status = fftw_mpi(N1, N2, N3, nthreads, inverse, iter);
   }
+
+  MPI_Finalize();
+
   if(status){
     return EXIT_FAILURE;
   }
