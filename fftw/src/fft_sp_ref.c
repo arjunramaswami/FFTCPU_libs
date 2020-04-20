@@ -261,6 +261,7 @@ int fftwf_mpi(int N1, int N2, int N3, int nthreads, int inverse, int iter){
       }
     }
 
+    MPI_Barrier(MPI_COMM_WORLD);
 #ifdef VERBOSE
     for(size_t i = 0; i < world_size; i++){
       if(myrank == i){

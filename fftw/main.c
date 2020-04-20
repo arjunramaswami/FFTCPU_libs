@@ -62,7 +62,7 @@ int main(int argc, const char **argv){
   MPI_Comm_size(MPI_COMM_WORLD, &world_size); 
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
 
-  if((N1 % world_size != 0) && (N2 % world_size !=0) && (N3 % world_size != 0)){
+  if(( (N1 * N2 * N3) % world_size) != 0){
     if(myrank == 0){
       fprintf(stderr, "\nNumber of processes should divide the 3d FFT equally\n");
     }

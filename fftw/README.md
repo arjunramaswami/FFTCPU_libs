@@ -134,6 +134,19 @@ fftw:       2        2       16³       0.1071            1.1476              0.
 - PCIe Transfer is the summation of read and write average over 100 iterations.
 - SVM Transfer is full duplex average over 100 iterations i.e. parallel reads and writes.
 
+| # points | 1 Node | 2x MPI Collective <br>Data transfers | 4 Nodes |
+|:--------:|:------:|:------------------------------------:|:-------:|
+| 32^3 | 0.0289 | 0.23 | 0.093 |
+| 64^3 | 0.141 | 0.4 | 0.46 |
+| 128^3 | 0.711 | 2.94 | 3.07 |
+| 256^3 | 6.94 | 38.26 | 30.41 |
+| 512^3 | 109.63 | 333.74 | 327.60 |
+| 1024^3 | 717.14 | 2660.14 | 2356.55 |
+
+- All measurements in milliseconds
+- Time for data transfer using MPI_Gather collective routine from 4 nodes to a single node.
+- The cumulative time to transfer data and execute a faster single node FFTW is worse than performing a distributed 4 nodal Hybrid FFTW.
+
 ### Runtime: Double Precision FFTW
 
 | # points | 1 Node |
