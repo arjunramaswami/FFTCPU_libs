@@ -1,0 +1,21 @@
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 1 
+Iterations         = 20 
+--------------------------------------------
+
+
+Time to plan: 1.368118sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:     128        1      128³       1.0690         2005.8130              2.7183 
+

@@ -24,20 +24,20 @@ Different configurations when using the code:
 
 ### Runtime: Single Precision FFTW
 
-| # points | 1 Node | 4 Nodes | 8 Nodes | FPGA Total<br> PCIe Transfer | FPGA Kernel<br>+ PCIe | FPGA <br>SVM Transfer |
-|:--------:|:------:|:-------:|:-------:|:----------------------------:|:---------------------:|:---------------------:|
-| 32^3 | 0.0289 | 0.093 | 0.07 | 0.24 | 0.46 | 0.110 |
-| 64^3 | 0.141 | 0.46 | 0.35 | 0.86 | 1.6 | 0.227 |
-| 128^3 | 0.711 | 3.07 | 1.64 | 5.73 |  | 1.60 |
-| 256^3 | 6.94 | 30.41 | 13.72 | 44.42 |  | 12.62 |
-| 512^3 | 109.63 | 327.60 | 184.5 | 352.11 |  | 98.71 |
-| 1024^3 | 717.14 | 2356.55 | 1253.83 | 2822.96 |  |  |
+| # points | 1 Node | 4 Nodes | FPGA Total<br> PCIe Transfer | FPGA Kernel<br>+ PCIe | FPGA <br>SVM Transfer |
+|:--------:|:------:|:--------:|:----------------------------:|:---------------------:|:---------------------:|
+| 32^3 | 0.0289 | - | 0.24 | 0.46 | 0.110 |
+| 64^3 | 0.141 | - | 0.86 | 1.6 | 0.227 |
+| 128^3 | 0.711 | 1.0690 | 5.73 |  | 1.60 |
+| 256^3 | 6.94 | 7.8893 | 44.42 |  | 12.62 |
+| 512^3 | 109.63 | 72.5637 | 352.11 |  | 98.71 |
+| 1024^3 | 717.14 | 607.3267 | 2822.96 |  |  |
 
 - Runtime is in milliseconds.
 - Best runtime:
   - 1 Node with 1 process and 1-40 threads per node, best of all the plans.
-  - 4 and 8 Nodes with 1 process and 32-40 threads per node. Using patient plan.
-- PCIe Transfer is the summation of read and write average over 100 iterations. Measured using OpenCL SDK for FPGA 20.1 and BSP version 19.4.0_hpc on the p520_hpc_sg280l board.
+  - 4 nodes with 32 processes per node using patient plan. No multithreading.
+- PCIe Transfer is the summation of read and write average over 100 iterations.
 - SVM Transfer is full duplex average over 100 iterations i.e. parallel reads and writes.
 
 ### Runtime: Double Precision FFTW
