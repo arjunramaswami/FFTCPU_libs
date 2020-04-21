@@ -3,7 +3,7 @@
 #SBATCH -J mpi_fftw
 #SBATCH -p batch
 #SBATCH -t 11:00:00
-#SBATCH --nodes=4
+#SBATCH --nodes=32
 #SBATCH --ntasks-per-node=32
 #SBATCH --switches=1
 #SBATCH --verbose
@@ -12,7 +12,7 @@ module load toolchain/gompi/2019b
 module load numlib/FFTW/3.3.8-gompi-2019b
 
 ctime=$(date "+%Y.%m.%d-%H.%M")
-outdir="../data/patient/mpi4nodes/"
+outdir="../data/patient/mpi32nodes/"
 iter=20
 
 make PATIENT=1 -C ../
