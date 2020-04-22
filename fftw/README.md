@@ -120,19 +120,19 @@ fftw:       2        2       16³       0.1071            1.1476              0.
 
 #### MPI only
 
-| # points | 1 Node | 4 Nodes | 8 Nodes | 16 Nodes | FPGA Total<br> PCIe Transfer | FPGA Kernel<br>+ PCIe | FPGA <br>SVM Transfer |
-|:--------:|:------:|:-------:|:-------:|:--------:|:----------------------------:|:---------------------:|:---------------------:|
-| 32^3 | 0.0289 | - |  |  | 0.24 | 0.46 | 0.110 |
-| 64^3 | 0.141 | - |  |  | 0.86 | 1.6 | 0.227 |
-| 128^3 | 0.711 | 1.07 |  |  | 5.73 |  | 1.60 |
-| 256^3 | 6.94 | 7.89 |  |  | 44.42 |  | 12.62 |
-| 512^3 | 109.63 | 72.56 | 50.57 |  | 352.11 |  | 98.71 |
-| 1024^3 | 717.14 | 607.33 | 324.87 | 211.89 | 2822.96 |  |  ||
+| # points | 1 Node | 4 Nodes | 8 Nodes | 16 Nodes | 32 Nodes | FPGA Total<br> PCIe Transfer | FPGA Kernel<br>+ PCIe | FPGA <br>SVM Transfer |
+|:--------:|:------:|:-------:|:-------:|:--------:|:--------:|:----------------------------:|:---------------------:|:---------------------:|
+| 32^3 | 0.0289 | - |  |  |  | 0.24 | 0.46 | 0.110 |
+| 64^3 | 0.141 | - |  |  |  | 0.86 | 1.6 | 0.227 |
+| 128^3 | 0.711 | 1.07 |  |  |  | 5.73 |  | 1.60 |
+| 256^3 | 6.94 | 7.89 |  |  |  | 44.42 |  | 12.62 |
+| 512^3 | 109.63 | 72.56 | 50.57 |  |  | 352.11 |  | 98.71 |
+| 1024^3 | 717.14 | 607.33 | 324.87 | 211.89 | 115.06 | 2822.96 |  |  |
 
 - Runtime is in milliseconds.
 - Best runtime:
   - 1 Node with 1 process and 1-40 threads per node, best of all the plans.
-  - 4, 8, 16 nodes with 32 processes per node using patient plan. No multithreading.
+  - 4, 8, 16, 32 nodes with 32 processes per node using patient plan. No multithreading.
 - PCIe Transfer is the summation of read and write average over 100 iterations.
 - SVM Transfer is full duplex average over 100 iterations i.e. parallel reads and writes.
 
