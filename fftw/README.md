@@ -10,11 +10,12 @@ The following libraries have to be loaded in noctua in order to build the target
 
 - FFTW:
   
-   `module load numlib/FFTW/3.3.8-gompi-2019b`
+   `module load numlib/FFTW/3.3.8-gompi-2020a`
 
-- C compiler that implements OpenMPI (tested with gcc 8.3.0):
+- C compiler that implements OpenMPI (tested with gcc 9.3.0):
 
-    `module load toolchain/gompi/2019b`
+    `module load toolchain/gompi/2020a`
+    `module load devel/CMake`
 
 #### Targets
 
