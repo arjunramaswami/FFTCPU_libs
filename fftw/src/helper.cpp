@@ -1,8 +1,13 @@
 //  Author: Arjun Ramaswami
 
 #include <iostream>
+#include <iomanip>
 #include <mpi.h>
-using namespace std;
+
+using std::cout;
+using std::cerr;
+using std::endl;
+using std::setw;
 
 /* Compute (K*L)%M accurately */
 double moda(unsigned K, unsigned L, unsigned M){
@@ -42,7 +47,8 @@ bool print_results(double exec_time, double gather_time, double flops, unsigned 
     //double gpoints_per_sec = ( N[0] * N[1] * N[2] / (fftw_runtime * 1E-3)) * 1E-9;
     double gflops = (flops / avg_fftw_runtime) * 1E-6;
     //double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(avg_fftw_runtime * 1E-3 * 1E9);
-    cout << nprocs << " " << nthreads << " " << N << " " << avg_fftw_runtime << " " << gflops << " " << avg_transfer_time << endl;
+    cout << setw(6) << nprocs << setw(11) << nthreads << setw(10) << N;
+    cout << setw(15) << avg_fftw_runtime << setw(15) << gflops << setw(15) << avg_transfer_time << endl;
   }
   else{
     cerr << "Error in FFT3D" << endl;
@@ -92,7 +98,7 @@ void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsig
   cout << "FFTW Configuration: \n";
   cout << "--------------------------------------------\n";
   cout << "Type               = Complex to Complex\n";
-  cout << "Points             = {"<< N << ", " << N << ", " << N << endl;
+  cout << "Points             = {"<< N << ", " << N << ", " << N << "}" << endl;
   cout << "Precision          = "<< (dp ? "Double":"Single") << endl;
   cout << "Direction          = "<< (inverse ? "BACKWARD ":"FORWARD") << endl;
   cout << "Placement          = In Place    \n";

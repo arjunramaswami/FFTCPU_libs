@@ -53,25 +53,24 @@ The arguments available to the program:
 |   Argument  | Default | Description                                      |
 |:-----------:|---------|--------------------------------------------------|
 | -h / --help | -       | displays the cmd line parameter options          |
-|      -m     | 64      | number of points in the first dim of 3d fft      |
-|      -n     | 64      | number of points in the second dim of 3d fft     |
-|      -p     | 64      | number of points in the third dim of 3d fft      |
-|      -b     | -       | compute backward 3d fft                          |
-|      -s     | -       | call single precision functions instead of double|
+|      -n     | 64      | number of points in the first dim of 3d fft      |
+|      -b     | false   | compute backward 3d fft                          |
+|      -d     | false   | call single precision functions instead of double|
 |      -t     | 1       | number of threads if multithreading is available |
+|      -c     | 1       | batched FFTW execution                           |
 |      -i     | 1       | number of iterations of the application          |
 
 To execute:
 
 ```bash
 # executing a single threaded dp backward fftw. Note '-t' is 1
-mpirun -n 2 ./bin/fftw -m 16 -n 16 -p 16 -t 1 -i 2
+mpirun -n 2 ./bin/fftw -n 16 -t 1 -i 2
 
 # executing a 40 threaded dp fftw
-mpirun -n 16 ./bin/fftw -m 256 -n 256 -p 256 -t 40 -i 2
+mpirun -n 16 ./bin/fftw -n 256 -t 40 -i 2
 
 # executing a 20 threaded sp fftw
-mpirun -n 8 ./bin/fftw -m 256 -n 256 -p 256 -t 20 -s -i 2
+mpirun -n 8 ./bin/fftw -n 256 -t 20 -i 2
 ```
 
 ## Interpreting Results

@@ -74,7 +74,7 @@ int main(int argc, char **argv){
     fftwf_many_sp(3, N, batch, nthreads, inverse, iter);
   }
   catch(const char* msg){
-    cerr << msg;
+    cerr << msg << endl;
   }
 
   MPI_Finalize();
