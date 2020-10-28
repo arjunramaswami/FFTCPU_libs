@@ -12,131 +12,123 @@
 #include "helper.h"
 using namespace std;
 
-static fftwf_plan plan;
+static fftwf_plan plan, plan_verify;
 
-static void cleanup(fftwf_complex *per_process_data){
+static void cleanup(fftwf_complex *per_process_data, fftwf_complex *verify_per_process){
   // Cleanup 
   fftwf_free(per_process_data);
+  fftwf_free(verify_per_process);
   //fftwf_cleanup_threads(); // Thread Cleanup
   fftwf_mpi_cleanup();
   fftwf_destroy_plan(plan);
+  fftwf_destroy_plan(plan_verify);
 }
 
 /**
- * \brief  create single precision floating points values for FFT computation for each process level block
- * 
- * \param  fftw_data   : pointer to 3d number of sp points 
- * \param  n0, n1, n2  : number of points in each dimension
- * \param  local_n0    : number of points in the n0 dim
- * \param  local_start : starting point in the n0 dim
- * \param  H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \brief create single precision floating points values for FFT computation for each process level block
+ * \param fftw_data   : pointer to 3d number of sp points for FFTW
+ * \param verify_data : pointer to 3d number of sp points for verification
+ * \param n0, n1, n2  : number of points in each dimension
+ * \param local_n0    : number of points in the n0 dim
+ * \param local_start : starting point in the n0 dim
+ * \param H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \param how_many    : number of batched implementations of FFTW
  */
-void get_sp_input_data(fftwf_complex *fftw_data, ptrdiff_t N, ptrdiff_t local_n0, ptrdiff_t local_start, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
+void get_sp_input_data(fftwf_complex *fftw_data, fftwf_complex *verify_data,ptrdiff_t N, ptrdiff_t local_n0, ptrdiff_t local_start, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
 
-  unsigned index; //S1 = N * S2, S2 = N * S3, S3 = how_many;
-
+  unsigned index; 
   float TWOPI = 6.2831853071795864769;
   float phase, phase1, phase2, phase3;
+  double re_val = 0.0, img_val = 0.0;
 
-  cout << "Input data: " << endl;
+  /*
+  * Interleaved data reordering for batched implementation
+  *   i.e. elements of multiple transforms are adjacent to each other
+  *   e.g. first element of batches 1, 2, 3 are in adjacent positions
+  *        meaning, stride of 3 for second element of same batch 
+  *                 distance of 1 between batch data
+  * Creating distinct input data to different batches to stress CPU
+  *   by modifying the phase by the index (many)
+  */
   for (ptrdiff_t i = 0; i < local_n0; i++) {
     for (ptrdiff_t j = 0; j < N; j++) {
       for (ptrdiff_t k = 0; k < N; k++) {
 
-        phase1 = moda(i + local_start, H1, N) / N;
-        phase2 = moda(j, H2, N) / N;
-        phase3 = moda(k, H3, N) / N;
-        phase = phase1 + phase2 + phase3;
-
-        double re_val = cosf( TWOPI * phase ) / (N*N*N);
-        double img_val = sinf( TWOPI * phase ) / (N*N*N);
-
         for(ptrdiff_t many = 0; many < how_many; many++){
 
           index = (i * N * N * how_many) + (j * N * how_many) + (k * how_many) + many;
-          //index = (many * local_n0 * S1) + i*S1 + j*S2 + k*S3;
 
-          fftw_data[index][0] = re_val;
-          fftw_data[index][1] = img_val;
+          // considering the H1, H2, H3 are inverse for backward FFT
+          //   multiply with the index
+          phase1 = moda(i + local_start, H1 * many, N) / N;
+          phase2 = moda(j, H2 * many, N) / N;
+          phase3 = moda(k, H3 * many, N) / N;
+          phase = phase1 + phase2 + phase3;
 
+          re_val = cosf( TWOPI * phase ) / (N*N*N);
+          img_val = sinf( TWOPI * phase ) / (N*N*N);
+
+          verify_data[index][0] = fftw_data[index][0] = re_val;
+          verify_data[index][1] = fftw_data[index][1] = img_val;
+
+#ifdef VERBOSE
           cout << many << ": " << i << " " << j << " " << k << " : fftw[" << index << "] = ";
           cout <<"(" << fftw_data[index][0] << ", " << fftw_data[index][1] << ")";
+          cout <<" = (" << verify_data[index][0] << ", " << verify_data[index][1] << ")";
           cout << endl;
+#endif
         }
       }
     }
   }
-  cout << endl;
 }
 
-
 /**
- * \brief  Verify single precision FFT3d computation
- * \param  x : fftwf_complex - 3d FFT data after transformation
- * \param  N1, N2, N3 - fft size
- * \param  H1, H2, H3 : harmonic to modify frequency of discrete time signal
+ * \brief  Verify single precision batched FFT3d computation using FFTW
+ * \param  fftw_data   : pointer to 3D number of sp points after FFTW
+ * \param  verify_data : pointer to 3D number of sp points for verification
+ * \param  N1, N2, N3  : fft size
+ * \param  H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \param  how_many    : number of batched implementations of FFTW
  * \return true if successful, false otherwise
  */
-bool verify_fftw(fftwf_complex *x, unsigned N, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
-  /* Verify that x(n1,n2,n3) is a peak at H1,H2,H3 */
-  double err;
+bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
 
-  /* Generalized strides for row-major addressing of x */
-  unsigned S1 = N*N, S2 = N, S3 = 1, index;
+  double magnitude = 0.0, noise = 0.0, mag_sum = 0.0, noise_sum = 0.0;
 
-  /*
-    * Note, this simple error bound doesn't take into account error of
-    * input data
-    */
-  double errthr = 5.0 * log( (float)N*N*N ) / log(2.0) * FLT_EPSILON;
-#ifdef DEBUG
-  cout << "Verify the result, errthr = " << errthr << endl;
-#endif
-  /*
-  double maxerr = 0.0;
-  for (size_t n1 = 0; n1 < N; n1++){
-    for (size_t n2 = 0; n2 < N; n2++){
-      for (size_t n3 = 0; n3 < N; n3++){
-        float re_exp = 0.0, im_exp = 0.0, re_got, im_got;
+  for(size_t i = 0; i < how_many * N * N * N; i++){
 
-        if ((n1-H1)%N==0 && (n2-H2)%N==0 && (n3-H3)%N==0) {
-          re_exp = 1;
-        }
+    // FFT -> iFFT is scaled by dimensions (N*N*N)
+    verify_data[i][0] = verify_data[i][0] * N * N * N;
+    verify_data[i][1] = verify_data[i][1] * N * N * N;
 
-        index = n1*S1 + n2*S2 + n3*S3;
-        re_got = x[index][0];
-        im_got = x[index][1];
-        err  = fabs(re_got - re_exp) + fabs(im_got - im_exp);
-        if (err > maxerr) maxerr = err;
-        if (!(err < errthr)){       
-            cerr << " x["<< n1 << "]["<< n2 << "]["<< n3 << "]";
-            cerr << " expected (" << re_exp << "," << im_exp << ")";
-            cerr << " got (" << re_got << "," << im_got << ")";
-            cerr << " err " << err << endl;
-            cerr << " Verification FAILED\n";
-            return false;
-        }
-      }
-    }
-  }
-*/
+    magnitude = verify_data[i][0] * verify_data[i][0] + \
+                      verify_data[i][1] * verify_data[i][1];
+    noise = (verify_data[i][0] - fftw_data[i][0]) \
+        * (verify_data[i][0] - fftw_data[i][0]) + 
+        (verify_data[i][1] - fftw_data[i][1]) * (verify_data[i][1] - fftw_data[i][1]);
+
+    mag_sum += magnitude;
+    noise_sum += noise;
+
 #ifdef VERBOSE
-  cerr << "Verification: Maximum error was " << maxerr << endl;
+    cout << i << ": fftw_out[" << i << "] = (" << fftw_data[i][0] << ", " << fftw_data[i][1] << ")";
+    cout << " = (" << total_verify[i][0] << ", " << total_verify[i][1] << ")";
+    cout << endl;
 #endif
-  cout << "\n\nOutput Frequencies: \n";
-  for(size_t many = 0; many < how_many; many++){
-    for(size_t i = 0; i < N; i++){
-        for(size_t j = 0; j < N; j++){
-            for(size_t k = 0; k < N; k++){
-              index = (many * N * N * N) + (i * N * N) + (j * N) + k;
-              cout << many << ": " << i << " " << j << " " << k << ": fftw[" << index << "] = (" << x[index][0] << ", " << x[index][1] << ")" << endl;
-
-            }
-        }
-    }
   }
 
-  return true;
+  float db = 10 * log(mag_sum / noise_sum) / log(10.0);
+
+    // if SNR greater than 120, verification passes
+  if(db > 120){
+    return true;
+  }
+  else{ 
+    cout << "Signal to noise ratio on output sample: " << db << " --> FAILED \n\n";
+    return false;
+  }
+
 }
 
 /**
@@ -161,7 +153,7 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
   }
 
   unsigned H1 = 1, H2 = 1, H3 = 1;
-  double gather_diff = 0.0, exec_diff = 0.0;
+  double gather_diff = 0.0, exec_diff = 0.0, inp_data_diff = 0.0;
 
   // One time initialization to use threads
   int threads_ok = fftwf_init_threads();
@@ -187,15 +179,17 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
   MPI_Comm_rank(MPI_COMM_WORLD, &myrank);
   MPI_Get_processor_name(processor_name, &namelen);
   
-    #pragma omp parallel 
-    {
-        // prints number of threads per rank on machine
-        int num_th = omp_get_num_threads();
-        int thr_num = omp_get_thread_num();
-        cout << "Hybrid: Hello from thread "<< thr_num << " out of "<< num_th;
-        cout << " from process " << myrank << " out of " << world_size;
-        cout << " on " << processor_name << endl;
-    }
+#ifdef VERBOSE
+  #pragma omp parallel 
+  {
+      // prints number of threads per rank on machine
+      int num_th = omp_get_num_threads();
+      int thr_num = omp_get_thread_num();
+      cout << "Hybrid: Hello from thread "<< thr_num << " out of "<< num_th;
+      cout << " from process " << myrank << " out of " << world_size;
+      cout << " on " << processor_name << endl;
+  }
+#endif
 
   ptrdiff_t alloc_local, local_n0, local_0_start;
   ptrdiff_t n[3] = {N, N, N};
@@ -203,25 +197,32 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
   // get local data size
   alloc_local = fftwf_mpi_local_size_many(3, n, how_many,   FFTW_MPI_DEFAULT_BLOCK, MPI_COMM_WORLD, &local_n0, &local_0_start);
 
-  //alloc_local = fftwf_mpi_local_size_3d(n0, n1, n2, MPI_COMM_WORLD, &local_n0, &local_0_start);
+#ifdef VERBOSE
   for(size_t i = 0; i < world_size; i++){
     if(myrank == i){
       cout << "Rank " << myrank << " of " << world_size;
       cout << "\n\t" << alloc_local << "pts in local transform of total: " <<  N*N*N*how_many;
       cout << "\n\t" << local_n0 << " blocks starting from " << local_0_start; cout << "\n\t" << " each block of " << N*N << "pts \n\n"; }
      }
+  }
+#endif
 
   // allocate
   fftwf_complex *per_process_data = fftwf_alloc_complex(alloc_local);
+  fftwf_complex *verify_per_process = fftwf_alloc_complex(alloc_local);
 
   // direction of FFT for the plan
   int direction = FFTW_FORWARD;
+  int direction_inv = FFTW_BACKWARD;
   if(inverse){
     direction = FFTW_BACKWARD;
+    direction_inv = FFTW_FORWARD;
   }
 
+#ifdef VERBOSE
   if(myrank == 0)
     cout << "Configuring plan for single precision FFT" << endl;
+#endif
     
   // plan
   MPI_Barrier(MPI_COMM_WORLD);
@@ -230,29 +231,39 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
   plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_MEASURE);
 #elif PATIENT
   plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
-  //plan = fftwf_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
 #elif EXHAUSTIVE
   plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_EXHAUSTIVE);
-  //plan = fftwf_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_EXHAUSTIVE);
 #else
   plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_ESTIMATE);
-  //plan = fftwf_mpi_plan_dft_3d(n0, n1, n2, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_ESTIMATE);
 #endif
   MPI_Barrier(MPI_COMM_WORLD);
   double plan_time = MPI_Wtime() - plan_start;
 
-  // iterate iter times 
+  // Planning for verification
+  plan_verify = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction_inv, FFTW_MEASURE);
+
+  /*
+  * iterate iter times 
+  * time the required planning and transform phase
+  * verify the transformation by performing its inverse
+  * verify whether the inverse matches the original data after scaling correctly
+  */
   for(size_t it = 0; it < iter; it++){
     size_t data_sz = N * N * N * how_many;
     fftwf_complex *total_data = fftwf_alloc_complex(data_sz); //-- large sz
+    fftwf_complex *total_verify = fftwf_alloc_complex(data_sz); //-- large sz
 
     // fill data
+    MPI_Barrier(MPI_COMM_WORLD);
+    double inp_data_start = MPI_Wtime();
     if(inverse){
-      get_sp_input_data(per_process_data, N, local_n0, local_0_start, -H1, -H2, -H3, how_many);
+      get_sp_input_data(per_process_data, verify_per_process, N, local_n0, local_0_start, -H1, -H2, -H3, how_many);
     }
     else{
-      get_sp_input_data(per_process_data, N, local_n0, local_0_start, H1, H2, H3, how_many);
+      get_sp_input_data(per_process_data, verify_per_process, N, local_n0, local_0_start, H1, H2, H3, how_many);
     }
+    MPI_Barrier(MPI_COMM_WORLD);
+    double inp_data_end = MPI_Wtime();
 
     // execute
     MPI_Barrier(MPI_COMM_WORLD);
@@ -261,47 +272,34 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
     MPI_Barrier(MPI_COMM_WORLD);
     double exec_end = MPI_Wtime();
 
-    // gather transformed result to master process
-    /* --large sz
-    */
-    //double gather_start = MPI_Wtime();
+    // Inverse transform to verify
+    fftwf_execute(plan_verify);
+
+    // Gather transformed data from all processes to master 
+    double gather_start = MPI_Wtime();
     // TODO: exception
-    /*
     MPI_Gather(&per_process_data[0], alloc_local, MPI_COMPLEX, &total_data[0], alloc_local, MPI_COMPLEX, 0, MPI_COMM_WORLD);
     double gather_end = MPI_Wtime();
-    */
+   
+    // Gather initial data from all processes to master
+    MPI_Gather(&verify_per_process[0], alloc_local, MPI_COMPLEX, &total_verify[0], alloc_local, MPI_COMPLEX, 0, MPI_COMM_WORLD);
+    
     /*
     if(checkStatus(status)){
-      cleanup(per_process_data);
+      cleanup(per_process_data, verify_per_process);
       return 1;
     }
     */
 
-    cout << "Output Frequencies: " << endl;
-    unsigned index;
-    for(size_t many = 0; many < how_many; many++){
-      for(size_t i = 0; i < N; i++){
-          for(size_t j = 0; j < N; j++){
-              for(size_t k = 0; k < N; k++){
-                index = (many * N*N*N) + (i * N * N) + (j * N) + k;
-                cout << many << ": " << i << " " << j << " " << k << ": fftw_out[" << index << "] = (" << per_process_data[index][0] << ", " << per_process_data[index][1] << ")" << endl;
-
-              }
-          }
-      }
-    }
-
-    // verify result 
-    /*
+    // verify transformed and original data
     if(myrank == 0){
-      bool status = verify_fftw(total_data, N, H1, H2, H3, how_many);
+      bool status = verify_fftw(total_data, total_verify, N, H1, H2, H3, how_many);
       if(!status){
         cerr << "Error in transformation\n";
-        cleanup(per_process_data);
+        cleanup(per_process_data, verify_per_process);
         throw "Error in verification transformation";
       }
     }
-    */
     
     MPI_Barrier(MPI_COMM_WORLD);
 #ifdef VERBOSE
@@ -315,18 +313,16 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
       }
     }
 #endif
-#ifdef DEBUG
-    for(size_t d = 0; d < data_sz; d++){
-      cout << d << ": " << total_data[d][0] << " " << total_data[d][1]) << endl;
-    }
-#endif
-    double gather_end = 0.0, gather_start = 0.0;
+
+    inp_data_diff += (inp_data_end - inp_data_start);
     exec_diff += (exec_end - exec_start);
     gather_diff += (gather_end - gather_start);
 
-    //free(total_data); // large sz
+    free(total_data); // large sz
+    free(total_verify); // large sz
   }
 
+  inp_data_diff = inp_data_diff / iter;
   exec_diff = exec_diff / iter;
   gather_diff = gather_diff / iter;
 
@@ -359,9 +355,10 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
     // Print to console the configuration chosen to execute during runtime
     print_config(N, false, world_size, nthreads, how_many, inverse, iter);
     cout << "\nTime to plan: " << plan_time << "sec\n\n";
+    cout << "\nTime to gen reordered data: " << inp_data_diff << "sec\n\n";
     bool status = print_results(exec_diff, gather_diff, tot_flops, N, world_size, nthreads, iter);
     if(!status){
-      cleanup(per_process_data);
+      cleanup(per_process_data, verify_per_process);
       throw "Printing Results function failed!";
     }
   }
