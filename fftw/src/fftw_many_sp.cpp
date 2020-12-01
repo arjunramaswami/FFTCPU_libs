@@ -163,11 +163,11 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
     mag_sum += magnitude;
     noise_sum += noise;
 
-#ifdef VERBOSE
+//#ifdef VERBOSE
     cout << i << ": fftw_out[" << i << "] = (" << fftw_data[i][0] << ", " << fftw_data[i][1] << ")";
-    cout << " = (" << total_verify[i][0] << ", " << total_verify[i][1] << ")";
+    cout << " = (" << verify_data[i][0] << ", " << verify_data[i][1] << ")";
     cout << endl;
-#endif
+//#endif
   }
 
   float db = 10 * log(mag_sum / noise_sum) / log(10.0);
@@ -428,8 +428,8 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
   }
 
   unsigned H1 = 1, H2 = 1, H3 = 1;
-
   double total_diff = 0.0;
+
   int threads_ok = fftwf_init_threads(); 
   if(threads_ok == 0){
     throw "Something went wrong with Multithreaded FFTW! Exiting... \n";
@@ -450,10 +450,10 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
     direction_inv = FFTW_FORWARD;
   }
 
-  int n[3] = {N, N, N};
+  const int n[3] = {N, N, N};
   int idist = N * N * N, odist = N * N * N;
   int istride = 1, ostride = 1;
-  int *inembed = n, *onembed = n;
+  const int *inembed = n, *onembed = n;
 
   double plan_start = getTimeinMilliSec();
 #ifdef MEASURE
@@ -466,6 +466,8 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
   fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
 #endif
   double plan_time = getTimeinMilliSec() - plan_start;
+
+  fftwf_plan plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_MEASURE);
 
   //printf("Threads %d: time to plan - %lf sec\n\n", nthreads, (plan_end - plan_start) / 1000);;
 
@@ -484,6 +486,8 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
     stop = getTimeinMilliSec();
 
     diff = stop - start;
+
+    fftwf_execute(plan_verify);
 
 #ifdef VERBOSE
     cout << "Iter " << i << ": " << diff << "ms" << endl;
