@@ -14,7 +14,7 @@ using namespace std;
 
 static fftwf_plan plan, plan_verify;
 
-static void cleanup(fftwf_complex *per_process_data, fftwf_complex *verify_per_process){
+static void cleanup_mpi(fftwf_complex *per_process_data, fftwf_complex *verify_per_process){
   // Cleanup 
   fftwf_free(per_process_data);
   fftwf_free(verify_per_process);
@@ -22,6 +22,15 @@ static void cleanup(fftwf_complex *per_process_data, fftwf_complex *verify_per_p
   fftwf_mpi_cleanup();
   fftwf_destroy_plan(plan);
   fftwf_destroy_plan(plan_verify);
+}
+
+static void cleanup_openmp(fftwf_complex *fftw_data, fftwf_complex *verify_data){
+
+  // Cleanup : fftw data, plans and threads
+  fftwf_free(fftw_data);
+  fftwf_free(verify_data);
+  fftwf_destroy_plan(plan);
+  fftwf_cleanup_threads();
 }
 
 /**
@@ -34,7 +43,7 @@ static void cleanup(fftwf_complex *per_process_data, fftwf_complex *verify_per_p
  * \param H1, H2, H3  : harmonic to modify frequency of discrete time signal
  * \param how_many    : number of batched implementations of FFTW
  */
-void get_sp_input_data(fftwf_complex *fftw_data, fftwf_complex *verify_data,ptrdiff_t N, ptrdiff_t local_n0, ptrdiff_t local_start, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
+void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,ptrdiff_t N, ptrdiff_t local_n0, ptrdiff_t local_start, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
 
   unsigned index; 
   float TWOPI = 6.2831853071795864769;
@@ -84,6 +93,49 @@ void get_sp_input_data(fftwf_complex *fftw_data, fftwf_complex *verify_data,ptrd
 }
 
 /**
+ * \brief create single precision floating points values for FFT computation for each process level block
+ * \param fftw_data   : pointer to 3d number of sp points for FFTW
+ * \param verify_data : pointer to 3d number of sp points for verification
+ * \param N           : number of points in each dimension
+ * \param H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \param how_many    : number of batched implementations of FFTW
+ */
+void get_sp_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,size_t N, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
+
+  unsigned index; 
+  float TWOPI = 6.2831853071795864769;
+  float phase, phase1, phase2, phase3;
+  double re_val = 0.0, img_val = 0.0;
+  unsigned S1 = N*N, S2 = N, S3 = 1;
+
+  for(size_t many = 0; many < how_many; many++){
+    for(size_t i = 0; i < N; i++) {
+      for(size_t j = 0; j < N; j++) {
+        for(size_t k = 0; k < N; k++) {
+          phase1 = moda(i, H1, N) / N;
+          phase2 = moda(j, H2, N) / N;
+          phase3 = moda(k, H3, N) / N;
+          phase = phase1 + phase2 + phase3;
+
+          index = (many * S1 * S2) + (i * S1) + (j * S2) + k;
+
+          re_val = cosf( TWOPI * phase ) / (N * N * N);
+          img_val = sinf( TWOPI * phase ) / (N * N * N);
+
+          verify_data[index][0] = fftw_data[index][0] = re_val;
+          verify_data[index][1] = fftw_data[index][1] = img_val;
+
+  #ifdef DEBUG          
+          printf(" %d %d %d : fftw[%d] = (%f, %f) \n", i, j, k, index, fftw_data[index][0], fftw_data[index][1]);
+  #endif
+        }
+      }
+    }
+  }
+}
+
+
+/**
  * \brief  Verify single precision batched FFT3d computation using FFTW
  * \param  fftw_data   : pointer to 3D number of sp points after FFTW
  * \param  verify_data : pointer to 3D number of sp points for verification
@@ -128,7 +180,6 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
     cout << "Signal to noise ratio on output sample: " << db << " --> FAILED \n\n";
     return false;
   }
-
 }
 
 /**
@@ -140,7 +191,7 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
  */
-void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
+void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
     
   if(dim != 3){
     throw "Currently supports only 3D FFT!";
@@ -257,10 +308,10 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
     MPI_Barrier(MPI_COMM_WORLD);
     double inp_data_start = MPI_Wtime();
     if(inverse){
-      get_sp_input_data(per_process_data, verify_per_process, N, local_n0, local_0_start, -H1, -H2, -H3, how_many);
+      get_sp_mpi_many_input(per_process_data, verify_per_process, N, local_n0, local_0_start, -H1, -H2, -H3, how_many);
     }
     else{
-      get_sp_input_data(per_process_data, verify_per_process, N, local_n0, local_0_start, H1, H2, H3, how_many);
+      get_sp_mpi_many_input(per_process_data, verify_per_process, N, local_n0, local_0_start, H1, H2, H3, how_many);
     }
     MPI_Barrier(MPI_COMM_WORLD);
     double inp_data_end = MPI_Wtime();
@@ -296,7 +347,7 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
       bool status = verify_fftw(total_data, total_verify, N, H1, H2, H3, how_many);
       if(!status){
         cerr << "Error in transformation\n";
-        cleanup(per_process_data, verify_per_process);
+        cleanup_mpi(per_process_data, verify_per_process);
         throw "Error in verification transformation";
       }
     }
@@ -358,8 +409,104 @@ void fftwf_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthread
     cout << "\nTime to gen reordered data: " << inp_data_diff << "sec\n\n";
     bool status = print_results(exec_diff, gather_diff, tot_flops, N, world_size, nthreads, iter);
     if(!status){
-      cleanup(per_process_data, verify_per_process);
+      cleanup_mpi(per_process_data, verify_per_process);
       throw "Printing Results function failed!";
     }
   }
+}
+
+void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
+    
+  if(dim != 3){
+    throw "Currently supports only 3D FFT!";
+  }
+  else if ((N & N-1) != 0){
+    throw "Invalid N value, should be a power of 2!";
+  }
+  else if ( (how_many == 0) || (nthreads == 0) || (iter == 0) ){
+    throw "Invalid value, should be >=1!";
+  }
+
+  unsigned H1 = 1, H2 = 1, H3 = 1;
+
+  double total_diff = 0.0;
+  int threads_ok = fftwf_init_threads(); 
+  if(threads_ok == 0){
+    throw "Something went wrong with Multithreaded FFTW! Exiting... \n";
+  }
+
+  // All subsequent plans will now use nthreads
+  fftwf_plan_with_nthreads((int)nthreads);
+
+  size_t data_sz = how_many * N * N * N;
+  fftwf_complex *fftw_data = fftwf_alloc_complex(data_sz);
+  fftwf_complex *verify_data = fftwf_alloc_complex(data_sz);
+
+  // direction of FFT for the plan
+  int direction = FFTW_FORWARD;
+  int direction_inv = FFTW_BACKWARD;
+  if(inverse){
+    direction = FFTW_BACKWARD;
+    direction_inv = FFTW_FORWARD;
+  }
+
+  int n[3] = {N, N, N};
+  int idist = N * N * N, odist = N * N * N;
+  int istride = 1, ostride = 1;
+  int *inembed = n, *onembed = n;
+
+  double plan_start = getTimeinMilliSec();
+#ifdef MEASURE
+  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_MEASURE);
+#elif PATIENT
+  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_PATIENT);
+#elif EXHAUSTIVE
+  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_EXHAUSTIVE);
+#else
+  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
+#endif
+  double plan_time = getTimeinMilliSec() - plan_start;
+
+  //printf("Threads %d: time to plan - %lf sec\n\n", nthreads, (plan_end - plan_start) / 1000);;
+
+  double start = 0.0, stop = 0.0, diff = 0.0;
+  // Iterate iter times
+  for(size_t it = 0; it < iter; it++){
+    if(inverse){
+      get_sp_many_input(fftw_data, verify_data, N, -H1, -H2, -H3, how_many);
+    }
+    else{
+      get_sp_many_input(fftw_data, verify_data, N, H1, H2, H3, how_many);
+    }
+
+    start = getTimeinMilliSec();
+    fftwf_execute(plan);
+    stop = getTimeinMilliSec();
+
+    diff = stop - start;
+
+#ifdef VERBOSE
+    cout << "Iter " << i << ": " << diff << "ms" << endl;
+#endif
+
+    total_diff += diff;
+      //printf(" Time : %lf %lf - %lf \n", start, stop, diff);
+    bool status = verify_fftw(fftw_data, verify_data, N, H1, H2, H3, how_many);
+    if(!status){
+      cleanup_openmp(fftw_data, verify_data);
+      throw "Error in Transformation \n";
+    }
+  }
+
+  double add, mul, fma, flops;
+  fftwf_flops(plan, &add, &mul, &fma);
+  flops = add + mul + fma;
+
+  bool status = print_results(total_diff, 0, flops, N, 1, nthreads, iter);
+  if(!status){
+    cleanup_openmp(fftw_data, verify_data);
+    throw "Printing Results function failed!";
+  }
+
+  cleanup_openmp(fftw_data, verify_data);
 }

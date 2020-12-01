@@ -71,7 +71,7 @@ int main(int argc, char **argv){
   }
 
   try{
-    fftwf_many_sp(3, N, batch, nthreads, inverse, iter);
+    fftwf_mpi_many_sp(3, N, batch, nthreads, inverse, iter);
   }
   catch(const char* msg){
     cerr << msg << endl;

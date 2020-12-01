@@ -4,25 +4,13 @@ project(FFTW VERSION 3.0
             DESCRIPTION "Parallel and Distributed FFTW"
             LANGUAGES CXX C)
 
-add_executable(fftw
-  ${PROJECT_SOURCE_DIR}/main.cpp
-  ${PROJECT_SOURCE_DIR}/src/fftw_many_sp.cpp
-  ${PROJECT_SOURCE_DIR}/src/helper.cpp
-)
+set(examples hybrid_many openmp_many)
 
 # Find FFTW
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/findFFTW")
 find_package(FFTW REQUIRED)
-target_link_libraries(fftw PRIVATE ${FFTW_DOUBLE_LIB} ${FFTW_FLOAT_LIB})
-#target_link_libraries(fftw PRIVATE fftw3 fftw3f)
-
-# Find MPI
 find_package(MPI REQUIRED)
-target_link_libraries(fftw PRIVATE MPI::MPI_CXX ${FFTW_FLOAT_MPI_LIB} ${FFTW_DOUBLE_MPI_LIB})
-
-# Find OpenMP
 find_package(OpenMP REQUIRED)
-target_link_libraries(fftw PRIVATE OpenMP::OpenMP_CXX ${FFTW_FLOAT_OPENMP_LIB} ${FFTW_DOUBLE_OPENMP_LIB})
 
 # External Dependencies
 include(FetchContent)
@@ -33,7 +21,25 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cxxopts)
 
-target_link_libraries(fftw PRIVATE cxxopts)
-target_include_directories(fftw PRIVATE 
-  ${PROJECT_SOURCE_DIR}/include 
-  ${FFTW_INCLUDE_DIRS})
+foreach(example ${examples})
+  
+  add_executable(${example} 
+    ${PROJECT_SOURCE_DIR}/examples/${example}.cpp
+    ${PROJECT_SOURCE_DIR}/src/fftw_many_sp.cpp
+    ${PROJECT_SOURCE_DIR}/src/helper.cpp
+  )
+  target_link_libraries(${example} PRIVATE ${FFTW_DOUBLE_LIB} ${FFTW_FLOAT_LIB})
+
+  target_link_libraries(${example} PRIVATE MPI::MPI_CXX ${FFTW_FLOAT_MPI_LIB} ${FFTW_DOUBLE_MPI_LIB})
+
+  target_link_libraries(${example} PRIVATE OpenMP::OpenMP_CXX 
+      ${FFTW_FLOAT_OPENMP_LIB} ${FFTW_DOUBLE_OPENMP_LIB})
+
+  target_link_libraries(${example} PRIVATE cxxopts)
+
+  target_include_directories(${example} PRIVATE ${PROJECT_SOURCE_DIR}/include 
+                              ${FFTW_INCLUDE_DIRS})
+
+endforeach()
+
+
