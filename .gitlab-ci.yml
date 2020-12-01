@@ -1,55 +1,27 @@
 stages:
-  - compile_estimate
-  - execute_estimate
-  - compile_measure
-  - execute_measure
+  - build
+  - execute
 
-compile_fftw_est:
-  stage: compile_estimate
+compile_est_plan:
+  stage: build
   script:
-    - cd fftw
-    - make clean && make
-  artifacts:
-    paths:
-    - fftw/bin/fftw
+    echo "Building"
+    module load toolchain/gompi/2020a devel/CMake numlib/FFTW
+    rm -rf build && mkdir build && cd build
+    cmake ..
+    make
 
-run_fftw_dp_est:
-  stage: execute_estimate
+run_est_plan:
+  stage: execute
   script:
-    - cd fftw/bin
-    - mpirun -n 2 ./fftw -m 16 -n 16 -p 16 -i 2 -t 2
-  dependencies:
-    - compile_fftw_est
+    - mpirun -n 2 ./hybrid_many --num 64 --threads=5 --batch=2
 
-run_fftw_sp_est:
-  stage: execute_estimate
+compile_measure_plan:
+  stage: build
   script:
-    - cd fftw/bin
-    - mpirun -n 2 ./fftw -m 16 -n 16 -p 16 -i 2 -t 2 -s
-  dependencies:
-    - compile_fftw_est
-
-compile_fftw_measure:
-  stage: compile_measure
-  script:
-    - cd fftw
     - make clean && make MEASURE=1
-  artifacts:
-    paths:
-    - fftw/bin/fftw
 
-run_fftw_dp_measure:
-  stage: execute_measure
+run_measure_plan:
+  stage: execute
   script:
-    - cd fftw/bin
-    - mpirun -n 2 ./fftw -m 16 -n 16 -p 16 -i 2 -t 2
-  dependencies:
-    - compile_fftw_measure
-
-run_fftw_sp_est:
-  stage: execute_measure
-  script:
-    - cd fftw/bin
-    - mpirun -n 2 ./fftw -m 16 -n 16 -p 16 -i 2 -t 2 -s
-  dependencies:
-    - compile_fftw_measure
+    - mpirun -n 2 ./hybrid_many --num 64 --threads=5 --batch=2
