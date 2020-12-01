@@ -20,8 +20,12 @@ compile_measure_plan:
   stage: build
   script:
     - make clean && make MEASURE=1
+  dependencies:
+    - run_est_plan
 
 run_measure_plan:
   stage: execute
   script:
     - mpirun -n 2 ./hybrid_many --num 64 --threads=5 --batch=2
+  dependencies:
+    - compile_measure_plan
