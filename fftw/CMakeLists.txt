@@ -28,18 +28,17 @@ foreach(example ${examples})
     ${PROJECT_SOURCE_DIR}/src/fftw_many_sp.cpp
     ${PROJECT_SOURCE_DIR}/src/helper.cpp
   )
-  target_link_libraries(${example} PRIVATE ${FFTW_DOUBLE_LIB} ${FFTW_FLOAT_LIB})
+  target_link_libraries(${example} PRIVATE ${FFTW_FLOAT_LIB})
 
-  target_link_libraries(${example} PRIVATE MPI::MPI_CXX ${FFTW_FLOAT_MPI_LIB} ${FFTW_DOUBLE_MPI_LIB})
+  target_link_libraries(${example} PRIVATE MPI::MPI_CXX ${FFTW_FLOAT_MPI_LIB})
 
   target_link_libraries(${example} PRIVATE OpenMP::OpenMP_CXX 
-      ${FFTW_FLOAT_OPENMP_LIB} ${FFTW_DOUBLE_OPENMP_LIB})
+      ${FFTW_FLOAT_OPENMP_LIB})
 
   target_link_libraries(${example} PRIVATE cxxopts)
 
   target_include_directories(${example} PRIVATE ${PROJECT_SOURCE_DIR}/include 
                               ${FFTW_INCLUDE_DIRS})
-
 endforeach()
 
 

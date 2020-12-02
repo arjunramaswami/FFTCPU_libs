@@ -7,8 +7,8 @@ using namespace std;
 #include <omp.h>
 
 #include "cxxopts.hpp" // Cmd-Line Args parser
-#include "fftw_many_sp.h"  // Single precision Batch Hybrid
-#include "helper.h"
+#include "fftw_many_sp.hpp"  // Single precision Batch Hybrid
+#include "helper.hpp"
 
 void print_config(int N1, int N2, int N3, int iter, int inverse, int nthreads, int sp);
 

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <mpi.h>
+#include "helper.hpp"
 
 using std::cout;
 using std::cerr;

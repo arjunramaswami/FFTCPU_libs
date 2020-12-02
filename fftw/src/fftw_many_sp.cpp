@@ -8,8 +8,8 @@
 #include <fftw3-mpi.h>
 
 #include "cxxopts.hpp" // Cmd-Line Args parser
-#include "fftw_many_sp.h"
-#include "helper.h"
+#include "fftw_many_sp.hpp"
+#include "helper.hpp"
 using namespace std;
 
 static fftwf_plan plan, plan_verify;
@@ -163,11 +163,11 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
     mag_sum += magnitude;
     noise_sum += noise;
 
-//#ifdef VERBOSE
+#ifdef VERBOSE
     cout << i << ": fftw_out[" << i << "] = (" << fftw_data[i][0] << ", " << fftw_data[i][1] << ")";
     cout << " = (" << verify_data[i][0] << ", " << verify_data[i][1] << ")";
     cout << endl;
-//#endif
+#endif
   }
 
   float db = 10 * log(mag_sum / noise_sum) / log(10.0);
@@ -328,20 +328,13 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
 
     // Gather transformed data from all processes to master 
     double gather_start = MPI_Wtime();
-    // TODO: exception
+
     MPI_Gather(&per_process_data[0], alloc_local, MPI_COMPLEX, &total_data[0], alloc_local, MPI_COMPLEX, 0, MPI_COMM_WORLD);
     double gather_end = MPI_Wtime();
    
     // Gather initial data from all processes to master
     MPI_Gather(&verify_per_process[0], alloc_local, MPI_COMPLEX, &total_verify[0], alloc_local, MPI_COMPLEX, 0, MPI_COMM_WORLD);
     
-    /*
-    if(checkStatus(status)){
-      cleanup(per_process_data, verify_per_process);
-      return 1;
-    }
-    */
-
     // verify transformed and original data
     if(myrank == 0){
       bool status = verify_fftw(total_data, total_verify, N, H1, H2, H3, how_many);
@@ -457,17 +450,17 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
 
   double plan_start = getTimeinMilliSec();
 #ifdef MEASURE
-  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_MEASURE);
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_MEASURE);
 #elif PATIENT
-  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_PATIENT);
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_PATIENT);
 #elif EXHAUSTIVE
-  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_EXHAUSTIVE);
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_EXHAUSTIVE);
 #else
-  fftwf_plan plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
 #endif
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  fftwf_plan plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_MEASURE);
+  plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_MEASURE);
 
   //printf("Threads %d: time to plan - %lf sec\n\n", nthreads, (plan_end - plan_start) / 1000);;
 
