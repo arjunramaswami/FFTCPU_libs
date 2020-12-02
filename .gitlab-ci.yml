@@ -10,6 +10,9 @@ compile_est_plan:
     rm -rf build && mkdir build && cd build
     cmake ..
     make
+  artifacts:
+    paths:
+      build/openmp_many
 
 run_est_plan:
   stage: execute
