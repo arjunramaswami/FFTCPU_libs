@@ -13,9 +13,10 @@ compile_est_plan:
     make
   artifacts:
     paths:
-      - fftw/build/openmp_many
+      - fftw/build/*
 
 run_est_plan:
   stage: execute
   script:
+    cd fftw/build
     ./openmp_many --num=16 --threads=2 --batch=2
