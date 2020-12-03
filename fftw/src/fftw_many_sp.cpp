@@ -512,12 +512,15 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
       cleanup_openmp(fftw_data, verify_data);
       throw "Error in Transformation \n";
     }
+    cout << "Iter: " << it << " Runtime: " << diff << " total: " << total_diff << endl;
   }
 
   double add, mul, fma, flops;
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma;
 
+  cout << "\nTime to plan: " << plan_time << "sec\n";
+  cout << "Flops: " << flops << endl;
   bool status = print_results(total_diff, 0, flops, N, 1, nthreads, iter, how_many);
   if(!status){
     cleanup_openmp(fftw_data, verify_data);
