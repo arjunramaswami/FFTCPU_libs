@@ -11,8 +11,6 @@ compile_est_plan:
     - rm -rf build && mkdir build && cd build
     - cmake ..
     - make
-    - echo "Print dir $(ls)" 
-    - echo "Print dir $(ls fftw) $(ls fftw/build)" 
   artifacts:
     paths:
       - fftw/build/openmp_many
