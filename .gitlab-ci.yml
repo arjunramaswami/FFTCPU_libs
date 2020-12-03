@@ -5,15 +5,14 @@ stages:
 compile_est_plan:
   stage: build
   script:
-    echo "Building"
-    module load toolchain/gompi/2020a devel/CMake numlib/FFTW
-    cd fftw
-    rm -rf build && mkdir build && cd build
-    cmake ..
-    make
-    ls 
-    ls fftw
-    ls fftw/build
+    - echo "Building"
+    - module load toolchain/gompi/2020a devel/CMake numlib/FFTW
+    - cd fftw
+    - rm -rf build && mkdir build && cd build
+    - cmake ..
+    - make
+    - echo "Print dir $(ls)" 
+    - echo "Print dir $(ls fftw) $(ls fftw/build)" 
   artifacts:
     paths:
       - fftw/build/openmp_many
