@@ -8,7 +8,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
 set(examples hybrid_many openmp_many)
 
 # Find FFTW
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/findFFTW")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/findFFTW)
+
 find_package(FFTW REQUIRED)
 find_package(MPI REQUIRED)
 find_package(OpenMP REQUIRED)
