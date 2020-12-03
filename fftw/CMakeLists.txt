@@ -4,6 +4,7 @@ project(FFTW VERSION 3.0
             DESCRIPTION "Parallel and Distributed FFTW"
             LANGUAGES CXX C)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
 set(examples hybrid_many openmp_many)
 
 # Find FFTW
