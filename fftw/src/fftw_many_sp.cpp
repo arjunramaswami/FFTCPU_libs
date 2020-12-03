@@ -6,6 +6,7 @@
 #include <mpi.h>
 #include <fftw3.h>
 #include <fftw3-mpi.h>
+#include "config.h"
 
 #include "cxxopts.hpp" // Cmd-Line Args parser
 #include "fftw_many_sp.hpp"
@@ -275,23 +276,32 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
     cout << "Configuring plan for single precision FFT" << endl;
 #endif
     
+  const unsigned fftw_plan = FFTW_PLAN;
+
+  switch(fftw_plan){
+    case FFTW_MEASURE:  cout << "FFTW Plan Measure\n";
+                        break;
+    case FFTW_ESTIMATE: cout << "FFTW Plan Estimate\n";
+                        break;
+    case FFTW_PATIENT:  cout << "FFTW Plan Patient\n";
+                        break;
+    case FFTW_EXHAUSTIVE: cout << "FFTW Plan Exhaustive\n";
+                        break;
+    default: throw "Incorrect plan\n";
+            break;
+  }
+
   // plan
   MPI_Barrier(MPI_COMM_WORLD);
   double plan_start = MPI_Wtime();
-#ifdef MEASURE
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_MEASURE);
-#elif PATIENT
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
-#elif EXHAUSTIVE
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_EXHAUSTIVE);
-#else
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_ESTIMATE);
-#endif
+  
+  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, fftw_plan);
+
   MPI_Barrier(MPI_COMM_WORLD);
   double plan_time = MPI_Wtime() - plan_start;
 
   // Planning for verification
-  plan_verify = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction_inv, FFTW_MEASURE);
+  plan_verify = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction_inv, fftw_plan);
 
   /*
   * iterate iter times 
@@ -400,7 +410,7 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
     print_config(N, false, world_size, nthreads, how_many, inverse, iter);
     cout << "\nTime to plan: " << plan_time << "sec\n\n";
     cout << "\nTime to gen reordered data: " << inp_data_diff << "sec\n\n";
-    bool status = print_results(exec_diff, gather_diff, tot_flops, N, world_size, nthreads, iter);
+    bool status = print_results(exec_diff, gather_diff, tot_flops, N, world_size, nthreads, iter, how_many);
     if(!status){
       cleanup_mpi(per_process_data, verify_per_process);
       throw "Printing Results function failed!";
@@ -448,19 +458,28 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
   int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
 
+  const unsigned fftw_plan = FFTW_PLAN;
+
+  switch(fftw_plan){
+    case FFTW_MEASURE:  cout << "FFTW Plan: Measure\n";
+                        break;
+    case FFTW_ESTIMATE: cout << "FFTW Plan: Estimate\n";
+                        break;
+    case FFTW_PATIENT:  cout << "FFTW Plan: Patient\n";
+                        break;
+    case FFTW_EXHAUSTIVE: cout << "FFTW Plan: Exhaustive\n";
+                        break;
+    default: throw "Incorrect plan\n";
+            break;
+  }
+
   double plan_start = getTimeinMilliSec();
-#ifdef MEASURE
-  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_MEASURE);
-#elif PATIENT
-  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_PATIENT);
-#elif EXHAUSTIVE
-  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_EXHAUSTIVE);
-#else
-  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
-#endif
+
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
+
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_MEASURE);
+  plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, fftw_plan);
 
   //printf("Threads %d: time to plan - %lf sec\n\n", nthreads, (plan_end - plan_start) / 1000);;
 
@@ -499,7 +518,7 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma;
 
-  bool status = print_results(total_diff, 0, flops, N, 1, nthreads, iter);
+  bool status = print_results(total_diff, 0, flops, N, 1, nthreads, iter, how_many);
   if(!status){
     cleanup_openmp(fftw_data, verify_data);
     throw "Printing Results function failed!";

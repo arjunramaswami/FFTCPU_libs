@@ -9,6 +9,7 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::setw;
+using std::setprecision;
 
 /* Compute (K*L)%M accurately */
 double moda(unsigned K, unsigned L, unsigned M){
@@ -36,25 +37,38 @@ double getTimeinMilliSec(){
  * \param  iter         : number of iterations
  * \return true if successful, false otherwise
  */
-bool print_results(double exec_time, double gather_time, double flops, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter){
-  double avg_fftw_runtime = 0.0, avg_transfer_time = 0.0;
+bool print_results(double exec_time, double gather_time, double flops, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter, unsigned how_many){
 
-  cout << "\n       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  " << endl;
+  if(exec_time == 0.0)
+    throw "Error in Run\n";
 
+  cout << "\nMeasurements\n" << "--------------------------\n";
+  cout << "Processes           : " << nprocs << endl;
+  cout << "Threads             : " << nthreads << endl;
+  cout << "FFT Size            : " << N << "^3\n";
+  cout << "Batch               : " << how_many << endl;
+  cout << "Total Runtime       : " << setprecision(4) << exec_time << " ms\n";
+  cout << "Runtime per batch   : " << (exec_time / how_many) << " ms\n";
+  cout << "Throughput          : " << flops * 1e-9 << " GFLOPs\n";
+  cout << "Time to Transfer    : " << gather_time << "ms\n";
+  cout << "--------------------------\n";
+
+  /*
+  cout << "\n       Processes  Threads  FFTSize  Batch  AvgRuntime(ms)  Total Flops TimetoTransfer(ms)  " << endl;
   cout << "fftw:";
   if(exec_time != 0.0){
-    avg_fftw_runtime = (exec_time) * 1E3;  
-    avg_transfer_time = (gather_time) * 1E3;  
     //double gpoints_per_sec = ( N[0] * N[1] * N[2] / (fftw_runtime * 1E-3)) * 1E-9;
-    double gflops = (flops / avg_fftw_runtime) * 1E-6;
+    double gflops = (flops * 1e-9) / (exec_time * 1e-3);
     //double gflops = 3 * 5 * N[0] * N[1] * N[2]* (log((double)N[0])/log((double)2))/(avg_fftw_runtime * 1E-3 * 1E9);
-    cout << setw(6) << nprocs << setw(11) << nthreads << setw(10) << N;
-    cout << setw(15) << avg_fftw_runtime << setw(15) << gflops << setw(15) << avg_transfer_time << endl;
+    cout << setw(6) << nprocs << setw(11) << nthreads << setw(8) << N << "^3";
+    cout << setw(6) << how_many;
+    cout << setw(13) << exec_time << setw(15) << gflops << setw(15) << gather_time << endl;
   }
   else{
     cerr << "Error in FFT3D" << endl;
     return false;
   }
+  */
   return true;
 }
 

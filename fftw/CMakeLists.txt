@@ -23,6 +23,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cxxopts)
 
+set(FFTW_PLAN "FFTW_ESTIMATE" CACHE STRING "FFTW Plan")
+set_property(CACHE FFTW_PLAN PROPERTY STRINGS "FFTW_ESTIMATE" "FFTW_MEASURE" "FFTW_PATIENT" "FFTW_EXHAUSTIVE")
+
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in"
+  "${CMAKE_BINARY_DIR}/include/config.h"
+  ESCAPE_QUOTES
+)
+
 foreach(example ${examples})
   
   add_executable(${example} 
@@ -40,7 +49,8 @@ foreach(example ${examples})
   target_link_libraries(${example} PRIVATE cxxopts)
 
   target_include_directories(${example} PRIVATE ${PROJECT_SOURCE_DIR}/include 
-                              ${FFTW_INCLUDE_DIRS})
+      ${CMAKE_BINARY_DIR}/include ${FFTW_INCLUDE_DIRS})
+
 endforeach()
 
 
