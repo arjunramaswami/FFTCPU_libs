@@ -9,6 +9,11 @@ All notable changes to this project will be documented in this file.
 - Fix scripts to plan
 - Fix DEBUG prints
 
+## [3.0] - [04.12.2020] 
+ - Batched FFTW interface for hybrid and openmp Multithreaded variants replace the existing functions
+ - Ported to C++
+ - FFTW plan as part of CMake options
+
 ## [2.0.2] - [16.04.2020] 
 - Measurements for distributed sp FFTW over 4 and 8 nodes
 
