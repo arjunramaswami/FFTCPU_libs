@@ -8,7 +8,7 @@
 #SBATCH --switches=1
 
 module reset
-module load devel/CMake
+#module load devel/CMake
 module load toolchain/gompi/2020a
 module load numlib/FFTW/3.3.8-gompi-2020a
 

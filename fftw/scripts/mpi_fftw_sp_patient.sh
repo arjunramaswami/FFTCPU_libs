@@ -7,7 +7,8 @@
 #SBATCH --ntasks-per-node=32
 #SBATCH --verbose
 
-module load devel/CMake
+module reset
+#module load devel/CMake
 module load toolchain/gompi/2020a
 module load numlib/FFTW/3.3.8-gompi-2020a
 
@@ -15,7 +16,7 @@ ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/patient/mpi1nodes/"
 iter=20
 
-make PATIENT=1 -C ../
+#make PATIENT=1 -C ../
 
 # Execute applications with number of processes that divides 3d FFT size
 echo "Passed $# FFT3d Sizes"

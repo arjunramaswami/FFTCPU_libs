@@ -22,7 +22,7 @@ ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/measure/"
 iter=100
 
-make MEASURE=1 -C ../
+#make MEASURE=1 -C ../
 
 ## Set OMP Environment Variables
 export OMP_DISPLAY_AFFINITY=TRUE

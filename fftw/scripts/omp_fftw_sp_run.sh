@@ -22,7 +22,7 @@ ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/estimate/"
 iter=100
 
-make -C ../ 
+#make -C ../ 
 
 ## Set OMP Environment Variables
 export OMP_DISPLAY_AFFINITY=TRUE

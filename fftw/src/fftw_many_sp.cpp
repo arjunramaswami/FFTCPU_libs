@@ -184,7 +184,7 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
 }
 
 /**
- * \brief  Distributed Single precision FFTW execution
+ * \brief  Hybrid Single precision FFTW execution
  * \param  dim        - number of dimensions of FFT (supports only 3)
  * \param  N          - Size of one dimension of FFT
  * \param  how_many   - number of batches
@@ -418,6 +418,15 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   }
 }
 
+/**
+ * \brief  OpenMp Multithreaded Single precision FFTW execution
+ * \param  dim        - number of dimensions of FFT (supports only 3)
+ * \param  N          - Size of one dimension of FFT
+ * \param  how_many   - number of batches
+ * \param  nthreads   - number of threads
+ * \param  inverse    - true if backward transform
+ * \param  iter       - number of iterations of execution
+ */
 void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
     
   if(dim != 3){

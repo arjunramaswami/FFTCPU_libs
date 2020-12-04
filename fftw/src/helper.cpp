@@ -11,7 +11,7 @@ using std::endl;
 using std::setw;
 using std::setprecision;
 
-/* Compute (K*L)%M accurately */
+/* Compute (K*L)%M */
 double moda(unsigned K, unsigned L, unsigned M){
     return (double)(((long long)K * L) % M);
 }
@@ -88,12 +88,13 @@ bool checkStatus(int status){
 
 /*
  * \brief Print configuration of execution 
- * \param N1, N2, N3 : number of points in each dimension
- * \param sp         : 1 if single precision
- * \param nprocs     : number of processes used
- * \param nthreads   : number of threads used
- * \param inverse    : 1 if backward transformation
- * \param iter       : number of iterations of execution
+ * \param N .      : number of points in each dimension of 3D FFT
+ * \param dp       : true if double precision (not supported)
+ * \param nprocs   : number of processes used
+ * \param nthreads : number of threads used
+ * \param how_many : number of batched FFTs executed
+ * \param inverse  : true if backward transformation
+ * \param iter     : number of iterations of execution
  */
 void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsigned how_many, bool inverse, unsigned iter){
   cout << "\n------------------------------------------\n";

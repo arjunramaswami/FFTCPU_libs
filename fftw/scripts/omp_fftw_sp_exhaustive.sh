@@ -22,7 +22,7 @@ ctime=$(date "+%Y.%m.%d-%H.%M")
 outdir="../data/exhaustive/"
 iter=100
 
-make EXHAUSTIVE=1 -C ../
+#make EXHAUSTIVE=1 -C ../
 
 ## Set OMP Environment Variables
 export OMP_DISPLAY_AFFINITY=TRUE
