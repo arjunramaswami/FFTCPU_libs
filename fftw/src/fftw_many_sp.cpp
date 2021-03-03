@@ -427,7 +427,7 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
  */
-void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
+void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
     
   if(dim != 3){
     throw "Currently supports only 3D FFT!";
@@ -467,7 +467,7 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
   int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
 
-  const unsigned fftw_plan = FFTW_PLAN;
+  unsigned fftw_plan = FFTW_PLAN;
 
   switch(fftw_plan){
     case FFTW_MEASURE:  cout << "FFTW Plan: Measure\n";
@@ -482,12 +482,32 @@ void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned 
             break;
   }
 
+  int wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
+  if(wis_status == 0){
+    cout << "-- Cannot import wisdom from " << wisfile << endl;
+  }
+  else{
+    cout << "-- Importing wisdom from " << wisfile << endl;
+    fftw_plan = FFTW_WISDOM_ONLY | FFTW_ESTIMATE;
+  }
+
   double plan_start = getTimeinMilliSec();
 
   plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
 
   double plan_time = getTimeinMilliSec() - plan_start;
 
+  if(wis_status == 0){
+    int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
+    if(exp_stat == 0){
+      cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
+    }
+    else{
+      cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
+    }
+  }
+
+  fftw_plan = FFTW_PLAN;
   plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, fftw_plan);
 
   //printf("Threads %d: time to plan - %lf sec\n\n", nthreads, (plan_end - plan_start) / 1000);;

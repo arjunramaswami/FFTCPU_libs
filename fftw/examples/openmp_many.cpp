@@ -27,6 +27,7 @@ int main(int argc, char **argv){
       ("i, iter", "Number of iterations", cxxopts::value<unsigned>()->default_value("1"))
       ("b, inverse", "Backward FFT", cxxopts::value<bool>()->default_value("false"))
       ("d, dp", "Double Precision", cxxopts::value<bool>()->default_value("false"))
+      ("w, wisdomfile", "File to wisdom", cxxopts::value<string>())
       ("h,help", "Print usage")
   ;
 
@@ -43,6 +44,7 @@ int main(int argc, char **argv){
   iter = result["iter"].as<unsigned>();
   inverse = result["inverse"].as<bool>();
   dp = result["dp"].as<bool>();
+  string wisfile = result["wisdomfile"].as<string>();
     
   // Initialize: set default number of threads to be used
   omp_set_num_threads(nthreads);
@@ -59,7 +61,7 @@ int main(int argc, char **argv){
   }
 
   try{
-    fftwf_openmp_many_sp(3, N, batch, nthreads, inverse, iter);
+    fftwf_openmp_many_sp(3, N, batch, nthreads, inverse, iter, wisfile);
   }
   catch(const char* msg){
     cerr << msg << endl;
