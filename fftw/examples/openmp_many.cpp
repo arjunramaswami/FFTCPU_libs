@@ -16,7 +16,8 @@ int main(int argc, char **argv){
 
   // Cmd line argument declarations
   unsigned N = 64, iter = 1, nthreads = 1, batch = 1;
-  bool inverse = false, dp = false;
+  bool inverse = false, noverify = false;
+  string wisfile;
 
   cxxopts::Options options("FFTW", "Parse FFTW input params");
 
@@ -26,8 +27,8 @@ int main(int argc, char **argv){
       ("c, batch", "Number of batch", cxxopts::value<unsigned>()->default_value("1"))
       ("i, iter", "Number of iterations", cxxopts::value<unsigned>()->default_value("1"))
       ("b, inverse", "Backward FFT", cxxopts::value<bool>()->default_value("false"))
-      ("d, dp", "Double Precision", cxxopts::value<bool>()->default_value("false"))
-      ("w, wisdomfile", "File to wisdom", cxxopts::value<string>())
+      ("w, wisdomfile", "File to wisdom", cxxopts::value<string>()->default_value("test.wisdom"))
+      ("y, noverify", "No verification", cxxopts::value<bool>()->default_value("false") )
       ("h,help", "Print usage")
   ;
 
@@ -43,8 +44,8 @@ int main(int argc, char **argv){
   batch = result["batch"].as<unsigned>();
   iter = result["iter"].as<unsigned>();
   inverse = result["inverse"].as<bool>();
-  dp = result["dp"].as<bool>();
-  string wisfile = result["wisdomfile"].as<string>();
+  wisfile = result["wisdomfile"].as<string>();
+  noverify = result["noverify"].as<bool>();
     
   // Initialize: set default number of threads to be used
   omp_set_num_threads(nthreads);
@@ -61,7 +62,7 @@ int main(int argc, char **argv){
   }
 
   try{
-    fftwf_openmp_many_sp(3, N, batch, nthreads, inverse, iter, wisfile);
+    fftwf_openmp_many_sp(3, N, batch, nthreads, inverse, iter, wisfile, noverify);
   }
   catch(const char* msg){
     cerr << msg << endl;

@@ -5,6 +5,7 @@ data/
 samples/
 vscode/
 tags
+wisdom/
 
 *.DS_Store
 slurm*

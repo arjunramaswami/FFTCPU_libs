@@ -11,8 +11,10 @@
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
+ * \param  noverify   - disable verification
  */
-void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter);
+void fftwf_mpi_many(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile, bool noverify);
 
 /**
  * \brief  OpenMP Multithreaded Single precision FFTW execution
@@ -22,7 +24,9 @@ void fftwf_mpi_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nth
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
+ * \param  noverify   - disable verification
  */
-void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile);
+void fftwf_openmp_many_sp(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile, bool noverify);
 
 #endif // FFT_MANY_SP_HPP

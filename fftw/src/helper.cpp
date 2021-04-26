@@ -3,13 +3,17 @@
 #include <iostream>
 #include <iomanip>
 #include <mpi.h>
+#include "config.h"
 #include "helper.hpp"
+#include <fftw3.h>
 
 using std::cout;
 using std::cerr;
 using std::endl;
 using std::setw;
+
 using std::setprecision;
+using std::fixed;
 
 /* Compute (K*L)%M */
 double moda(unsigned K, unsigned L, unsigned M){
@@ -42,16 +46,14 @@ bool print_results(double exec_time, double gather_time, double flops, unsigned 
   if(exec_time == 0.0)
     throw "Error in Run\n";
   
-  double avg_exec = exec_time / iter;
-
   cout << "\nMeasurements\n" << "--------------------------\n";
   cout << "Processes           : " << nprocs << endl;
-  cout << "Threads             : " << nthreads << endl;
+  cout << "Threads per proc    : " << nthreads << endl;
   cout << "FFT Size            : " << N << "^3\n";
   cout << "Batch               : " << how_many << endl;
   cout << "Iterations          : " << iter << endl;
-  cout << "Avg Tot Runtime     : " << setprecision(4) << avg_exec << " ms\n";
-  cout << "Runtime per batch   : " << (avg_exec / how_many) << " ms\n";
+  cout << "Avg Tot Runtime     : " << fixed << (exec_time * 1e3)<< " ms\n";
+  cout << "Runtime per batch   : " << ((exec_time / how_many) * 1e3) << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
   cout << "Time to Transfer    : " << gather_time << "ms\n";
   cout << "--------------------------\n";
@@ -97,6 +99,7 @@ bool checkStatus(int status){
  * \param iter     : number of iterations of execution
  */
 void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsigned how_many, bool inverse, unsigned iter){
+
   cout << "\n------------------------------------------\n";
   cout << "FFTW Configuration: \n";
   cout << "--------------------------------------------\n";
@@ -105,15 +108,23 @@ void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsig
   cout << "Precision          = "<< (dp ? "Double":"Single") << endl;
   cout << "Direction          = "<< (inverse ? "BACKWARD ":"FORWARD") << endl;
   cout << "Placement          = In Place    \n";
-  #ifdef MEASURE
-  cout << "Plan               = Measure     \n";
-  #elif PATIENT
-  cout << "Plan               = Patient     \n";
-  #elif EXHAUSTIVE
-  cout << "Plan               = Exhaustive  \n";
-  #else
-  cout << "Plan               = Estimate    \n";
-  #endif
+  unsigned fftw_plan = FFTW_PLAN;
+  switch(fftw_plan){
+    case FFTW_MEASURE:  
+      cout << "Plan               = Measure     \n";                        break;
+    case FFTW_ESTIMATE: 
+      cout << "Plan               = Exhaustive  \n"; 
+      break;
+    case FFTW_PATIENT: 
+      cout << "Plan               = Patient     \n";
+      break;
+    case FFTW_EXHAUSTIVE: 
+      cout << "Plan               = Exhaustive  \n";
+      break;
+    default: 
+      throw "Incorrect plan\n";
+      break;    
+  }
   cout << "Threads            = "<< nthreads << endl;
   cout << "Iterations         = "<< iter << endl;
   cout << "--------------------------------------------\n\n";
