@@ -6,17 +6,17 @@ compile_est_plan:
   stage: build
   script:
     - echo "Building"
-    - module load toolchain/gompi/2020a devel/CMake numlib/FFTW
+    - module load toolchain/gompi devel/CMake numlib/FFTW
     - cd fftw
     - rm -rf build && mkdir build && cd build
     - cmake ..
     - make
   artifacts:
     paths:
-      - fftw/build/openmp_many
+      - fftw/build/hybrid_many
 
 run_est_plan:
   stage: execute
   script:
     - cd fftw/build
-    - ./openmp_many --num=16 --threads=2 --batch=2
+    - ./hybrid_many --num=16 --threads=2 --batch=2
