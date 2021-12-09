@@ -26,7 +26,7 @@ void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsig
  * \param  iter         : number of iterations
  * \return true if successful, false otherwise
  */
-bool print_results(double exec_time, double gather_time, double flops, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter, unsigned how_many);
+bool print_results(double exec_time, double gather_time, double flops, double sd, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter, unsigned how_many);
 
 /**
  * \brief  compute walltime in milliseconds

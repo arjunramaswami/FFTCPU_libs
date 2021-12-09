@@ -41,7 +41,7 @@ double getTimeinMilliSec(){
  * \param  iter         : number of iterations
  * \return true if successful, false otherwise
  */
-bool print_results(double exec_time, double gather_time, double flops, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter, unsigned how_many){
+bool print_results(double exec_time, double gather_time, double flops, double sd, unsigned N, unsigned nprocs, unsigned nthreads, unsigned iter, unsigned how_many){
 
   if(exec_time == 0.0)
     throw "Error in Run\n";
@@ -54,6 +54,7 @@ bool print_results(double exec_time, double gather_time, double flops, unsigned 
   cout << "Iterations          : " << iter << endl;
   cout << "Avg Tot Runtime     : " << fixed << (exec_time * 1e3)<< " ms\n";
   cout << "Runtime per batch   : " << ((exec_time / how_many) * 1e3) << " ms\n";
+  cout << "SD                  : " << sd * 1e3 << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
   cout << "Time to Transfer    : " << gather_time << "ms\n";
   cout << "--------------------------\n";
@@ -113,7 +114,7 @@ void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsig
     case FFTW_MEASURE:  
       cout << "Plan               = Measure     \n";                        break;
     case FFTW_ESTIMATE: 
-      cout << "Plan               = Exhaustive  \n"; 
+      cout << "Plan               = Estimate  \n"; 
       break;
     case FFTW_PATIENT: 
       cout << "Plan               = Patient     \n";

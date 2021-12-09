@@ -5,7 +5,7 @@ project(FFTW VERSION 3.0
             LANGUAGES CXX C)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-set(examples hybrid_many openmp_many)
+set(examples hybrid_many)
 
 # Find FFTW
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")

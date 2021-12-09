@@ -7,11 +7,17 @@
 DEBUG := 0
 
 # Compilers
-CC := gcc -std=c99
+# Gcc with OpenMPI, FFTW with OpenMPI
+CC := gcc -std=c99  
 MPICC := mpicc 
-
-# Compiler Flags
+LIBS := -fopenmp -lm
 CFLAGS := -march=native -Wall
+
+# Intel MPI requires installing FFTW with icc 
+#CC := icc -std=c99 
+#MPICC := mpiicc 
+#LIBS := -qopenmp
+#CFLAGS := -O3 -xHOST -Wall
 
 # debug flag enables heap memory leak sanitization along with prints
 ifeq ($(DEBUG),1)
@@ -42,7 +48,7 @@ CFLAGS := $(CFLAGS)
 
 INC := -Iinclude 
 
-LIBS := -lfftw3 -lfftw3f -lfftw3_omp -lfftw3f_omp -lfftw3_mpi -lfftw3f_mpi -lm -fopenmp
+LIBS += -lfftw3 -lfftw3f -lfftw3_omp -lfftw3f_omp -lfftw3_mpi -lfftw3f_mpi
 
 # Target
 TARGETDIR := bin
