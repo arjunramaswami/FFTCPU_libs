@@ -9,7 +9,7 @@
 #include "config.h"
 
 #include "cxxopts.hpp" // Cmd-Line Args parser
-#include "fftw_many_sp.hpp"
+#include "fftwf_many.hpp"
 #include "helper.hpp"
 using namespace std;
 
@@ -70,7 +70,6 @@ void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,
 
           // considering the H1, H2, H3 are inverse for backward FFT
           //   multiply with the index
-          /*
           phase1 = moda(i + local_start, H1, N) / N;
           phase2 = moda(j, H2, N) / N;
           phase3 = moda(k, H3, N) / N;
@@ -78,10 +77,11 @@ void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,
 
           re_val = cosf( TWOPI * phase ) / (N*N*N);
           img_val = sinf( TWOPI * phase ) / (N*N*N);
-          */
 
+          /*
           re_val = ((double) rand() / (RAND_MAX));
           img_val = ((double) rand() / (RAND_MAX));
+          */
 
           verify_data[index][0] = fftw_data[index][0] = re_val;
           verify_data[index][1] = fftw_data[index][1] = img_val;
@@ -202,9 +202,6 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   if(dim != 3){
     throw "Currently supports only 3D FFT!";
   }
-  // else if ((N & N-1) != 0){
-  //   throw "Invalid N value, should be a power of 2!";
-  // }
   else if ( (how_many == 0) || (nthreads == 0) || (iter == 0) ){
     throw "Invalid value, should be >=1!";
   }
@@ -277,15 +274,15 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
 
   if(myrank == 0){
     switch(fftw_plan){
-      case FFTW_MEASURE:  cout << "FFTW Plan Measure\n";
+      case FFTW_MEASURE:  cout << "-- FFTW Plan: Measure\n";
                           break;
-      case FFTW_ESTIMATE: cout << "FFTW Plan Estimate\n";
+      case FFTW_ESTIMATE: cout << "-- FFTW Plan: Estimate\n";
                           break;
-      case FFTW_PATIENT:  cout << "FFTW Plan Patient\n";
+      case FFTW_PATIENT:  cout << "-- FFTW Plan: Patient\n";
                           break;
-      case FFTW_EXHAUSTIVE: cout << "FFTW Plan Exhaustive\n";
+      case FFTW_EXHAUSTIVE: cout << "-- FFTW Plan: Exhaustive\n";
                           break;
-      default: throw "Incorrect plan\n";
+      default: throw "-- Incorrect plan\n";
               break;
     }
   }
@@ -322,7 +319,8 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
 
   // plan
   double plan_start = MPI_Wtime();
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, fftw_plan);
+  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
+  //plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, fftw_plan);
   double plan_time = MPI_Wtime() - plan_start;
 
   if(myrank == 0)
@@ -345,6 +343,7 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   fftwf_complex *total_data = fftwf_alloc_complex(data_sz); // gathered data
   fftwf_complex *total_verify = fftwf_alloc_complex(data_sz); // -- || -- 
 
+  // other operations to flush cache
   size_t num = 256*256*256;
   double *test_res, *temp1, *temp2;
   test_res = new double [num];
@@ -488,7 +487,7 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   if(myrank == 0){
     // Print to console the configuration chosen to execute during runtime
     print_config(N, false, world_size, nthreads, how_many, inverse, iter);
-    cout << "\nTime to plan: " << plan_time << "sec\n";
+    cout << "\n-- Time to plan: " << plan_time << "sec\n";
     bool status = print_results(avg, gather_diff, tot_flops, sd, N, world_size, nthreads, iter, how_many);
     if(!status){
       cleanup_mpi(per_process_data, verify_per_process);

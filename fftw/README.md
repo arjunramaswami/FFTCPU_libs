@@ -21,56 +21,56 @@ The following libraries have to be loaded in noctua in order to build the target
 
 Use the makefile along with the targets mentioned below to build different configurations of the FFTW library.
 
-| Target | Description                            |
-|:------:|----------------------------------------|
-|   all  | builds multiprocess multithreaded single and double precision binary                      |
+| Target | Description                            |  Linking Libraries
+|:------:|----------------------------------------|---------------------|
+| all         | builds the below two binaries     | 
+| openmp_many | single node openmp multi-threaded binary | `-lfftw3f_omp -lfftw3f` |
+| hybrid_many | distributed mpi+openmpi hybrid binary | `-lfftw3f_mpi -lfftw3f`|
 
 #### Build Parameters
 
 | Target    | Description                            |
 |:---------:|----------------------------------------|
-| DEBUG     | output debug information on execution  |
-| VERBOSE   | output runtime of every iteration      |
-| MEASURE   | Plan FFT with type FFTW_MEASURE        |
-| PATIENT   | Plan FFT with type FFTW_PATIENT        |
-| EXHAUSTIVE| Plan FFT with type FFTW_EXHAUSTIVE     |
+| CMAKE_BUILD_TYPE | Debug, Release                  |
+| FFTW_PLAN  | FFTW_ESTIMATE, FFTW_MEASURE, FFTW_PATIENT, FFTW_EXHAUSTIVE |
 
 The default FFTW plan is **FFTW_ESTIMATE**.
 
-The program is compiled to the `bin` folder. The following is an example of compilation:
+#### How to build
 
 ```bash
+module load devel/CMake/3.20.1-GCCcore-10.3.0
 module load toolchain/gompi/2019b
 module load numlib/FFTW/3.3.8-gompi-2019b
-make DEBUG=1 VERBOSE=1
-make PATIENT=1
+
+mkdir build
+cmake ..
+ccmake .. # to change params in gui
+make 
 ```
 
 ## Execution
 
-The arguments available to the program:
+For: `openmp_many`:
 
-|   Argument  | Default | Description                                      |
-|:-----------:|---------|--------------------------------------------------|
-| -h / --help | -       | displays the cmd line parameter options          |
-|      -n     | 64      | number of points in the first dim of 3d fft      |
-|      -b     | false   | compute backward 3d fft                          |
-|      -d     | false   | call single precision functions instead of double|
-|      -t     | 1       | number of threads if multithreading is available |
-|      -c     | 1       | batched FFTW execution                           |
-|      -i     | 1       | number of iterations of the application          |
+```bash
+Parse FFTW input params
+Usage:
+  FFTW [OPTION...]
+
+  -n, --num arg      Size of FFT dim (default: 64)
+  -t, --threads arg  Number of threads (default: 1)
+  -c, --batch arg    Number of batch (default: 1)
+  -i, --iter arg     Number of iterations (default: 1)
+  -b, --inverse      Backward FFT
+  -h, --help         Print usage
+```
 
 To execute:
 
 ```bash
-# executing a single threaded dp backward fftw. Note '-t' is 1
-mpirun -n 2 ./bin/fftw -n 16 -t 1 -i 2
-
-# executing a 40 threaded dp fftw
-mpirun -n 16 ./bin/fftw -n 256 -t 40 -i 2
-
-# executing a 20 threaded sp fftw
-mpirun -n 8 ./bin/fftw -n 256 -t 20 -i 2
+# executing openmp multithreaded FFTW
+./openmp_many --num=64 --threads=36 --iter=100
 ```
 
 ## Interpreting Results
