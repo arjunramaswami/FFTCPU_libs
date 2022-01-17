@@ -31,11 +31,11 @@ static void cleanup_openmp(fftwf_complex *fftw_data, fftwf_complex *verify_data)
  */
 void get_data(fftwf_complex *fftw_data, fftwf_complex *verify_data, size_t N, unsigned how_many){
 
-  double re_val = 0.0, img_val = 0.0;
+  float re_val = 0.0f, img_val = 0.0f;
 
   for(unsigned i = 0; i < how_many * N * N * N; i++){
-    re_val = ((double) rand() / (RAND_MAX));
-    img_val = ((double) rand() / (RAND_MAX));
+    re_val = ((float) rand() / (RAND_MAX));
+    img_val = ((float) rand() / (RAND_MAX));
 
     verify_data[i][0] = fftw_data[i][0] = re_val;
     verify_data[i][1] = fftw_data[i][1] = img_val;
