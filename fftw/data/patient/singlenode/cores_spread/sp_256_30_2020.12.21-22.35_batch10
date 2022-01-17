@@ -1,0 +1,117 @@
+FFTW Plan: Patient
+Iter: 0 Runtime: 121.758 total: 121.758
+Iter: 1 Runtime: 121.205 total: 242.963
+Iter: 2 Runtime: 121.327 total: 364.29
+Iter: 3 Runtime: 121.628 total: 485.918
+Iter: 4 Runtime: 122.304 total: 608.222
+Iter: 5 Runtime: 121.867 total: 730.089
+Iter: 6 Runtime: 121.92 total: 852.009
+Iter: 7 Runtime: 125.044 total: 977.053
+Iter: 8 Runtime: 124.62 total: 1101.67
+Iter: 9 Runtime: 122.282 total: 1223.95
+Iter: 10 Runtime: 120.52 total: 1344.47
+Iter: 11 Runtime: 119.659 total: 1464.13
+Iter: 12 Runtime: 120.044 total: 1584.18
+Iter: 13 Runtime: 120.493 total: 1704.67
+Iter: 14 Runtime: 120.015 total: 1824.69
+Iter: 15 Runtime: 120.017 total: 1944.7
+Iter: 16 Runtime: 117.206 total: 2061.91
+Iter: 17 Runtime: 109.08 total: 2170.99
+Iter: 18 Runtime: 105.631 total: 2276.62
+Iter: 19 Runtime: 100.821 total: 2377.44
+Iter: 20 Runtime: 100.634 total: 2478.08
+Iter: 21 Runtime: 103.194 total: 2581.27
+Iter: 22 Runtime: 100.923 total: 2682.19
+Iter: 23 Runtime: 99.5775 total: 2781.77
+Iter: 24 Runtime: 97.1897 total: 2878.96
+Iter: 25 Runtime: 96.7223 total: 2975.68
+Iter: 26 Runtime: 96.8148 total: 3072.5
+Iter: 27 Runtime: 97.1369 total: 3169.63
+Iter: 28 Runtime: 97.3967 total: 3267.03
+Iter: 29 Runtime: 96.1951 total: 3363.23
+Iter: 30 Runtime: 99.8239 total: 3463.05
+Iter: 31 Runtime: 104.605 total: 3567.65
+Iter: 32 Runtime: 104.687 total: 3672.34
+Iter: 33 Runtime: 113.328 total: 3785.67
+Iter: 34 Runtime: 106.936 total: 3892.61
+Iter: 35 Runtime: 106.041 total: 3998.65
+Iter: 36 Runtime: 103.003 total: 4101.65
+Iter: 37 Runtime: 100.186 total: 4201.84
+Iter: 38 Runtime: 100.561 total: 4302.4
+Iter: 39 Runtime: 100.357 total: 4402.75
+Iter: 40 Runtime: 100.765 total: 4503.52
+Iter: 41 Runtime: 100.352 total: 4603.87
+Iter: 42 Runtime: 100.414 total: 4704.29
+Iter: 43 Runtime: 100.488 total: 4804.77
+Iter: 44 Runtime: 100.415 total: 4905.19
+Iter: 45 Runtime: 100.108 total: 5005.3
+Iter: 46 Runtime: 100.624 total: 5105.92
+Iter: 47 Runtime: 100.745 total: 5206.67
+Iter: 48 Runtime: 98.7782 total: 5305.45
+Iter: 49 Runtime: 102.991 total: 5408.44
+Iter: 50 Runtime: 103.028 total: 5511.46
+Iter: 51 Runtime: 102.714 total: 5614.18
+Iter: 52 Runtime: 103.017 total: 5717.19
+Iter: 53 Runtime: 103.791 total: 5820.99
+Iter: 54 Runtime: 107.421 total: 5928.41
+Iter: 55 Runtime: 103.468 total: 6031.87
+Iter: 56 Runtime: 103.08 total: 6134.95
+Iter: 57 Runtime: 103.126 total: 6238.08
+Iter: 58 Runtime: 105.46 total: 6343.54
+Iter: 59 Runtime: 105.955 total: 6449.5
+Iter: 60 Runtime: 103.223 total: 6552.72
+Iter: 61 Runtime: 102.877 total: 6655.6
+Iter: 62 Runtime: 102.987 total: 6758.58
+Iter: 63 Runtime: 103.084 total: 6861.67
+Iter: 64 Runtime: 102.967 total: 6964.63
+Iter: 65 Runtime: 103.299 total: 7067.93
+Iter: 66 Runtime: 101.758 total: 7169.69
+Iter: 67 Runtime: 98.5958 total: 7268.29
+Iter: 68 Runtime: 99.2222 total: 7367.51
+Iter: 69 Runtime: 100.703 total: 7468.21
+Iter: 70 Runtime: 98.7555 total: 7566.97
+Iter: 71 Runtime: 99.5294 total: 7666.5
+Iter: 72 Runtime: 97.7891 total: 7764.29
+Iter: 73 Runtime: 103.366 total: 7867.65
+Iter: 74 Runtime: 103.215 total: 7970.87
+Iter: 75 Runtime: 214.334 total: 8185.2
+Iter: 76 Runtime: 147.14 total: 8332.34
+Iter: 77 Runtime: 213.969 total: 8546.31
+Iter: 78 Runtime: 223.525 total: 8769.83
+Iter: 79 Runtime: 239.452 total: 9009.29
+Iter: 80 Runtime: 150.764 total: 9160.05
+Iter: 81 Runtime: 137.054 total: 9297.1
+Iter: 82 Runtime: 107.135 total: 9404.24
+Iter: 83 Runtime: 98.7938 total: 9503.03
+Iter: 84 Runtime: 99.025 total: 9602.06
+Iter: 85 Runtime: 98.8811 total: 9700.94
+Iter: 86 Runtime: 97.0406 total: 9797.98
+Iter: 87 Runtime: 97.3474 total: 9895.33
+Iter: 88 Runtime: 96.7538 total: 9992.08
+Iter: 89 Runtime: 97.5104 total: 10089.6
+Iter: 90 Runtime: 96.6158 total: 10186.2
+Iter: 91 Runtime: 95.5717 total: 10281.8
+Iter: 92 Runtime: 94.799 total: 10376.6
+Iter: 93 Runtime: 94.95 total: 10471.5
+Iter: 94 Runtime: 94.4623 total: 10566
+Iter: 95 Runtime: 94.9048 total: 10660.9
+Iter: 96 Runtime: 95.094 total: 10756
+Iter: 97 Runtime: 99.0122 total: 10855
+Iter: 98 Runtime: 104.068 total: 10959.1
+Iter: 99 Runtime: 104.439 total: 11063.5
+
+Time to plan: 816951sec
+Flops: 1.73439e+09
+
+Measurements
+--------------------------
+Processes           : 1
+Threads             : 30
+FFT Size            : 256^3
+Batch               : 10
+Iterations          : 100
+Avg Tot Runtime     : 110.6 ms
+Runtime per batch   : 11.06 ms
+Throughput          : 1.734 GFLOPs
+Time to Transfer    : 0ms
+--------------------------

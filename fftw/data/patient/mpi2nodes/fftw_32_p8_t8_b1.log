@@ -1,0 +1,4534 @@
+FFTW Plan Patient
+-- Importing wisdom from ../wisdom/mpi2nodes/fftw_32_p8_t8_b1.patient
+
+Planning completed
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 0 
+	exec time: 28.733838 ms
+	gather time: 23.057145 ms
+
+Rank: 1 
+	iter 0 
+	exec time: 32.186436 ms
+	gather time: 12.423416 ms
+
+Rank: 2 
+	iter 0 
+	exec time: 28.748910 ms
+	gather time: 19.673919 ms
+
+Rank: 3 
+	iter 0 
+	exec time: 32.185124 ms
+	gather time: 21.984062 ms
+
+Rank: 4 
+	iter 0 
+	exec time: 28.742064 ms
+	gather time: 34.979324 ms
+
+Rank: 5 
+	iter 0 
+	exec time: 28.751145 ms
+	gather time: 12.377035 ms
+
+Rank: 6 
+	iter 0 
+	exec time: 28.742161 ms
+	gather time: 23.056009 ms
+
+Rank: 7 
+	iter 0 
+	exec time: 28.749187 ms
+	gather time: 25.339908 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 1 
+	exec time: 19.613599 ms
+	gather time: 107.547239 ms
+
+Rank: 1 
+	iter 1 
+	exec time: 24.699715 ms
+	gather time: 13.995162 ms
+
+Rank: 2 
+	iter 1 
+	exec time: 19.613390 ms
+	gather time: 39.650933 ms
+
+Rank: 3 
+	iter 1 
+	exec time: 18.372672 ms
+	gather time: 80.991083 ms
+
+Rank: 4 
+	iter 1 
+	exec time: 19.618486 ms
+	gather time: 78.002100 ms
+
+Rank: 5 
+	iter 1 
+	exec time: 24.694887 ms
+	gather time: 104.560235 ms
+
+Rank: 6 
+	iter 1 
+	exec time: 19.615190 ms
+	gather time: 83.659559 ms
+
+Rank: 7 
+	iter 1 
+	exec time: 24.692438 ms
+	gather time: 112.561343 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 2 
+	exec time: 42.292466 ms
+	gather time: 55.635248 ms
+
+Rank: 1 
+	iter 2 
+	exec time: 49.574072 ms
+	gather time: 34.567584 ms
+
+Rank: 2 
+	iter 2 
+	exec time: 42.290616 ms
+	gather time: 34.653569 ms
+
+Rank: 3 
+	iter 2 
+	exec time: 49.489554 ms
+	gather time: 64.570143 ms
+
+Rank: 4 
+	iter 2 
+	exec time: 42.290671 ms
+	gather time: 34.691958 ms
+
+Rank: 5 
+	iter 2 
+	exec time: 49.492667 ms
+	gather time: 59.610567 ms
+
+Rank: 6 
+	iter 2 
+	exec time: 42.289667 ms
+	gather time: 34.689242 ms
+
+Rank: 7 
+	iter 2 
+	exec time: 49.490180 ms
+	gather time: 68.566096 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 3 
+	exec time: 50.729025 ms
+	gather time: 81.566253 ms
+
+Rank: 1 
+	iter 3 
+	exec time: 46.514852 ms
+	gather time: 16.980600 ms
+
+Rank: 2 
+	iter 3 
+	exec time: 48.431957 ms
+	gather time: 25.580216 ms
+
+Rank: 3 
+	iter 3 
+	exec time: 42.161810 ms
+	gather time: 38.996939 ms
+
+Rank: 4 
+	iter 3 
+	exec time: 41.870938 ms
+	gather time: 55.581304 ms
+
+Rank: 5 
+	iter 3 
+	exec time: 46.509367 ms
+	gather time: 48.348668 ms
+
+Rank: 6 
+	iter 3 
+	exec time: 41.870216 ms
+	gather time: 64.937275 ms
+
+Rank: 7 
+	iter 3 
+	exec time: 42.159893 ms
+	gather time: 64.991268 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 4 
+	exec time: 54.660712 ms
+	gather time: 69.974335 ms
+
+Rank: 1 
+	iter 4 
+	exec time: 52.333949 ms
+	gather time: 11.980545 ms
+
+Rank: 2 
+	iter 4 
+	exec time: 54.662636 ms
+	gather time: 38.993151 ms
+
+Rank: 3 
+	iter 4 
+	exec time: 54.372407 ms
+	gather time: 46.986738 ms
+
+Rank: 4 
+	iter 4 
+	exec time: 52.422441 ms
+	gather time: 49.012367 ms
+
+Rank: 5 
+	iter 4 
+	exec time: 52.421689 ms
+	gather time: 46.335762 ms
+
+Rank: 6 
+	iter 4 
+	exec time: 52.420307 ms
+	gather time: 51.107294 ms
+
+Rank: 7 
+	iter 4 
+	exec time: 54.366316 ms
+	gather time: 55.993331 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 5 
+	exec time: 41.340619 ms
+	gather time: 62.716936 ms
+
+Rank: 1 
+	iter 5 
+	exec time: 41.310254 ms
+	gather time: 12.976695 ms
+
+Rank: 2 
+	iter 5 
+	exec time: 41.339650 ms
+	gather time: 17.443504 ms
+
+Rank: 3 
+	iter 5 
+	exec time: 41.208766 ms
+	gather time: 16.918448 ms
+
+Rank: 4 
+	iter 5 
+	exec time: 41.345111 ms
+	gather time: 17.459900 ms
+
+Rank: 5 
+	iter 5 
+	exec time: 41.323426 ms
+	gather time: 29.337642 ms
+
+Rank: 6 
+	iter 5 
+	exec time: 41.345145 ms
+	gather time: 49.070618 ms
+
+Rank: 7 
+	iter 5 
+	exec time: 41.209538 ms
+	gather time: 58.338332 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 6 
+	exec time: 63.352747 ms
+	gather time: 57.635892 ms
+
+Rank: 1 
+	iter 6 
+	exec time: 55.031168 ms
+	gather time: 30.915382 ms
+
+Rank: 2 
+	iter 6 
+	exec time: 59.475630 ms
+	gather time: 31.656628 ms
+
+Rank: 3 
+	iter 6 
+	exec time: 55.028450 ms
+	gather time: 53.246646 ms
+
+Rank: 4 
+	iter 6 
+	exec time: 58.917130 ms
+	gather time: 31.671659 ms
+
+Rank: 5 
+	iter 6 
+	exec time: 55.026693 ms
+	gather time: 53.113348 ms
+
+Rank: 6 
+	iter 6 
+	exec time: 53.121416 ms
+	gather time: 41.000370 ms
+
+Rank: 7 
+	iter 6 
+	exec time: 55.026145 ms
+	gather time: 75.103843 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 7 
+	exec time: 54.137772 ms
+	gather time: 64.994180 ms
+
+Rank: 1 
+	iter 7 
+	exec time: 42.014370 ms
+	gather time: 14.990116 ms
+
+Rank: 2 
+	iter 7 
+	exec time: 54.136517 ms
+	gather time: 19.638803 ms
+
+Rank: 3 
+	iter 7 
+	exec time: 42.013113 ms
+	gather time: 19.991673 ms
+
+Rank: 4 
+	iter 7 
+	exec time: 52.229979 ms
+	gather time: 19.994223 ms
+
+Rank: 5 
+	iter 7 
+	exec time: 42.012247 ms
+	gather time: 39.644747 ms
+
+Rank: 6 
+	iter 7 
+	exec time: 52.227149 ms
+	gather time: 52.654138 ms
+
+Rank: 7 
+	iter 7 
+	exec time: 42.013541 ms
+	gather time: 52.006893 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 8 
+	exec time: 63.063749 ms
+	gather time: 35.020308 ms
+
+Rank: 1 
+	iter 8 
+	exec time: 63.071599 ms
+	gather time: 22.479233 ms
+
+Rank: 2 
+	iter 8 
+	exec time: 66.854623 ms
+	gather time: 26.307502 ms
+
+Rank: 3 
+	iter 8 
+	exec time: 63.068344 ms
+	gather time: 26.482771 ms
+
+Rank: 4 
+	iter 8 
+	exec time: 62.972957 ms
+	gather time: 26.323857 ms
+
+Rank: 5 
+	iter 8 
+	exec time: 63.067795 ms
+	gather time: 20.849040 ms
+
+Rank: 6 
+	iter 8 
+	exec time: 66.854847 ms
+	gather time: 47.443115 ms
+
+Rank: 7 
+	iter 8 
+	exec time: 63.065645 ms
+	gather time: 47.837053 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 9 
+	exec time: 41.371947 ms
+	gather time: 41.244693 ms
+
+Rank: 1 
+	iter 9 
+	exec time: 43.870140 ms
+	gather time: 9.978902 ms
+
+Rank: 2 
+	iter 9 
+	exec time: 41.371390 ms
+	gather time: 35.914355 ms
+
+Rank: 3 
+	iter 9 
+	exec time: 43.867467 ms
+	gather time: 35.982675 ms
+
+Rank: 4 
+	iter 9 
+	exec time: 41.373315 ms
+	gather time: 35.922490 ms
+
+Rank: 5 
+	iter 9 
+	exec time: 43.867103 ms
+	gather time: 23.349926 ms
+
+Rank: 6 
+	iter 9 
+	exec time: 35.472766 ms
+	gather time: 36.256180 ms
+
+Rank: 7 
+	iter 9 
+	exec time: 43.864128 ms
+	gather time: 28.352060 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 10 
+	exec time: 20.305344 ms
+	gather time: 51.369892 ms
+
+Rank: 1 
+	iter 10 
+	exec time: 21.405852 ms
+	gather time: 38.982117 ms
+
+Rank: 2 
+	iter 10 
+	exec time: 20.308507 ms
+	gather time: 30.021121 ms
+
+Rank: 3 
+	iter 10 
+	exec time: 21.404472 ms
+	gather time: 79.988404 ms
+
+Rank: 4 
+	iter 10 
+	exec time: 20.297472 ms
+	gather time: 69.667703 ms
+
+Rank: 5 
+	iter 10 
+	exec time: 21.404428 ms
+	gather time: 80.347535 ms
+
+Rank: 6 
+	iter 10 
+	exec time: 20.296314 ms
+	gather time: 73.008264 ms
+
+Rank: 7 
+	iter 10 
+	exec time: 21.405808 ms
+	gather time: 81.351557 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 11 
+	exec time: 22.957536 ms
+	gather time: 42.219233 ms
+
+Rank: 1 
+	iter 11 
+	exec time: 24.124662 ms
+	gather time: 13.161625 ms
+
+Rank: 2 
+	iter 11 
+	exec time: 28.065398 ms
+	gather time: 19.878213 ms
+
+Rank: 3 
+	iter 11 
+	exec time: 24.124819 ms
+	gather time: 22.159249 ms
+
+Rank: 4 
+	iter 11 
+	exec time: 26.226134 ms
+	gather time: 21.213743 ms
+
+Rank: 5 
+	iter 11 
+	exec time: 24.127896 ms
+	gather time: 26.174748 ms
+
+Rank: 6 
+	iter 11 
+	exec time: 28.069069 ms
+	gather time: 35.872540 ms
+
+Rank: 7 
+	iter 11 
+	exec time: 24.126341 ms
+	gather time: 32.537364 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 12 
+	exec time: 25.300208 ms
+	gather time: 81.993421 ms
+
+Rank: 1 
+	iter 12 
+	exec time: 28.534020 ms
+	gather time: 29.902327 ms
+
+Rank: 2 
+	iter 12 
+	exec time: 24.303764 ms
+	gather time: 30.017842 ms
+
+Rank: 3 
+	iter 12 
+	exec time: 28.533415 ms
+	gather time: 55.632291 ms
+
+Rank: 4 
+	iter 12 
+	exec time: 25.309704 ms
+	gather time: 34.998249 ms
+
+Rank: 5 
+	iter 12 
+	exec time: 28.536792 ms
+	gather time: 71.989333 ms
+
+Rank: 6 
+	iter 12 
+	exec time: 20.922592 ms
+	gather time: 62.997109 ms
+
+Rank: 7 
+	iter 12 
+	exec time: 28.534696 ms
+	gather time: 97.889078 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 13 
+	exec time: 24.714474 ms
+	gather time: 38.273337 ms
+
+Rank: 1 
+	iter 13 
+	exec time: 29.236681 ms
+	gather time: 8.980103 ms
+
+Rank: 2 
+	iter 13 
+	exec time: 24.710452 ms
+	gather time: 34.942911 ms
+
+Rank: 3 
+	iter 13 
+	exec time: 25.955084 ms
+	gather time: 35.983939 ms
+
+Rank: 4 
+	iter 13 
+	exec time: 24.713929 ms
+	gather time: 34.958046 ms
+
+Rank: 5 
+	iter 13 
+	exec time: 29.236015 ms
+	gather time: 22.349629 ms
+
+Rank: 6 
+	iter 13 
+	exec time: 24.715545 ms
+	gather time: 35.291230 ms
+
+Rank: 7 
+	iter 13 
+	exec time: 24.309095 ms
+	gather time: 25.351349 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 14 
+	exec time: 44.676445 ms
+	gather time: 120.982446 ms
+
+Rank: 1 
+	iter 14 
+	exec time: 36.713476 ms
+	gather time: 36.263647 ms
+
+Rank: 2 
+	iter 14 
+	exec time: 38.154088 ms
+	gather time: 38.995462 ms
+
+Rank: 3 
+	iter 14 
+	exec time: 36.713029 ms
+	gather time: 75.279630 ms
+
+Rank: 4 
+	iter 14 
+	exec time: 38.324873 ms
+	gather time: 76.345268 ms
+
+Rank: 5 
+	iter 14 
+	exec time: 34.169988 ms
+	gather time: 111.615217 ms
+
+Rank: 6 
+	iter 14 
+	exec time: 38.155162 ms
+	gather time: 102.342891 ms
+
+Rank: 7 
+	iter 14 
+	exec time: 36.715001 ms
+	gather time: 136.617985 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 15 
+	exec time: 56.704501 ms
+	gather time: 75.352427 ms
+
+Rank: 1 
+	iter 15 
+	exec time: 56.616687 ms
+	gather time: 12.628798 ms
+
+Rank: 2 
+	iter 15 
+	exec time: 56.652326 ms
+	gather time: 0.025131 ms
+
+Rank: 3 
+	iter 15 
+	exec time: 54.891753 ms
+	gather time: 13.632518 ms
+
+Rank: 4 
+	iter 15 
+	exec time: 54.006887 ms
+	gather time: 27.993879 ms
+
+Rank: 5 
+	iter 15 
+	exec time: 56.617558 ms
+	gather time: 34.989747 ms
+
+Rank: 6 
+	iter 15 
+	exec time: 56.719898 ms
+	gather time: 43.649296 ms
+
+Rank: 7 
+	iter 15 
+	exec time: 50.949445 ms
+	gather time: 84.984032 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 16 
+	exec time: 52.014342 ms
+	gather time: 89.143837 ms
+
+Rank: 1 
+	iter 16 
+	exec time: 53.585929 ms
+	gather time: 11.624337 ms
+
+Rank: 2 
+	iter 16 
+	exec time: 52.014587 ms
+	gather time: 37.155606 ms
+
+Rank: 3 
+	iter 16 
+	exec time: 50.013411 ms
+	gather time: 44.627483 ms
+
+Rank: 4 
+	iter 16 
+	exec time: 58.505153 ms
+	gather time: 69.495587 ms
+
+Rank: 5 
+	iter 16 
+	exec time: 58.507897 ms
+	gather time: 50.641887 ms
+
+Rank: 6 
+	iter 16 
+	exec time: 58.501518 ms
+	gather time: 74.501872 ms
+
+Rank: 7 
+	iter 16 
+	exec time: 51.375374 ms
+	gather time: 82.982428 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 17 
+	exec time: 63.046587 ms
+	gather time: 38.332474 ms
+
+Rank: 1 
+	iter 17 
+	exec time: 67.641767 ms
+	gather time: 25.598610 ms
+
+Rank: 2 
+	iter 17 
+	exec time: 63.048955 ms
+	gather time: 28.993695 ms
+
+Rank: 3 
+	iter 17 
+	exec time: 67.638740 ms
+	gather time: 54.713703 ms
+
+Rank: 4 
+	iter 17 
+	exec time: 55.619802 ms
+	gather time: 35.026240 ms
+
+Rank: 5 
+	iter 17 
+	exec time: 60.208333 ms
+	gather time: 56.070201 ms
+
+Rank: 6 
+	iter 17 
+	exec time: 56.377133 ms
+	gather time: 35.025000 ms
+
+Rank: 7 
+	iter 17 
+	exec time: 55.515784 ms
+	gather time: 47.083594 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 18 
+	exec time: 59.743222 ms
+	gather time: 88.628362 ms
+
+Rank: 1 
+	iter 18 
+	exec time: 51.333273 ms
+	gather time: 33.364186 ms
+
+Rank: 2 
+	iter 18 
+	exec time: 59.654840 ms
+	gather time: 20.017442 ms
+
+Rank: 3 
+	iter 18 
+	exec time: 51.334155 ms
+	gather time: 51.366328 ms
+
+Rank: 4 
+	iter 18 
+	exec time: 59.739628 ms
+	gather time: 40.987480 ms
+
+Rank: 5 
+	iter 18 
+	exec time: 51.334449 ms
+	gather time: 77.714246 ms
+
+Rank: 6 
+	iter 18 
+	exec time: 59.648285 ms
+	gather time: 69.988828 ms
+
+Rank: 7 
+	iter 18 
+	exec time: 51.335512 ms
+	gather time: 98.366142 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 19 
+	exec time: 42.148480 ms
+	gather time: 60.371272 ms
+
+Rank: 1 
+	iter 19 
+	exec time: 44.241968 ms
+	gather time: 35.976149 ms
+
+Rank: 2 
+	iter 19 
+	exec time: 42.148135 ms
+	gather time: 26.028578 ms
+
+Rank: 3 
+	iter 19 
+	exec time: 42.396308 ms
+	gather time: 29.074217 ms
+
+Rank: 4 
+	iter 19 
+	exec time: 42.159141 ms
+	gather time: 66.339172 ms
+
+Rank: 5 
+	iter 19 
+	exec time: 42.035804 ms
+	gather time: 51.655786 ms
+
+Rank: 6 
+	iter 19 
+	exec time: 42.159278 ms
+	gather time: 77.990172 ms
+
+Rank: 7 
+	iter 19 
+	exec time: 41.959392 ms
+	gather time: 86.992865 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 20 
+	exec time: 52.164267 ms
+	gather time: 89.939355 ms
+
+Rank: 1 
+	iter 20 
+	exec time: 56.004286 ms
+	gather time: 16.979701 ms
+
+Rank: 2 
+	iter 20 
+	exec time: 68.498983 ms
+	gather time: 25.869905 ms
+
+Rank: 3 
+	iter 20 
+	exec time: 54.362677 ms
+	gather time: 29.995367 ms
+
+Rank: 4 
+	iter 20 
+	exec time: 44.337741 ms
+	gather time: 51.224701 ms
+
+Rank: 5 
+	iter 20 
+	exec time: 50.419839 ms
+	gather time: 61.338081 ms
+
+Rank: 6 
+	iter 20 
+	exec time: 56.861423 ms
+	gather time: 82.192770 ms
+
+Rank: 7 
+	iter 20 
+	exec time: 43.767937 ms
+	gather time: 88.338561 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 21 
+	exec time: 52.139633 ms
+	gather time: 54.994628 ms
+
+Rank: 1 
+	iter 21 
+	exec time: 57.847096 ms
+	gather time: 37.440603 ms
+
+Rank: 2 
+	iter 21 
+	exec time: 51.449668 ms
+	gather time: 14.643053 ms
+
+Rank: 3 
+	iter 21 
+	exec time: 57.848939 ms
+	gather time: 42.451443 ms
+
+Rank: 4 
+	iter 21 
+	exec time: 45.508758 ms
+	gather time: 14.655437 ms
+
+Rank: 5 
+	iter 21 
+	exec time: 48.856710 ms
+	gather time: 36.800965 ms
+
+Rank: 6 
+	iter 21 
+	exec time: 45.506075 ms
+	gather time: 41.976018 ms
+
+Rank: 7 
+	iter 21 
+	exec time: 48.856369 ms
+	gather time: 79.792578 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 22 
+	exec time: 40.721417 ms
+	gather time: 71.861964 ms
+
+Rank: 1 
+	iter 22 
+	exec time: 38.424510 ms
+	gather time: 10.626699 ms
+
+Rank: 2 
+	iter 22 
+	exec time: 40.717568 ms
+	gather time: 21.960501 ms
+
+Rank: 3 
+	iter 22 
+	exec time: 38.424607 ms
+	gather time: 21.628838 ms
+
+Rank: 4 
+	iter 22 
+	exec time: 34.638896 ms
+	gather time: 36.515459 ms
+
+Rank: 5 
+	iter 22 
+	exec time: 38.424612 ms
+	gather time: 35.979440 ms
+
+Rank: 6 
+	iter 22 
+	exec time: 36.686697 ms
+	gather time: 62.485584 ms
+
+Rank: 7 
+	iter 22 
+	exec time: 38.425942 ms
+	gather time: 68.982108 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 23 
+	exec time: 58.090680 ms
+	gather time: 31.992956 ms
+
+Rank: 1 
+	iter 23 
+	exec time: 63.852045 ms
+	gather time: 25.111932 ms
+
+Rank: 2 
+	iter 23 
+	exec time: 58.092756 ms
+	gather time: 8.446592 ms
+
+Rank: 3 
+	iter 23 
+	exec time: 58.007180 ms
+	gather time: 35.461377 ms
+
+Rank: 4 
+	iter 23 
+	exec time: 56.023655 ms
+	gather time: 8.457641 ms
+
+Rank: 5 
+	iter 23 
+	exec time: 53.950934 ms
+	gather time: 34.817850 ms
+
+Rank: 6 
+	iter 23 
+	exec time: 55.041583 ms
+	gather time: 20.115413 ms
+
+Rank: 7 
+	iter 23 
+	exec time: 48.108850 ms
+	gather time: 44.835038 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 24 
+	exec time: 31.902915 ms
+	gather time: 53.772090 ms
+
+Rank: 1 
+	iter 24 
+	exec time: 35.476623 ms
+	gather time: 13.980763 ms
+
+Rank: 2 
+	iter 24 
+	exec time: 32.043862 ms
+	gather time: 27.424899 ms
+
+Rank: 3 
+	iter 24 
+	exec time: 32.072278 ms
+	gather time: 25.982896 ms
+
+Rank: 4 
+	iter 24 
+	exec time: 32.045572 ms
+	gather time: 48.748526 ms
+
+Rank: 5 
+	iter 24 
+	exec time: 35.474924 ms
+	gather time: 26.996218 ms
+
+Rank: 6 
+	iter 24 
+	exec time: 32.046890 ms
+	gather time: 53.779337 ms
+
+Rank: 7 
+	iter 24 
+	exec time: 29.255664 ms
+	gather time: 52.336988 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 25 
+	exec time: 49.265100 ms
+	gather time: 47.370859 ms
+
+Rank: 1 
+	iter 25 
+	exec time: 53.022663 ms
+	gather time: 48.991723 ms
+
+Rank: 2 
+	iter 25 
+	exec time: 57.654530 ms
+	gather time: 28.877184 ms
+
+Rank: 3 
+	iter 25 
+	exec time: 53.048674 ms
+	gather time: 63.993159 ms
+
+Rank: 4 
+	iter 25 
+	exec time: 40.979348 ms
+	gather time: 57.691348 ms
+
+Rank: 5 
+	iter 25 
+	exec time: 44.515679 ms
+	gather time: 75.342746 ms
+
+Rank: 6 
+	iter 25 
+	exec time: 45.663965 ms
+	gather time: 62.681366 ms
+
+Rank: 7 
+	iter 25 
+	exec time: 44.518424 ms
+	gather time: 83.345027 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 26 
+	exec time: 24.809743 ms
+	gather time: 66.923089 ms
+
+Rank: 1 
+	iter 26 
+	exec time: 24.831441 ms
+	gather time: 14.953647 ms
+
+Rank: 2 
+	iter 26 
+	exec time: 29.811314 ms
+	gather time: 25.938506 ms
+
+Rank: 3 
+	iter 26 
+	exec time: 24.829785 ms
+	gather time: 22.637435 ms
+
+Rank: 4 
+	iter 26 
+	exec time: 24.795703 ms
+	gather time: 25.937881 ms
+
+Rank: 5 
+	iter 26 
+	exec time: 19.254600 ms
+	gather time: 27.634246 ms
+
+Rank: 6 
+	iter 26 
+	exec time: 29.795248 ms
+	gather time: 48.266556 ms
+
+Rank: 7 
+	iter 26 
+	exec time: 24.826912 ms
+	gather time: 57.983685 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 27 
+	exec time: 27.606461 ms
+	gather time: 99.274300 ms
+
+Rank: 1 
+	iter 27 
+	exec time: 21.719843 ms
+	gather time: 12.981792 ms
+
+Rank: 2 
+	iter 27 
+	exec time: 27.607324 ms
+	gather time: 40.930171 ms
+
+Rank: 3 
+	iter 27 
+	exec time: 32.913922 ms
+	gather time: 45.000249 ms
+
+Rank: 4 
+	iter 27 
+	exec time: 27.608719 ms
+	gather time: 83.925708 ms
+
+Rank: 5 
+	iter 27 
+	exec time: 28.387052 ms
+	gather time: 93.337415 ms
+
+Rank: 6 
+	iter 27 
+	exec time: 27.610008 ms
+	gather time: 96.292036 ms
+
+Rank: 7 
+	iter 27 
+	exec time: 32.920358 ms
+	gather time: 84.351351 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 28 
+	exec time: 28.686882 ms
+	gather time: 54.641360 ms
+
+Rank: 1 
+	iter 28 
+	exec time: 33.344572 ms
+	gather time: 32.299557 ms
+
+Rank: 2 
+	iter 28 
+	exec time: 28.686629 ms
+	gather time: 28.650840 ms
+
+Rank: 3 
+	iter 28 
+	exec time: 33.342942 ms
+	gather time: 57.924144 ms
+
+Rank: 4 
+	iter 28 
+	exec time: 28.689008 ms
+	gather time: 28.659767 ms
+
+Rank: 5 
+	iter 28 
+	exec time: 33.342575 ms
+	gather time: 55.270885 ms
+
+Rank: 6 
+	iter 28 
+	exec time: 28.686470 ms
+	gather time: 62.984374 ms
+
+Rank: 7 
+	iter 28 
+	exec time: 33.344553 ms
+	gather time: 70.924656 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 29 
+	exec time: 35.432644 ms
+	gather time: 33.018755 ms
+
+Rank: 1 
+	iter 29 
+	exec time: 29.967959 ms
+	gather time: 9.059002 ms
+
+Rank: 2 
+	iter 29 
+	exec time: 35.431585 ms
+	gather time: 29.945021 ms
+
+Rank: 3 
+	iter 29 
+	exec time: 29.966656 ms
+	gather time: 19.060107 ms
+
+Rank: 4 
+	iter 29 
+	exec time: 35.429591 ms
+	gather time: 29.962371 ms
+
+Rank: 5 
+	iter 29 
+	exec time: 29.966455 ms
+	gather time: 15.347700 ms
+
+Rank: 6 
+	iter 29 
+	exec time: 35.429675 ms
+	gather time: 45.948155 ms
+
+Rank: 7 
+	iter 29 
+	exec time: 29.966788 ms
+	gather time: 41.338280 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 30 
+	exec time: 45.039086 ms
+	gather time: 54.992732 ms
+
+Rank: 1 
+	iter 30 
+	exec time: 40.861495 ms
+	gather time: 40.464500 ms
+
+Rank: 2 
+	iter 30 
+	exec time: 45.042095 ms
+	gather time: 22.636019 ms
+
+Rank: 3 
+	iter 30 
+	exec time: 40.858748 ms
+	gather time: 60.635021 ms
+
+Rank: 4 
+	iter 30 
+	exec time: 45.042198 ms
+	gather time: 45.990478 ms
+
+Rank: 5 
+	iter 30 
+	exec time: 40.858144 ms
+	gather time: 78.822469 ms
+
+Rank: 6 
+	iter 30 
+	exec time: 45.044219 ms
+	gather time: 51.004554 ms
+
+Rank: 7 
+	iter 30 
+	exec time: 40.858538 ms
+	gather time: 70.835821 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 31 
+	exec time: 38.472417 ms
+	gather time: 92.631944 ms
+
+Rank: 1 
+	iter 31 
+	exec time: 34.527882 ms
+	gather time: 16.995578 ms
+
+Rank: 2 
+	iter 31 
+	exec time: 34.399640 ms
+	gather time: 44.651642 ms
+
+Rank: 3 
+	iter 31 
+	exec time: 34.527544 ms
+	gather time: 22.995587 ms
+
+Rank: 4 
+	iter 31 
+	exec time: 37.108568 ms
+	gather time: 44.663345 ms
+
+Rank: 5 
+	iter 31 
+	exec time: 34.526278 ms
+	gather time: 42.999742 ms
+
+Rank: 6 
+	iter 31 
+	exec time: 30.126623 ms
+	gather time: 77.986355 ms
+
+Rank: 7 
+	iter 31 
+	exec time: 34.526010 ms
+	gather time: 77.990060 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 32 
+	exec time: 43.819389 ms
+	gather time: 79.969518 ms
+
+Rank: 1 
+	iter 32 
+	exec time: 43.798589 ms
+	gather time: 35.079098 ms
+
+Rank: 2 
+	iter 32 
+	exec time: 43.919954 ms
+	gather time: 35.994043 ms
+
+Rank: 3 
+	iter 32 
+	exec time: 43.800437 ms
+	gather time: 73.083830 ms
+
+Rank: 4 
+	iter 32 
+	exec time: 43.821655 ms
+	gather time: 54.006532 ms
+
+Rank: 5 
+	iter 32 
+	exec time: 43.799400 ms
+	gather time: 85.438322 ms
+
+Rank: 6 
+	iter 32 
+	exec time: 43.921351 ms
+	gather time: 61.356656 ms
+
+Rank: 7 
+	iter 32 
+	exec time: 43.800040 ms
+	gather time: 96.436941 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 33 
+	exec time: 62.429100 ms
+	gather time: 68.037021 ms
+
+Rank: 1 
+	iter 33 
+	exec time: 57.832145 ms
+	gather time: 12.980068 ms
+
+Rank: 2 
+	iter 33 
+	exec time: 57.823170 ms
+	gather time: 38.706721 ms
+
+Rank: 3 
+	iter 33 
+	exec time: 57.829957 ms
+	gather time: 43.983802 ms
+
+Rank: 4 
+	iter 33 
+	exec time: 56.139595 ms
+	gather time: 58.689168 ms
+
+Rank: 5 
+	iter 33 
+	exec time: 57.828149 ms
+	gather time: 67.340488 ms
+
+Rank: 6 
+	iter 33 
+	exec time: 56.853450 ms
+	gather time: 58.704283 ms
+
+Rank: 7 
+	iter 33 
+	exec time: 57.829142 ms
+	gather time: 55.353745 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 34 
+	exec time: 42.985542 ms
+	gather time: 71.631669 ms
+
+Rank: 1 
+	iter 34 
+	exec time: 38.446378 ms
+	gather time: 40.627625 ms
+
+Rank: 2 
+	iter 34 
+	exec time: 42.985667 ms
+	gather time: 19.520234 ms
+
+Rank: 3 
+	iter 34 
+	exec time: 38.446605 ms
+	gather time: 58.643487 ms
+
+Rank: 4 
+	iter 34 
+	exec time: 42.987948 ms
+	gather time: 60.986640 ms
+
+Rank: 5 
+	iter 34 
+	exec time: 38.449449 ms
+	gather time: 61.999913 ms
+
+Rank: 6 
+	iter 34 
+	exec time: 42.985976 ms
+	gather time: 52.992751 ms
+
+Rank: 7 
+	iter 34 
+	exec time: 38.445572 ms
+	gather time: 90.981895 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 35 
+	exec time: 53.471458 ms
+	gather time: 48.356481 ms
+
+Rank: 1 
+	iter 35 
+	exec time: 41.363438 ms
+	gather time: 14.985072 ms
+
+Rank: 2 
+	iter 35 
+	exec time: 53.469428 ms
+	gather time: 33.993982 ms
+
+Rank: 3 
+	iter 35 
+	exec time: 41.361852 ms
+	gather time: 19.600976 ms
+
+Rank: 4 
+	iter 35 
+	exec time: 50.537388 ms
+	gather time: 33.661591 ms
+
+Rank: 5 
+	iter 35 
+	exec time: 41.360091 ms
+	gather time: 53.339916 ms
+
+Rank: 6 
+	iter 35 
+	exec time: 50.540013 ms
+	gather time: 44.660895 ms
+
+Rank: 7 
+	iter 35 
+	exec time: 41.359995 ms
+	gather time: 46.357063 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 36 
+	exec time: 60.856314 ms
+	gather time: 38.013288 ms
+
+Rank: 1 
+	iter 36 
+	exec time: 56.171873 ms
+	gather time: 24.626905 ms
+
+Rank: 2 
+	iter 36 
+	exec time: 56.062653 ms
+	gather time: 38.841772 ms
+
+Rank: 3 
+	iter 36 
+	exec time: 56.169725 ms
+	gather time: 15.857428 ms
+
+Rank: 4 
+	iter 36 
+	exec time: 60.855664 ms
+	gather time: 26.079929 ms
+
+Rank: 5 
+	iter 36 
+	exec time: 56.154787 ms
+	gather time: 22.993956 ms
+
+Rank: 6 
+	iter 36 
+	exec time: 56.152188 ms
+	gather time: 33.211696 ms
+
+Rank: 7 
+	iter 36 
+	exec time: 56.157459 ms
+	gather time: 40.634065 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 37 
+	exec time: 32.367529 ms
+	gather time: 72.382026 ms
+
+Rank: 1 
+	iter 37 
+	exec time: 29.173664 ms
+	gather time: 32.989415 ms
+
+Rank: 2 
+	iter 37 
+	exec time: 25.991072 ms
+	gather time: 41.632583 ms
+
+Rank: 3 
+	iter 37 
+	exec time: 20.973791 ms
+	gather time: 24.258224 ms
+
+Rank: 4 
+	iter 37 
+	exec time: 32.370631 ms
+	gather time: 28.909623 ms
+
+Rank: 5 
+	iter 37 
+	exec time: 29.175832 ms
+	gather time: 39.996787 ms
+
+Rank: 6 
+	iter 37 
+	exec time: 25.991944 ms
+	gather time: 54.004611 ms
+
+Rank: 7 
+	iter 37 
+	exec time: 20.975885 ms
+	gather time: 59.012695 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 38 
+	exec time: 62.411893 ms
+	gather time: 96.971945 ms
+
+Rank: 1 
+	iter 38 
+	exec time: 62.407837 ms
+	gather time: 40.013321 ms
+
+Rank: 2 
+	iter 38 
+	exec time: 62.413027 ms
+	gather time: 23.991384 ms
+
+Rank: 3 
+	iter 38 
+	exec time: 62.413512 ms
+	gather time: 61.019085 ms
+
+Rank: 4 
+	iter 38 
+	exec time: 62.409784 ms
+	gather time: 70.341353 ms
+
+Rank: 5 
+	iter 38 
+	exec time: 63.008102 ms
+	gather time: 82.029945 ms
+
+Rank: 6 
+	iter 38 
+	exec time: 62.816668 ms
+	gather time: 74.351380 ms
+
+Rank: 7 
+	iter 38 
+	exec time: 69.852385 ms
+	gather time: 112.373368 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 39 
+	exec time: 38.379657 ms
+	gather time: 63.343024 ms
+
+Rank: 1 
+	iter 39 
+	exec time: 33.990421 ms
+	gather time: 14.993337 ms
+
+Rank: 2 
+	iter 39 
+	exec time: 34.019261 ms
+	gather time: 25.499645 ms
+
+Rank: 3 
+	iter 39 
+	exec time: 33.990186 ms
+	gather time: 10.492884 ms
+
+Rank: 4 
+	iter 39 
+	exec time: 34.030027 ms
+	gather time: 25.515506 ms
+
+Rank: 5 
+	iter 39 
+	exec time: 33.987810 ms
+	gather time: 45.642871 ms
+
+Rank: 6 
+	iter 39 
+	exec time: 34.019881 ms
+	gather time: 56.000486 ms
+
+Rank: 7 
+	iter 39 
+	exec time: 33.895038 ms
+	gather time: 53.004196 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 40 
+	exec time: 62.490251 ms
+	gather time: 38.523586 ms
+
+Rank: 1 
+	iter 40 
+	exec time: 62.026321 ms
+	gather time: 12.990073 ms
+
+Rank: 2 
+	iter 40 
+	exec time: 62.492471 ms
+	gather time: 40.886886 ms
+
+Rank: 3 
+	iter 40 
+	exec time: 66.913651 ms
+	gather time: 0.017415 ms
+
+Rank: 4 
+	iter 40 
+	exec time: 62.490936 ms
+	gather time: 28.125291 ms
+
+Rank: 5 
+	iter 40 
+	exec time: 62.033349 ms
+	gather time: 0.011930 ms
+
+Rank: 6 
+	iter 40 
+	exec time: 62.609447 ms
+	gather time: 33.264438 ms
+
+Rank: 7 
+	iter 40 
+	exec time: 66.926436 ms
+	gather time: 12.994271 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 41 
+	exec time: 18.305348 ms
+	gather time: 84.015121 ms
+
+Rank: 1 
+	iter 41 
+	exec time: 17.579126 ms
+	gather time: 36.985438 ms
+
+Rank: 2 
+	iter 41 
+	exec time: 18.305409 ms
+	gather time: 35.640743 ms
+
+Rank: 3 
+	iter 41 
+	exec time: 17.578906 ms
+	gather time: 50.005694 ms
+
+Rank: 4 
+	iter 41 
+	exec time: 18.308819 ms
+	gather time: 62.665632 ms
+
+Rank: 5 
+	iter 41 
+	exec time: 17.577424 ms
+	gather time: 64.998441 ms
+
+Rank: 6 
+	iter 41 
+	exec time: 18.309025 ms
+	gather time: 72.996201 ms
+
+Rank: 7 
+	iter 41 
+	exec time: 17.576368 ms
+	gather time: 83.999069 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 42 
+	exec time: 40.905671 ms
+	gather time: 51.620995 ms
+
+Rank: 1 
+	iter 42 
+	exec time: 35.320822 ms
+	gather time: 50.818305 ms
+
+Rank: 2 
+	iter 42 
+	exec time: 40.702668 ms
+	gather time: 29.789823 ms
+
+Rank: 3 
+	iter 42 
+	exec time: 35.320156 ms
+	gather time: 54.823437 ms
+
+Rank: 4 
+	iter 42 
+	exec time: 40.901322 ms
+	gather time: 29.818601 ms
+
+Rank: 5 
+	iter 42 
+	exec time: 35.321456 ms
+	gather time: 54.182077 ms
+
+Rank: 6 
+	iter 42 
+	exec time: 40.699796 ms
+	gather time: 29.832023 ms
+
+Rank: 7 
+	iter 42 
+	exec time: 35.039441 ms
+	gather time: 63.833092 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 43 
+	exec time: 28.875646 ms
+	gather time: 82.360349 ms
+
+Rank: 1 
+	iter 43 
+	exec time: 30.258146 ms
+	gather time: 36.100786 ms
+
+Rank: 2 
+	iter 43 
+	exec time: 28.872780 ms
+	gather time: 1.023326 ms
+
+Rank: 3 
+	iter 43 
+	exec time: 30.258151 ms
+	gather time: 44.000024 ms
+
+Rank: 4 
+	iter 43 
+	exec time: 28.865795 ms
+	gather time: 46.000678 ms
+
+Rank: 5 
+	iter 43 
+	exec time: 30.258991 ms
+	gather time: 76.781324 ms
+
+Rank: 6 
+	iter 43 
+	exec time: 28.862744 ms
+	gather time: 75.137818 ms
+
+Rank: 7 
+	iter 43 
+	exec time: 30.257875 ms
+	gather time: 95.356815 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 44 
+	exec time: 52.698675 ms
+	gather time: 68.976228 ms
+
+Rank: 1 
+	iter 44 
+	exec time: 36.270022 ms
+	gather time: 35.949148 ms
+
+Rank: 2 
+	iter 44 
+	exec time: 52.696591 ms
+	gather time: 42.996751 ms
+
+Rank: 3 
+	iter 44 
+	exec time: 33.978968 ms
+	gather time: 77.953750 ms
+
+Rank: 4 
+	iter 44 
+	exec time: 57.439059 ms
+	gather time: 53.032379 ms
+
+Rank: 5 
+	iter 44 
+	exec time: 46.856110 ms
+	gather time: 74.313066 ms
+
+Rank: 6 
+	iter 44 
+	exec time: 57.436746 ms
+	gather time: 53.030979 ms
+
+Rank: 7 
+	iter 44 
+	exec time: 44.561402 ms
+	gather time: 85.308997 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 45 
+	exec time: 55.965616 ms
+	gather time: 108.981769 ms
+
+Rank: 1 
+	iter 45 
+	exec time: 57.495911 ms
+	gather time: 12.987428 ms
+
+Rank: 2 
+	iter 45 
+	exec time: 55.452028 ms
+	gather time: 47.994949 ms
+
+Rank: 3 
+	iter 45 
+	exec time: 57.535639 ms
+	gather time: 39.382460 ms
+
+Rank: 4 
+	iter 45 
+	exec time: 42.460371 ms
+	gather time: 60.348156 ms
+
+Rank: 5 
+	iter 45 
+	exec time: 57.496643 ms
+	gather time: 60.991917 ms
+
+Rank: 6 
+	iter 45 
+	exec time: 42.460173 ms
+	gather time: 83.347956 ms
+
+Rank: 7 
+	iter 45 
+	exec time: 60.607514 ms
+	gather time: 91.344082 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 46 
+	exec time: 17.691698 ms
+	gather time: 15.988003 ms
+
+Rank: 1 
+	iter 46 
+	exec time: 20.037972 ms
+	gather time: 25.849740 ms
+
+Rank: 2 
+	iter 46 
+	exec time: 17.692150 ms
+	gather time: 12.662406 ms
+
+Rank: 3 
+	iter 46 
+	exec time: 20.039872 ms
+	gather time: 32.479723 ms
+
+Rank: 4 
+	iter 46 
+	exec time: 17.695776 ms
+	gather time: 12.673011 ms
+
+Rank: 5 
+	iter 46 
+	exec time: 20.039375 ms
+	gather time: 22.848462 ms
+
+Rank: 6 
+	iter 46 
+	exec time: 17.693957 ms
+	gather time: 12.996626 ms
+
+Rank: 7 
+	iter 46 
+	exec time: 20.040361 ms
+	gather time: 25.848729 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 47 
+	exec time: 30.052651 ms
+	gather time: 93.965395 ms
+
+Rank: 1 
+	iter 47 
+	exec time: 36.890903 ms
+	gather time: 34.807674 ms
+
+Rank: 2 
+	iter 47 
+	exec time: 30.052296 ms
+	gather time: 37.990184 ms
+
+Rank: 3 
+	iter 47 
+	exec time: 36.893167 ms
+	gather time: 62.811171 ms
+
+Rank: 4 
+	iter 47 
+	exec time: 30.057989 ms
+	gather time: 50.346875 ms
+
+Rank: 5 
+	iter 47 
+	exec time: 36.889262 ms
+	gather time: 84.175260 ms
+
+Rank: 6 
+	iter 47 
+	exec time: 30.054332 ms
+	gather time: 75.345480 ms
+
+Rank: 7 
+	iter 47 
+	exec time: 36.890199 ms
+	gather time: 108.165765 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 48 
+	exec time: 18.020976 ms
+	gather time: 60.363077 ms
+
+Rank: 1 
+	iter 48 
+	exec time: 13.012416 ms
+	gather time: 13.965935 ms
+
+Rank: 2 
+	iter 48 
+	exec time: 18.021234 ms
+	gather time: 24.942177 ms
+
+Rank: 3 
+	iter 48 
+	exec time: 13.015599 ms
+	gather time: 34.979994 ms
+
+Rank: 4 
+	iter 48 
+	exec time: 18.009026 ms
+	gather time: 54.019828 ms
+
+Rank: 5 
+	iter 48 
+	exec time: 13.009827 ms
+	gather time: 53.336502 ms
+
+Rank: 6 
+	iter 48 
+	exec time: 18.008419 ms
+	gather time: 54.020670 ms
+
+Rank: 7 
+	iter 48 
+	exec time: 13.010414 ms
+	gather time: 47.351819 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 49 
+	exec time: 55.780441 ms
+	gather time: 45.923455 ms
+
+Rank: 1 
+	iter 49 
+	exec time: 65.661133 ms
+	gather time: 43.977385 ms
+
+Rank: 2 
+	iter 49 
+	exec time: 55.777414 ms
+	gather time: 26.010571 ms
+
+Rank: 3 
+	iter 49 
+	exec time: 63.817117 ms
+	gather time: 51.979365 ms
+
+Rank: 4 
+	iter 49 
+	exec time: 55.775686 ms
+	gather time: 28.025734 ms
+
+Rank: 5 
+	iter 49 
+	exec time: 61.197173 ms
+	gather time: 62.989201 ms
+
+Rank: 6 
+	iter 49 
+	exec time: 55.773787 ms
+	gather time: 64.346651 ms
+
+Rank: 7 
+	iter 49 
+	exec time: 61.187471 ms
+	gather time: 63.023667 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 50 
+	exec time: 58.856657 ms
+	gather time: 44.348196 ms
+
+Rank: 1 
+	iter 50 
+	exec time: 65.151173 ms
+	gather time: 34.421073 ms
+
+Rank: 2 
+	iter 50 
+	exec time: 57.329213 ms
+	gather time: 25.982867 ms
+
+Rank: 3 
+	iter 50 
+	exec time: 65.153207 ms
+	gather time: 26.012940 ms
+
+Rank: 4 
+	iter 50 
+	exec time: 58.859377 ms
+	gather time: 18.943556 ms
+
+Rank: 5 
+	iter 50 
+	exec time: 65.148192 ms
+	gather time: 54.784371 ms
+
+Rank: 6 
+	iter 50 
+	exec time: 57.330847 ms
+	gather time: 36.002603 ms
+
+Rank: 7 
+	iter 50 
+	exec time: 65.150781 ms
+	gather time: 56.798811 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 51 
+	exec time: 29.977693 ms
+	gather time: 64.605271 ms
+
+Rank: 1 
+	iter 51 
+	exec time: 32.941379 ms
+	gather time: 15.625397 ms
+
+Rank: 2 
+	iter 51 
+	exec time: 29.974104 ms
+	gather time: 25.261171 ms
+
+Rank: 3 
+	iter 51 
+	exec time: 32.941034 ms
+	gather time: 39.641397 ms
+
+Rank: 4 
+	iter 51 
+	exec time: 29.971546 ms
+	gather time: 52.273389 ms
+
+Rank: 5 
+	iter 51 
+	exec time: 32.945543 ms
+	gather time: 50.996182 ms
+
+Rank: 6 
+	iter 51 
+	exec time: 29.972291 ms
+	gather time: 63.624603 ms
+
+Rank: 7 
+	iter 51 
+	exec time: 32.942467 ms
+	gather time: 51.995556 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 52 
+	exec time: 53.588223 ms
+	gather time: 47.003031 ms
+
+Rank: 1 
+	iter 52 
+	exec time: 56.665831 ms
+	gather time: 35.632068 ms
+
+Rank: 2 
+	iter 52 
+	exec time: 53.646162 ms
+	gather time: 26.010990 ms
+
+Rank: 3 
+	iter 52 
+	exec time: 53.646639 ms
+	gather time: 42.632863 ms
+
+Rank: 4 
+	iter 52 
+	exec time: 44.193626 ms
+	gather time: 11.673354 ms
+
+Rank: 5 
+	iter 52 
+	exec time: 43.660053 ms
+	gather time: 35.004936 ms
+
+Rank: 6 
+	iter 52 
+	exec time: 44.249827 ms
+	gather time: 33.007511 ms
+
+Rank: 7 
+	iter 52 
+	exec time: 40.611777 ms
+	gather time: 58.641554 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 53 
+	exec time: 31.958165 ms
+	gather time: 33.393648 ms
+
+Rank: 1 
+	iter 53 
+	exec time: 32.122793 ms
+	gather time: 31.043311 ms
+
+Rank: 2 
+	iter 53 
+	exec time: 31.959255 ms
+	gather time: 10.133882 ms
+
+Rank: 3 
+	iter 53 
+	exec time: 32.123632 ms
+	gather time: 35.747662 ms
+
+Rank: 4 
+	iter 53 
+	exec time: 31.956986 ms
+	gather time: 10.150091 ms
+
+Rank: 5 
+	iter 53 
+	exec time: 32.121294 ms
+	gather time: 22.973808 ms
+
+Rank: 6 
+	iter 53 
+	exec time: 31.958629 ms
+	gather time: 33.421191 ms
+
+Rank: 7 
+	iter 53 
+	exec time: 32.121932 ms
+	gather time: 59.093858 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 54 
+	exec time: 24.197512 ms
+	gather time: 42.279449 ms
+
+Rank: 1 
+	iter 54 
+	exec time: 29.862612 ms
+	gather time: 13.671050 ms
+
+Rank: 2 
+	iter 54 
+	exec time: 24.197838 ms
+	gather time: 24.936333 ms
+
+Rank: 3 
+	iter 54 
+	exec time: 29.862574 ms
+	gather time: 21.181836 ms
+
+Rank: 4 
+	iter 54 
+	exec time: 24.198581 ms
+	gather time: 25.284325 ms
+
+Rank: 5 
+	iter 54 
+	exec time: 29.863300 ms
+	gather time: 29.342546 ms
+
+Rank: 6 
+	iter 54 
+	exec time: 24.200999 ms
+	gather time: 38.938007 ms
+
+Rank: 7 
+	iter 54 
+	exec time: 29.865105 ms
+	gather time: 29.355956 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 55 
+	exec time: 66.502147 ms
+	gather time: 44.572192 ms
+
+Rank: 1 
+	iter 55 
+	exec time: 61.368827 ms
+	gather time: 30.625709 ms
+
+Rank: 2 
+	iter 55 
+	exec time: 61.365500 ms
+	gather time: 40.635569 ms
+
+Rank: 3 
+	iter 55 
+	exec time: 61.367310 ms
+	gather time: 43.640979 ms
+
+Rank: 4 
+	iter 55 
+	exec time: 64.365305 ms
+	gather time: 56.648418 ms
+
+Rank: 5 
+	iter 55 
+	exec time: 64.279657 ms
+	gather time: 56.386624 ms
+
+Rank: 6 
+	iter 55 
+	exec time: 64.362862 ms
+	gather time: 61.997753 ms
+
+Rank: 7 
+	iter 55 
+	exec time: 64.275951 ms
+	gather time: 50.202637 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 56 
+	exec time: 17.772811 ms
+	gather time: 67.998987 ms
+
+Rank: 1 
+	iter 56 
+	exec time: 27.304124 ms
+	gather time: 14.988683 ms
+
+Rank: 2 
+	iter 56 
+	exec time: 21.691869 ms
+	gather time: 0.011676 ms
+
+Rank: 3 
+	iter 56 
+	exec time: 27.305558 ms
+	gather time: 37.995057 ms
+
+Rank: 4 
+	iter 56 
+	exec time: 17.775632 ms
+	gather time: 29.658167 ms
+
+Rank: 5 
+	iter 56 
+	exec time: 27.309224 ms
+	gather time: 54.991508 ms
+
+Rank: 6 
+	iter 56 
+	exec time: 21.701190 ms
+	gather time: 49.996478 ms
+
+Rank: 7 
+	iter 56 
+	exec time: 27.306886 ms
+	gather time: 88.344271 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 57 
+	exec time: 23.746021 ms
+	gather time: 68.629100 ms
+
+Rank: 1 
+	iter 57 
+	exec time: 16.265556 ms
+	gather time: 38.475178 ms
+
+Rank: 2 
+	iter 57 
+	exec time: 23.745973 ms
+	gather time: 21.539539 ms
+
+Rank: 3 
+	iter 57 
+	exec time: 16.263812 ms
+	gather time: 41.479056 ms
+
+Rank: 4 
+	iter 57 
+	exec time: 23.745172 ms
+	gather time: 21.552456 ms
+
+Rank: 5 
+	iter 57 
+	exec time: 16.259822 ms
+	gather time: 51.488469 ms
+
+Rank: 6 
+	iter 57 
+	exec time: 23.744211 ms
+	gather time: 53.986102 ms
+
+Rank: 7 
+	iter 57 
+	exec time: 16.260911 ms
+	gather time: 86.837966 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 58 
+	exec time: 30.807373 ms
+	gather time: 72.973851 ms
+
+Rank: 1 
+	iter 58 
+	exec time: 35.405737 ms
+	gather time: 34.899064 ms
+
+Rank: 2 
+	iter 58 
+	exec time: 30.807763 ms
+	gather time: 17.991825 ms
+
+Rank: 3 
+	iter 58 
+	exec time: 35.404341 ms
+	gather time: 53.900975 ms
+
+Rank: 4 
+	iter 58 
+	exec time: 30.809201 ms
+	gather time: 35.008684 ms
+
+Rank: 5 
+	iter 58 
+	exec time: 35.401729 ms
+	gather time: 50.265560 ms
+
+Rank: 6 
+	iter 58 
+	exec time: 30.809630 ms
+	gather time: 42.039599 ms
+
+Rank: 7 
+	iter 58 
+	exec time: 35.402068 ms
+	gather time: 85.902690 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 59 
+	exec time: 47.438113 ms
+	gather time: 78.345712 ms
+
+Rank: 1 
+	iter 59 
+	exec time: 45.559988 ms
+	gather time: 44.394977 ms
+
+Rank: 2 
+	iter 59 
+	exec time: 47.438260 ms
+	gather time: 28.990894 ms
+
+Rank: 3 
+	iter 59 
+	exec time: 43.259698 ms
+	gather time: 65.397785 ms
+
+Rank: 4 
+	iter 59 
+	exec time: 47.441439 ms
+	gather time: 50.345509 ms
+
+Rank: 5 
+	iter 59 
+	exec time: 45.557294 ms
+	gather time: 90.753016 ms
+
+Rank: 6 
+	iter 59 
+	exec time: 45.053218 ms
+	gather time: 71.000344 ms
+
+Rank: 7 
+	iter 59 
+	exec time: 43.255797 ms
+	gather time: 90.761724 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 60 
+	exec time: 24.478460 ms
+	gather time: 81.960126 ms
+
+Rank: 1 
+	iter 60 
+	exec time: 34.027502 ms
+	gather time: 9.979371 ms
+
+Rank: 2 
+	iter 60 
+	exec time: 31.722186 ms
+	gather time: 47.596463 ms
+
+Rank: 3 
+	iter 60 
+	exec time: 34.028554 ms
+	gather time: 47.983830 ms
+
+Rank: 4 
+	iter 60 
+	exec time: 31.734540 ms
+	gather time: 54.625540 ms
+
+Rank: 5 
+	iter 60 
+	exec time: 34.032400 ms
+	gather time: 63.341640 ms
+
+Rank: 6 
+	iter 60 
+	exec time: 31.734915 ms
+	gather time: 73.611659 ms
+
+Rank: 7 
+	iter 60 
+	exec time: 34.029967 ms
+	gather time: 73.341156 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 61 
+	exec time: 48.544192 ms
+	gather time: 67.875296 ms
+
+Rank: 1 
+	iter 61 
+	exec time: 53.981389 ms
+	gather time: 11.196591 ms
+
+Rank: 2 
+	iter 61 
+	exec time: 48.544236 ms
+	gather time: 23.889955 ms
+
+Rank: 3 
+	iter 61 
+	exec time: 53.977869 ms
+	gather time: 20.697630 ms
+
+Rank: 4 
+	iter 61 
+	exec time: 48.544257 ms
+	gather time: 23.902964 ms
+
+Rank: 5 
+	iter 61 
+	exec time: 53.977836 ms
+	gather time: 23.995661 ms
+
+Rank: 6 
+	iter 61 
+	exec time: 48.542457 ms
+	gather time: 46.228197 ms
+
+Rank: 7 
+	iter 61 
+	exec time: 53.266248 ms
+	gather time: 62.344384 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 62 
+	exec time: 28.243303 ms
+	gather time: 70.333737 ms
+
+Rank: 1 
+	iter 62 
+	exec time: 33.477768 ms
+	gather time: 35.882569 ms
+
+Rank: 2 
+	iter 62 
+	exec time: 28.244796 ms
+	gather time: 25.981469 ms
+
+Rank: 3 
+	iter 62 
+	exec time: 33.478706 ms
+	gather time: 25.926542 ms
+
+Rank: 4 
+	iter 62 
+	exec time: 28.248320 ms
+	gather time: 39.991275 ms
+
+Rank: 5 
+	iter 62 
+	exec time: 33.471155 ms
+	gather time: 77.890081 ms
+
+Rank: 6 
+	iter 62 
+	exec time: 28.245831 ms
+	gather time: 64.999796 ms
+
+Rank: 7 
+	iter 62 
+	exec time: 33.471396 ms
+	gather time: 83.253104 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 63 
+	exec time: 20.778671 ms
+	gather time: 72.431857 ms
+
+Rank: 1 
+	iter 63 
+	exec time: 21.284662 ms
+	gather time: 11.979965 ms
+
+Rank: 2 
+	iter 63 
+	exec time: 20.779075 ms
+	gather time: 22.431913 ms
+
+Rank: 3 
+	iter 63 
+	exec time: 21.286454 ms
+	gather time: 33.985584 ms
+
+Rank: 4 
+	iter 63 
+	exec time: 20.776429 ms
+	gather time: 56.775594 ms
+
+Rank: 5 
+	iter 63 
+	exec time: 18.361698 ms
+	gather time: 32.020311 ms
+
+Rank: 6 
+	iter 63 
+	exec time: 20.776495 ms
+	gather time: 72.437679 ms
+
+Rank: 7 
+	iter 63 
+	exec time: 18.360272 ms
+	gather time: 72.344894 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 64 
+	exec time: 25.095831 ms
+	gather time: 55.903241 ms
+
+Rank: 1 
+	iter 64 
+	exec time: 32.882196 ms
+	gather time: 4.770064 ms
+
+Rank: 2 
+	iter 64 
+	exec time: 25.092856 ms
+	gather time: 29.914856 ms
+
+Rank: 3 
+	iter 64 
+	exec time: 25.126369 ms
+	gather time: 33.980910 ms
+
+Rank: 4 
+	iter 64 
+	exec time: 25.091829 ms
+	gather time: 29.928299 ms
+
+Rank: 5 
+	iter 64 
+	exec time: 32.893274 ms
+	gather time: 29.352829 ms
+
+Rank: 6 
+	iter 64 
+	exec time: 25.090995 ms
+	gather time: 55.909291 ms
+
+Rank: 7 
+	iter 64 
+	exec time: 25.126456 ms
+	gather time: 55.343701 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 65 
+	exec time: 61.901521 ms
+	gather time: 44.694938 ms
+
+Rank: 1 
+	iter 65 
+	exec time: 60.753956 ms
+	gather time: 15.977635 ms
+
+Rank: 2 
+	iter 65 
+	exec time: 59.616236 ms
+	gather time: 25.325015 ms
+
+Rank: 3 
+	iter 65 
+	exec time: 59.628016 ms
+	gather time: 21.983953 ms
+
+Rank: 4 
+	iter 65 
+	exec time: 61.902147 ms
+	gather time: 32.617087 ms
+
+Rank: 5 
+	iter 65 
+	exec time: 60.754219 ms
+	gather time: 11.358735 ms
+
+Rank: 6 
+	iter 65 
+	exec time: 61.058420 ms
+	gather time: 27.087879 ms
+
+Rank: 7 
+	iter 65 
+	exec time: 59.715668 ms
+	gather time: 32.342318 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 66 
+	exec time: 13.024081 ms
+	gather time: 39.993969 ms
+
+Rank: 1 
+	iter 66 
+	exec time: 14.918620 ms
+	gather time: 37.273162 ms
+
+Rank: 2 
+	iter 66 
+	exec time: 13.020984 ms
+	gather time: 37.650354 ms
+
+Rank: 3 
+	iter 66 
+	exec time: 14.919034 ms
+	gather time: 67.278753 ms
+
+Rank: 4 
+	iter 66 
+	exec time: 13.016932 ms
+	gather time: 37.683968 ms
+
+Rank: 5 
+	iter 66 
+	exec time: 14.930650 ms
+	gather time: 61.638652 ms
+
+Rank: 6 
+	iter 66 
+	exec time: 13.017531 ms
+	gather time: 37.677500 ms
+
+Rank: 7 
+	iter 66 
+	exec time: 14.928885 ms
+	gather time: 52.651872 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 67 
+	exec time: 37.215932 ms
+	gather time: 65.013262 ms
+
+Rank: 1 
+	iter 67 
+	exec time: 32.571574 ms
+	gather time: 12.989635 ms
+
+Rank: 2 
+	iter 67 
+	exec time: 34.406601 ms
+	gather time: 51.284161 ms
+
+Rank: 3 
+	iter 67 
+	exec time: 32.560140 ms
+	gather time: 46.000052 ms
+
+Rank: 4 
+	iter 67 
+	exec time: 37.210335 ms
+	gather time: 60.300501 ms
+
+Rank: 5 
+	iter 67 
+	exec time: 32.571333 ms
+	gather time: 35.364146 ms
+
+Rank: 6 
+	iter 67 
+	exec time: 34.403182 ms
+	gather time: 60.647407 ms
+
+Rank: 7 
+	iter 67 
+	exec time: 32.571375 ms
+	gather time: 51.996210 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 68 
+	exec time: 53.847307 ms
+	gather time: 84.372004 ms
+
+Rank: 1 
+	iter 68 
+	exec time: 53.849187 ms
+	gather time: 46.975855 ms
+
+Rank: 2 
+	iter 68 
+	exec time: 51.465982 ms
+	gather time: 60.019918 ms
+
+Rank: 3 
+	iter 68 
+	exec time: 54.508075 ms
+	gather time: 67.997184 ms
+
+Rank: 4 
+	iter 68 
+	exec time: 40.821561 ms
+	gather time: 64.996546 ms
+
+Rank: 5 
+	iter 68 
+	exec time: 46.797496 ms
+	gather time: 102.342392 ms
+
+Rank: 6 
+	iter 68 
+	exec time: 38.471023 ms
+	gather time: 86.650535 ms
+
+Rank: 7 
+	iter 68 
+	exec time: 44.365656 ms
+	gather time: 110.355727 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 69 
+	exec time: 44.794684 ms
+	gather time: 73.336180 ms
+
+Rank: 1 
+	iter 69 
+	exec time: 44.686528 ms
+	gather time: 37.904512 ms
+
+Rank: 2 
+	iter 69 
+	exec time: 44.703631 ms
+	gather time: 22.991017 ms
+
+Rank: 3 
+	iter 69 
+	exec time: 44.685442 ms
+	gather time: 60.910645 ms
+
+Rank: 4 
+	iter 69 
+	exec time: 44.797741 ms
+	gather time: 50.349335 ms
+
+Rank: 5 
+	iter 69 
+	exec time: 44.686353 ms
+	gather time: 89.264817 ms
+
+Rank: 6 
+	iter 69 
+	exec time: 44.708488 ms
+	gather time: 64.001512 ms
+
+Rank: 7 
+	iter 69 
+	exec time: 44.688197 ms
+	gather time: 86.278810 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 70 
+	exec time: 19.114274 ms
+	gather time: 61.002289 ms
+
+Rank: 1 
+	iter 70 
+	exec time: 18.460917 ms
+	gather time: 34.997409 ms
+
+Rank: 2 
+	iter 70 
+	exec time: 19.111306 ms
+	gather time: 26.320975 ms
+
+Rank: 3 
+	iter 70 
+	exec time: 18.460433 ms
+	gather time: 56.932844 ms
+
+Rank: 4 
+	iter 70 
+	exec time: 19.116337 ms
+	gather time: 48.660372 ms
+
+Rank: 5 
+	iter 70 
+	exec time: 18.460099 ms
+	gather time: 66.295770 ms
+
+Rank: 6 
+	iter 70 
+	exec time: 19.114087 ms
+	gather time: 60.010044 ms
+
+Rank: 7 
+	iter 70 
+	exec time: 18.460100 ms
+	gather time: 85.285692 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 71 
+	exec time: 49.910947 ms
+	gather time: 127.658937 ms
+
+Rank: 1 
+	iter 71 
+	exec time: 49.289356 ms
+	gather time: 9.622454 ms
+
+Rank: 2 
+	iter 71 
+	exec time: 49.909552 ms
+	gather time: 33.670986 ms
+
+Rank: 3 
+	iter 71 
+	exec time: 49.289532 ms
+	gather time: 59.625619 ms
+
+Rank: 4 
+	iter 71 
+	exec time: 58.510104 ms
+	gather time: 76.024790 ms
+
+Rank: 5 
+	iter 71 
+	exec time: 49.294068 ms
+	gather time: 85.626122 ms
+
+Rank: 6 
+	iter 71 
+	exec time: 58.512789 ms
+	gather time: 104.025846 ms
+
+Rank: 7 
+	iter 71 
+	exec time: 49.292163 ms
+	gather time: 116.982917 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 72 
+	exec time: 33.022196 ms
+	gather time: 60.985438 ms
+
+Rank: 1 
+	iter 72 
+	exec time: 30.464365 ms
+	gather time: 33.996929 ms
+
+Rank: 2 
+	iter 72 
+	exec time: 33.023362 ms
+	gather time: 13.962410 ms
+
+Rank: 3 
+	iter 72 
+	exec time: 30.465555 ms
+	gather time: 36.002898 ms
+
+Rank: 4 
+	iter 72 
+	exec time: 33.025987 ms
+	gather time: 35.002305 ms
+
+Rank: 5 
+	iter 72 
+	exec time: 30.462758 ms
+	gather time: 59.366309 ms
+
+Rank: 6 
+	iter 72 
+	exec time: 33.023928 ms
+	gather time: 43.546329 ms
+
+Rank: 7 
+	iter 72 
+	exec time: 30.463184 ms
+	gather time: 79.366058 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 73 
+	exec time: 34.392310 ms
+	gather time: 72.345080 ms
+
+Rank: 1 
+	iter 73 
+	exec time: 20.783546 ms
+	gather time: 10.989174 ms
+
+Rank: 2 
+	iter 73 
+	exec time: 26.953841 ms
+	gather time: 21.991405 ms
+
+Rank: 3 
+	iter 73 
+	exec time: 20.782946 ms
+	gather time: 29.990326 ms
+
+Rank: 4 
+	iter 73 
+	exec time: 34.393495 ms
+	gather time: 25.999109 ms
+
+Rank: 5 
+	iter 73 
+	exec time: 20.784661 ms
+	gather time: 54.361434 ms
+
+Rank: 6 
+	iter 73 
+	exec time: 26.958216 ms
+	gather time: 48.009332 ms
+
+Rank: 7 
+	iter 73 
+	exec time: 20.784762 ms
+	gather time: 46.012675 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 74 
+	exec time: 29.260739 ms
+	gather time: 34.365501 ms
+
+Rank: 1 
+	iter 74 
+	exec time: 32.685649 ms
+	gather time: 33.526544 ms
+
+Rank: 2 
+	iter 74 
+	exec time: 29.258138 ms
+	gather time: 13.017506 ms
+
+Rank: 3 
+	iter 74 
+	exec time: 32.686025 ms
+	gather time: 34.711818 ms
+
+Rank: 4 
+	iter 74 
+	exec time: 29.257020 ms
+	gather time: 33.004804 ms
+
+Rank: 5 
+	iter 74 
+	exec time: 32.687104 ms
+	gather time: 56.070831 ms
+
+Rank: 6 
+	iter 74 
+	exec time: 29.256557 ms
+	gather time: 33.007261 ms
+
+Rank: 7 
+	iter 74 
+	exec time: 32.689864 ms
+	gather time: 47.108663 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 75 
+	exec time: 31.396569 ms
+	gather time: 75.309448 ms
+
+Rank: 1 
+	iter 75 
+	exec time: 23.571328 ms
+	gather time: 33.616503 ms
+
+Rank: 2 
+	iter 75 
+	exec time: 25.233723 ms
+	gather time: 35.006360 ms
+
+Rank: 3 
+	iter 75 
+	exec time: 23.570727 ms
+	gather time: 59.620049 ms
+
+Rank: 4 
+	iter 75 
+	exec time: 25.249885 ms
+	gather time: 52.999614 ms
+
+Rank: 5 
+	iter 75 
+	exec time: 23.571622 ms
+	gather time: 80.977687 ms
+
+Rank: 6 
+	iter 75 
+	exec time: 25.214025 ms
+	gather time: 53.004463 ms
+
+Rank: 7 
+	iter 75 
+	exec time: 23.570575 ms
+	gather time: 91.978741 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 76 
+	exec time: 27.495911 ms
+	gather time: 67.643243 ms
+
+Rank: 1 
+	iter 76 
+	exec time: 27.045839 ms
+	gather time: 15.995584 ms
+
+Rank: 2 
+	iter 76 
+	exec time: 27.493679 ms
+	gather time: 26.335934 ms
+
+Rank: 3 
+	iter 76 
+	exec time: 27.048020 ms
+	gather time: 31.109166 ms
+
+Rank: 4 
+	iter 76 
+	exec time: 27.489799 ms
+	gather time: 33.659068 ms
+
+Rank: 5 
+	iter 76 
+	exec time: 27.042779 ms
+	gather time: 35.997907 ms
+
+Rank: 6 
+	iter 76 
+	exec time: 27.489175 ms
+	gather time: 56.552700 ms
+
+Rank: 7 
+	iter 76 
+	exec time: 27.043285 ms
+	gather time: 60.998806 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 77 
+	exec time: 59.537798 ms
+	gather time: 93.347051 ms
+
+Rank: 1 
+	iter 77 
+	exec time: 60.855022 ms
+	gather time: 42.426513 ms
+
+Rank: 2 
+	iter 77 
+	exec time: 56.571899 ms
+	gather time: 18.646327 ms
+
+Rank: 3 
+	iter 77 
+	exec time: 60.858673 ms
+	gather time: 60.430693 ms
+
+Rank: 4 
+	iter 77 
+	exec time: 59.536467 ms
+	gather time: 53.992310 ms
+
+Rank: 5 
+	iter 77 
+	exec time: 54.826929 ms
+	gather time: 83.789909 ms
+
+Rank: 6 
+	iter 77 
+	exec time: 59.449990 ms
+	gather time: 83.989276 ms
+
+Rank: 7 
+	iter 77 
+	exec time: 54.824498 ms
+	gather time: 110.792725 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 78 
+	exec time: 46.726687 ms
+	gather time: 99.626121 ms
+
+Rank: 1 
+	iter 78 
+	exec time: 38.427544 ms
+	gather time: 38.630380 ms
+
+Rank: 2 
+	iter 78 
+	exec time: 46.725276 ms
+	gather time: 17.634538 ms
+
+Rank: 3 
+	iter 78 
+	exec time: 38.427311 ms
+	gather time: 59.039443 ms
+
+Rank: 4 
+	iter 78 
+	exec time: 46.730838 ms
+	gather time: 51.989129 ms
+
+Rank: 5 
+	iter 78 
+	exec time: 38.426061 ms
+	gather time: 90.995058 ms
+
+Rank: 6 
+	iter 78 
+	exec time: 46.728764 ms
+	gather time: 77.989085 ms
+
+Rank: 7 
+	iter 78 
+	exec time: 38.426734 ms
+	gather time: 116.993810 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 79 
+	exec time: 36.505234 ms
+	gather time: 79.983862 ms
+
+Rank: 1 
+	iter 79 
+	exec time: 36.496553 ms
+	gather time: 31.059488 ms
+
+Rank: 2 
+	iter 79 
+	exec time: 47.561163 ms
+	gather time: 38.003925 ms
+
+Rank: 3 
+	iter 79 
+	exec time: 36.496075 ms
+	gather time: 61.064244 ms
+
+Rank: 4 
+	iter 79 
+	exec time: 49.896938 ms
+	gather time: 38.348123 ms
+
+Rank: 5 
+	iter 79 
+	exec time: 46.848193 ms
+	gather time: 65.437312 ms
+
+Rank: 6 
+	iter 79 
+	exec time: 49.900005 ms
+	gather time: 58.359843 ms
+
+Rank: 7 
+	iter 79 
+	exec time: 46.845990 ms
+	gather time: 88.423853 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 80 
+	exec time: 27.509128 ms
+	gather time: 78.625303 ms
+
+Rank: 1 
+	iter 80 
+	exec time: 26.845605 ms
+	gather time: 33.473596 ms
+
+Rank: 2 
+	iter 80 
+	exec time: 27.507439 ms
+	gather time: 35.648050 ms
+
+Rank: 3 
+	iter 80 
+	exec time: 26.846622 ms
+	gather time: 59.475795 ms
+
+Rank: 4 
+	iter 80 
+	exec time: 27.504864 ms
+	gather time: 55.984399 ms
+
+Rank: 5 
+	iter 80 
+	exec time: 26.853507 ms
+	gather time: 63.496540 ms
+
+Rank: 6 
+	iter 80 
+	exec time: 27.505030 ms
+	gather time: 59.991442 ms
+
+Rank: 7 
+	iter 80 
+	exec time: 26.853611 ms
+	gather time: 93.837149 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 81 
+	exec time: 33.040678 ms
+	gather time: 64.553959 ms
+
+Rank: 1 
+	iter 81 
+	exec time: 33.067919 ms
+	gather time: 13.624955 ms
+
+Rank: 2 
+	iter 81 
+	exec time: 33.039506 ms
+	gather time: 25.201518 ms
+
+Rank: 3 
+	iter 81 
+	exec time: 33.150092 ms
+	gather time: 26.639835 ms
+
+Rank: 4 
+	iter 81 
+	exec time: 33.039531 ms
+	gather time: 60.208143 ms
+
+Rank: 5 
+	iter 81 
+	exec time: 33.152140 ms
+	gather time: 58.981517 ms
+
+Rank: 6 
+	iter 81 
+	exec time: 33.039710 ms
+	gather time: 60.213090 ms
+
+Rank: 7 
+	iter 81 
+	exec time: 33.152398 ms
+	gather time: 50.995507 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 82 
+	exec time: 53.208626 ms
+	gather time: 119.973377 ms
+
+Rank: 1 
+	iter 82 
+	exec time: 50.556774 ms
+	gather time: 34.242445 ms
+
+Rank: 2 
+	iter 82 
+	exec time: 45.066526 ms
+	gather time: 41.996221 ms
+
+Rank: 3 
+	iter 82 
+	exec time: 47.166695 ms
+	gather time: 80.258754 ms
+
+Rank: 4 
+	iter 82 
+	exec time: 53.207076 ms
+	gather time: 76.349730 ms
+
+Rank: 5 
+	iter 82 
+	exec time: 50.553637 ms
+	gather time: 112.607480 ms
+
+Rank: 6 
+	iter 82 
+	exec time: 39.606616 ms
+	gather time: 101.348542 ms
+
+Rank: 7 
+	iter 82 
+	exec time: 47.165828 ms
+	gather time: 135.608782 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 83 
+	exec time: 51.169763 ms
+	gather time: 90.998306 ms
+
+Rank: 1 
+	iter 83 
+	exec time: 46.722889 ms
+	gather time: 34.990527 ms
+
+Rank: 2 
+	iter 83 
+	exec time: 51.166975 ms
+	gather time: 38.018480 ms
+
+Rank: 3 
+	iter 83 
+	exec time: 46.722124 ms
+	gather time: 60.991989 ms
+
+Rank: 4 
+	iter 83 
+	exec time: 51.166707 ms
+	gather time: 52.005117 ms
+
+Rank: 5 
+	iter 83 
+	exec time: 46.722760 ms
+	gather time: 83.741195 ms
+
+Rank: 6 
+	iter 83 
+	exec time: 47.789422 ms
+	gather time: 86.997730 ms
+
+Rank: 7 
+	iter 83 
+	exec time: 46.724295 ms
+	gather time: 111.346088 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 84 
+	exec time: 34.638989 ms
+	gather time: 78.336860 ms
+
+Rank: 1 
+	iter 84 
+	exec time: 40.472171 ms
+	gather time: 10.986229 ms
+
+Rank: 2 
+	iter 84 
+	exec time: 34.638867 ms
+	gather time: 25.990581 ms
+
+Rank: 3 
+	iter 84 
+	exec time: 29.233863 ms
+	gather time: 24.001305 ms
+
+Rank: 4 
+	iter 84 
+	exec time: 34.642435 ms
+	gather time: 50.348356 ms
+
+Rank: 5 
+	iter 84 
+	exec time: 40.474373 ms
+	gather time: 55.348696 ms
+
+Rank: 6 
+	iter 84 
+	exec time: 26.985991 ms
+	gather time: 71.001384 ms
+
+Rank: 7 
+	iter 84 
+	exec time: 34.223763 ms
+	gather time: 52.011434 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 85 
+	exec time: 60.211534 ms
+	gather time: 65.584789 ms
+
+Rank: 1 
+	iter 85 
+	exec time: 56.400885 ms
+	gather time: 14.620763 ms
+
+Rank: 2 
+	iter 85 
+	exec time: 60.209226 ms
+	gather time: 21.594345 ms
+
+Rank: 3 
+	iter 85 
+	exec time: 56.397795 ms
+	gather time: 22.624110 ms
+
+Rank: 4 
+	iter 85 
+	exec time: 60.208253 ms
+	gather time: 24.946635 ms
+
+Rank: 5 
+	iter 85 
+	exec time: 60.316528 ms
+	gather time: 27.626186 ms
+
+Rank: 6 
+	iter 85 
+	exec time: 60.206470 ms
+	gather time: 46.947505 ms
+
+Rank: 7 
+	iter 85 
+	exec time: 60.313275 ms
+	gather time: 57.980114 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 86 
+	exec time: 39.350150 ms
+	gather time: 64.990873 ms
+
+Rank: 1 
+	iter 86 
+	exec time: 48.212594 ms
+	gather time: 28.794111 ms
+
+Rank: 2 
+	iter 86 
+	exec time: 39.347402 ms
+	gather time: 28.639426 ms
+
+Rank: 3 
+	iter 86 
+	exec time: 48.212756 ms
+	gather time: 59.519490 ms
+
+Rank: 4 
+	iter 86 
+	exec time: 44.193799 ms
+	gather time: 34.651235 ms
+
+Rank: 5 
+	iter 86 
+	exec time: 48.213304 ms
+	gather time: 73.883780 ms
+
+Rank: 6 
+	iter 86 
+	exec time: 48.622106 ms
+	gather time: 54.642202 ms
+
+Rank: 7 
+	iter 86 
+	exec time: 48.214682 ms
+	gather time: 77.896339 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 87 
+	exec time: 32.863348 ms
+	gather time: 90.967323 ms
+
+Rank: 1 
+	iter 87 
+	exec time: 37.970309 ms
+	gather time: 8.982925 ms
+
+Rank: 2 
+	iter 87 
+	exec time: 32.860609 ms
+	gather time: 39.994769 ms
+
+Rank: 3 
+	iter 87 
+	exec time: 37.972274 ms
+	gather time: 49.209237 ms
+
+Rank: 4 
+	iter 87 
+	exec time: 32.865255 ms
+	gather time: 52.012349 ms
+
+Rank: 5 
+	iter 87 
+	exec time: 37.967542 ms
+	gather time: 40.000550 ms
+
+Rank: 6 
+	iter 87 
+	exec time: 32.862920 ms
+	gather time: 67.939074 ms
+
+Rank: 7 
+	iter 87 
+	exec time: 37.968712 ms
+	gather time: 66.996770 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 88 
+	exec time: 38.093462 ms
+	gather time: 73.332446 ms
+
+Rank: 1 
+	iter 88 
+	exec time: 26.355624 ms
+	gather time: 33.478094 ms
+
+Rank: 2 
+	iter 88 
+	exec time: 28.821440 ms
+	gather time: 36.991847 ms
+
+Rank: 3 
+	iter 88 
+	exec time: 26.356346 ms
+	gather time: 70.481856 ms
+
+Rank: 4 
+	iter 88 
+	exec time: 38.094420 ms
+	gather time: 65.999903 ms
+
+Rank: 5 
+	iter 88 
+	exec time: 26.356526 ms
+	gather time: 90.838772 ms
+
+Rank: 6 
+	iter 88 
+	exec time: 26.341459 ms
+	gather time: 66.006034 ms
+
+Rank: 7 
+	iter 88 
+	exec time: 26.355969 ms
+	gather time: 82.849862 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 89 
+	exec time: 47.385421 ms
+	gather time: 59.999846 ms
+
+Rank: 1 
+	iter 89 
+	exec time: 44.777282 ms
+	gather time: 41.980115 ms
+
+Rank: 2 
+	iter 89 
+	exec time: 44.663001 ms
+	gather time: 26.006706 ms
+
+Rank: 3 
+	iter 89 
+	exec time: 44.777561 ms
+	gather time: 51.981350 ms
+
+Rank: 4 
+	iter 89 
+	exec time: 44.669443 ms
+	gather time: 26.016195 ms
+
+Rank: 5 
+	iter 89 
+	exec time: 44.778952 ms
+	gather time: 54.991789 ms
+
+Rank: 6 
+	iter 89 
+	exec time: 44.658344 ms
+	gather time: 60.007275 ms
+
+Rank: 7 
+	iter 89 
+	exec time: 44.779076 ms
+	gather time: 89.343221 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 90 
+	exec time: 34.440164 ms
+	gather time: 77.973500 ms
+
+Rank: 1 
+	iter 90 
+	exec time: 27.568292 ms
+	gather time: 34.149110 ms
+
+Rank: 2 
+	iter 90 
+	exec time: 28.884119 ms
+	gather time: 34.991310 ms
+
+Rank: 3 
+	iter 90 
+	exec time: 27.568191 ms
+	gather time: 65.169121 ms
+
+Rank: 4 
+	iter 90 
+	exec time: 28.895804 ms
+	gather time: 53.012482 ms
+
+Rank: 5 
+	iter 90 
+	exec time: 27.567257 ms
+	gather time: 68.519687 ms
+
+Rank: 6 
+	iter 90 
+	exec time: 28.885285 ms
+	gather time: 59.346183 ms
+
+Rank: 7 
+	iter 90 
+	exec time: 27.566927 ms
+	gather time: 97.510233 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 91 
+	exec time: 60.189899 ms
+	gather time: 47.079675 ms
+
+Rank: 1 
+	iter 91 
+	exec time: 60.175037 ms
+	gather time: 9.625190 ms
+
+Rank: 2 
+	iter 91 
+	exec time: 60.033344 ms
+	gather time: 15.710492 ms
+
+Rank: 3 
+	iter 91 
+	exec time: 60.172612 ms
+	gather time: 27.628962 ms
+
+Rank: 4 
+	iter 91 
+	exec time: 60.076641 ms
+	gather time: 47.050390 ms
+
+Rank: 5 
+	iter 91 
+	exec time: 60.162312 ms
+	gather time: 22.680424 ms
+
+Rank: 6 
+	iter 91 
+	exec time: 60.121909 ms
+	gather time: 47.081082 ms
+
+Rank: 7 
+	iter 91 
+	exec time: 60.165355 ms
+	gather time: 47.984216 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 92 
+	exec time: 25.695219 ms
+	gather time: 38.991863 ms
+
+Rank: 1 
+	iter 92 
+	exec time: 26.478943 ms
+	gather time: 32.071493 ms
+
+Rank: 2 
+	iter 92 
+	exec time: 25.695266 ms
+	gather time: 23.625805 ms
+
+Rank: 3 
+	iter 92 
+	exec time: 17.891235 ms
+	gather time: 23.922558 ms
+
+Rank: 4 
+	iter 92 
+	exec time: 25.694020 ms
+	gather time: 11.482045 ms
+
+Rank: 5 
+	iter 92 
+	exec time: 26.477810 ms
+	gather time: 25.441390 ms
+
+Rank: 6 
+	iter 92 
+	exec time: 25.692755 ms
+	gather time: 32.628722 ms
+
+Rank: 7 
+	iter 92 
+	exec time: 17.889043 ms
+	gather time: 61.308538 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 93 
+	exec time: 56.126504 ms
+	gather time: 90.631947 ms
+
+Rank: 1 
+	iter 93 
+	exec time: 58.842712 ms
+	gather time: 35.626003 ms
+
+Rank: 2 
+	iter 93 
+	exec time: 53.892328 ms
+	gather time: 15.636814 ms
+
+Rank: 3 
+	iter 93 
+	exec time: 59.534970 ms
+	gather time: 50.628446 ms
+
+Rank: 4 
+	iter 93 
+	exec time: 53.895755 ms
+	gather time: 44.997821 ms
+
+Rank: 5 
+	iter 93 
+	exec time: 58.890882 ms
+	gather time: 81.983594 ms
+
+Rank: 6 
+	iter 93 
+	exec time: 53.892486 ms
+	gather time: 71.993932 ms
+
+Rank: 7 
+	iter 93 
+	exec time: 56.204944 ms
+	gather time: 111.985210 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 94 
+	exec time: 47.054635 ms
+	gather time: 89.638244 ms
+
+Rank: 1 
+	iter 94 
+	exec time: 54.218224 ms
+	gather time: 40.524006 ms
+
+Rank: 2 
+	iter 94 
+	exec time: 47.064525 ms
+	gather time: 23.635666 ms
+
+Rank: 3 
+	iter 94 
+	exec time: 46.966438 ms
+	gather time: 61.527267 ms
+
+Rank: 4 
+	iter 94 
+	exec time: 47.065919 ms
+	gather time: 51.986837 ms
+
+Rank: 5 
+	iter 94 
+	exec time: 54.304736 ms
+	gather time: 81.885148 ms
+
+Rank: 6 
+	iter 94 
+	exec time: 47.063040 ms
+	gather time: 89.642030 ms
+
+Rank: 7 
+	iter 94 
+	exec time: 46.399142 ms
+	gather time: 118.757704 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 95 
+	exec time: 47.777512 ms
+	gather time: 88.984193 ms
+
+Rank: 1 
+	iter 95 
+	exec time: 38.568417 ms
+	gather time: 36.574188 ms
+
+Rank: 2 
+	iter 95 
+	exec time: 47.780393 ms
+	gather time: 37.004819 ms
+
+Rank: 3 
+	iter 95 
+	exec time: 38.569744 ms
+	gather time: 72.576548 ms
+
+Rank: 4 
+	iter 95 
+	exec time: 44.769501 ms
+	gather time: 41.348543 ms
+
+Rank: 5 
+	iter 95 
+	exec time: 38.571488 ms
+	gather time: 76.938634 ms
+
+Rank: 6 
+	iter 95 
+	exec time: 44.766780 ms
+	gather time: 73.349831 ms
+
+Rank: 7 
+	iter 95 
+	exec time: 38.573312 ms
+	gather time: 108.937946 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 96 
+	exec time: 53.462254 ms
+	gather time: 48.360750 ms
+
+Rank: 1 
+	iter 96 
+	exec time: 54.693239 ms
+	gather time: 26.730711 ms
+
+Rank: 2 
+	iter 96 
+	exec time: 53.457638 ms
+	gather time: 9.883252 ms
+
+Rank: 3 
+	iter 96 
+	exec time: 50.883835 ms
+	gather time: 32.632591 ms
+
+Rank: 4 
+	iter 96 
+	exec time: 52.704414 ms
+	gather time: 30.646246 ms
+
+Rank: 5 
+	iter 96 
+	exec time: 53.856744 ms
+	gather time: 26.000286 ms
+
+Rank: 6 
+	iter 96 
+	exec time: 52.700983 ms
+	gather time: 49.989712 ms
+
+Rank: 7 
+	iter 96 
+	exec time: 50.884042 ms
+	gather time: 60.923414 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 97 
+	exec time: 62.814983 ms
+	gather time: 91.629945 ms
+
+Rank: 1 
+	iter 97 
+	exec time: 62.824031 ms
+	gather time: 36.516923 ms
+
+Rank: 2 
+	iter 97 
+	exec time: 62.811532 ms
+	gather time: 39.640023 ms
+
+Rank: 3 
+	iter 97 
+	exec time: 62.908376 ms
+	gather time: 76.520331 ms
+
+Rank: 4 
+	iter 97 
+	exec time: 62.907704 ms
+	gather time: 51.988021 ms
+
+Rank: 5 
+	iter 97 
+	exec time: 62.830370 ms
+	gather time: 79.524324 ms
+
+Rank: 6 
+	iter 97 
+	exec time: 62.808300 ms
+	gather time: 76.987956 ms
+
+Rank: 7 
+	iter 97 
+	exec time: 62.913190 ms
+	gather time: 111.878361 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 98 
+	exec time: 38.818816 ms
+	gather time: 64.007980 ms
+
+Rank: 1 
+	iter 98 
+	exec time: 46.825571 ms
+	gather time: 9.620689 ms
+
+Rank: 2 
+	iter 98 
+	exec time: 38.816355 ms
+	gather time: 25.026468 ms
+
+Rank: 3 
+	iter 98 
+	exec time: 42.911266 ms
+	gather time: 24.625765 ms
+
+Rank: 4 
+	iter 98 
+	exec time: 38.814735 ms
+	gather time: 50.794677 ms
+
+Rank: 5 
+	iter 98 
+	exec time: 46.826702 ms
+	gather time: 43.986371 ms
+
+Rank: 6 
+	iter 98 
+	exec time: 38.813494 ms
+	gather time: 50.805625 ms
+
+Rank: 7 
+	iter 98 
+	exec time: 42.913386 ms
+	gather time: 51.985077 ms
+
+Starting execution..
+Completed execution..
+Completed verification..
+Gathered results..
+Completed multiplication..
+Rank: 0 
+	iter 99 
+	exec time: 26.856893 ms
+	gather time: 60.987323 ms
+
+Rank: 1 
+	iter 99 
+	exec time: 24.168930 ms
+	gather time: 34.898502 ms
+
+Rank: 2 
+	iter 99 
+	exec time: 26.857341 ms
+	gather time: 35.005315 ms
+
+Rank: 3 
+	iter 99 
+	exec time: 16.710098 ms
+	gather time: 67.903577 ms
+
+Rank: 4 
+	iter 99 
+	exec time: 26.858176 ms
+	gather time: 45.343879 ms
+
+Rank: 5 
+	iter 99 
+	exec time: 24.174929 ms
+	gather time: 47.954122 ms
+
+Rank: 6 
+	iter 99 
+	exec time: 26.860415 ms
+	gather time: 42.349358 ms
+
+Rank: 7 
+	iter 99 
+	exec time: 16.711570 ms
+	gather time: 79.264681 ms
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {32, 32, 32}
+Precision          = Single
+Direction          = FORWARD
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 8
+Iterations         = 100
+--------------------------------------------
+
+
+Time to plan: 3.74599sec
+
+Measurements
+--------------------------
+Processes           : 8
+Threads per proc    : 8
+FFT Size            : 32^3
+Batch               : 1
+Iterations          : 100
+Avg Tot Runtime     : 40.306138 ms
+Runtime per batch   : 40.306138 ms
+SD                  : 14.065737 ms
+Throughput          : 0.002171 GFLOPs
+Time to Transfer    : 0.067049ms
+--------------------------

@@ -1,11 +1,9 @@
 build*/
 debug*/
 bin/
-data/
 samples/
 vscode/
 tags
-wisdom/
 
 *.DS_Store
 slurm*

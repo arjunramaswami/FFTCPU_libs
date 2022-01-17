@@ -1,0 +1,69 @@
+Expm 1: Only FFTW
+FFTW Plan: Patient
+-- Cannot import wisdom from ../../wisdom/singlenode/composite/expm1//fftw_176_t21_b1.patient
+-- Exporting wisdom file to ../../wisdom/singlenode/composite/expm1//fftw_176_t21_b1.patient
+Iteration: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 
+Printing individual runtimes:
+ 0: 3.604658ms
+ 1: 3.486946ms
+ 2: 3.454971ms
+ 3: 3.473748ms
+ 4: 3.426645ms
+ 5: 3.455644ms
+ 6: 3.465734ms
+ 7: 3.467883ms
+ 8: 3.475430ms
+ 9: 3.456988ms
+ 10: 3.474196ms
+ 11: 3.460188ms
+ 12: 3.459741ms
+ 13: 3.452377ms
+ 14: 3.446155ms
+ 15: 3.506156ms
+ 16: 3.471784ms
+ 17: 3.466312ms
+ 18: 3.467195ms
+ 19: 3.409115ms
+ 20: 3.481592ms
+ 21: 3.478515ms
+ 22: 3.432373ms
+ 23: 3.445687ms
+ 24: 3.466527ms
+ 25: 3.456475ms
+ 26: 3.451770ms
+ 27: 3.477997ms
+ 28: 3.451668ms
+ 29: 3.430875ms
+ 30: 3.472040ms
+ 31: 3.470286ms
+ 32: 3.451402ms
+ 33: 3.459973ms
+ 34: 3.449023ms
+ 35: 3.478798ms
+ 36: 3.488247ms
+ 37: 3.457376ms
+ 38: 3.571885ms
+ 39: 3.440446ms
+ 40: 3.489434ms
+ 41: 3.446577ms
+ 42: 3.880868ms
+ 43: 3.475010ms
+ 44: 3.457193ms
+ 45: 3.471591ms
+ 46: 3.462255ms
+ 47: 3.481236ms
+ 48: 3.470770ms
+ 49: 3.477654ms
+
+
+Measurements
+--------------------------
+FFT Size            : 176^3
+Threads             : 21
+Batch               : 1
+Iterations          : 50
+Avg Tot Runtime     : 3.476148 ms
+Runtime per batch   : 3.476148 ms
+SD                  : 0.065234 ms
+Throughput          : 0.109590 GFLOPs
+Plan Time           : 54.238580 sec

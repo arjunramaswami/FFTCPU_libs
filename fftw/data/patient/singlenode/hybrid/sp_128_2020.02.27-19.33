@@ -1,0 +1,920 @@
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 1 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 1: time to plan - 19.045051 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     1      128³      11.1174            1.54 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 2 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 2: time to plan - 41.216152 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     2      128³       5.5155            3.15 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 3 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 3: time to plan - 48.221123 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     3      128³       3.8448            4.69 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 4 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 4: time to plan - 36.358633 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     4      128³       2.7770            6.15 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 5 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 5: time to plan - 46.825823 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     5      128³       2.7911            6.43 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 6 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 6: time to plan - 44.730555 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     6      128³       2.0372            9.18 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 7 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 7: time to plan - 41.620066 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     7      128³       1.7939           10.28 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 8 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 8: time to plan - 33.529676 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     8      128³       1.4937           11.63 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 9 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 9: time to plan - 45.590926 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:     9      128³       1.4508           11.92 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 10 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 10: time to plan - 43.788577 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    10      128³       1.4935           12.32 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 11 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 11: time to plan - 39.535356 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    11      128³       1.2061           15.34 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 12 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 12: time to plan - 41.392262 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    12      128³       1.0457           16.87 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 13 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 13: time to plan - 40.690853 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    13      128³       1.2016           14.48 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 14 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 14: time to plan - 47.590796 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    14      128³       1.0102           17.94 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 15 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 15: time to plan - 37.067542 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    15      128³       0.9322           19.35 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 16 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 16: time to plan - 32.611836 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    16      128³       0.8839           19.80 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 17 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 17: time to plan - 44.865140 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    17      128³       0.8701           20.98 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 18 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 18: time to plan - 46.368313 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    18      128³       0.8694           21.14 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 19 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 19: time to plan - 42.336857 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    19      128³       0.7721           23.48 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 20 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 20: time to plan - 52.344358 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    20      128³       0.7914           23.96 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 21 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 21: time to plan - 53.901808 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    21      128³       0.8760           21.32 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 22 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 22: time to plan - 41.640551 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    22      128³       0.7649           24.34 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 23 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 23: time to plan - 53.030554 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    23      128³       0.7124           26.30 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 24 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 24: time to plan - 52.603768 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    24      128³       0.7397           25.00 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 25 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 25: time to plan - 52.037050 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    25      128³       0.7145           23.91 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 26 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 26: time to plan - 44.619471 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    26      128³       0.7337           24.69 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 27 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 27: time to plan - 56.830051 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    27      128³       0.7336           23.85 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 28 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 28: time to plan - 54.708645 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    28      128³       0.7275           24.20 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 29 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 29: time to plan - 52.584691 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    29      128³       0.7311           25.87 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 30 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 30: time to plan - 54.654938 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    30      128³       0.8743           21.06 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 31 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 31: time to plan - 53.536524 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    31      128³       0.7110           25.73 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 32 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 32: time to plan - 38.079719 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    32      128³       0.8124           21.38 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 33 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 33: time to plan - 52.919343 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    33      128³       0.7733           24.82 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 34 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 34: time to plan - 52.113393 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    34      128³       0.8063           23.09 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 35 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 35: time to plan - 53.900760 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    35      128³       0.7627           24.82 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 36 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 36: time to plan - 52.818700 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    36      128³       0.7588           23.34 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 37 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 37: time to plan - 54.529585 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    37      128³       1.0691           16.83 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 38 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 38: time to plan - 54.493548 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    38      128³       0.7429           23.38 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 39 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 39: time to plan - 56.747745 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    39      128³       1.0242           17.53 
+
+Cleaning up 
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128} 
+Precision          = Single 
+Direction          = FORWARD 
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 40 
+Iterations         = 100 
+--------------------------------------------
+
+Configuring plan for single precision FFT
+
+Threads 40: time to plan - 58.564516 sec
+
+
+       Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS)  
+fftw:    40      128³       0.9292           20.04 
+
+Cleaning up 

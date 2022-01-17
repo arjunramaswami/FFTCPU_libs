@@ -1,0 +1,25 @@
+Using AOCX: fft1d.aocx
+
+Launching FFT transform for 16777216 iterations
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+	FFT kernel initialization is complete.
+PCIe Write Transfer Time of 1359.861240ms for 1073741824 points of 8589934592 bytes
+PCIe Read Transfer Time of 1463.091483ms for 1073741824 points of 8589934592 bytes
+	Processing time = 547.9940ms
+	Throughput = 1.9594 Gpoints / sec (58.7821 Gflops)
+	Signal to noise ratio on output sample: 136.899399 --> PASSED
+
+Launching inverse FFT transform for 16777216 iterations
+	Inverse FFT kernel initialization is complete.
+Context callback: Argument error
+ERROR: CL_MEM_OBJECT_ALLOCATION_FAILURE 
+Location: host/src/main.cpp:230
+Failed to launch kernel

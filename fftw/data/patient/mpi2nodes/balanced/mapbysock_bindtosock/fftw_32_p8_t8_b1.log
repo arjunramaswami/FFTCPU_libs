@@ -1,0 +1,4038 @@
+FFTW Plan Patient
+-- Cannot import wisdom from ../wisdom/mpi2nodes/fftw_32_p8_t8_b1.patient
+Planning completed
+-- Exporting wisdom file to ../wisdom/mpi2nodes/fftw_32_p8_t8_b1.patient
+Rank: 0
+	iter 0
+	exec time: 0.0370062sec
+	gather time: 0.096982sec
+
+Rank: 4
+	iter 0
+Rank: 7
+	iter 0
+	exec time: 0.0231189sec
+	gather time: 0.110713sec
+
+	exec time: 0.0368068sec
+	gather time: 0.0457444sec
+
+Rank: 3
+	iter 0
+	exec time: 0.0231147sec
+	gather time: 0.059368sec
+
+Rank: 1
+	iter 0
+	exec time: 0.0231151sec
+	gather time: 0.042368sec
+
+Rank: 5
+	iter 0
+Rank: 6
+	iter 0
+	exec time: 0.0231172sec
+	gather time: 0.0867108sec
+
+	exec time: 0.0368067sec
+	gather time: 0.0703454sec
+
+Rank: 2
+	iter 0
+	exec time: 0.0368084sec
+	gather time: 0.0209927sec
+
+Rank: 2
+Rank: 6
+	iter 1
+	exec time: 0.0304465sec
+	gather time: 0.0959965sec
+
+Rank: 0
+Rank: 4
+	iter 1
+	exec time: 0.0304464sec
+	gather time: 0.072334sec
+
+	iter 1
+	exec time: 0.0304465sec
+	gather time: 0.0570097sec
+
+Rank: 1
+	iter 1
+	exec time: 0.0436326sec
+	gather time: 0.0443319sec
+
+Rank: 5
+	iter 1
+	Rank: 7
+	iter 1
+	exec time: 0.0436319sec
+exec time: 0.0436321sec
+	gather time: 0.0913297sec
+
+	gather time: 0.0953378sec
+
+Rank: 3
+	iter 1
+	iter 1
+	exec time: 0.0304465sec
+	gather time: 0.0823498sec
+
+	exec time: 0.0436325sec
+	gather time: 0.056996sec
+
+Rank: 1
+	iter 2
+	exec time: 0.039984sec
+	gather time: 0.0402264sec
+
+Rank: 5
+Rank: 3
+	iter 2
+	exec time: 0.0389167sec
+	gather time: 0.0602278sec
+
+Rank: 7
+Rank: 6
+	iter 2
+	exec time: 0.0481711sec
+	gather time: 0.0753373sec
+
+Rank: 4
+	iter 2
+	exec time: 0.0476754sec
+	gather time: 0.0875736sec
+
+Rank: 0
+	iter 2
+	exec time: 0.0481704sec
+	gather time: 0.0883336sec
+
+	iter 2
+	exec time: 0.0399828sec
+	gather time: 0.102586sec
+
+	iter 2
+	exec time: 0.0477747sec
+	gather time: 0.0463369sec
+
+Rank: 2
+	iter 2
+	exec time: 0.0481711sec
+	gather time: 0.0239921sec
+
+Rank: 1
+	iter 3
+	exec time: 0.0459875sec
+	gather time: 0.031134sec
+
+Rank: 5
+Rank: 3
+	iter 3
+	exec time: 0.0369811sec
+	gather time: 0.0421328sec
+
+Rank: 7
+Rank: 4
+	iter 3
+	exec time: 0.0534186sec
+	gather time: 0.0343259sec
+
+Rank: 6
+	iter 3
+	exec time: 0.0444682sec
+	gather time: 0.0270016sec
+
+Rank: 0
+	iter 3
+	exec time: 0.0534184sec
+	gather time: 0.0343325sec
+
+	iter 3
+	exec time: 0.0369858sec
+	gather time: 0.0514879sec
+
+	iter 3
+	exec time: 0.0459874sec
+	gather time: 0.0441484sec
+
+Rank: 2
+	iter 3
+	exec time: 0.0444182sec
+	gather time: 0.00508657sec
+
+Rank: 0
+Rank: 2
+	iter 4
+	exec time: 0.0451621sec
+	Rank: 1
+	iter 4
+	exec time: 0.0369804sec
+	gather time: 0.0449462sec
+
+gather time: 0.0359785sec
+
+Rank: 6
+	iter 4
+	exec time: 0.0451622sec
+	gather time: 0.0563359sec
+
+Rank: 4
+	iter 4
+	exec time: 0.0451614sec
+	gather time: 0.0253345sec
+
+	iter 4
+	exec time: 0.0451616sec
+	gather time: 0.0709845sec
+
+Rank: 3
+	iter 4
+	exec time: 0.0369791sec
+	gather time: 0.0361686sec
+
+Rank: 5
+	iter 4
+	exec time: 0.0369787sec
+Rank: 7
+	iter 4
+	exec time: 0.0361235sec
+	gather time: 0.083947sec
+
+	gather time: 0.0632855sec
+
+Rank: 1
+	iter 5
+Rank: 3
+	iter 5
+	exec time: 0.0560901sec
+	exec time: 0.0560902sec
+	gather time: 0.015633sec
+
+	gather time: 0.0286432sec
+
+Rank: 7
+Rank: 5
+	iter 5
+	exec time: 0.0560902sec
+	gather time: 0.0416473sec
+
+Rank: 4
+	iter 5
+	exec time: 0.0570038sec
+	iter 5
+	exec time: 0.0560899sec
+	gather time: 0.0489912sec
+
+	gather time: 0.0585037sec
+
+Rank: 0
+	iter 5
+	exec time: 0.0592417sec
+	gather time: 0.0575168sec
+
+Rank: 2
+Rank: 6
+	iter 5
+	exec time: 0.0570037sec
+	gather time: 0.0501759sec
+
+	iter 5
+	exec time: 0.0570053sec
+	gather time: 0.0152037sec
+
+Rank: 1
+	iter 6
+	exec time: 0.0413516sec
+	gather time: 0.00998098sec
+
+Rank: 5
+	iter 6
+	exec time: 0.0413516sec
+	gather time: 0.024337sec
+
+Rank: 3
+	iter 6
+	exec time: 0.0413524sec
+	gather time: 0.0389807sec
+
+Rank: 6
+	iter 6
+	exec time: 0.0290239sec
+Rank: 4
+	iter 6
+	exec time: 0.0290236sec
+	gather time: 0.0383223sec
+
+	gather time: 0.070627sec
+
+Rank: 0
+	iter 6
+	exec time: 0.0290236sec
+	gather time: 0.0642922sec
+
+Rank: 2
+	iter 6
+	exec time: 0.029024sec
+	gather time: 0.0382957sec
+
+Rank: 7
+	iter 6
+	exec time: 0.041352sec
+	gather time: 0.0499966sec
+
+Rank: 0
+Rank: 4
+Rank: 6
+	iter 7
+	exec time: 0.0593696sec
+	gather time: 0.0720608sec
+
+Rank: 2
+	iter 7
+	exec time: 0.0570269sec
+	gather time: 0.038723sec
+
+	iter 7
+	exec time: 0.0684955sec
+	gather time: 0.0987061sec
+
+	iter 7
+Rank: 7
+	iter 7
+	exec time: 0.0708283sec
+	gather time: 0.0859857sec
+
+	exec time: 0.0684959sec
+	gather time: 0.0680508sec
+
+Rank: 3
+	iter 7
+	exec time: 0.0684947sec
+	gather time: 0.0399796sec
+
+Rank: 5
+	iter 7
+	exec time: 0.0689611sec
+	gather time: 0.0519943sec
+
+Rank: 1
+	iter 7
+	exec time: 0.0684953sec
+	gather time: 0.0129797sec
+
+Rank: 0
+Rank: 2
+	iter 8
+	exec time: 0.0292576sec
+	Rank: 1
+	iter 8
+	exec time: 0.0190635sec
+	gather time: 0.0373143sec
+
+gather time: 0.03666sec
+
+Rank: 4
+Rank: 6
+Rank: 5
+	iter 8
+	exec time: 0.0190613sec
+	gather time: 0.0626788sec
+
+	iter 8
+	exec time: 0.0292584sec
+	iter 8
+	exec time: 0.0292575sec
+	gather time: 0.036668sec
+
+	gather time: 0.0389949sec
+
+Rank: 3
+	iter 8
+	exec time: 0.0190633sec
+	iter 8
+	exec time: 0.0292569sec
+	gather time: 0.0556477sec
+
+	gather time: 0.0703138sec
+
+Rank: 7
+	iter 8
+	exec time: 0.0190616sec
+	gather time: 0.0736824sec
+
+Rank: 1
+	iter 9
+	exec time: 0.0274463sec
+Rank: 3
+	iter 9
+	exec time: 0.0274461sec
+	gather time: 0.0353777sec
+
+	gather time: 0.0343788sec
+
+Rank: 5
+Rank: 7
+	iter 9
+	exec time: 0.0274458sec
+	gather time: 0.0477396sec
+
+	iter 9
+Rank: 6
+	iter 9
+	exec time: 0.037482sec
+	gather time: 0.0350019sec
+
+	exec time: 0.0274465sec
+	gather time: 0.0473956sec
+
+Rank: 2
+	iter 9
+	Rank: 0
+	iter 9
+	exec time: 0.0374805sec
+	gather time: 0.0353357sec
+
+Rank: 4
+	iter 9
+	exec time: 0.0374815sec
+	gather time: 0.0403306sec
+
+exec time: 0.0374801sec
+	gather time: 0.0136376sec
+
+Rank: 1
+	iter 10
+	exec time: 0.0581973sec
+	gather time: 0.0129787sec
+
+Rank: 5
+	iter 10
+	exec time: 0.0581982sec
+	gather time: 0.0523397sec
+
+Rank: 2
+Rank: 3
+	iter 10
+	exec time: 0.0581981sec
+	gather time: 0.0429819sec
+
+Rank: 6
+	iter 10
+	exec time: 0.0488591sec
+	gather time: 0.0821371sec
+
+Rank: 4
+	iter 10
+	exec time: 0.0488594sec
+	gather time: 0.0548093sec
+
+	iter 10
+	exec time: 0.0488574sec
+Rank: 0
+	iter 10
+	exec time: 0.0488578sec
+		gather time: 0.0387982sec
+
+gather time: 0.0808006sec
+
+Rank: 7
+	iter 10
+	exec time: 0.0581982sec
+	gather time: 0.0679949sec
+
+Rank: 3
+Rank: 1
+	iter 11
+	exec time: 0.0329094sec
+	gather time: 0.0106338sec
+
+Rank: 7
+	iter 11
+	exec time: 0.0329088sec
+	gather time: 0.0776445sec
+
+Rank: 5
+	iter 11
+	exec time: 0.032909sec
+	gather time: 0.0529867sec
+
+	iter 11
+	exec time: 0.0329084sec
+Rank: 2
+	gather time: 0.0586331sec
+
+Rank: 6
+	iter 11
+	exec time: 0.0363707sec
+	gather time: 0.0987126sec
+
+Rank: 4
+	iter 11
+	exec time: 0.0220016sec
+	gather time: 0.0644594sec
+
+	iter 11
+	exec time: 0.0363724sec
+	gather time: 0.0384625sec
+
+Rank: 0
+	iter 11
+	exec time: 0.0269919sec
+	gather time: 0.090455sec
+
+Rank: 1
+	iter 12
+	exec time: 0.0688715sec
+	gather time: 0.0409807sec
+
+Rank: 5
+	iter 12
+	exec time: 0.0643197sec
+	gather time: 0.122329sec
+
+Rank: 3
+	iter 12
+	exec time: 0.0808575sec
+	gather time: 0.0859804sec
+
+Rank: 7
+	iter 12
+	exec time: 0.080858sec
+	gather time: 0.142987sec
+
+Rank: 0
+	iter 12
+	exec time: 0.0807366sec
+	gather time: 0.12999sec
+
+Rank: 6
+	iter 12
+Rank: 4
+	iter 12
+	exec time: 0.0731673sec
+	gather time: 0.0733392sec
+
+	exec time: 0.0731673sec
+	gather time: 0.116344sec
+
+Rank: 2
+	iter 12
+	exec time: 0.0809974sec
+	gather time: 0.0409969sec
+
+Rank: 1
+	iter 13
+	exec time: 0.0399198sec
+	gather time: 0.0116293sec
+
+Rank: 5
+	iter 13
+	exec time: 0.0399195sec
+	gather time: 0.0829804sec
+
+Rank: 3
+	iter 13
+	exec time: 0.0399205sec
+	gather time: 0.0466288sec
+
+Rank: 6
+Rank: 4
+	iter 13
+	exec time: 0.028541sec
+	gather time: 0.0631131sec
+
+Rank: 7
+	iter 13
+	exec time: 0.0399195sec
+	gather time: 0.0779889sec
+
+Rank: 0
+	iter 13
+	exec time: 0.0285394sec
+	gather time: 0.0904713sec
+
+Rank: 2
+	iter 13
+	exec time: 0.0285395sec
+	gather time: 0.0371336sec
+
+	iter 13
+	exec time: 0.0285412sec
+	gather time: 0.0891246sec
+
+Rank: 1
+	iter 14
+	exec time: 0.0652909sec
+	gather time: 0.00986737sec
+
+Rank: 5
+	iter 14
+	exec time: 0.0652891sec
+	gather time: 0.0479882sec
+
+Rank: 3
+	iter 14
+	exec time: 0.059754sec
+	gather time: 0.0369804sec
+
+Rank: 4
+	iter 14
+	exec time: 0.0597578sec
+	gather time: 0.0452475sec
+
+Rank: 6
+Rank: 7
+	iter 14
+	exec time: 0.0578566sec
+	gather time: 0.0493416sec
+
+Rank: 0
+	iter 14
+	exec time: 0.0597583sec
+	gather time: 0.0622495sec
+
+Rank: 2
+	iter 14
+	exec time: 0.0597582sec
+	gather time: 0.0349124sec
+
+	iter 14
+	exec time: 0.0597579sec
+	gather time: 0.0609019sec
+
+Rank: 0
+Rank: 2
+Rank: 1
+	iter 15
+Rank: 3
+	iter 15
+	exec time: 0.054065sec
+		exec time: 0.0539988sec
+	gather time: 0.0417088sec
+
+gather time: 0.0557085sec
+
+Rank: 4
+Rank: 6
+	iter 15
+	exec time: 0.0493021sec
+	gather time: 0.0549983sec
+
+Rank: 5
+	iter 15
+	exec time: 0.0539995sec
+	gather time: 0.0770593sec
+
+	iter 15
+	exec time: 0.0492218sec
+	gather time: 0.0179938sec
+
+	iter 15
+	exec time: 0.0492234sec
+Rank: 7
+	iter 15
+		gather time: 0.0380031sec
+
+exec time: 0.054067sec
+	gather time: 0.0720693sec
+
+	iter 15
+	exec time: 0.0492215sec
+	gather time: 0.0553381sec
+
+Rank: 1
+	iter 16
+	exec time: 0.0863459sec
+	gather time: 0.0397052sec
+
+Rank: 5
+	iter 16
+	exec time: 0.0863454sec
+	gather time: 0.0760638sec
+
+Rank: 2
+Rank: 3
+	iter 16
+	exec time: 0.08642sec
+	gather time: 0.0747042sec
+
+Rank: 4
+Rank: 6
+Rank: 7
+	iter 16
+	exec time: 0.0863458sec
+	gather time: 0.0790665sec
+
+	iter 16
+	exec time: 0.0872405sec
+	gather time: 0.0520047sec
+
+Rank: 0
+	iter 16
+	exec time: 0.0872425sec
+	gather time: 0.0643364sec
+
+	iter 16
+	exec time: 0.086337sec
+	gather time: 0.0613468sec
+
+	iter 16
+	exec time: 0.0863391sec
+	gather time: 0.0379906sec
+
+Rank: 1
+	iter 17
+	exec time: 0.0476791sec
+	gather time: 0.0276302sec
+
+Rank: 5
+Rank: 2
+Rank: 3
+	iter 17
+	exec time: 0.0419349sec
+	gather time: 0.0316318sec
+
+Rank: 4
+Rank: 6
+	iter 17
+	exec time: 0.0500011sec
+		iter 17
+	exec time: 0.0476723sec
+	gather time: 0.036195sec
+
+gather time: 0.0739936sec
+
+	iter 17
+	exec time: 0.0500015sec
+	gather time: 0.0281175sec
+
+Rank: 0
+	iter 17
+	exec time: 0.0499997sec
+	gather time: 0.0829979sec
+
+	iter 17
+	exec time: 0.0499995sec
+	gather time: 0.00646776sec
+
+Rank: 7
+	iter 17
+	exec time: 0.0419265sec
+	gather time: 0.0869875sec
+
+Rank: 1
+	iter 18
+	exec time: 0.0567995sec
+	gather time: 0.0128588sec
+
+Rank: 5
+	iter 18
+	exec time: 0.0567993sec
+	gather time: 0.055333sec
+
+Rank: 2
+	iter 18
+	exec time: 0.0479872sec
+	gather time: 0.0376741sec
+
+Rank: 6
+	iter 18
+	exec time: 0.0479894sec
+	gather time: 0.06367sec
+
+Rank: 4
+	iter 18
+	exec time: 0.0479907sec
+	gather time: 0.0486791sec
+
+Rank: 0
+	iter 18
+	exec time: 0.0418205sec
+	gather time: 0.0640217sec
+
+Rank: 3
+	iter 18
+	exec time: 0.0607987sec
+	gather time: 0.0479763sec
+
+Rank: 7
+	iter 18
+	exec time: 0.0607987sec
+	gather time: 0.0513422sec
+
+Rank: 1
+	iter 19
+	exec time: 0.0723589sec
+	gather time: 0.0251906sec
+
+Rank: 5
+	iter 19
+	exec time: 0.0723601sec
+	gather time: 0.0145483sec
+
+Rank: 3
+	iter 19
+	exec time: 0.0723582sec
+	gather time: 0.0281905sec
+
+Rank: 7
+	iter 19
+	exec time: 0.0723605sec
+	gather time: 0.0525505sec
+
+Rank: 0
+Rank: 2
+	iter 19
+	exec time: 0.0660008sec
+	gather time: 0.00102283sec
+
+Rank: 6
+	iter 19
+	exec time: 0.066002sec
+Rank: 4
+	iter 19
+	exec time: 0.0663447sec
+	gather time: 0.00103177sec
+
+	gather time: 0.0349892sec
+
+	iter 19
+	exec time: 0.0660004sec
+	gather time: 0.0403451sec
+
+Rank: 1
+Rank: 7
+Rank: 5
+	iter 20
+	exec time: 0.0588339sec
+	gather time: 0.0226412sec
+
+	iter 20
+	exec time: 0.0588342sec
+	gather time: 0.0451819sec
+
+Rank: 3
+	iter 20
+	exec time: 0.0588325sec
+	gather time: 0.0186307sec
+
+	iter 20
+	exec time: 0.0588336sec
+	gather time: 0.00963224sec
+
+Rank: 4
+	iter 20
+	exec time: 0.0421014sec
+	gather time: 0.0399972sec
+
+Rank: 6
+	iter 20
+	exec time: 0.0420866sec
+	gather time: 0.0467683sec
+
+Rank: 2
+	iter 20
+	exec time: 0.0420868sec
+	gather time: 0.0206712sec
+
+Rank: 0
+	iter 20
+	exec time: 0.0420966sec
+	gather time: 0.0726493sec
+
+Rank: 3
+	iter 21
+Rank: 1
+	iter 21
+	exec time: 0.0497447sec
+	gather time: 0.0169788sec
+
+	exec time: 0.049745sec
+	gather time: 0.0399907sec
+
+Rank: 7
+	iter 21
+	exec time: 0.0497467sec
+Rank: 5
+	iter 21
+	exec time: 0.0497456sec
+	gather time: 0.0573336sec
+
+	gather time: 0.0843346sec
+
+Rank: 4
+	iter 21
+	exec time: 0.0337111sec
+	gather time: 0.04866sec
+
+Rank: 6
+	iter 21
+	exec time: 0.0337118sec
+	gather time: 0.073001sec
+
+Rank: 0
+	iter 21
+	exec time: 0.0337113sec
+Rank: 2
+	iter 21
+	exec time: 0.0337115sec
+	gather time: 0.090645sec
+
+	gather time: 0.0386505sec
+
+Rank: 3
+	iter 22
+	Rank: 1
+	iter 22
+	exec time: 0.0756485sec
+	gather time: 0.0880034sec
+
+exec time: 0.0756476sec
+	gather time: 0.0409948sec
+
+Rank: 7
+Rank: 6
+	iter 22
+	exec time: 0.0740211sec
+	gather time: 0.113649sec
+
+Rank: 4
+Rank: 5
+	iter 22
+	exec time: 0.0802231sec
+	gather time: 0.125925sec
+
+	iter 22
+	exec time: 0.0756499sec
+	iter 22
+	exec time: 0.0740228sec
+	gather time: 0.0879938sec
+
+	gather time: 0.134285sec
+
+Rank: 2
+	iter 22
+	exec time: 0.0740214sec
+	gather time: 0.0430029sec
+
+Rank: 0
+	iter 22
+	exec time: 0.0740228sec
+	gather time: 0.107357sec
+
+Rank: 2
+	iter 23
+	exec time: 0.0468439sec
+	gather time: 0.0192788sec
+
+Rank: 6
+	iter 23
+	exec time: 0.0468444sec
+	gather time: 0.0486189sec
+
+Rank: 0
+Rank: 4
+	iter 23
+	exec time: 0.0468455sec
+	gather time: 0.0446096sec
+
+Rank: 1
+Rank: 3
+	iter 23
+	exec time: 0.0496654sec
+	iter 23
+	exec time: 0.046844sec
+	gather time: 0.0622575sec
+
+	gather time: 0.0196299sec
+
+Rank: 7
+	iter 23
+	exec time: 0.0496651sec
+	gather time: 0.0496324sec
+
+	iter 23
+	exec time: 0.0496639sec
+	gather time: 0.0126314sec
+
+Rank: 5
+	iter 23
+	exec time: 0.049664sec
+	gather time: 0.0256396sec
+
+Rank: 3
+Rank: 1
+	iter 24
+	exec time: 0.0233252sec
+Rank: 2
+	iter 24
+	exec time: 0.0389178sec
+		gather time: 0.0316789sec
+
+gather time: 0.00983674sec
+
+Rank: 7
+Rank: 5
+	iter 24
+	exec time: 0.0233209sec
+	gather time: 0.0260369sec
+
+Rank: 4
+Rank: 6
+	iter 24
+	exec time: 0.0389175sec
+	gather time: 0.0316301sec
+
+	iter 24
+	exec time: 0.0233205sec
+	iter 24
+	exec time: 0.0389168sec
+	gather time: 0.00984468sec
+
+	gather time: 0.0570391sec
+
+Rank: 0
+	iter 24
+	exec time: 0.0389178sec
+	gather time: 0.0439894sec
+
+	iter 24
+	exec time: 0.0233068sec
+	gather time: 0.0326809sec
+
+Rank: 1
+	iter 25
+	exec time: 0.0513559sec
+	gather time: 0.0149959sec
+
+Rank: 3
+	iter 25
+	exec time: 0.0513571sec
+	gather time: 0.0379887sec
+
+Rank: 5
+Rank: 7
+	iter 25
+	exec time: 0.0513566sec
+	gather time: 0.0519961sec
+
+Rank: 2
+	iter 25
+	Rank: 0
+	iter 25
+	exec time: 0.0425865sec
+exec time: 0.0425866sec
+	gather time: 0.00815232sec
+
+	gather time: 0.0503539sec
+
+Rank: 6
+	iter 25
+		iter 25
+	exec time: 0.0513552sec
+	gather time: 0.0260052sec
+
+Rank: 4
+exec time: 0.0425845sec
+	gather time: 0.0556335sec
+
+	iter 25
+	exec time: 0.0425845sec
+	gather time: 0.038649sec
+
+Rank: 1
+	iter 26
+	exec time: 0.043063sec
+	gather time: 0.0129938sec
+
+Rank: 5
+	iter 26
+	exec time: 0.0430647sec
+	gather time: 0.0586062sec
+
+Rank: 2
+Rank: 3
+	iter 26
+	exec time: 0.0430633sec
+	gather time: 0.0479908sec
+
+Rank: 6
+Rank: 4
+	iter 26
+	exec time: 0.0314114sec
+	gather time: 0.0583063sec
+
+Rank: 7
+	iter 26
+	exec time: 0.0430647sec
+	gather time: 0.0806557sec
+
+Rank: 0
+	iter 26
+	exec time: 0.0314125sec
+	gather time: 0.0840013sec
+
+	iter 26
+	exec time: 0.0314122sec
+	gather time: 0.0389991sec
+
+	iter 26
+	exec time: 0.0314112sec
+	gather time: 0.08734sec
+
+Rank: 3
+Rank: 7
+	iter 27
+	exec time: 0.0370108sec
+	gather time: 0.0383363sec
+
+Rank: 1
+Rank: 5
+	iter 27
+	exec time: 0.0456656sec
+	gather time: 0.0155038sec
+
+Rank: 2
+	iter 27
+	exec time: 0.0372501sec
+	gather time: 0.00824396sec
+
+Rank: 6
+	iter 27
+	exec time: 0.0447643sec
+	gather time: 0.0326108sec
+
+	iter 27
+	exec time: 0.0456655sec
+	gather time: 0.0169787sec
+
+	iter 27
+	exec time: 0.0447647sec
+	gather time: 0.0372459sec
+
+Rank: 4
+	iter 27
+	exec time: 0.0447647sec
+	gather time: 0.0245215sec
+
+Rank: 0
+	iter 27
+	exec time: 0.0447649sec
+	gather time: 0.0462494sec
+
+Rank: 3
+Rank: 1
+	iter 28
+	exec time: 0.0397395sec
+Rank: 2
+	iter 28
+	exec time: 0.0459936sec
+	gather time: 0.0214537sec
+
+	gather time: 0.0156272sec
+
+Rank: 7
+Rank: 5
+Rank: 6
+	iter 28
+	exec time: 0.0459937sec
+	gather time: 0.056799sec
+
+Rank: 4
+	iter 28
+	exec time: 0.040018sec
+	gather time: 0.0257966sec
+
+	iter 28
+	exec time: 0.0563895sec
+	iter 28
+	exec time: 0.0574064sec
+	gather time: 0.0576284sec
+
+	gather time: 0.0316289sec
+
+Rank: 0
+	iter 28
+	exec time: 0.0400184sec
+	gather time: 0.0704381sec
+
+	iter 28
+	exec time: 0.0574049sec
+	gather time: 0.0216258sec
+
+Rank: 1
+	iter 29
+	exec time: 0.0406911sec
+	gather time: 0.0169756sec
+
+Rank: 5
+Rank: 3
+	iter 29
+	exec time: 0.0406918sec
+	gather time: 0.0229775sec
+
+Rank: 7
+	iter 29
+	exec time: 0.040691sec
+	gather time: 0.0403459sec
+
+	iter 29
+	exec time: 0.0406912sec
+	gather time: 0.0383358sec
+
+Rank: 6
+	iter 29
+	exec time: 0.0260736sec
+	gather time: 0.0394223sec
+
+Rank: 2
+	iter 29
+	exec time: 0.0260755sec
+	gather time: 0.0194274sec
+
+Rank: 4
+	iter 29
+	exec time: 0.0260735sec
+	gather time: 0.0217683sec
+
+Rank: 0
+	iter 29
+	exec time: 0.0260754sec
+	gather time: 0.0497693sec
+
+Rank: 1
+	iter 30
+	exec time: 0.0416791sec
+	gather time: 0.0266248sec
+
+Rank: 3
+	iter 30
+	exec time: 0.0416798sec
+	gather time: 0.077634sec
+
+Rank: 7
+	iter 30
+	exec time: 0.0416794sec
+	gather time: 0.129988sec
+
+Rank: 5
+	iter 30
+	exec time: 0.0377708sec
+	gather time: 0.108978sec
+
+Rank: 6
+	iter 30
+	exec time: 0.0239075sec
+	gather time: 0.103996sec
+
+Rank: 2
+	iter 30
+	exec time: 0.0264532sec
+	gather time: 0.0276399sec
+
+Rank: 0
+	iter 30
+	exec time: 0.0264533sec
+	gather time: 0.116993sec
+
+Rank: 4
+	iter 30
+	exec time: 0.0216193sec
+	gather time: 0.0659919sec
+
+Rank: 3
+	iter 31
+	exec time: 0.0547113sec
+	gather time: 0.0402765sec
+
+Rank: 7
+	iter 31
+	exec time: 0.0547086sec
+	gather time: 0.0773481sec
+
+Rank: 1
+Rank: 5
+	iter 31
+	exec time: 0.0550545sec
+	gather time: 0.0623383sec
+
+Rank: 6
+	iter 31
+	exec time: 0.0596589sec
+	gather time: 0.0781317sec
+
+Rank: 2
+	iter 31
+	iter 31
+	exec time: 0.0597235sec
+	exec time: 0.0596608sec
+	gather time: 0.0437911sec
+
+	gather time: 0.00897706sec
+
+Rank: 4
+	iter 31
+	exec time: 0.0596593sec
+	gather time: 0.0505263sec
+
+Rank: 0
+	iter 31
+	exec time: 0.0596609sec
+	gather time: 0.0911344sec
+
+Rank: 3
+	iter 32
+	exec time: 0.087644sec
+	gather time: 0.0369959sec
+
+Rank: 1
+	iter 32
+	exec time: 0.0789164sec
+	gather time: 0.0379915sec
+
+Rank: 7
+Rank: 4
+	iter 32
+	exec time: 0.0840977sec
+	gather time: 0.028681sec
+
+Rank: 6
+	iter 32
+	exec time: 0.0840985sec
+	gather time: 0.0669942sec
+
+Rank: 5
+	iter 32
+	exec time: 0.0839962sec
+	gather time: 0.0675014sec
+
+	iter 32
+	exec time: 0.0909955sec
+	gather time: 0.101856sec
+
+Rank: 0
+	iter 32
+	exec time: 0.0840959sec
+	Rank: 2
+	iter 32
+	exec time: 0.0755873sec
+gather time: 0.0680007sec
+
+	gather time: 0.0130324sec
+
+Rank: 1
+	iter 33
+	exec time: 0.0776482sec
+	gather time: 0.0149785sec
+
+Rank: 5
+	iter 33
+	exec time: 0.0850138sec
+	gather time: 0.0279971sec
+
+Rank: 2
+Rank: 3
+	iter 33
+	exec time: 0.0776483sec
+	gather time: 0.0219808sec
+
+Rank: 6
+	iter 33
+	exec time: 0.0781953sec
+	gather time: 0.0505562sec
+
+Rank: 4
+	iter 33
+	exec time: 0.0781946sec
+	gather time: 0.0425464sec
+
+Rank: 0
+	iter 33
+	exec time: 0.0781931sec
+	gather time: 0.0741936sec
+
+	iter 33
+	exec time: 0.0781932sec
+	gather time: 0.0212071sec
+
+Rank: 7
+	iter 33
+	exec time: 0.0850153sec
+	gather time: 0.0643396sec
+
+Rank: 6
+	iter 34
+	exec time: 0.079822sec
+	gather time: 0.048991sec
+
+Rank: 2
+	iter 34
+	exec time: 0.0798219sec
+	gather time: 0.0220353sec
+
+Rank: 4
+	iter 34
+	exec time: 0.0798224sec
+	gather time: 0.0376429sec
+
+Rank: 7
+	iter 34
+	exec time: 0.0701033sec
+	gather time: 0.0749442sec
+
+Rank: 3
+	iter 34
+	exec time: 0.0723441sec
+	gather time: 0.0549393sec
+
+Rank: 0
+	iter 34
+	exec time: 0.0798231sec
+	gather time: 0.0636336sec
+
+Rank: 5
+	iter 34
+	exec time: 0.0646532sec
+	gather time: 0.0523067sec
+
+Rank: 1
+	iter 34
+	exec time: 0.0786048sec
+	gather time: 0.0349385sec
+
+Rank: 1
+	iter 35
+	exec time: 0.038915sec
+	gather time: 0.01498sec
+
+Rank: 5
+	iter 35
+	exec time: 0.0389152sec
+	gather time: 0.0539849sec
+
+Rank: 3
+	iter 35
+	exec time: 0.0389153sec
+	gather time: 0.0279894sec
+
+Rank: 7
+	iter 35
+	exec time: 0.0389151sec
+	gather time: 0.0643482sec
+
+Rank: 0
+	iter 35
+	exec time: 0.0426383sec
+	gather time: 0.0773153sec
+
+Rank: 6
+	iter 35
+	Rank: 4
+exec time: 0.0319801sec
+	gather time: 0.0669621sec
+
+Rank: 2
+	iter 35
+	exec time: 0.0309648sec
+	gather time: 0.0259601sec
+
+	iter 35
+	exec time: 0.0426395sec
+	gather time: 0.0473134sec
+
+Rank: 1
+	iter 36
+	exec time: 0.0479934sec
+	gather time: 0.0106246sec
+
+Rank: 3
+	iter 36
+	exec time: 0.0479933sec
+	gather time: 0.0476248sec
+
+Rank: 7
+	iter 36
+	exec time: 0.0479929sec
+	gather time: 0.0739896sec
+
+Rank: 5
+	iter 36
+	exec time: 0.0479928sec
+	gather time: 0.0699825sec
+
+Rank: 6
+	iter 36
+	exec time: 0.0348152sec
+	gather time: 0.0781851sec
+
+Rank: 2
+	iter 36
+	exec time: 0.0348172sec
+	gather time: 0.0471943sec
+
+Rank: 0
+Rank: 4
+	iter 36
+	exec time: 0.0348256sec
+	gather time: 0.0555352sec
+
+	iter 36
+	exec time: 0.0348178sec
+	gather time: 0.086549sec
+
+Rank: 3
+	iter 37
+	exec time: 0.0464998sec
+Rank: 1
+	iter 37
+	gather time: 0.024623sec
+
+	exec time: 0.0459101sec
+	gather time: 0.0126239sec
+
+Rank: 7
+Rank: 6
+	iter 37
+	exec time: 0.0369115sec
+	gather time: 0.0647888sec
+
+Rank: 5
+	iter 37
+	exec time: 0.0459105sec
+	gather time: 0.0349892sec
+
+Rank: 4
+	iter 37
+	exec time: 0.0465008sec
+	iter 37
+	exec time: 0.0420218sec
+	gather time: 0.0354358sec
+
+	gather time: 0.0506359sec
+
+Rank: 2
+	iter 37
+	exec time: 0.0369121sec
+Rank: 0
+	iter 37
+	exec time: 0.0420217sec
+	gather time: 0.0604429sec
+
+	gather time: 0.0214509sec
+
+Rank: 1
+	iter 38
+	exec time: 0.0583143sec
+	gather time: 0.01298sec
+
+Rank: 5
+	iter 38
+	exec time: 0.0583132sec
+	gather time: 0.0519837sec
+
+Rank: 3
+	iter 38
+	exec time: 0.0582344sec
+	gather time: 0.046978sec
+
+Rank: 7
+Rank: 4
+	iter 38
+	Rank: 6
+	iter 38
+	exec time: 0.0569783sec
+exec time: 0.0569789sec
+	gather time: 0.0487295sec
+
+	gather time: 0.0643764sec
+
+Rank: 0
+	iter 38
+	exec time: 0.0569805sec
+	gather time: 0.0737325sec
+
+Rank: 2
+	iter 38
+	exec time: 0.0569802sec
+	gather time: 0.038375sec
+
+	iter 38
+	exec time: 0.0582341sec
+	gather time: 0.0613483sec
+
+Rank: 0
+Rank: 2
+	iter 39
+	exec time: 0.047119sec
+	gather time: 0.034991sec
+
+Rank: 6
+	iter 39
+Rank: 4
+	exec time: 0.0471186sec
+	gather time: 0.0520185sec
+
+	iter 39
+	exec time: 0.0471184sec
+	gather time: 0.0583432sec
+
+	iter 39
+	exec time: 0.0471183sec
+	gather time: 0.0643441sec
+
+Rank: 3
+	iter 39
+	exec time: 0.0393381sec
+	gather time: 0.0744294sec
+
+Rank: 7
+	iter 39
+	exec time: 0.0393366sec
+	gather time: 0.080801sec
+
+Rank: 5
+	iter 39
+	exec time: 0.0393368sec
+	gather time: 0.0684618sec
+
+Rank: 1
+	iter 39
+	exec time: 0.0393386sec
+	gather time: 0.0384397sec
+
+Rank: 3
+Rank: 1
+	iter 40
+	exec time: 0.0268382sec
+	Rank: 2
+	iter 40
+	exec time: 0.0409115sec
+	gather time: 0.020994sec
+
+gather time: 0.0428578sec
+
+Rank: 5
+Rank: 4
+	iter 40
+	exec time: 0.0409099sec
+	gather time: 0.0583415sec
+
+Rank: 6
+Rank: 7
+	iter 40
+	exec time: 0.0268375sec
+	gather time: 0.0772308sec
+
+	iter 40
+	exec time: 0.0268378sec
+	gather time: 0.0558686sec
+
+	iter 40
+	exec time: 0.0409117sec
+	gather time: 0.0560024sec
+
+Rank: 0
+	iter 40
+	exec time: 0.04091sec
+	gather time: 0.0593469sec
+
+	iter 40
+	exec time: 0.0268379sec
+	gather time: 0.0738647sec
+
+Rank: 1
+Rank: 3
+	iter 41
+	exec time: 0.02137sec
+Rank: 0
+	iter 41
+	exec time: 0.0375874sec
+	gather time: 0.061346sec
+
+	gather time: 0.0268405sec
+
+Rank: 7
+Rank: 6
+	iter 41
+	exec time: 0.0375878sec
+	gather time: 0.0499932sec
+
+Rank: 4
+Rank: 5
+	iter 41
+	exec time: 0.0213721sec
+	gather time: 0.0657395sec
+
+	iter 41
+	exec time: 0.0213719sec
+	gather time: 0.0757492sec
+
+Rank: 2
+	iter 41
+	exec time: 0.0375874sec
+	iter 41
+	exec time: 0.0213703sec
+	gather time: 0.0353814sec
+
+	gather time: 0.0249763sec
+
+	iter 41
+	exec time: 0.0375878sec
+	gather time: 0.0339844sec
+
+Rank: 3
+	iter 42
+	exec time: 0.0613711sec
+Rank: 1
+	iter 42
+	exec time: 0.0613713sec
+	gather time: 0.0375889sec
+
+	gather time: 0.0635883sec
+
+Rank: 5
+	iter 42
+Rank: 7
+	iter 42
+	exec time: 0.0613721sec
+		exec time: 0.0613725sec
+	gather time: 0.0509565sec
+
+gather time: 0.0765928sec
+
+Rank: 4
+	iter 42
+	exec time: 0.0581073sec
+	gather time: 0.0376511sec
+
+Rank: 6
+	iter 42
+	exec time: 0.058107sec
+	gather time: 0.0459888sec
+
+Rank: 0
+	iter 42
+	Rank: 2
+	iter 42
+	exec time: 0.0581088sec
+	gather time: 0.0376409sec
+
+exec time: 0.0581087sec
+	gather time: 0.0636271sec
+
+Rank: 0
+Rank: 3
+Rank: 1
+	iter 43
+	exec time: 0.0640089sec
+	gather time: 0.0444341sec
+
+Rank: 2
+	iter 43
+	exec time: 0.0572729sec
+	gather time: 0.0246341sec
+
+Rank: 4
+Rank: 5
+	iter 43
+	exec time: 0.0640076sec
+	gather time: 0.0628057sec
+
+Rank: 6
+	iter 43
+	exec time: 0.0572729sec
+	gather time: 0.0509914sec
+
+Rank: 7
+	iter 43
+	exec time: 0.0640077sec
+	gather time: 0.0688076sec
+
+	iter 43
+	exec time: 0.0572729sec
+	iter 43
+	exec time: 0.0640851sec
+	gather time: 0.0624352sec
+
+	gather time: 0.0569913sec
+
+	iter 43
+	exec time: 0.0572726sec
+	gather time: 0.0456389sec
+
+Rank: 2
+	iter 44
+	exec time: 0.081725sec
+	gather time: 0.0381443sec
+
+Rank: 6
+	iter 44
+	exec time: 0.0770029sec
+	gather time: 0.0765002sec
+
+Rank: 1
+	iter 44
+	exec time: 0.0800551sec
+	gather time: 0.00898208sec
+
+Rank: 5
+Rank: 4
+	iter 44
+	exec time: 0.0753315sec
+	gather time: 0.0481503sec
+
+Rank: 3
+	iter 44
+	exec time: 0.0792108sec
+	gather time: 0.04398sec
+
+Rank: 7
+	iter 44
+	exec time: 0.0773901sec
+	gather time: 0.0739865sec
+
+	iter 44
+	exec time: 0.0800531sec
+	gather time: 0.047986sec
+
+Rank: 0
+	iter 44
+	exec time: 0.0800516sec
+	gather time: 0.0901397sec
+
+Rank: 1
+	iter 45
+	exec time: 0.0461701sec
+	gather time: 0.0150585sec
+
+Rank: 2
+	iter 45
+	exec time: 0.0331685sec
+	gather time: 0.0184021sec
+
+Rank: 6
+	iter 45
+	Rank: 4
+Rank: 5
+	iter 45
+	exec time: 0.0461322sec
+	gather time: 9.688e-06sec
+
+exec time: 0.0373441sec
+	gather time: 0.0194888sec
+
+Rank: 3
+	iter 45
+	exec time: 0.0461705sec
+	gather time: 0.019056sec
+
+Rank: 7
+	iter 45
+	exec time: 0.0390226sec
+	gather time: 0.0184169sec
+
+Rank: 0
+	iter 45
+	exec time: 0.0373433sec
+	gather time: 0.0431194sec
+
+	iter 45
+	exec time: 0.0461683sec
+	gather time: 0.0169945sec
+
+Rank: 3
+Rank: 7
+	iter 46
+	exec time: 0.0389501sec
+	gather time: 0.0795375sec
+
+	iter 46
+	exec time: 0.0389504sec
+	gather time: 0.063169sec
+
+Rank: 6
+	iter 46
+	exec time: 0.0485676sec
+	gather time: 0.0546337sec
+
+Rank: 5
+	iter 46
+	exec time: 0.0389412sec
+	gather time: 0.0671788sec
+
+Rank: 1
+	iter 46
+	exec time: 0.0389413sec
+	gather time: 0.0351598sec
+
+Rank: 2
+	iter 46
+	exec time: 0.048568sec
+	gather time: 0.0356394sec
+
+Rank: 4
+	iter 46
+	exec time: 0.0485673sec
+	gather time: 0.0619771sec
+
+Rank: 0
+	iter 46
+	exec time: 0.0485675sec
+	gather time: 0.0669888sec
+
+Rank: 3
+	iter 47
+	exec time: 0.0442809sec
+	gather time: 0.0406267sec
+
+Rank: 7
+	iter 47
+	exec time: 0.0442809sec
+	gather time: 0.0669748sec
+
+Rank: 1
+Rank: 5
+	iter 47
+	exec time: 0.045003sec
+	gather time: 0.0519708sec
+
+Rank: 6
+	iter 47
+	exec time: 0.0343434sec
+	gather time: 0.0649117sec
+
+Rank: 2
+	iter 47
+	exec time: 0.0343418sec
+	gather time: 0.0375594sec
+
+	iter 47
+	exec time: 0.0450044sec
+	gather time: 0.0116171sec
+
+Rank: 4
+	iter 47
+	exec time: 0.0343434sec
+	gather time: 0.0535561sec
+
+Rank: 0
+	iter 47
+	exec time: 0.0343416sec
+	gather time: 0.078556sec
+
+Rank: 6
+	iter 48
+	exec time: 0.0501412sec
+	gather time: 0.0769893sec
+
+Rank: 3
+	iter 48
+	exec time: 0.0453124sec
+	gather time: 0.064954sec
+
+Rank: 1
+	iter 48
+	exec time: 0.0453128sec
+	gather time: 0.0389443sec
+
+Rank: 5
+Rank: 4
+	iter 48
+	exec time: 0.0518958sec
+	gather time: 0.050988sec
+
+	iter 48
+	exec time: 0.0453126sec
+	gather time: 0.0779541sec
+
+Rank: 7
+	iter 48
+	exec time: 0.0453124sec
+	gather time: 0.109313sec
+
+Rank: 0
+	iter 48
+	exec time: 0.0518963sec
+	gather time: 0.0959857sec
+
+Rank: 2
+	iter 48
+	exec time: 0.0501434sec
+	gather time: 0.0388651sec
+
+Rank: 1
+	iter 49
+	Rank: 3
+exec time: 0.0466235sec
+	gather time: 0.00962063sec
+
+Rank: 5
+Rank: 7
+	iter 49
+	exec time: 0.0466238sec
+	gather time: 0.0486297sec
+
+Rank: 2
+	iter 49
+	exec time: 0.0466226sec
+	gather time: 0.0366201sec
+
+	iter 49
+	exec time: 0.0466245sec
+	gather time: 0.0319883sec
+
+Rank: 6
+	iter 49
+	exec time: 0.0371493sec
+	gather time: 0.064393sec
+
+	iter 49
+	exec time: 0.0371495sec
+	gather time: 0.0330543sec
+
+Rank: 0
+Rank: 4
+	iter 49
+	exec time: 0.0371498sec
+	gather time: 0.0330631sec
+
+	iter 49
+	exec time: 0.0371496sec
+	gather time: 0.0590446sec
+
+Rank: 1
+	iter 50
+	exec time: 0.0719368sec
+	gather time: 0.0280984sec
+
+Rank: 3
+	iter 50
+	exec time: 0.0719368sec
+	gather time: 0.0665179sec
+
+Rank: 7
+	iter 50
+	Rank: 5
+exec time: 0.0719369sec
+	gather time: 0.0966635sec
+
+Rank: 6
+	iter 50
+	iter 50
+	exec time: 0.0719369sec
+	gather time: 0.0768773sec
+
+	exec time: 0.074931sec
+	gather time: 0.0510069sec
+
+Rank: 2
+	iter 50
+	exec time: 0.0706417sec
+	gather time: 0.0286357sec
+
+Rank: 0
+Rank: 4
+	iter 50
+	exec time: 0.074927sec
+	gather time: 0.0286535sec
+
+	iter 50
+	exec time: 0.0706421sec
+	gather time: 0.0826284sec
+
+Rank: 1
+	iter 51
+	exec time: 0.0581489sec
+	gather time: 0.00478355sec
+
+Rank: 3
+	iter 51
+	exec time: 0.0581493sec
+	gather time: 0.0386162sec
+
+Rank: 7
+	iter 51
+	exec time: 0.0581499sec
+	gather time: 0.046992sec
+
+Rank: 5
+	iter 51
+	exec time: 0.0581482sec
+	gather time: 0.0509762sec
+
+Rank: 4
+	iter 51
+	Rank: 6
+	iter 51
+	exec time: 0.0449706sec
+	gather time: 0.0568967sec
+
+exec time: 0.0449711sec
+	gather time: 0.0412537sec
+
+Rank: 2
+	iter 51
+	exec time: 0.0449709sec
+	Rank: 0
+	iter 51
+	exec time: 0.0449712sec
+	gather time: 0.060259sec
+
+gather time: 0.0309035sec
+
+Rank: 0
+	iter 52
+	exec time: 0.022783sec
+	gather time: 0.0366815sec
+
+Rank: 6
+	iter 52
+	exec time: 0.0227823sec
+Rank: 4
+	gather time: 0.036353sec
+
+Rank: 2
+	iter 52
+	exec time: 0.0227823sec
+	gather time: 0.0363284sec
+
+	iter 52
+	exec time: 0.0227829sec
+	gather time: 0.0486644sec
+
+Rank: 3
+	iter 52
+	exec time: 0.0364752sec
+	gather time: 0.0349783sec
+
+Rank: 7
+Rank: 5
+	iter 52
+	exec time: 0.0364738sec
+	gather time: 0.0220255sec
+
+Rank: 1
+	iter 52
+	exec time: 0.0364749sec
+	gather time: 0.00898039sec
+
+	iter 52
+	exec time: 0.0364749sec
+	gather time: 0.022355sec
+
+Rank: 1
+	iter 53
+	exec time: 0.0536491sec
+	gather time: 0.00968908sec
+
+Rank: 2
+Rank: 3
+	iter 53
+	exec time: 0.0536482sec
+	gather time: 0.0479918sec
+
+Rank: 6
+	iter 53
+	exec time: 0.0536446sec
+Rank: 4
+Rank: 5
+	iter 53
+	exec time: 0.0536491sec
+	gather time: 0.073986sec
+
+	gather time: 0.0992611sec
+
+Rank: 0
+	iter 53
+	exec time: 0.0536453sec
+	gather time: 0.112895sec
+
+	iter 53
+	exec time: 0.0536453sec
+	gather time: 0.0349sec
+
+	iter 53
+	exec time: 0.0536443sec
+	gather time: 0.0642581sec
+
+Rank: 7
+	iter 53
+	exec time: 0.0536489sec
+	gather time: 0.099986sec
+
+Rank: 1
+	iter 54
+Rank: 3
+	iter 54
+	exec time: 0.0822517sec
+	exec time: 0.082213sec
+	gather time: 0.0480406sec
+
+	gather time: 0.0610493sec
+
+Rank: 5
+Rank: 7
+	iter 54
+	exec time: 0.0822518sec
+	gather time: 0.120402sec
+
+Rank: 6
+	iter 54
+	exec time: 0.0822571sec
+	gather time: 0.0789862sec
+
+	iter 54
+	exec time: 0.0822127sec
+	gather time: 0.0904004sec
+
+Rank: 2
+	iter 54
+	exec time: 0.0821732sec
+	gather time: 0.0255084sec
+
+Rank: 0
+Rank: 4
+	iter 54
+	exec time: 0.083124sec
+	gather time: 0.0479864sec
+
+	iter 54
+	exec time: 0.0831226sec
+	gather time: 0.0986244sec
+
+Rank: 3
+	iter 55
+	exec time: 0.0328537sec
+Rank: 1
+	iter 55
+	exec time: 0.032852sec
+	gather time: 0.00961915sec
+
+	gather time: 0.0456181sec
+
+Rank: 7
+	iter 55
+	exec time: 0.0328522sec
+Rank: 5
+	gather time: 0.0569899sec
+
+Rank: 2
+	iter 55
+	exec time: 0.0184964sec
+	gather time: 0.0373793sec
+
+	iter 55
+	exec time: 0.032851sec
+	gather time: 0.0486177sec
+
+Rank: 6
+	iter 55
+	exec time: 0.0185073sec
+	gather time: 0.0633775sec
+
+Rank: 0
+Rank: 4
+	iter 55
+	exec time: 0.0185057sec
+	gather time: 0.0493299sec
+
+	iter 55
+	exec time: 0.0184967sec
+	gather time: 0.071739sec
+
+Rank: 1
+	iter 56
+	exec time: 0.0731029sec
+	gather time: 0.00861724sec
+
+Rank: 5
+	iter 56
+	exec time: 0.0731031sec
+	gather time: 0.0319868sec
+
+Rank: 3
+	iter 56
+	exec time: 0.0749599sec
+	gather time: 0.0196157sec
+
+Rank: 7
+Rank: 6
+	iter 56
+	exec time: 0.0671834sec
+	gather time: 0.0673119sec
+
+Rank: 0
+	iter 56
+	exec time: 0.0671825sec
+	gather time: 0.0629595sec
+
+Rank: 4
+	iter 56
+	exec time: 0.0731698sec
+	gather time: 0.0369519sec
+
+	iter 56
+	exec time: 0.0731033sec
+	gather time: 0.0476274sec
+
+Rank: 2
+	iter 56
+	exec time: 0.0671826sec
+	gather time: 0.0219661sec
+
+Rank: 0
+	iter 57
+	Rank: 2
+	iter 57
+	exec time: 0.0231623sec
+	gather time: 0.00549648sec
+
+exec time: 0.0231628sec
+	gather time: 0.0129939sec
+
+Rank: 4
+	iter 57
+Rank: 6
+	iter 57
+	exec time: 0.0231623sec
+	gather time: 0.0127888sec
+
+	exec time: 0.0231627sec
+	gather time: 0.00452275sec
+
+Rank: 1
+	iter 57
+	exec time: 0.0352941sec
+	gather time: 0.0126687sec
+
+Rank: 5
+	iter 57
+	exec time: 0.0352928sec
+	gather time: 0.0247781sec
+
+Rank: 3
+	iter 57
+	exec time: 0.0352945sec
+	gather time: 0.00913507sec
+
+Rank: 7
+	iter 57
+	exec time: 0.0352927sec
+	gather time: 0.0249937sec
+
+Rank: 0
+	iter 58
+	exec time: 0.0393068sec
+	gather time: 0.0939854sec
+
+Rank: 4
+Rank: 2
+	iter 58
+	exec time: 0.0393078sec
+	gather time: 0.0379977sec
+
+Rank: 6
+	iter 58
+	exec time: 0.0393067sec
+	gather time: 0.079355sec
+
+	iter 58
+	exec time: 0.0393061sec
+	gather time: 0.0503533sec
+
+Rank: 3
+	iter 58
+	exec time: 0.0249164sec
+	gather time: 0.0664169sec
+
+Rank: 7
+	iter 58
+	exec time: 0.0249165sec
+	gather time: 0.113784sec
+
+Rank: 5
+	iter 58
+	exec time: 0.0249165sec
+	gather time: 0.0804228sec
+
+Rank: 1
+	iter 58
+	exec time: 0.0249162sec
+	gather time: 0.0374148sec
+
+Rank: 1
+	iter 59
+	exec time: 0.0826451sec
+	gather time: 0.0619792sec
+
+Rank: 5
+	iter 59
+	exec time: 0.0826466sec
+	gather time: 0.074993sec
+
+Rank: 3
+	iter 59
+	exec time: 0.0827276sec
+	gather time: 0.0602747sec
+
+Rank: 7
+Rank: 4
+	iter 59
+	exec time: 0.0879978sec
+	gather time: 0.0649921sec
+
+Rank: 6
+	iter 59
+	exec time: 0.0827297sec
+	gather time: 0.102346sec
+
+Rank: 0
+	iter 59
+	exec time: 0.0879964sec
+	gather time: 0.0710008sec
+
+Rank: 2
+	iter 59
+	exec time: 0.0879957sec
+	gather time: 0.0347661sec
+
+	iter 59
+	exec time: 0.0881514sec
+	gather time: 0.0709987sec
+
+Rank: 3
+Rank: 1
+	iter 60
+	exec time: 0.0811018sec
+	gather time: 0.0105742sec
+
+Rank: 5
+Rank: 7
+	iter 60
+	exec time: 0.0708348sec
+	gather time: 0.0310462sec
+
+Rank: 2
+	iter 60
+	exec time: 0.073171sec
+	gather time: 0.0329819sec
+
+Rank: 6
+	iter 60
+		iter 60
+	exec time: 0.0763674sec
+	gather time: 0.0253525sec
+
+exec time: 0.0755722sec
+	gather time: 0.0382879sec
+
+	iter 60
+	exec time: 0.0755742sec
+	gather time: 0.0332307sec
+
+Rank: 0
+Rank: 4
+	iter 60
+	exec time: 0.075572sec
+	gather time: 0.0332459sec
+
+	iter 60
+	exec time: 0.0755737sec
+	gather time: 0.0439699sec
+
+Rank: 1
+	iter 61
+	exec time: 0.054535sec
+	gather time: 0.0229807sec
+
+Rank: 3
+	iter 61
+	exec time: 0.0545352sec
+	gather time: 0.0279804sec
+
+Rank: 7
+	iter 61
+	exec time: 0.0545345sec
+Rank: 5
+	iter 61
+	exec time: 0.0545344sec
+	gather time: 0.039647sec
+
+	gather time: 0.0529854sec
+
+Rank: 4
+	iter 61
+	exec time: 0.0423988sec
+	gather time: 0.00261697sec
+
+Rank: 6
+	iter 61
+	exec time: 0.0423993sec
+	gather time: 0.025001sec
+
+Rank: 0
+	iter 61
+	exec time: 0.0423991sec
+	gather time: 0.0399928sec
+
+Rank: 2
+	iter 61
+	exec time: 0.0423995sec
+	gather time: 0.00196838sec
+
+Rank: 1
+	iter 62
+	exec time: 0.0476847sec
+	gather time: 0.0126199sec
+
+Rank: 5
+	iter 62
+	exec time: 0.0476842sec
+	gather time: 0.0516253sec
+
+Rank: 3
+	iter 62
+	exec time: 0.0476849sec
+	gather time: 0.0266179sec
+
+Rank: 7
+	iter 62
+	exec time: 0.0476843sec
+	gather time: 0.0626329sec
+
+Rank: 0
+Rank: 6
+	iter 62
+	Rank: 4
+	iter 62
+	exec time: 0.039342sec
+	gather time: 0.0379964sec
+
+exec time: 0.0393417sec
+	gather time: 0.0546378sec
+
+Rank: 2
+	iter 62
+	exec time: 0.0393434sec
+	gather time: 0.0136303sec
+
+	iter 62
+	exec time: 0.0393429sec
+	gather time: 0.0856236sec
+
+Rank: 1
+	iter 63
+	exec time: 0.0766333sec
+	gather time: 0.0169794sec
+
+Rank: 3
+	iter 63
+	exec time: 0.0766323sec
+	gather time: 0.0239813sec
+
+Rank: 5
+	iter 63
+	exec time: 0.0806687sec
+	Rank: 7
+	iter 63
+	exec time: 0.0806737sec
+	gather time: 0.0509871sec
+
+gather time: 0.0303502sec
+
+Rank: 0
+	iter 63
+	exec time: 0.077737sec
+Rank: 2
+	iter 63
+	exec time: 0.0777362sec
+	gather time: 0.0259299sec
+
+	gather time: 0.0659115sec
+
+Rank: 6
+	iter 63
+	exec time: 0.0777385sec
+	Rank: 4
+	iter 63
+	exec time: 0.0777387sec
+	gather time: 0.0259424sec
+
+gather time: 0.0522812sec
+
+Rank: 1
+	iter 64
+	exec time: 0.0707958sec
+	gather time: 0.04035sec
+
+Rank: 5
+Rank: 2
+Rank: 3
+	iter 64
+	exec time: 0.0707968sec
+	gather time: 0.046353sec
+
+Rank: 6
+	iter 64
+Rank: 4
+	iter 64
+	exec time: 0.0707944sec
+	gather time: 0.053367sec
+
+	exec time: 0.0639569sec
+	gather time: 0.04599sec
+
+Rank: 0
+	iter 64
+	exec time: 0.0707858sec
+	gather time: 0.0716216sec
+
+	iter 64
+	exec time: 0.0639582sec
+	gather time: 0.015426sec
+
+	iter 64
+	exec time: 0.0639575sec
+Rank: 7
+	iter 64
+	exec time: 0.0707953sec
+	gather time: 0.0903592sec
+
+	gather time: 0.0369768sec
+
+Rank: 2
+Rank: 6
+	iter 65
+	exec time: 0.0641224sec
+	gather time: 0.0099913sec
+
+Rank: 0
+Rank: 1
+	iter 65
+Rank: 3
+	iter 65
+	exec time: 0.0599073sec
+	gather time: 0.00956725sec
+
+	exec time: 0.0560213sec
+	gather time: 0.0260286sec
+
+Rank: 4
+	iter 65
+	exec time: 0.0677953sec
+	gather time: 0.00957719sec
+
+Rank: 7
+	iter 65
+	exec time: 0.0560213sec
+	gather time: 0.0204138sec
+
+	iter 65
+	exec time: 0.0560214sec
+		iter 65
+	exec time: 0.0677935sec
+	gather time: 0.0119939sec
+
+gather time: 0.0300306sec
+
+Rank: 5
+	iter 65
+	exec time: 0.056021sec
+	gather time: 0.0304007sec
+
+Rank: 0
+Rank: 1
+	iter 66
+	exec time: 0.0480203sec
+	gather time: 0.0119899sec
+
+Rank: 3
+	iter 66
+	exec time: 0.048021sec
+	gather time: 0.0109581sec
+
+Rank: 6
+	iter 66
+	exec time: 0.0591253sec
+Rank: 4
+	iter 66
+	exec time: 0.0526753sec
+	gather time: 0.0119989sec
+
+	gather time: 0.0260011sec
+
+	iter 66
+	Rank: 2
+	iter 66
+	exec time: 0.0526696sec
+	gather time: 0.0100308sec
+
+exec time: 0.0514192sec
+	gather time: 0.0609855sec
+
+Rank: 5
+	iter 66
+	exec time: 0.0480212sec
+	gather time: 0.0236372sec
+
+Rank: 7
+	iter 66
+	exec time: 0.0480207sec
+	gather time: 0.0589897sec
+
+Rank: 3
+	iter 67
+	exec time: 0.0155645sec
+	gather time: 0.0266215sec
+
+Rank: 1
+	iter 67
+	exec time: 0.0122885sec
+	gather time: 0.0129956sec
+
+Rank: 7
+	iter 67
+	exec time: 0.0155642sec
+	gather time: 0.0376285sec
+
+Rank: 5
+	iter 67
+	exec time: 0.0122886sec
+	gather time: 0.0169991sec
+
+Rank: 6
+	iter 67
+	exec time: 0.0302865sec
+	gather time: 0.00400567sec
+
+Rank: 2
+	iter 67
+	exec time: 0.0302865sec
+	gather time: 0.0118805sec
+
+Rank: 4
+	iter 67
+	exec time: 0.0266963sec
+	gather time: 0.00353066sec
+
+Rank: 0
+	iter 67
+	exec time: 0.0266973sec
+	gather time: 0.032989sec
+
+Rank: 1
+	iter 68
+	exec time: 0.0524481sec
+	gather time: 0.00696714sec
+
+Rank: 2
+Rank: 3
+	iter 68
+	exec time: 0.0524483sec
+	gather time: 0.0329792sec
+
+Rank: 6
+	iter 68
+	exec time: 0.0425723sec
+Rank: 4
+	iter 68
+	exec time: 0.0425727sec
+	gather time: 0.0330075sec
+
+	gather time: 0.0683402sec
+
+Rank: 0
+	iter 68
+	exec time: 0.0425727sec
+	gather time: 0.0659752sec
+
+Rank: 5
+	iter 68
+	exec time: 0.0524467sec
+	gather time: 0.0253586sec
+
+Rank: 7
+	iter 68
+	exec time: 0.0524466sec
+	gather time: 0.0529964sec
+
+	iter 68
+	exec time: 0.0425723sec
+	gather time: 0.0329809sec
+
+Rank: 2
+Rank: 6
+	iter 69
+	exec time: 0.0394219sec
+	gather time: 0.0497844sec
+
+Rank: 1
+	iter 69
+	exec time: 0.0485607sec
+	gather time: 0.0129791sec
+
+Rank: 3
+	iter 69
+	exec time: 0.0485611sec
+	gather time: 0.02498sec
+
+Rank: 5
+	iter 69
+	exec time: 0.0485613sec
+	gather time: 0.0259973sec
+
+Rank: 7
+	iter 69
+	exec time: 0.0485611sec
+Rank: 4
+	iter 69
+	exec time: 0.039422sec
+	gather time: 0.0457746sec
+
+	gather time: 0.0519879sec
+
+	iter 69
+	exec time: 0.039424sec
+Rank: 0
+	iter 69
+	exec time: 0.0394237sec
+	gather time: 0.0644069sec
+
+	gather time: 0.0244248sec
+
+Rank: 3
+	iter 70
+	exec time: 0.0370478sec
+Rank: 1
+	iter 70
+	exec time: 0.0370493sec
+	gather time: 0.0159926sec
+
+	gather time: 0.0270061sec
+
+Rank: 5
+	iter 70
+	Rank: 7
+	iter 70
+	exec time: 0.0370457sec
+	gather time: 0.10636sec
+
+exec time: 0.0370475sec
+	gather time: 0.0789855sec
+
+Rank: 4
+	iter 70
+Rank: 6
+	iter 70
+	exec time: 0.0320348sec
+		exec time: 0.0306444sec
+	gather time: 0.0413593sec
+
+gather time: 0.0753632sec
+
+Rank: 2
+	iter 70
+	exec time: 0.0320275sec
+	gather time: 0.0259978sec
+
+Rank: 0
+	iter 70
+	exec time: 0.0238086sec
+	gather time: 0.0933626sec
+
+Rank: 2
+Rank: 6
+	iter 71
+	exec time: 0.0520953sec
+	gather time: 0.0483607sec
+
+Rank: 3
+	iter 71
+	exec time: 0.0570065sec
+Rank: 1
+	iter 71
+	exec time: 0.0570066sec
+	gather time: 0.0355285sec
+
+	gather time: 0.032526sec
+
+Rank: 5
+Rank: 4
+	iter 71
+	exec time: 0.0520957sec
+	gather time: 0.0143591sec
+
+Rank: 7
+	iter 71
+	exec time: 0.0570053sec
+	gather time: 0.091901sec
+
+	iter 71
+	exec time: 0.0570056sec
+	gather time: 0.058538sec
+
+	iter 71
+	exec time: 0.0520956sec
+	gather time: 0.0110133sec
+
+Rank: 0
+	iter 71
+	exec time: 0.0520958sec
+	gather time: 0.072322sec
+
+Rank: 3
+	iter 72
+	exec time: 0.0530116sec
+Rank: 1
+	iter 72
+	exec time: 0.0530116sec
+	gather time: 0.0273287sec
+
+	gather time: 0.0313299sec
+
+Rank: 7
+	iter 72
+	exec time: 0.0530117sec
+	gather time: 0.0497114sec
+
+Rank: 5
+	iter 72
+	exec time: 0.0530119sec
+	gather time: 0.0247101sec
+
+Rank: 6
+	iter 72
+	exec time: 0.053216sec
+	gather time: 0.0279853sec
+
+Rank: 2
+	iter 72
+	exec time: 0.0532161sec
+	gather time: 0.00613719sec
+
+Rank: 0
+Rank: 4
+	iter 72
+	exec time: 0.0532157sec
+	gather time: 0.00615378sec
+
+	iter 72
+	exec time: 0.0532156sec
+	gather time: 0.03736sec
+
+Rank: 1
+	iter 73
+	exec time: 0.0406889sec
+	gather time: 0.0319812sec
+
+Rank: 5
+	iter 73
+	exec time: 0.0424161sec
+	gather time: 0.0473595sec
+
+Rank: 2
+Rank: 3
+	iter 73
+	exec time: 0.0474434sec
+	gather time: 0.057979sec
+
+Rank: 6
+	iter 73
+	exec time: 0.0390188sec
+	gather time: 0.0393624sec
+
+Rank: 4
+	iter 73
+	exec time: 0.0390196sec
+	gather time: 0.0320146sec
+
+Rank: 0
+	iter 73
+	exec time: 0.039028sec
+	gather time: 0.0589897sec
+
+	iter 73
+	exec time: 0.0390293sec
+	gather time: 0.0320066sec
+
+Rank: 7
+	iter 73
+	exec time: 0.047445sec
+	gather time: 0.0753507sec
+
+Rank: 1
+	iter 74
+	exec time: 0.021927sec
+	gather time: 0.0353477sec
+
+Rank: 3
+	iter 74
+	exec time: 0.0219273sec
+	Rank: 2
+gather time: 0.0613466sec
+
+Rank: 5
+	iter 74
+	Rank: 6
+	iter 74
+	exec time: 0.0363697sec
+	gather time: 0.0646198sec
+
+exec time: 0.0219271sec
+	gather time: 0.0743474sec
+
+	iter 74
+	exec time: 0.0363716sec
+	gather time: 0.0386325sec
+
+Rank: 0
+	iter 74
+	exec time: 0.0363711sec
+	gather time: 0.0649913sec
+
+Rank: 7
+	iter 74
+	exec time: 0.0219275sec
+Rank: 4
+	iter 74
+	exec time: 0.0363701sec
+	gather time: 0.0409871sec
+
+	gather time: 0.0747253sec
+
+Rank: 1
+	iter 75
+	exec time: 0.0669296sec
+	gather time: 0.0429782sec
+
+Rank: 5
+	iter 75
+	exec time: 0.0669279sec
+	gather time: 0.0819862sec
+
+Rank: 3
+	iter 75
+	exec time: 0.064557sec
+	gather time: 0.0639805sec
+
+Rank: 7
+	iter 75
+	exec time: 0.0645583sec
+	gather time: 0.110354sec
+
+Rank: 0
+	iter 75
+	exec time: 0.0531567sec
+	gather time: 0.091997sec
+
+Rank: 6
+	iter 75
+	Rank: 4
+exec time: 0.0446713sec
+	gather time: 0.0763699sec
+
+Rank: 2
+	iter 75
+	exec time: 0.0576277sec
+	gather time: 0.022002sec
+
+	iter 75
+	exec time: 0.053157sec
+	gather time: 0.0533656sec
+
+Rank: 1
+	iter 76
+	exec time: 0.0583897sec
+	gather time: 0.038979sec
+
+Rank: 2
+Rank: 3
+	iter 76
+	exec time: 0.0581933sec
+	gather time: 0.0509803sec
+
+Rank: 6
+	iter 76
+Rank: 4
+Rank: 5
+	iter 76
+	exec time: 0.0583875sec
+	gather time: 0.0382172sec
+
+	exec time: 0.0513413sec
+	gather time: 0.0262246sec
+
+Rank: 0
+	iter 76
+	exec time: 0.0493701sec
+	gather time: 0.0379975sec
+
+	iter 76
+	exec time: 0.0513404sec
+	gather time: 0.0240111sec
+
+	iter 76
+	Rank: 7
+	iter 76
+	exec time: 0.0581914sec
+exec time: 0.0493701sec
+	gather time: 0.0260164sec
+
+	gather time: 0.0593551sec
+
+Rank: 1
+	iter 77
+	exec time: 0.0149767sec
+	gather time: 0.0256565sec
+
+Rank: 3
+	iter 77
+	exec time: 0.0149758sec
+	gather time: 0.0296571sec
+
+Rank: 7
+	iter 77
+	exec time: 0.0149752sec
+	gather time: 0.0860076sec
+
+Rank: 5
+	iter 77
+	exec time: 0.014975sec
+	gather time: 0.0502606sec
+
+Rank: 6
+	iter 77
+	exec time: 0.0260147sec
+	gather time: 0.0489946sec
+
+Rank: 2
+	iter 77
+	exec time: 0.0260161sec
+	gather time: 0.00374569sec
+
+Rank: 0
+Rank: 4
+	iter 77
+	exec time: 0.026015sec
+	gather time: 0.00375471sec
+
+	iter 77
+	exec time: 0.0260166sec
+	gather time: 0.0626367sec
+
+Rank: 3
+	iter 78
+	exec time: 0.0488891sec
+	gather time: 0.042623sec
+
+Rank: 1
+	iter 78
+	exec time: 0.0517046sec
+	gather time: 0.0296099sec
+
+Rank: 5
+	iter 78
+	Rank: 7
+	iter 78
+	exec time: 0.0509511sec
+	gather time: 0.0899852sec
+
+exec time: 0.0524403sec
+	gather time: 0.0606281sec
+
+Rank: 0
+	iter 78
+	Rank: 2
+	iter 78
+	exec time: 0.0453075sec
+	gather time: 0.0210031sec
+
+exec time: 0.0381285sec
+	gather time: 0.081sec
+
+Rank: 4
+	iter 78
+	Rank: 6
+	iter 78
+	exec time: 0.0453099sec
+	exec time: 0.0453099sec
+	gather time: 0.0320052sec
+
+gather time: 0.0556346sec
+
+Rank: 1
+	iter 79
+	exec time: 0.0620749sec
+	gather time: 0.0399797sec
+
+Rank: 3
+	iter 79
+	exec time: 0.0620755sec
+	gather time: 0.0529891sec
+
+Rank: 5
+Rank: 7
+	iter 79
+	exec time: 0.0620746sec
+	gather time: 0.0563645sec
+
+	iter 79
+Rank: 6
+	iter 79
+	exec time: 0.0524046sec
+	gather time: 0.0356579sec
+
+	exec time: 0.0620746sec
+	gather time: 0.0530123sec
+
+Rank: 2
+	iter 79
+	exec time: 0.0524016sec
+	gather time: 0.0260004sec
+
+Rank: 0
+Rank: 4
+	iter 79
+	exec time: 0.052405sec
+	gather time: 0.0441906sec
+
+	iter 79
+	exec time: 0.0524047sec
+	gather time: 0.0433687sec
+
+Rank: 1
+	iter 80
+	exec time: 0.0156084sec
+	gather time: 0.0156099sec
+
+Rank: 5
+	iter 80
+	exec time: 0.0156084sec
+	gather time: 0.0619781sec
+
+Rank: 2
+Rank: 3
+	iter 80
+	exec time: 0.0156075sec
+	gather time: 0.03761sec
+
+Rank: 6
+	iter 80
+	exec time: 0.0246291sec
+	gather time: 0.0672188sec
+
+Rank: 4
+	iter 80
+	exec time: 0.0246292sec
+	gather time: 0.043176sec
+
+Rank: 0
+	iter 80
+	exec time: 0.0246287sec
+	gather time: 0.0695816sec
+
+	iter 80
+	exec time: 0.0246288sec
+	gather time: 0.0212146sec
+
+Rank: 7
+	iter 80
+	exec time: 0.015608sec
+	gather time: 0.0599898sec
+
+Rank: 0
+	iter 81
+	exec time: 0.0318188sec
+	gather time: 0.0129603sec
+
+Rank: 4
+Rank: 2
+	iter 81
+	exec time: 0.0268943sec
+	gather time: 0.00660107sec
+
+Rank: 6
+	iter 81
+	exec time: 0.0268927sec
+	gather time: 0.000272249sec
+
+	iter 81
+	exec time: 0.0318176sec
+	gather time: 0.0129878sec
+
+Rank: 3
+	iter 81
+	exec time: 0.0155852sec
+	gather time: 0.0123926sec
+
+Rank: 7
+	iter 81
+	exec time: 0.0155838sec
+	gather time: 9.332e-06sec
+
+Rank: 1
+Rank: 5
+	iter 81
+	exec time: 0.0155846sec
+	gather time: 1.9139e-05sec
+
+	iter 81
+	exec time: 0.0155864sec
+	gather time: 0.00899125sec
+
+Rank: 2
+Rank: 0
+Rank: 3
+	iter 82
+Rank: 1
+	iter 82
+	exec time: 0.0181872sec
+	gather time: 0.0315471sec
+
+	exec time: 0.018187sec
+	gather time: 0.0338537sec
+
+Rank: 6
+	iter 82
+	exec time: 0.027479sec
+Rank: 4
+	iter 82
+	exec time: 0.0274796sec
+	gather time: 0.0309967sec
+
+	gather time: 0.0309998sec
+
+	iter 82
+	exec time: 0.0274798sec
+	gather time: 0.0353637sec
+
+Rank: 7
+	iter 82
+Rank: 5
+	iter 82
+	exec time: 0.018187sec
+	gather time: 0.0562291sec
+
+	exec time: 0.018187sec
+	gather time: 0.0482388sec
+
+	iter 82
+	exec time: 0.027479sec
+	gather time: 0.0120176sec
+
+Rank: 1
+	iter 83
+	exec time: 0.0764826sec
+	gather time: 0.0129967sec
+
+Rank: 3
+	iter 83
+	exec time: 0.0728874sec
+	gather time: 0.0259939sec
+
+Rank: 7
+	iter 83
+	exec time: 0.0764792sec
+	gather time: 0.0406189sec
+
+Rank: 5
+	iter 83
+	exec time: 0.0816264sec
+	gather time: 0.0239937sec
+
+Rank: 2
+Rank: 6
+	iter 83
+	exec time: 0.0765546sec
+	gather time: 0.0273722sec
+
+Rank: 0
+Rank: 4
+	iter 83
+	exec time: 0.0765535sec
+	gather time: 0.0260158sec
+
+	iter 83
+	exec time: 0.0765521sec
+	gather time: 0.0260067sec
+
+	iter 83
+	exec time: 0.0765521sec
+	gather time: 0.0390012sec
+
+Rank: 2
+Rank: 0
+	iter 84
+	exec time: 0.0390214sec
+Rank: 3
+	iter 84
+	exec time: 0.0405239sec
+	gather time: 0.0384981sec
+
+	gather time: 0.0226076sec
+
+Rank: 6
+	iter 84
+Rank: 4
+	exec time: 0.0390208sec
+	gather time: 0.0371261sec
+
+	iter 84
+	exec time: 0.0390212sec
+	gather time: 0.0227322sec
+
+Rank: 7
+	iter 84
+	exec time: 0.0471845sec
+	gather time: 0.0259874sec
+
+Rank: 1
+	iter 84
+	exec time: 0.0400253sec
+	gather time: 0.0116077sec
+
+	iter 84
+	exec time: 0.039021sec
+	gather time: 0.0227248sec
+
+Rank: 5
+	iter 84
+	exec time: 0.040527sec
+	gather time: 0.0246097sec
+
+Rank: 1
+	iter 85
+	exec time: 0.0191104sec
+	gather time: 0.0354871sec
+
+Rank: 3
+	iter 85
+	exec time: 0.0191108sec
+	gather time: 0.0614866sec
+
+Rank: 7
+Rank: 5
+	iter 85
+	exec time: 0.0191124sec
+	gather time: 0.0518701sec
+
+Rank: 4
+Rank: 6
+	iter 85
+	exec time: 0.0339577sec
+	gather time: 0.0666117sec
+
+Rank: 0
+	iter 85
+	exec time: 0.0339559sec
+	gather time: 0.0779914sec
+
+	iter 85
+	exec time: 0.0191125sec
+	gather time: 0.0908737sec
+
+	iter 85
+	exec time: 0.0339572sec
+	gather time: 0.035641sec
+
+Rank: 2
+	iter 85
+	exec time: 0.0339567sec
+	gather time: 0.0356301sec
+
+Rank: 1
+	iter 86
+	exec time: 0.0553458sec
+	gather time: 0.0274993sec
+
+Rank: 3
+	iter 86
+	exec time: 0.051298sec
+	gather time: 0.0536077sec
+
+Rank: 7
+Rank: 6
+	iter 86
+	exec time: 0.0466444sec
+	gather time: 0.0536301sec
+
+Rank: 4
+	iter 86
+	exec time: 0.0466438sec
+	gather time: 0.0260043sec
+
+Rank: 0
+	iter 86
+	exec time: 0.0466417sec
+	gather time: 0.0733698sec
+
+	iter 86
+	exec time: 0.0499546sec
+	Rank: 5
+	iter 86
+	exec time: 0.0553464sec
+	gather time: 0.0609969sec
+
+gather time: 0.0749957sec
+
+Rank: 2
+	iter 86
+	exec time: 0.0466425sec
+	gather time: 0.0390096sec
+
+Rank: 1
+	iter 87
+	exec time: 0.0364198sec
+	gather time: 0.00363018sec
+
+Rank: 2
+	iter 87
+	exec time: 0.0323974sec
+	gather time: 0.0304065sec
+
+Rank: 4
+Rank: 5
+	iter 87
+	exec time: 0.0382201sec
+	gather time: 0.0419941sec
+
+Rank: 6
+	iter 87
+	exec time: 0.0323956sec
+	gather time: 0.0564038sec
+
+Rank: 0
+	iter 87
+	exec time: 0.0323965sec
+	gather time: 0.0657804sec
+
+Rank: 3
+	iter 87
+	exec time: 0.0432513sec
+	gather time: 0.0259928sec
+
+	iter 87
+	exec time: 0.0324042sec
+	gather time: 0.0607599sec
+
+Rank: 7
+	iter 87
+	exec time: 0.0432509sec
+	gather time: 0.0513668sec
+
+Rank: 4
+	iter 88
+	exec time: 0.0393957sec
+	gather time: 0.0515034sec
+
+Rank: 6
+	iter 88
+	exec time: 0.0313024sec
+	gather time: 0.0841271sec
+
+Rank: 2
+	iter 88
+	exec time: 0.0393969sec
+Rank: 0
+	iter 88
+	exec time: 0.0393975sec
+	gather time: 0.09352sec
+
+	gather time: 0.0301452sec
+
+Rank: 7
+	iter 88
+	exec time: 0.0399285sec
+Rank: 5
+	gather time: 0.0733692sec
+
+Rank: 3
+	iter 88
+	exec time: 0.0399305sec
+Rank: 1
+	iter 88
+	exec time: 0.0399307sec
+	gather time: 0.0169776sec
+
+	gather time: 0.033979sec
+
+	iter 88
+	exec time: 0.03993sec
+	gather time: 0.0395656sec
+
+Rank: 0
+Rank: 6
+	iter 89
+Rank: 4
+	exec time: 0.0272239sec
+	gather time: 0.0316078sec
+
+	iter 89
+	exec time: 0.0272236sec
+	gather time: 0.00665063sec
+
+Rank: 2
+	iter 89
+	exec time: 0.0272235sec
+	gather time: 0.00663949sec
+
+	iter 89
+	exec time: 0.0272228sec
+	gather time: 0.0389909sec
+
+Rank: 5
+	iter 89
+	exec time: 0.0129152sec
+	gather time: 0.0254788sec
+
+Rank: 7
+	iter 89
+	exec time: 0.0129273sec
+	gather time: 0.0514758sec
+
+Rank: 3
+	iter 89
+	exec time: 0.0129256sec
+	gather time: 0.031111sec
+
+Rank: 1
+	iter 89
+	exec time: 0.0129133sec
+	gather time: 0.0311119sec
+
+Rank: 6
+	iter 90
+	exec time: 0.027333sec
+	gather time: 0.061986sec
+
+Rank: 0
+Rank: 4
+	iter 90
+	exec time: 0.0273319sec
+	gather time: 0.0359866sec
+
+Rank: 2
+	iter 90
+	exec time: 0.0273324sec
+	gather time: 0.0110139sec
+
+Rank: 7
+	iter 90
+	exec time: 0.0156403sec
+	gather time: 0.0821796sec
+
+	iter 90
+	exec time: 0.0273318sec
+	gather time: 0.0693663sec
+
+Rank: 5
+	iter 90
+	exec time: 0.0156402sec
+	gather time: 0.0581769sec
+
+Rank: 3
+	iter 90
+	exec time: 0.0156402sec
+	gather time: 0.0307936sec
+
+Rank: 1
+	iter 90
+	exec time: 0.0156403sec
+	gather time: 0.0357887sec
+
+Rank: 1
+	iter 91
+	exec time: 0.0356178sec
+	gather time: 0.00998297sec
+
+Rank: 5
+	iter 91
+	exec time: 0.0356177sec
+	gather time: 0.0489834sec
+
+Rank: 3
+	iter 91
+	exec time: 0.0356178sec
+	gather time: 0.0399819sec
+
+Rank: 7
+Rank: 6
+	iter 91
+	exec time: 0.0323575sec
+	gather time: 0.0624239sec
+
+Rank: 4
+	iter 91
+	exec time: 0.0363974sec
+	gather time: 0.0477922sec
+
+Rank: 0
+	iter 91
+	exec time: 0.0363975sec
+	gather time: 0.0637994sec
+
+	iter 91
+	exec time: 0.0356179sec
+	gather time: 0.0503678sec
+
+Rank: 2
+	iter 91
+	exec time: 0.0246389sec
+	gather time: 0.0364227sec
+
+Rank: 1
+	iter 92
+	exec time: 0.0617891sec
+	gather time: 0.0105296sec
+
+Rank: 5
+	iter 92
+	exec time: 0.0588259sec
+	gather time: 0.0563528sec
+
+Rank: 3
+	iter 92
+	exec time: 0.0617891sec
+	gather time: 0.0389798sec
+
+Rank: 7
+	iter 92
+	exec time: 0.0594832sec
+	gather time: 0.0769804sec
+
+Rank: 0
+Rank: 2
+	iter 92
+	exec time: 0.0531843sec
+	gather time: 0.0357092sec
+
+Rank: 4
+	iter 92
+	exec time: 0.0534492sec
+Rank: 6
+	iter 92
+	exec time: 0.0546439sec
+	gather time: 0.0750741sec
+
+	gather time: 0.0470721sec
+
+	iter 92
+	exec time: 0.0534477sec
+	gather time: 0.089692sec
+
+Rank: 1
+	iter 93
+	exec time: 0.0405167sec
+	gather time: 0.00998026sec
+
+Rank: 5
+	iter 93
+	exec time: 0.0399523sec
+	gather time: 0.046359sec
+
+Rank: 3
+	iter 93
+	exec time: 0.0405179sec
+	gather time: 0.01898sec
+
+Rank: 7
+Rank: 6
+	iter 93
+	exec time: 0.0333518sec
+	gather time: 0.054676sec
+
+Rank: 0
+	iter 93
+	exec time: 0.033352sec
+	gather time: 0.062046sec
+
+Rank: 4
+	iter 93
+	exec time: 0.033352sec
+	gather time: 0.0356661sec
+
+	iter 93
+	exec time: 0.0405156sec
+	gather time: 0.0493628sec
+
+Rank: 2
+	iter 93
+	exec time: 0.0333514sec
+	gather time: 0.0186916sec
+
+Rank: 0
+Rank: 1
+	iter 94
+	Rank: 3
+	iter 94
+	exec time: 0.0903026sec
+	gather time: 0.0315197sec
+
+exec time: 0.0896226sec
+	gather time: 0.0196195sec
+
+Rank: 4
+Rank: 6
+	iter 94
+	exec time: 0.0903021sec
+	gather time: 0.0229944sec
+
+Rank: 5
+	iter 94
+	exec time: 0.0896239sec
+	gather time: 0.0359168sec
+
+	iter 94
+	Rank: 2
+	iter 94
+exec time: 0.0817862sec
+	gather time: 0.0319922sec
+
+	exec time: 0.0895821sec
+	gather time: 0.00585549sec
+
+Rank: 7
+	iter 94
+	iter 94
+	exec time: 0.0828812sec
+	gather time: 0.00586387sec
+
+	exec time: 0.0903048sec
+	gather time: 0.0449184sec
+
+Rank: 2
+Rank: 6
+	iter 95
+	exec time: 0.0488977sec
+	gather time: 0.0705322sec
+
+Rank: 1
+	iter 95
+	exec time: 0.060647sec
+	gather time: 0.0129798sec
+
+Rank: 3
+	iter 95
+	exec time: 0.0606466sec
+	gather time: 0.0469795sec
+
+Rank: 5
+	iter 95
+	exec time: 0.0606469sec
+	gather time: 0.0643592sec
+
+	iter 95
+	exec time: 0.0488997sec
+	gather time: 0.0365311sec
+
+Rank: 7
+	iter 95
+	exec time: 0.0524936sec
+	gather time: 0.0668681sec
+
+Rank: 4
+	iter 95
+	exec time: 0.0488983sec
+	gather time: 0.0465399sec
+
+Rank: 0
+	iter 95
+	exec time: 0.0488991sec
+	gather time: 0.0774084sec
+
+Rank: 1
+	iter 96
+	exec time: 0.040563sec
+	gather time: 0.036981sec
+
+Rank: 5
+	iter 96
+	exec time: 0.0405648sec
+	gather time: 0.0759876sec
+
+Rank: 2
+Rank: 3
+	iter 96
+	exec time: 0.0405638sec
+	gather time: 0.0549792sec
+
+Rank: 6
+	iter 96
+	exec time: 0.0250161sec
+	gather time: 0.063sec
+
+Rank: 4
+	iter 96
+	exec time: 0.0285849sec
+	gather time: 0.0403688sec
+
+	iter 96
+	exec time: 0.0250273sec
+	gather time: 0.0189988sec
+
+Rank: 7
+	iter 96
+	exec time: 0.0405653sec
+	gather time: 0.0873718sec
+
+Rank: 0
+	iter 96
+	exec time: 0.0285869sec
+	gather time: 0.0743744sec
+
+Rank: 1
+	iter 97
+	exec time: 0.0874367sec
+	gather time: 0.0156051sec
+
+Rank: 2
+Rank: 3
+	iter 97
+	exec time: 0.0874363sec
+	gather time: 0.0286145sec
+
+Rank: 6
+	iter 97
+	exec time: 0.0733808sec
+	Rank: 5
+	iter 97
+	exec time: 0.0874361sec
+	gather time: 0.0549786sec
+
+Rank: 4
+gather time: 0.0739688sec
+
+Rank: 0
+	iter 97
+	exec time: 0.0733831sec
+	gather time: 0.0935861sec
+
+	iter 97
+	exec time: 0.0814757sec
+	gather time: 0.0255925sec
+
+Rank: 7
+	iter 97
+	iter 97
+	exec time: 0.0733814sec
+	gather time: 0.0507573sec
+
+	exec time: 0.087437sec
+	gather time: 0.0806068sec
+
+Rank: 1
+	iter 98
+	exec time: 0.0530163sec
+	gather time: 0.03699sec
+
+Rank: 5
+Rank: 3
+	iter 98
+	exec time: 0.0563944sec
+	gather time: 0.04399sec
+
+Rank: 7
+	iter 98
+	exec time: 0.0563939sec
+	gather time: 0.0729907sec
+
+	iter 98
+	exec time: 0.0530177sec
+	gather time: 0.0563675sec
+
+Rank: 6
+	iter 98
+	exec time: 0.0564002sec
+	gather time: 0.0540054sec
+
+Rank: 2
+	iter 98
+	exec time: 0.0564038sec
+	gather time: 0.0190153sec
+
+Rank: 4
+	iter 98
+	exec time: 0.0530301sec
+	gather time: 0.0316422sec
+
+Rank: 0
+	iter 98
+	exec time: 0.0530319sec
+	gather time: 0.0599998sec
+
+Rank: 3
+	iter 99
+	exec time: 0.0908957sec
+	gather time: 0.0259902sec
+
+Rank: 1
+	iter 99
+	exec time: 0.091894sec
+	gather time: 0.0129962sec
+
+Rank: 5
+	iter 99
+	exec time: 0.0887669sec
+Rank: 7
+	iter 99
+	exec time: 0.0874344sec
+	gather time: 0.0603707sec
+
+	gather time: 0.0519848sec
+
+Rank: 6
+	iter 99
+	exec time: 0.0829611sec
+	gather time: 0.0406158sec
+
+Rank: 2
+	iter 99
+	exec time: 0.0875037sec
+	gather time: 0.0220122sec
+
+Rank: 0
+	iter 99
+	exec time: 0.086902sec
+	gather time: 0.0473801sec
+
+Rank: 4
+	iter 99
+	exec time: 0.0842878sec
+	gather time: 0.0269921sec
+
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {32, 32, 32}
+Precision          = Single
+Direction          = FORWARD
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 8
+Iterations         = 100
+--------------------------------------------
+
+
+Time to plan: 324.724sec
+
+
+Time to gen reordered data: 0.0161224sec
+
+
+Measurements
+--------------------------
+Processes           : 8
+Threads per proc    : 8
+FFT Size            : 32^3
+Batch               : 1
+Iterations          : 100
+Avg Tot Runtime     : 48.857608 ms
+Runtime per batch   : 48.857608 ms
+Throughput          : 0.002388 GFLOPs
+Time to Transfer    : 0.066806ms
+--------------------------
+SD                  : 18.599606 ms

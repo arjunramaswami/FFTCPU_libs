@@ -1,0 +1,34 @@
+FFTW Plan Patient
+-- Importing wisdom from ../wisdom/mpi2nodes/fftw_32_p8_t8_b1.patient
+
+Planning completed
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {32, 32, 32}
+Precision          = Single
+Direction          = FORWARD
+Placement          = In Place    
+Plan               = Patient     
+Threads            = 8
+Iterations         = 100
+--------------------------------------------
+
+
+Time to plan: 3.36958sec
+
+Measurements
+--------------------------
+Processes           : 8
+Threads per proc    : 8
+FFT Size            : 32^3
+Batch               : 1
+Iterations          : 100
+Avg Tot Runtime     : 35.861533 ms
+Runtime per batch   : 35.861533 ms
+SD                  : 18.885685 ms
+Throughput          : 0.002171 GFLOPs
+Time to Transfer    : 0.070306ms
+--------------------------

@@ -1,0 +1,23 @@
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {128, 128, 128}
+Precision          = Single
+Direction          = FORWARD
+Placement          = In Place    
+Plan               = Estimate    
+Threads            = 1
+Iterations         = 5
+--------------------------------------------
+
+
+Time to plan: 0.00412242sec
+
+
+Time to gen reordered data: 0.0703708sec
+
+
+       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
+fftw:    64          1       128        34.7891        1414.09        131.675

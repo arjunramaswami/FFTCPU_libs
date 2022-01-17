@@ -1,0 +1,37 @@
+FFTW Plan Patient
+-- Cannot import wisdom from ../wisdom/mpi2nodes/fftw_512_p64_t1_b1.patient
+Planning completed
+-- Exporting wisdom file to ../wisdom/mpi2nodes/fftw_512_p64_t1_b1.patient
+
+------------------------------------------
+FFTW Configuration: 
+--------------------------------------------
+Type               = Complex to Complex
+Points             = {512, 512, 512}
+Precision          = Single
+Direction          = FORWARD
+Placement          = In Place    
+Plan               = Estimate    
+Threads            = 1
+Iterations         = 100
+--------------------------------------------
+
+
+Time to plan: 46.3232sec
+
+
+Time to gen reordered data: 0.0775915sec
+
+
+Measurements
+--------------------------
+Processes           : 64
+Threads             : 1
+FFT Size            : 512^3
+Batch               : 1
+Iterations          : 100
+Avg Tot Runtime     : 0.001071 ms
+Runtime per batch   : 0.001071 ms
+Throughput          : 98.19 GFLOPs
+Time to Transfer    : 0.3526ms
+--------------------------

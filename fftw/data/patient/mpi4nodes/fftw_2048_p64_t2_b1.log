@@ -1,0 +1,5 @@
+FFTW Plan Patient
+-- Cannot import wisdom from ../wisdom/mpi2nodes/fftw_2048_p64_t2_b1.patient
+Planning completed
+-- Exporting wisdom file to ../wisdom/mpi2nodes/fftw_2048_p64_t2_b1.patient
+cn-0023.56050hybrid_many: Reading from remote process' memory failed. Disabling CMA support
