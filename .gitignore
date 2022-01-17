@@ -10,3 +10,4 @@ slurm*
 *.swp
 *.vscode
 host*
+.ipynb_checkpoints*/

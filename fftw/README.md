@@ -1,31 +1,24 @@
 # FFTW
 
-This folder contains code to execute 3d FFT using [FFTW](http://www.fftw.org/) that executes hybrid (MPI + OpenMP) single and double precision complex configurations.
+Here, you find the code along with several helper scripts required to execute and collect performance results of FFT3D using [FFTW](http://www.fftw.org/). FFTW can be executed either using OpenMP multi-threaded only or hybrid (MPI + OpenMP) single precision configurations.
 
 ## Build
 
 #### Prerequisites
 
-The following libraries have to be loaded in noctua in order to build the target
+The following libraries are required to be loaded before building:
 
-- FFTW:
-  
-   `module load numlib/FFTW/3.3.8-gompi-2020a`
-
-- C compiler that implements OpenMPI (tested with gcc 9.3.0):
-
-    `module load toolchain/gompi/2020a`
-    `module load devel/CMake`
+- FFTW
+- Intel MKL
+- CMake
 
 #### Targets
-
-Use the makefile along with the targets mentioned below to build different configurations of the FFTW library.
 
 | Target | Description                            |  Linking Libraries
 |:------:|----------------------------------------|---------------------|
 | all         | builds the below two binaries     | 
 | openmp_many | single node openmp multi-threaded binary | `-lfftw3f_omp -lfftw3f` |
-| hybrid_many | distributed mpi+openmpi hybrid binary | `-lfftw3f_mpi -lfftw3f`|
+| hybrid_many | distributed mpi+openmpi hybrid binary | `-lfftw3f_mpi  fftw3f_omp -lfftw3f`|
 
 #### Build Parameters
 
@@ -36,12 +29,12 @@ Use the makefile along with the targets mentioned below to build different confi
 
 The default FFTW plan is **FFTW_ESTIMATE**.
 
-#### How to build
+#### How to build in Noctua
 
 ```bash
-module load devel/CMake/3.20.1-GCCcore-10.3.0
-module load toolchain/gompi/2019b
-module load numlib/FFTW/3.3.8-gompi-2019b
+module load devel/CMake
+module load toolchain/intel/2021a
+module load numlib/FFTW/3.3.10-gompi-2021b
 
 mkdir build
 cmake ..
@@ -58,12 +51,14 @@ Parse FFTW input params
 Usage:
   FFTW [OPTION...]
 
-  -n, --num arg      Size of FFT dim (default: 64)
-  -t, --threads arg  Number of threads (default: 1)
-  -c, --batch arg    Number of batch (default: 1)
-  -i, --iter arg     Number of iterations (default: 1)
-  -b, --inverse      Backward FFT
-  -h, --help         Print usage
+  -n, --num arg         Size of FFT dim (default: 64)
+  -t, --threads arg     Number of threads (default: 1)
+  -c, --batch arg       Number of batch (default: 1)
+  -i, --iter arg        Number of iterations (default: 1)
+  -b, --inverse         Backward FFT
+  -w, --wisdomfile arg  File to wisdom (default: test.wisdom)
+  -e, --expm arg        Expm number (default: 1)
+  -h, --help            Print usage
 ```
 
 To execute:
@@ -87,7 +82,7 @@ Runtime is measured for the following:
 
 1. `fftw(f)_execute()` collective routine over a number of iterations, then its average runtime is considered.
 
-2. `fftw_plan_dft_3d()` method that creates a plan for the fft configuration.
+2. `fftwf_plan_many_dft()` method that creates a plan for the fft configuration.
 
 ### Throughput
 
@@ -102,11 +97,17 @@ In a distributed FFT, each process contains its respective transformed subset of
 The console output shows the configuration of execution followed by the following results:
 
 ```bash
-Time to plan: 0.002379sec
-
-
-       Processes  Threads  FFTSize  AvgRuntime(ms)  Throughput(GFLOPS) AvgTimetoTransfer(ms)  
-fftw:       2        2       16³       0.1071            1.1476              0.0515 
+Measurements
+--------------------------
+FFT Size            : 16^3
+Threads             : 40
+Batch               : 1
+Iterations          : 50
+Avg Tot Runtime     : 0.026052 ms
+Runtime per batch   : 0.026052 ms
+SD                  : 0.008196 ms
+Throughput          : 0.000026 GFLOPs
+Plan Time           : 1.226069 sec
 ```
 
 ### Note
@@ -168,20 +169,6 @@ fftw:       2        2       16³       0.1071            1.1476              0.
 - Time for data transfer using MPI_Gather collective routine from 4 nodes to a single node.
 - The cumulative time to transfer data and execute a faster single node FFTW is worse than performing a distributed 4 nodal Hybrid FFTW.
 
-### Runtime: Double Precision FFTW
-
-| # points | 1 Node |
-|:--------:|:------:|
-| 32^3 | 0.05 |
-| 64^3 | 0.22 |
-| 128^3 | 1.16 |
-| 256^3 | 17.23 |
-| 512^3 | 203.66 |
-| 1024^3 |  |
-
-- Runtime is in milliseconds.
-- Best runtime using 1 Node with 1 process and 1-40 threads per node, best of all the plans.
-
 ### Plans
 
 Just for fun: Given below is the time taken to plan and the plans used to obtain the best runtime given above for single node configuration. SP is single precision, DP is double precision.
@@ -195,28 +182,16 @@ Just for fun: Given below is the time taken to plan and the plans used to obtain
 | 512^3    | 1449 (patient)     | 2240 (patient)    |
 | 1024^3    | 17320 (patient)     |    |
 
-The `common/fftw_plans` directory has illustrations on the comparison of different runtimes of plans.
+The `images/fftw_plans` directory has illustrations on the comparison of different runtimes of plans.
 
 ## Additional Scripts
 
-- Bash scripts for different precisions and plans.
+Performance analysis of OpenMP FFTW FFT3D:
 
-```
-sbatch omp_fftw_dp_run.sh <array of sizes of fft3d>
+1. `scripts/fftw_runs/omp_fftw_patient.sh`:  run OpenMP configurations in Noctua. Outputs measurements are saved in `data/` folder and wisdoms in `wisdom` folder. In `data`, performance is logged per FFT size. 
 
-sbatch omp_fftw_dp_run.sh 16 32 64
-```
+2. `scripts/evaluation/perf_fftw.sh`: collects performance based on the folder structure in `data` to produce a `csv` file with the format `fftsize, perf(ms)`
 
-- Bash script `create_csv.sh` can be used to create a csv output from the reports generated by the above bash file.
+  - `./perf_fftw.sh 16 671 perf_17.01.csv`
 
-```
-./create_csv.sh <generated_report> <output.csv>
-./create_csv.sh ../raw/measure/sp_128_* ../csv/measure/sp_128.csv
-```
-
-- Bash script `plan.sh` can be used to tabulate the time to plan using different planning schemes for different number of threads.
-
-```
-./plan.sh <generate report> <output.csv>
-./plan.sh ../raw/measure/sp_128_* ../csv/measure/plans/sp_128_plan.csv
-```
+- `scripts/evaluation/fftw_plot_perf.ipynb` is a JupterLab file that can be used to plot graphs using the previous `csv` file. The output images are stored in `images` folder.

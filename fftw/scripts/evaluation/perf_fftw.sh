@@ -3,6 +3,9 @@
 ## Find the fastest runtime between FFTW sizes $1 and $2 and store to file $3.
 ##   Along with the fastest runtime also bin the process that produced the perf
 ##   
+## Example> ./perf_fftw.sh <starting_fft> <final_fft> <output_file>
+##          ./perf_fftw.sh 16 671 perf_17.01.csv
+
 start=$1
 stop=$2
 outputname=$3
