@@ -1,6 +1,5 @@
 stages:
   - build
-  - execute_hybrid
   - execute_openmp
 
 compile_est_plan:
@@ -14,14 +13,7 @@ compile_est_plan:
     - make
   artifacts:
     paths:
-      - fftw/build/hybrid_many
       - fftw/build/openmp_many
-
-run_est_plan_hybrid:
-  stage: execute_hybrid
-  script:
-    - cd fftw/build
-    - mpirun -n 2 ./hybrid_many --num=16 --threads=2 --batch=2
 
 run_est_plan_openmp:
   stage: execute_openmp
