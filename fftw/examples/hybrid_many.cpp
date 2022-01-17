@@ -10,14 +10,9 @@ using namespace std;
 #include "fftwf_many.hpp"  // Single precision Batch Hybrid
 #include "helper.hpp"
 
-void print_config(int N1, int N2, int N3, int iter, int inverse, int nthreads, int sp);
-
 int main(int argc, char **argv){
 
   // Cmd line argument declarations
-  unsigned N = 64, iter = 1, nthreads = 1, batch = 1;
-  bool inverse = false, noverify = false;
-  string wisfile;
 
   cxxopts::Options options("FFTW", "Parse FFTW input params");
 
@@ -39,13 +34,13 @@ int main(int argc, char **argv){
     return EXIT_SUCCESS;
   }
 
-  N = result["num"].as<unsigned>();
-  nthreads = result["threads"].as<unsigned>();
-  batch = result["batch"].as<unsigned>();
-  iter = result["iter"].as<unsigned>();
-  inverse = result["inverse"].as<bool>();
-  wisfile = result["wisdomfile"].as<string>();
-  noverify = result["noverify"].as<bool>();
+  unsigned N = result["num"].as<unsigned>();
+  unsigned nthreads = result["threads"].as<unsigned>();
+  unsigned batch = result["batch"].as<unsigned>();
+  unsigned iter = result["iter"].as<unsigned>();
+  bool inverse = result["inverse"].as<bool>();
+  string wisfile = result["wisdomfile"].as<string>();
+  bool noverify = result["noverify"].as<bool>();
     
   // Initialize: set default number of threads to be used
   omp_set_num_threads(nthreads);
@@ -74,7 +69,7 @@ int main(int argc, char **argv){
   }
 
   try{
-    fftwf_hybrid_many(3, N, batch, nthreads, inverse, iter, wisfile, noverify);
+    fftwf_hybrid_many(N, batch, nthreads, inverse, iter, wisfile, noverify);
   }
   catch(const char* msg){
     cerr << msg << endl;

@@ -70,6 +70,7 @@ void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,
 
           // considering the H1, H2, H3 are inverse for backward FFT
           //   multiply with the index
+          /*
           phase1 = moda(i + local_start, H1, N) / N;
           phase2 = moda(j, H2, N) / N;
           phase3 = moda(k, H3, N) / N;
@@ -77,11 +78,10 @@ void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,
 
           re_val = cosf( TWOPI * phase ) / (N*N*N);
           img_val = sinf( TWOPI * phase ) / (N*N*N);
+          */
 
-          /*
           re_val = ((double) rand() / (RAND_MAX));
           img_val = ((double) rand() / (RAND_MAX));
-          */
 
           verify_data[index][0] = fftw_data[index][0] = re_val;
           verify_data[index][1] = fftw_data[index][1] = img_val;
@@ -99,96 +99,6 @@ void get_sp_mpi_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,
 }
 
 /**
- * \brief create single precision floating points values for FFT computation for each process level block
- * \param fftw_data   : pointer to 3d number of sp points for FFTW
- * \param verify_data : pointer to 3d number of sp points for verification
- * \param N           : number of points in each dimension
- * \param H1, H2, H3  : harmonic to modify frequency of discrete time signal
- * \param how_many    : number of batched implementations of FFTW
- */
-void get_sp_many_input(fftwf_complex *fftw_data, fftwf_complex *verify_data,size_t N, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
-
-  unsigned index; 
-  float TWOPI = 6.2831853071795864769;
-  float phase, phase1, phase2, phase3;
-  double re_val = 0.0, img_val = 0.0;
-  unsigned S1 = N*N, S2 = N, S3 = 1;
-
-  for(size_t many = 0; many < how_many; many++){
-    for(size_t i = 0; i < N; i++) {
-      for(size_t j = 0; j < N; j++) {
-        for(size_t k = 0; k < N; k++) {
-          phase1 = moda(i, H1, N) / N;
-          phase2 = moda(j, H2, N) / N;
-          phase3 = moda(k, H3, N) / N;
-          phase = phase1 + phase2 + phase3;
-
-          index = (many * S1 * S2) + (i * S1) + (j * S2) + k;
-
-          re_val = cosf( TWOPI * phase ) / (N * N * N);
-          img_val = sinf( TWOPI * phase ) / (N * N * N);
-
-          verify_data[index][0] = fftw_data[index][0] = re_val;
-          verify_data[index][1] = fftw_data[index][1] = img_val;
-
-  #ifdef DEBUG          
-          printf(" %d %d %d : fftw[%d] = (%f, %f) \n", i, j, k, index, fftw_data[index][0], fftw_data[index][1]);
-  #endif
-        }
-      }
-    }
-  }
-}
-
-
-/**
- * \brief  Verify single precision batched FFT3d computation using FFTW
- * \param  fftw_data   : pointer to 3D number of sp points after FFTW
- * \param  verify_data : pointer to 3D number of sp points for verification
- * \param  N1, N2, N3  : fft size
- * \param  H1, H2, H3  : harmonic to modify frequency of discrete time signal
- * \param  how_many    : number of batched implementations of FFTW
- * \return true if successful, false otherwise
- */
-bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned H1, unsigned H2, unsigned H3, unsigned how_many){
-
-  double magnitude = 0.0, noise = 0.0, mag_sum = 0.0, noise_sum = 0.0;
-
-  for(size_t i = 0; i < how_many * N * N * N; i++){
-
-    // FFT -> iFFT is scaled by dimensions (N*N*N)
-    verify_data[i][0] = verify_data[i][0] * N * N * N;
-    verify_data[i][1] = verify_data[i][1] * N * N * N;
-
-    magnitude = verify_data[i][0] * verify_data[i][0] + \
-                      verify_data[i][1] * verify_data[i][1];
-    noise = (verify_data[i][0] - fftw_data[i][0]) \
-        * (verify_data[i][0] - fftw_data[i][0]) + 
-        (verify_data[i][1] - fftw_data[i][1]) * (verify_data[i][1] - fftw_data[i][1]);
-
-    mag_sum += magnitude;
-    noise_sum += noise;
-
-#ifdef VERBOSE
-    cout << i << ": fftw_out[" << i << "] = (" << fftw_data[i][0] << ", " << fftw_data[i][1] << ")";
-    cout << " = (" << verify_data[i][0] << ", " << verify_data[i][1] << ")";
-    cout << endl;
-#endif
-  }
-
-  float db = 10 * log(mag_sum / noise_sum) / log(10.0);
-
-    // if SNR greater than 120, verification passes
-  if(db > 120){
-    return true;
-  }
-  else{ 
-    cout << "Signal to noise ratio on output sample: " << db << " --> FAILED \n\n";
-    return false;
-  }
-}
-
-/**
  * \brief  Hybrid Single precision FFTW execution
  * \param  dim        - number of dimensions of FFT (supports only 3)
  * \param  N          - Size of one dimension of FFT
@@ -197,11 +107,16 @@ bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned 
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
  */
-void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile, bool noverify){
-    
+void fftwf_hybrid_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile, bool noverify){
+  
+  const unsigned dim = 3;
+
   if(dim != 3){
     throw "Currently supports only 3D FFT!";
   }
+  // else if ((N & N-1) != 0){
+  //   throw "Invalid N value, should be a power of 2!";
+  // }
   else if ( (how_many == 0) || (nthreads == 0) || (iter == 0) ){
     throw "Invalid value, should be >=1!";
   }
@@ -274,15 +189,15 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
 
   if(myrank == 0){
     switch(fftw_plan){
-      case FFTW_MEASURE:  cout << "-- FFTW Plan: Measure\n";
+      case FFTW_MEASURE:  cout << "FFTW Plan Measure\n";
                           break;
-      case FFTW_ESTIMATE: cout << "-- FFTW Plan: Estimate\n";
+      case FFTW_ESTIMATE: cout << "FFTW Plan Estimate\n";
                           break;
-      case FFTW_PATIENT:  cout << "-- FFTW Plan: Patient\n";
+      case FFTW_PATIENT:  cout << "FFTW Plan Patient\n";
                           break;
-      case FFTW_EXHAUSTIVE: cout << "-- FFTW Plan: Exhaustive\n";
+      case FFTW_EXHAUSTIVE: cout << "FFTW Plan Exhaustive\n";
                           break;
-      default: throw "-- Incorrect plan\n";
+      default: throw "Incorrect plan\n";
               break;
     }
   }
@@ -319,8 +234,7 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
 
   // plan
   double plan_start = MPI_Wtime();
-  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, FFTW_PATIENT);
-  //plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, fftw_plan);
+  plan = fftwf_mpi_plan_many_dft(3, n, how_many, FFTW_MPI_DEFAULT_BLOCK, FFTW_MPI_DEFAULT_BLOCK, per_process_data, per_process_data, MPI_COMM_WORLD, direction, fftw_plan);
   double plan_time = MPI_Wtime() - plan_start;
 
   if(myrank == 0)
@@ -343,7 +257,6 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   fftwf_complex *total_data = fftwf_alloc_complex(data_sz); // gathered data
   fftwf_complex *total_verify = fftwf_alloc_complex(data_sz); // -- || -- 
 
-  // other operations to flush cache
   size_t num = 256*256*256;
   double *test_res, *temp1, *temp2;
   test_res = new double [num];
@@ -418,7 +331,7 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
     // verify transformed and original data
     if(myrank == 0){
       if(!noverify){
-        bool status = verify_fftw(total_data, total_verify, N, H1, H2, H3, how_many);
+        bool status = verify_fftw(total_data, total_verify, N, how_many);
         if(!status){
           cerr << "Error in transformation\n";
           cleanup_mpi(per_process_data, verify_per_process);
@@ -487,7 +400,7 @@ void fftwf_hybrid_many(unsigned dim, unsigned N, unsigned how_many, unsigned nth
   if(myrank == 0){
     // Print to console the configuration chosen to execute during runtime
     print_config(N, false, world_size, nthreads, how_many, inverse, iter);
-    cout << "\n-- Time to plan: " << plan_time << "sec\n";
+    cout << "\nTime to plan: " << plan_time << "sec\n";
     bool status = print_results(avg, gather_diff, tot_flops, sd, N, world_size, nthreads, iter, how_many);
     if(!status){
       cleanup_mpi(per_process_data, verify_per_process);
