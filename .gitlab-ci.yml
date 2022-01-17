@@ -1,6 +1,7 @@
 stages:
   - build
-  - execute
+  - execute_hybrid
+  - execute_openmp
 
 compile_est_plan:
   stage: build
