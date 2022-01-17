@@ -40,8 +40,8 @@ int main(int argc, char **argv){
   try{
     switch(expm){
       case 1:{
-        cout << "Expm 1: Streaming MKL\n";
-        mkl_openmp(N, batch, nthreads, inverse, iter);
+        cout << "Expm 1: Only FFT\n";
+        mkl_openmp_many(N, batch, nthreads, inverse, iter);
         break;
       }
       default:{

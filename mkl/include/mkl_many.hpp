@@ -9,6 +9,6 @@
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
  */
-void mkl_openmp(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter);
+void mkl_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter);
 
 #endif // MKL_MANY_HPP

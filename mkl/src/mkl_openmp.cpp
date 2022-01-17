@@ -175,8 +175,7 @@ static void error_msg(MKL_LONG status){
   }
 }
 
-
-void mkl_openmp(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
+void mkl_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
 
   if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
     throw "Invalid value, should be >=1!";
@@ -189,7 +188,6 @@ void mkl_openmp(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, 
   if (fft_data == NULL)
     throw "FFT data allocation failed";
 
-  get_data(fft_data, verify_data, N, how_many);
 
   //MKL_NUM_THREADS = nthreads;
   const MKL_LONG dim = 3;
@@ -209,20 +207,56 @@ void mkl_openmp(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, 
   status = DftiCommitDescriptor(fft_desc_handle);
   error_msg(status);
 
-  double start = getTimeinMilliSec();
-  DftiComputeForward(fft_desc_handle, fft_data);
-  double stop = getTimeinMilliSec();
+  double start = 0.0, stop = 0.0, exec_diff = 0.0;
+  double exec_t[iter];
 
-  cout << "Time to FFT3D: " << stop-start << endl;
+  for(unsigned it = 0; it < iter; it++){
 
-  DftiComputeBackward(fft_desc_handle, fft_data);
+    printf("Iter: %u, ", it);
+
+    get_data(fft_data, verify_data, N, how_many);
+
+    start = getTimeinMilliSec();
+    DftiComputeForward(fft_desc_handle, fft_data);
+    stop = getTimeinMilliSec();
+
+    DftiComputeBackward(fft_desc_handle, fft_data);
+    bool status_out = verify_mkl(fft_data, verify_data, N, how_many);
+    if(!status_out){
+      mkl_free(fft_data);
+      mkl_free(verify_data);
+      throw "Error in Transformation\n";
+    }
+
+    exec_t[it] = stop - start;
+    exec_diff += stop - start;
+  }
+  printf("\n");
+
+  double mean = exec_diff / iter;
+  double variance = 0.0;
+  for(unsigned i = 0; i < iter; i++){
+    variance += pow(exec_t[i] - mean, 2);
+  }
+
+  double sq_sd = variance / iter;
+  double sd = sqrt(variance / iter);
+
+  cout << "Printing individual runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+
+  cout << "\nMeasurements\n" << "--------------------------\n";
+  cout << "FFT Size            : " << N << "^3\n";
+  cout << "Threads             : " << nthreads << endl;
+  cout << "Batch               : " << how_many << endl;
+  cout << "Iterations          : " << iter << endl;
+  cout << "Avg Tot Runtime     : " << std::fixed << mean<< " ms\n";
+  cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
+  cout << "SD                  : " << sd << " ms\n";
 
   DftiFreeDescriptor(&fft_desc_handle);
-
-  bool status_out = verify_mkl(fft_data, verify_data, N, how_many);
-  if(!status_out){
-    cout << "Error in Transformation\n";
-  }
 
   mkl_free(fft_data);
   mkl_free(verify_data);

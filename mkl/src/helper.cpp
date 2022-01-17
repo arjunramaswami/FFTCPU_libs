@@ -40,9 +40,9 @@ bool verify_mkl(MKL_Complex8 *fft_data, MKL_Complex8 *verify_data, unsigned N, u
     noise_sum += noise;
 
 #ifndef NDEBUG
-    cout << i << ": fft_out[" << i << "] = (" << fft_data[i].real << ", " << fft_data[i].imag << ")";
-    cout << " = (" << verify_data[i].real << ", " << verify_data[i].imag << ")";
-    cout << endl;
+  cout << i << ": fft_out[" << i << "] = (" << fft_data[i].real << ", " << fft_data[i].imag << ")";
+  cout << " = (" << verify_data[i].real << ", " << verify_data[i].imag << ")";
+  cout << endl;
 #endif
   }
 
