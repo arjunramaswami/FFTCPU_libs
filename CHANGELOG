@@ -1,44 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-- Gathering data from non-divisible number of processes using gatherv
-- Additional measurements for PCIe and SVM
-- Update main Readme env with network details for hybrid measurements
-- Scripts to graph, data transfer
-- Fix scripts to plan
-- Fix DEBUG prints
+## [3.0] - [17.01.2022]
+ - Separate OpenMP, hybrid FFTW
+ - performance results for FFT3D ranging [16, 670]
 
-## [3.0] - [04.12.2020] 
+## [2.0] - [04.12.2020] 
  - Batched FFTW interface for hybrid and openmp Multithreaded variants replace the existing functions
  - Ported to C++
  - FFTW plan as part of CMake options
 
-## [2.0.2] - [16.04.2020] 
-- Measurements for distributed sp FFTW over 4 and 8 nodes
-
-## [2.0.1] - [15.04.2020]
-- Propagate errors back to main for CI
-
-## [2.0] - [07.04.2020]
-- Hybrid (MPI + OpenMP) FFTW execution
-
-## [1.3] - [15.03.2020]
-- 1024^3 point sp 3d FFT
-
-## [1.2] - [10.03.2020]
-- 512^3 point 3d FFT
-
-## [1.1] - [05.03.2020]
-- Exhaustive planning
-- 32^3 point 3d FFT
-
 ## [1.0.0] - [03.03.2020]
-
-### Added
-- Multithreaded executions for dp and sp fftw using different plans
-- Separated dp and sp executions using cmd line params
-- Configuring FFTW plans at compile time
-- fftw_flops to calculate throughput
-- Scripts for executing and parsing results
-- CI/CD

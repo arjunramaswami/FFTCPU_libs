@@ -191,7 +191,6 @@ Performance analysis of OpenMP FFTW FFT3D:
 1. `scripts/fftw_runs/omp_fftw_patient.sh`:  run OpenMP configurations in Noctua. Outputs measurements are saved in `data/` folder and wisdoms in `wisdom` folder. In `data`, performance is logged per FFT size. 
 
 2. `scripts/evaluation/perf_fftw.sh`: collects performance based on the folder structure in `data` to produce a `csv` file with the format `fftsize, perf(ms)`
+    - `./perf_fftw.sh 16 671 perf_17.01.csv`
 
-  - `./perf_fftw.sh 16 671 perf_17.01.csv`
-
-- `scripts/evaluation/fftw_plot_perf.ipynb` is a JupterLab file that can be used to plot graphs using the previous `csv` file. The output images are stored in `images` folder.
+3. `scripts/evaluation/fftw_plot_perf.ipynb` is a JupterLab file that can be used to plot graphs using the previous `csv` file. The output images are stored in `images` folder.
