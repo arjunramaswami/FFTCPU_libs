@@ -14,9 +14,16 @@ compile_est_plan:
   artifacts:
     paths:
       - fftw/build/hybrid_many
+      - fftw/build/openmp_many
 
-run_est_plan:
-  stage: execute
+run_est_plan_hybrid:
+  stage: execute_hybrid
   script:
     - cd fftw/build
     - ./hybrid_many --num=16 --threads=2 --batch=2
+
+run_est_plan_openmp:
+  stage: execute_openmp
+  script:
+    - cd fftw/build
+    - ./openmp_many --num=16 --threads=2 --batch=2

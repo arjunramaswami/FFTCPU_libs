@@ -12,10 +12,6 @@ void print_config(int N1, int N2, int N3, int iter, int inverse, int nthreads, i
 
 int main(int argc, char **argv){
 
-  // Cmd line argument declarations
-  unsigned N = 64, iter = 1, nthreads = 1, batch = 1;
-  bool inverse = false, dp = false;
-
   cxxopts::Options options("FFTW", "Parse FFTW input params");
 
   options.add_options()
@@ -24,6 +20,8 @@ int main(int argc, char **argv){
       ("c, batch", "Number of batch", cxxopts::value<unsigned>()->default_value("1"))
       ("i, iter", "Number of iterations", cxxopts::value<unsigned>()->default_value("1"))
       ("b, inverse", "Backward FFT", cxxopts::value<bool>()->default_value("false"))
+      ("w, wisdomfile", "File to wisdom", cxxopts::value<string>()->default_value("test.wisdom"))
+      ("e, expm", "Expm number", cxxopts::value<unsigned>()->default_value("1"))
       ("h,help", "Print usage")
   ;
 
@@ -34,17 +32,49 @@ int main(int argc, char **argv){
     return EXIT_SUCCESS;
   }
 
-  N = result["num"].as<unsigned>();
-  nthreads = result["threads"].as<unsigned>();
-  batch = result["batch"].as<unsigned>();
-  iter = result["iter"].as<unsigned>();
-  inverse = result["inverse"].as<bool>();
+  unsigned N = result["num"].as<unsigned>();
+  unsigned nthreads = result["threads"].as<unsigned>();
+  unsigned batch = result["batch"].as<unsigned>();
+  unsigned iter = result["iter"].as<unsigned>();
+  bool inverse = result["inverse"].as<bool>(); 
+  string wisfile = result["wisdomfile"].as<string>();
+  unsigned expm = result["expm"].as<unsigned>();
     
   // Initialize: set default number of threads to be used
   omp_set_num_threads(nthreads);
 
   try{
-    fftwf_openmp_many(N, batch, nthreads, inverse, iter);
+    switch(expm){
+      case 1:{
+        cout << "Expm 1: Only FFTW\n";
+        fftwf_openmp_many(N, batch, nthreads, inverse, iter, wisfile);
+        break;
+      }
+      case 2:{
+        cout << "Expm 2: Streaming FFTW\n";
+        fftwf_openmp_many_streamappln(N, batch, nthreads, inverse, iter, wisfile);
+        break;
+      }
+      case 3:{
+        cout << "Expm 3: Conv FFTW\n";
+        fftwf_openmp_many_conv(N, batch, nthreads, inverse, iter, wisfile);
+        break;
+      }
+      case 4:{
+        cout << "Expm 4: No Wisdom no verification no inverse\n";
+        fftwf_openmp_many_nowisnoinv(N, batch, nthreads, inverse, iter);
+        break;
+      }
+      case 5:{
+        cout << "Expm 5: Only FFTW with harmonic signal input\n";
+        fftwf_openmp_many_waveinp(N, batch, nthreads, inverse, iter, wisfile);
+        break;
+      }
+      default:{
+        cout << "No experiment chosen\n";
+        break;
+      }
+    }
   }
   catch(const char* msg){
     cerr << msg << endl;

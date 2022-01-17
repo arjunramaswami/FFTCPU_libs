@@ -3,6 +3,7 @@
 #ifndef HELPER_HPP
 #define HELPER_HPP
 
+#include <fftw3.h>
 /*
  * \brief Print configuration of execution 
  * \param N .      : number of points in each dimension of 3D FFT
@@ -46,5 +47,7 @@ double moda(unsigned K, unsigned L, unsigned M);
  * \return true if successful, false on error
  */
 bool checkStatus(int status);
+
+bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned how_many);
 
 #endif // HELPER_HPP

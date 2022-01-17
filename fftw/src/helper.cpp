@@ -6,6 +6,7 @@
 #include "config.h"
 #include "helper.hpp"
 #include <fftw3.h>
+#include <cmath>
 
 using std::cout;
 using std::cerr;
@@ -14,6 +15,53 @@ using std::setw;
 
 using std::setprecision;
 using std::fixed;
+
+/**
+ * \brief  Verify single precision batched FFT3d computation using FFTW
+ * \param  fftw_data   : pointer to 3D number of sp points after FFTW
+ * \param  verify_data : pointer to 3D number of sp points for verification
+ * \param  N1, N2, N3  : fft size
+ * \param  H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \param  how_many    : number of batched implementations of FFTW
+ * \return true if successful, false otherwise
+ */
+bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned how_many){
+
+  double magnitude = 0.0, noise = 0.0, mag_sum = 0.0, noise_sum = 0.0;
+
+  for(size_t i = 0; i < how_many * N * N * N; i++){
+
+    // FFT -> iFFT is scaled by dimensions (N*N*N)
+    verify_data[i][0] = verify_data[i][0] * N * N * N;
+    verify_data[i][1] = verify_data[i][1] * N * N * N;
+
+    magnitude = verify_data[i][0] * verify_data[i][0] + \
+                      verify_data[i][1] * verify_data[i][1];
+    noise = (verify_data[i][0] - fftw_data[i][0]) \
+        * (verify_data[i][0] - fftw_data[i][0]) + 
+        (verify_data[i][1] - fftw_data[i][1]) * (verify_data[i][1] - fftw_data[i][1]);
+
+    mag_sum += magnitude;
+    noise_sum += noise;
+
+#ifndef NDEBUG
+    cout << i << ": fftw_out[" << i << "] = (" << fftw_data[i][0] << ", " << fftw_data[i][1] << ")";
+    cout << " = (" << verify_data[i][0] << ", " << verify_data[i][1] << ")";
+    cout << endl;
+#endif
+  }
+
+  float db = 10 * log(mag_sum / noise_sum) / log(10.0);
+
+    // if SNR greater than 120, verification passes
+  if(db > 120){
+    return true;
+  }
+  else{ 
+    cout << "Signal to noise ratio on output sample: " << db << " --> FAILED \n\n";
+    return false;
+  }
+}
 
 /* Compute (K*L)%M */
 double moda(unsigned K, unsigned L, unsigned M){

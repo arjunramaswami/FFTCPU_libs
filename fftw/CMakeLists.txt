@@ -6,6 +6,18 @@ project(FFTW VERSION 3.1
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  message("-- Using Clang Compiler")
+  # using Clang
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  message("-- Using GNU Compiler")
+  # using GCC
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+  message("-- Using Intel Compiler")
+  # using Intel C++
+endif()
+
 set(examples hybrid_many openmp_many)
 
 message("-- Building external dependencies")
@@ -19,17 +31,14 @@ message("-- Finding MPI and OpenMP")
 find_package(MPI REQUIRED)
 find_package(OpenMP REQUIRED)
 
-message("-- Fetching Cxxopts")
-## CxxOpts - for command line argument parsing
-FetchContent_Declare(
-  cxxopts
-  GIT_REPOSITORY https://github.com/jarro2783/cxxopts
-  GIT_TAG        v2.2.1
-)
-FetchContent_MakeAvailable(cxxopts)
+message("-- Finding MKL")
+set(BLA_VENDOR Intel10_64lp)
+find_package(BLAS)
 
 set(FFTW_PLAN "FFTW_ESTIMATE" CACHE STRING "FFTW Plan")
 set_property(CACHE FFTW_PLAN PROPERTY STRINGS "FFTW_ESTIMATE" "FFTW_MEASURE" "FFTW_PATIENT" "FFTW_EXHAUSTIVE")
+
+message("-- FFTW Plan: ${FFTW_PLAN}")
 
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in"
@@ -49,6 +58,7 @@ target_link_libraries(openmp_many PRIVATE
   OpenMP::OpenMP_CXX
   ${FFTW_FLOAT_LIB}         # fftw3f
   ${FFTW_FLOAT_OPENMP_LIB}  # ffw3f_omp
+  ${BLAS_LIBRARIES}
   cxxopts
 )
 
