@@ -11,4 +11,6 @@
  */
 void mkl_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter);
 
+void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter);
+
 #endif // MKL_MANY_HPP

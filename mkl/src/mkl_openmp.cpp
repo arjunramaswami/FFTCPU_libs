@@ -261,3 +261,103 @@ void mkl_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inve
   mkl_free(fft_data);
   mkl_free(verify_data);
 }
+
+void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
+
+  if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
+    throw "Invalid value, should be >=1!";
+
+  MKL_Complex8 *fft_data = (MKL_Complex8*)mkl_malloc(N * N * N * sizeof(MKL_Complex8), 64);
+  if (fft_data == NULL)
+    throw "FFT data allocation failed";
+
+  MKL_Complex8 *verify_data = (MKL_Complex8*)mkl_malloc(N * N * N * sizeof(MKL_Complex8), 64);
+  if (fft_data == NULL)
+    throw "FFT data allocation failed";
+
+
+  //MKL_NUM_THREADS = nthreads;
+  const MKL_LONG dim = 3;
+  const MKL_LONG size[3] = {N, N, N};
+  MKL_LONG status;
+
+  DFTI_DESCRIPTOR_HANDLE fft_desc_handle = NULL;
+
+  status = DftiCreateDescriptor(&fft_desc_handle, DFTI_SINGLE, DFTI_COMPLEX, dim, size);
+  error_msg(status);
+
+  status = DftiSetValue(fft_desc_handle, DFTI_PLACEMENT, DFTI_INPLACE);
+  error_msg(status);
+  status = DftiSetValue(fft_desc_handle, DFTI_THREAD_LIMIT, nthreads);
+  error_msg(status);
+
+  status = DftiCommitDescriptor(fft_desc_handle);
+  error_msg(status);
+
+  double start = 0.0, stop = 0.0, exec_diff = 0.0;
+  double exec_t[iter];
+
+  const size_t tot_sz = N*N*N;
+  const size_t num = 256*256*256;
+  float *temp1, *temp2;
+  temp1 = new float [num];
+  temp2 = new float [num];
+  float test_res = 0.0f;
+
+  cout << "Iteration: ";
+  for(unsigned it = 0; it < iter; it++){
+    cout << it << ", ";
+
+    get_data(fft_data, verify_data, N, how_many);
+
+    for(unsigned i = 0; i < num; i++){
+      temp1[i] = ((float) rand() / (RAND_MAX)); 
+      temp2[i] = ((float) rand() / (RAND_MAX)); 
+    }
+
+    // omp_set_num_threads in the main call, also influences this
+    // dot product
+    test_res = cblas_sdot(num, temp1, 1, temp2, 1);
+
+    start = getTimeinMilliSec();
+    DftiComputeForward(fft_desc_handle, fft_data);
+    stop = getTimeinMilliSec();
+
+    // vector scalar product
+    cblas_csscal(tot_sz, test_res, fft_data, 1);
+
+    exec_t[it] = stop - start;
+    exec_diff += (stop - start);
+  }
+  cout << endl;
+  delete[] temp1;
+  delete[] temp2;
+
+  double mean = exec_diff / iter;
+  double variance = 0.0;
+  for(unsigned i = 0; i < iter; i++){
+    variance += pow(exec_t[i] - mean, 2);
+  }
+
+  double sq_sd = variance / iter;
+  double sd = sqrt(variance / iter);
+
+  cout << "Printing individual runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+
+  cout << "\nMeasurements\n" << "--------------------------\n";
+  cout << "FFT Size            : " << N << "^3\n";
+  cout << "Threads             : " << nthreads << endl;
+  cout << "Batch               : " << how_many << endl;
+  cout << "Iterations          : " << iter << endl;
+  cout << "Avg Tot Runtime     : " << std::fixed << mean<< " ms\n";
+  cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
+  cout << "SD                  : " << sd << " ms\n";
+
+  DftiFreeDescriptor(&fft_desc_handle);
+
+  mkl_free(fft_data);
+  mkl_free(verify_data);
+}

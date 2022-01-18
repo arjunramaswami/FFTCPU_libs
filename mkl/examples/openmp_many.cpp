@@ -44,6 +44,11 @@ int main(int argc, char **argv){
         mkl_openmp_many(N, batch, nthreads, inverse, iter);
         break;
       }
+      case 2:{
+        cout << "Expm 2: Streaming FFT\n";
+        mkl_openmp_stream(N, batch, nthreads, inverse, iter);
+        break;       
+      }
       default:{
         cout << "No experiment chosen\n";
         break;
