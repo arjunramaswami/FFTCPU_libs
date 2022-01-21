@@ -165,10 +165,13 @@ void print_config(unsigned N, bool dp, unsigned nprocs, unsigned nthreads, unsig
       cout << "Plan               = Estimate  \n"; 
       break;
     case FFTW_PATIENT: 
-      cout << "Plan               = Patient     \n";
+      cout << "Plan               = Patient    \n";
       break;
     case FFTW_EXHAUSTIVE: 
       cout << "Plan               = Exhaustive  \n";
+      break;
+    case FFTW_WISDOM_ONLY:
+      cout << "Plan               = Wisdom Only \n";
       break;
     default: 
       throw "Incorrect plan\n";

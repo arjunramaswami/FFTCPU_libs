@@ -134,6 +134,8 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
                         break;
     case FFTW_EXHAUSTIVE: cout << "FFTW Plan: Exhaustive\n";
                         break;
+    case FFTW_WISDOM_ONLY: cout << "FFTW Plan: Wisdom Only \n";
+                        break;
     default: throw "Incorrect plan\n";
             break;
   }
@@ -142,9 +144,15 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   
   // Import wisdom from filename
   int wis_status = 0;
+  fftwf_forget_wisdom();
+
   wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
   if(wis_status == 0) // could not import wisdom
     cout << "-- Cannot import wisdom from " << wisfile << endl;
+  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+    cleanup_openmp(fftw_data, verify_data);
+    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  }
   else                 
     cout << "-- Importing wisdom from " << wisfile << endl;
 
@@ -155,15 +163,16 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
 
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  if(wis_status == 0){    // i.e., wisdom is not imported
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+    // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
-    if(exp_stat == 0){
+    if(exp_stat == 0)
       cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
-    }
-    else{
+    else
       cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
-    }
   }
+  else
+    cout << "Not exporting any wisdom\n";
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
@@ -277,34 +286,42 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
                         break;
     case FFTW_EXHAUSTIVE: cout << "FFTW Plan: Exhaustive\n";
                         break;
+    case FFTW_WISDOM_ONLY: cout << "FFTW Plan: Wisdom Only \n";
+                        break;
     default: throw "Incorrect plan\n";
             break;
   }
 
   // Import wisdom from filename
   int wis_status = 0;
+  fftwf_forget_wisdom();
+
   wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
   if(wis_status == 0) // could not import wisdom
     cout << "-- Cannot import wisdom from " << wisfile << endl;
+  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+    cleanup_openmp(fftw_data, verify_data);
+    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  }
   else                 
     cout << "-- Importing wisdom from " << wisfile << endl;
 
   // Make Plan
   double plan_start = getTimeinMilliSec();
-
   plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
-
   double plan_time = getTimeinMilliSec() - plan_start;
+  cout << "Planning Completed\n";
 
-  if(wis_status == 0){    // i.e., wisdom is not imported
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+    // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
-    if(exp_stat == 0){
+    if(exp_stat == 0)
       cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
-    }
-    else{
+    else
       cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
-    }
   }
+  else
+    cout << "Not exporting any wisdom\n";
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
@@ -437,9 +454,15 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
 
   // Import wisdom from filename
   int wis_status = 0;
+  fftwf_forget_wisdom();
+
   wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
   if(wis_status == 0) // could not import wisdom
     cout << "-- Cannot import wisdom from " << wisfile << endl;
+  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+    cleanup_openmp(fftw_data, verify_data);
+    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  }
   else                 
     cout << "-- Importing wisdom from " << wisfile << endl;
 
@@ -450,15 +473,16 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
 
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  if(wis_status == 0){    // i.e., wisdom is not imported
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+    // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
-    if(exp_stat == 0){
+    if(exp_stat == 0)
       cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
-    }
-    else{
+    else
       cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
-    }
   }
+  else
+    cout << "Not exporting any wisdom\n";
 
   // Make plan for verification
   plan_verify = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_ESTIMATE);
@@ -706,9 +730,15 @@ void fftwf_openmp_many_waveinp(unsigned N, unsigned how_many, unsigned nthreads,
   
   // Import wisdom from filename
   int wis_status = 0;
+  fftwf_forget_wisdom();
+
   wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
   if(wis_status == 0) // could not import wisdom
     cout << "-- Cannot import wisdom from " << wisfile << endl;
+  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+    cleanup_openmp(fftw_data, verify_data);
+    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  }
   else                 
     cout << "-- Importing wisdom from " << wisfile << endl;
 
@@ -719,15 +749,17 @@ void fftwf_openmp_many_waveinp(unsigned N, unsigned how_many, unsigned nthreads,
 
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  if(wis_status == 0){    // i.e., wisdom is not imported
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+    // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
-    if(exp_stat == 0){
+    if(exp_stat == 0)
       cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
-    }
-    else{
+    else
       cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
-    }
   }
+  else
+    cout << "Not exporting any wisdom\n";
+
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
