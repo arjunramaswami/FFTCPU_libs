@@ -6,10 +6,10 @@ compile_est_plan:
   stage: build
   script:
     - echo "Building"
-    - module load toolchain/gompi devel/CMake numlib/FFTW
+    - ml numlib/FFTW/3.3.9-gompi-2021a toolchain/intel/2021a devel/CMake
     - cd fftw
     - rm -rf build && mkdir build && cd build
-    - cmake ..
+    - cmake -DCMAKE_BUILD_TYPE=Release ..
     - make
   artifacts:
     paths:
@@ -19,4 +19,4 @@ run_est_plan_openmp:
   stage: execute_openmp
   script:
     - cd fftw/build
-    - ./openmp_many --num=16 --threads=2 --batch=2
+    - ./openmp_many --num=16 --threads=2 --batch=2 --expm=2
