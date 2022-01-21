@@ -5,6 +5,8 @@
 #include <fftw3.h>
 #include <mkl.h>
 #include "config.h"
+#include <algorithm> // nth_element used in calculating median, quartiles
+#include <vector>
 
 #include "cxxopts.hpp" // Cmd-Line Args parser
 #include "fftwf_many.hpp"
@@ -176,12 +178,15 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
-  double exec_t[iter];
+  vector<double> exec_t;
+#ifndef NDEBUG
   cout << "Iteration: ";
+#endif
   double test_res = 0.0;
   for(size_t it = 0; it < iter; it++){
+#ifndef NDEBUG
     cout << it << ", ";
-
+#endif
     // Get new data every iteration on the same allocation 
     get_data(fftw_data, verify_data, N, how_many);
 
@@ -197,11 +202,47 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
       throw "Error in Transformation\n";
     }
 
-    exec_t[it] = stop - start;
-    exec_diff += stop - start;
-
+    double diff = stop - start;
+    exec_t.push_back(diff);
+    exec_diff += diff;
   }
   cout << endl;
+
+#ifndef NDEBUG
+  cout << "Printing individual runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+#endif
+
+  // using rounding up algorithm to simplify
+  const unsigned Q1 = ceil(exec_t.size() / 4.0);
+  const unsigned Q2 = exec_t.size() / 2;
+  const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
+
+  cout << "\nQ1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+
+  nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
+  nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
+  nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
+
+  if(iter % 2 == 0) // if even, dont round up for median
+    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+
+#ifndef NDEBUG
+  cout << "Printing sorted runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+#endif
+
+  // Subtract by 1 to get the right index into the array because of [0..]
+  double Q1_val = exec_t[Q1 - 1];
+  double median = exec_t[Q2 - 1];
+  if(iter % 2 == 0)
+    median = (median + exec_t[Q2 -2]) / 2.0;
+
+  double Q3_val = exec_t[Q3-1];
 
   double mean = exec_diff / iter;
   double variance = 0.0;
@@ -216,11 +257,6 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma;
 
-  cout << "Printing individual runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-
   cout << "\nMeasurements\n" << "--------------------------\n";
   cout << "FFT Size            : " << N << "^3\n";
   cout << "Threads             : " << nthreads << endl;
@@ -230,6 +266,9 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
   cout << "SD                  : " << sd << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
+  cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
+  cout << "Median              : " << std::fixed << median << " ms\n";
+  cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
   cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
 
   cleanup_openmp(fftw_data, verify_data);
@@ -325,9 +364,10 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
-  double exec_t[iter];
+  vector<double> exec_t;
+#ifndef NDEBUG
   cout << "Iteration: ";
-
+#endif
   const size_t tot_sz = N*N*N;
   const size_t num = 256*256*256;
   float *temp1, *temp2;
@@ -336,7 +376,9 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   float test_res = 0.0f;
 
   for(size_t it = 0; it < iter; it++){
+#ifndef NDEBUG
     cout << it << ", ";
+#endif
 
     // Get new data every iteration on the same allocation 
     get_data(fftw_data, verify_data, N, how_many);
@@ -357,13 +399,49 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
     // vector scalar product
     cblas_csscal(tot_sz, test_res, fftw_data, 1);
 
-    exec_t[it] = stop - start;
-    exec_diff += stop - start;
-
+    double diff = stop - start;
+    exec_t.push_back(diff);
+    exec_diff += diff;
   }
   cout << endl;
   delete[] temp1;
   delete[] temp2;
+
+#ifndef NDEBUG
+  cout << "Printing individual runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+#endif
+
+  // using rounding up algorithm to simplify
+  const unsigned Q1 = ceil(exec_t.size() / 4.0);
+  const unsigned Q2 = exec_t.size() / 2;
+  const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
+
+  cout << "\nQ1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+
+  nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
+  nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
+  nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
+
+  if(iter % 2 == 0) // if even, dont round up for median
+    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+
+#ifndef NDEBUG
+  cout << "Printing sorted runtimes:\n";
+  for(unsigned i = 0; i < iter; i++)
+    printf(" %u: %lfms\n", i, exec_t[i]);
+  cout << endl;
+#endif
+
+  // Subtract by 1 to get the right index into the array because of [0..]
+  double Q1_val = exec_t[Q1 - 1];
+  double median = exec_t[Q2 - 1];
+  if(iter % 2 == 0)
+    median = (median + exec_t[Q2 -2]) / 2.0;
+
+  double Q3_val = exec_t[Q3-1];
 
   double mean = exec_diff / iter;
   double variance = 0.0;
@@ -378,11 +456,6 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma;
 
-  cout << "Printing individual runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-
   cout << "\nMeasurements\n" << "--------------------------\n";
   cout << "FFT Size            : " << N << "^3\n";
   cout << "Threads             : " << nthreads << endl;
@@ -392,6 +465,9 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
   cout << "SD                  : " << sd << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
+  cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
+  cout << "Median              : " << std::fixed << median << " ms\n";
+  cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
   cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
 
   cleanup_openmp(fftw_data, verify_data);
