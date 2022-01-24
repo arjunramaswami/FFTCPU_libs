@@ -60,16 +60,6 @@ int main(int argc, char **argv){
         fftwf_openmp_many_conv(N, batch, nthreads, inverse, iter, wisfile);
         break;
       }
-      case 4:{
-        cout << "Expm 4: No Wisdom no verification no inverse\n";
-        fftwf_openmp_many_nowisnoinv(N, batch, nthreads, inverse, iter);
-        break;
-      }
-      case 5:{
-        cout << "Expm 5: Only FFTW with harmonic signal input\n";
-        fftwf_openmp_many_waveinp(N, batch, nthreads, inverse, iter, wisfile);
-        break;
-      }
       default:{
         cout << "No experiment chosen\n";
         break;

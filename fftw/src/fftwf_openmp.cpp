@@ -94,6 +94,7 @@ void get_data_wave(fftwf_complex *fftw_data, fftwf_complex *verify_data,size_t N
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
  */
 void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
     
@@ -122,7 +123,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   }
 
   // Parameters for planning
-  const int n[3] = {N, N, N};
+  const int n[3] = {(int)N, (int)N, (int)N};
   int idist = N * N * N, odist = N * N * N;
   int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
@@ -148,24 +149,27 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   int wis_status = 0;
   fftwf_forget_wisdom();
 
-  wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
-  if(wis_status == 0) // could not import wisdom
-    cout << "-- Cannot import wisdom from " << wisfile << endl;
-  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
-    cleanup_openmp(fftw_data, verify_data);
-    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  if(fftw_plan != FFTW_ESTIMATE){
+    wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
+    if(wis_status == 0) // could not import wisdom
+      cout << "-- Cannot import wisdom from " << wisfile << endl;
+    else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+      cleanup_openmp(fftw_data, verify_data);
+      throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+    }
+    else                 
+      cout << "-- Importing wisdom from " << wisfile << endl;
   }
-  else                 
-    cout << "-- Importing wisdom from " << wisfile << endl;
+  else
+    cout << "Estimate Plan: Not using wisdom" << endl;
 
   // Make Plan
   double plan_start = getTimeinMilliSec();
-
   plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
-
   double plan_time = getTimeinMilliSec() - plan_start;
+  cout << "Planning Completed\n";
 
-  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY) && (fftw_plan != FFTW_ESTIMATE)){
     // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
     if(exp_stat == 0)
@@ -215,35 +219,36 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   cout << endl;
 #endif
 
-  // using rounding up algorithm to simplify
-  const unsigned Q1 = ceil(exec_t.size() / 4.0);
-  const unsigned Q2 = exec_t.size() / 2;
-  const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
+  double Q1_val = 0.0, median = 0.0, Q3_val = 0.0;
+  if(iter > 2){
+    // using rounding up algorithm to simplify
+    const unsigned Q1 = ceil(exec_t.size() / 4.0);
+    const unsigned Q2 = exec_t.size() / 2;
+    const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
 
-  cout << "\nQ1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+    cout << "\n-- Real : Q1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+    cout << "-- Array: Q1: " << Q1-1 <<" Q2: "<<Q2-1<< " Q3: "<< Q3-1 << endl;
 
-  nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
-  nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
-  nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
+    nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
+    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
+    nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
 
-  if(iter % 2 == 0) // if even, dont round up for median
-    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+  #ifndef NDEBUG
+    cout << "Printing sorted runtimes:\n";
+    for(unsigned i = 0; i < iter; i++)
+      printf(" %u: %lfms\n", i, exec_t[i]);
+    cout << endl;
+  #endif
 
-#ifndef NDEBUG
-  cout << "Printing sorted runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-#endif
-
-  // Subtract by 1 to get the right index into the array because of [0..]
-  double Q1_val = exec_t[Q1 - 1];
-  double median = exec_t[Q2 - 1];
-  if(iter % 2 == 0)
-    median = (median + exec_t[Q2 -2]) / 2.0;
-
-  double Q3_val = exec_t[Q3-1];
-
+    // Subtract by 1 to get the right index into the array because of [0..]
+    Q1_val = exec_t[Q1 - 1];
+    median = exec_t[Q2 - 1];
+    if((iter % 2 == 0) && (iter > 2)){
+      nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+      median = (median + exec_t[Q2]) / 2.0;
+    }
+    Q3_val = exec_t[Q3-1];
+  }
   double mean = exec_diff / iter;
   double variance = 0.0;
   for(unsigned i = 0; i < iter; i++){
@@ -266,9 +271,11 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
   cout << "SD                  : " << sd << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
-  cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
-  cout << "Median              : " << std::fixed << median << " ms\n";
-  cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
+  if(iter > 2){
+    cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
+    cout << "Median              : " << std::fixed << median << " ms\n";
+    cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
+  }
   cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
 
   cleanup_openmp(fftw_data, verify_data);
@@ -283,6 +290,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
  */
 void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
     
@@ -311,7 +319,7 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   }
 
   // Parameters for planning
-  const int n[3] = {N, N, N};
+  const int n[3] = {(int)N, (int)N, (int)N};
   int idist = N * N * N, odist = N * N * N;
   int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
@@ -335,23 +343,27 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   int wis_status = 0;
   fftwf_forget_wisdom();
 
-  wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
-  if(wis_status == 0) // could not import wisdom
-    cout << "-- Cannot import wisdom from " << wisfile << endl;
-  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
-    cleanup_openmp(fftw_data, verify_data);
-    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  if(fftw_plan != FFTW_ESTIMATE){
+    wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
+    if(wis_status == 0) // could not import wisdom
+      cout << "-- Cannot import wisdom from " << wisfile << endl;
+    else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+      cleanup_openmp(fftw_data, verify_data);
+      throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+    }
+    else                 
+      cout << "-- Importing wisdom from " << wisfile << endl;
   }
-  else                 
-    cout << "-- Importing wisdom from " << wisfile << endl;
+  else
+    cout << "Estimate Plan: Not using wisdom" << endl;
 
   // Make Plan
   double plan_start = getTimeinMilliSec();
-  plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
+  plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
   double plan_time = getTimeinMilliSec() - plan_start;
   cout << "Planning Completed\n";
 
-  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY) && (fftw_plan != FFTW_ESTIMATE)){
     // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
     if(exp_stat == 0)
@@ -414,34 +426,36 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   cout << endl;
 #endif
 
-  // using rounding up algorithm to simplify
-  const unsigned Q1 = ceil(exec_t.size() / 4.0);
-  const unsigned Q2 = exec_t.size() / 2;
-  const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
+  double Q1_val = 0.0, median = 0.0, Q3_val = 0.0;
+  if(iter > 2){
+    // using rounding up algorithm to simplify
+    const unsigned Q1 = ceil(exec_t.size() / 4.0);
+    const unsigned Q2 = ceil(exec_t.size() / 2.0);
+    const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
 
-  cout << "\nQ1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+    cout << "\n-- Real : Q1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+    cout << "-- Array: Q1: " << Q1-1 <<" Q2: "<<Q2-1<< " Q3: "<< Q3-1 << endl;
 
-  nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
-  nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
-  nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
+    nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
+    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
+    nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
 
-  if(iter % 2 == 0) // if even, dont round up for median
-    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+  #ifndef NDEBUG
+    cout << "Printing sorted runtimes:\n";
+    for(unsigned i = 0; i < iter; i++)
+      printf(" %u: %lfms\n", i, exec_t[i]);
+    cout << endl;
+  #endif
 
-#ifndef NDEBUG
-  cout << "Printing sorted runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-#endif
-
-  // Subtract by 1 to get the right index into the array because of [0..]
-  double Q1_val = exec_t[Q1 - 1];
-  double median = exec_t[Q2 - 1];
-  if(iter % 2 == 0)
-    median = (median + exec_t[Q2 -2]) / 2.0;
-
-  double Q3_val = exec_t[Q3-1];
+    // Subtract by 1 to get the right index into the array because of [0..]
+    Q1_val = exec_t[Q1 - 1];
+    median = exec_t[Q2 - 1];
+    if((iter % 2 == 0) && (iter > 2)){
+      nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+      median = (median + exec_t[Q2]) / 2.0;
+    }
+    Q3_val = exec_t[Q3-1];
+  }
 
   double mean = exec_diff / iter;
   double variance = 0.0;
@@ -465,9 +479,11 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
   cout << "SD                  : " << sd << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
-  cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
-  cout << "Median              : " << std::fixed << median << " ms\n";
-  cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
+  if(iter > 2){
+    cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
+    cout << "Median              : " << std::fixed << median << " ms\n";
+    cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
+  }
   cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
 
   cleanup_openmp(fftw_data, verify_data);
@@ -482,6 +498,7 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
  */
 void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
     
@@ -510,7 +527,7 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
   }
 
   // Parameters for planning
-  const int n[3] = {N, N, N};
+  const int n[3] = {(int)N, (int)N, (int)N};
   int idist = N * N * N, odist = N * N * N;
   int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
@@ -532,24 +549,26 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
   int wis_status = 0;
   fftwf_forget_wisdom();
 
-  wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
-  if(wis_status == 0) // could not import wisdom
-    cout << "-- Cannot import wisdom from " << wisfile << endl;
-  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
-    cleanup_openmp(fftw_data, verify_data);
-    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+  if(fftw_plan != FFTW_ESTIMATE){
+    wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
+    if(wis_status == 0) // could not import wisdom
+      cout << "-- Cannot import wisdom from " << wisfile << endl;
+    else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
+      cleanup_openmp(fftw_data, verify_data);
+      throw "Plan should use imported wisdom. Cannot import. Quitting\n";
+    }
+    else                 
+      cout << "-- Importing wisdom from " << wisfile << endl;
   }
-  else                 
-    cout << "-- Importing wisdom from " << wisfile << endl;
+  else
+    cout << "Estimate Plan: Not using wisdom" << endl;
 
   // Make Plan
   double plan_start = getTimeinMilliSec();
-
   plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
-
   double plan_time = getTimeinMilliSec() - plan_start;
 
-  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
+  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY) && (fftw_plan != FFTW_ESTIMATE)){
     // i.e., wisdom is not imported
     int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
     if(exp_stat == 0)
@@ -577,10 +596,14 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;
-  double exec_t[iter];
+  vector<double> exec_t;
+#ifndef NDEBUG
   cout << "Iteration: ";
+#endif
   for(unsigned it = 0; it < iter; it++){
+#ifndef NDEBUG
     cout << it << ", ";
+#endif
 
     start = getTimeinMilliSec();
     fftwf_execute(plan);
@@ -593,278 +616,52 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
     fftwf_execute(plan_verify);
 
     // vector scalar product
-
     cblas_csscal(tot_sz, inv_tot, fftw_data, 1);
 
-    exec_t[it] = stop - start;
-    exec_diff += stop - start;
+    double diff = stop - start;
+    exec_t.push_back(diff);
+    exec_diff += diff;
   }
   cout << endl;
-
   delete[] filter;
 
-  double mean = exec_diff / iter;
-  double variance = 0.0;
-  for(unsigned i = 0; i < iter; i++){
-    variance += pow(exec_t[i] - mean, 2);
-  }
-
-  double sq_sd = variance / iter;
-  double sd = sqrt(variance / iter);
-
-  double add, mul, fma, flops;
-  fftwf_flops(plan, &add, &mul, &fma);
-  flops = add + mul + fma;
-
+#ifndef NDEBUG
   cout << "Printing individual runtimes:\n";
   for(unsigned i = 0; i < iter; i++)
     printf(" %u: %lfms\n", i, exec_t[i]);
   cout << endl;
+#endif
 
-  cout << "\nMeasurements\n" << "--------------------------\n";
-  cout << "FFT Size            : " << N << "^3\n";
-  cout << "Threads             : " << nthreads << endl;
-  cout << "Batch               : " << how_many << endl;
-  cout << "Iterations          : " << iter << endl;
-  cout << "Avg Tot Runtime     : " << std::fixed << mean<< " ms\n";
-  cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
-  cout << "SD                  : " << sd << " ms\n";
-  cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
-  cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
+  double Q1_val = 0.0, median = 0.0, Q3_val = 0.0;
+  if(iter > 2){
+    // using rounding up algorithm to simplify
+    const unsigned Q1 = ceil(exec_t.size() / 4.0);
+    const unsigned Q2 = ceil(exec_t.size() / 2.0);
+    const unsigned Q3 = ceil(3 * exec_t.size() / 4.0);
 
-  cleanup_openmp(fftw_data, verify_data);
-}
+    cout << "\n-- Real : Q1: " << Q1 << " Q2: " << Q2 << " Q3: " << Q3 << endl;
+    cout << "-- Array: Q1: " << Q1-1 <<" Q2: "<<Q2-1<< " Q3: "<< Q3-1 << endl;
 
+    nth_element(exec_t.begin(),          exec_t.begin() + Q1, exec_t.end());
+    nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
+    nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
 
-/**
- * \brief  OpenMP Multithreaded Single precision FFTW 3D execution
- * \param  N          - Size of one dimension of FFT
- * \param  how_many   - number of batches
- * \param  nthreads   - number of threads
- * \param  inverse    - true if backward transform
- * \param  iter       - number of iterations of execution
- */
-void fftwf_openmp_many_nowisnoinv(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
-    
-  if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
-    throw "Invalid value, should be >=1!";
+  #ifndef NDEBUG
+    cout << "Printing sorted runtimes:\n";
+    for(unsigned i = 0; i < iter; i++)
+      printf(" %u: %lfms\n", i, exec_t[i]);
+    cout << endl;
+  #endif
 
-  // Initialising Threads
-  int threads_ok = fftwf_init_threads(); 
-  if(threads_ok == 0)
-    throw "Something went wrong with Multithreaded FFTW! Exiting... \n";
-
-  // All subsequent plans will now use nthreads
-  fftwf_plan_with_nthreads((int)nthreads);
-
-  // Allocating input and verification arrays
-  size_t data_sz = how_many * N * N * N;
-  fftwf_complex *fftw_data = fftwf_alloc_complex(data_sz);
-  fftwf_complex *verify_data = fftwf_alloc_complex(data_sz);
-
-  // Setting direction of FFT for the plan
-  int direction = FFTW_FORWARD;
-  int direction_inv = FFTW_BACKWARD;
-  if(inverse){
-    direction = FFTW_BACKWARD;
-    direction_inv = FFTW_FORWARD;
-  }
-
-  // Parameters for planning
-  const int n[3] = {N, N, N};
-  int idist = N * N * N, odist = N * N * N;
-  int istride = 1, ostride = 1;
-  const int *inembed = n, *onembed = n;
-  const unsigned fftw_plan = FFTW_PLAN;
-  switch(fftw_plan){
-    case FFTW_MEASURE:  cout << "FFTW Plan: Measure\n";
-                        break;
-    case FFTW_ESTIMATE: cout << "FFTW Plan: Estimate\n";
-                        break;
-    case FFTW_PATIENT:  cout << "FFTW Plan: Patient\n";
-                        break;
-    case FFTW_EXHAUSTIVE: cout << "FFTW Plan: Exhaustive\n";
-                        break;
-    default: throw "Incorrect plan\n";
-            break;
-  }
-
-  // Make Plan
-  double plan_start = getTimeinMilliSec();
-
-  plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
-
-  double plan_time = getTimeinMilliSec() - plan_start;
-
-  /* every iteration: FFT followed by inverse for verification */
-  double start = 0.0, stop = 0.0, exec_diff = 0.0;
-  double exec_t[iter];
-  cout << "Iteration: ";
-  double test_res = 0.0;
-  for(size_t it = 0; it < iter; it++){
-    cout << it << ", ";
-
-    // Get new data every iteration on the same allocation 
-    get_data(fftw_data, verify_data, N, how_many);
-
-    start = getTimeinMilliSec();
-    fftwf_execute(plan);
-    stop = getTimeinMilliSec();
-
-    exec_t[it] = stop - start;
-    exec_diff += stop - start;
-  }
-  cout << endl;
-
-  double mean = exec_diff / iter;
-  double variance = 0.0;
-  for(unsigned i = 0; i < iter; i++){
-    variance += pow(exec_t[i] - mean, 2);
-  }
-
-  double sq_sd = variance / iter;
-  double sd = sqrt(variance / iter);
-
-  double add, mul, fma, flops;
-  fftwf_flops(plan, &add, &mul, &fma);
-  flops = add + mul + fma;
-
-  cout << "Printing individual runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-
-  cout << "\nMeasurements\n" << "--------------------------\n";
-  cout << "FFT Size            : " << N << "^3\n";
-  cout << "Threads             : " << nthreads << endl;
-  cout << "Batch               : " << how_many << endl;
-  cout << "Iterations          : " << iter << endl;
-  cout << "Avg Tot Runtime     : " << std::fixed << mean<< " ms\n";
-  cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
-  cout << "SD                  : " << sd << " ms\n";
-  cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
-  cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
-
-  cleanup_openmp(fftw_data, verify_data);
-}
-
-
-/**
- * \brief  OpenMP Multithreaded Single precision FFTW 3D execution
- * \param  N          - Size of one dimension of FFT
- * \param  how_many   - number of batches
- * \param  nthreads   - number of threads
- * \param  inverse    - true if backward transform
- * \param  iter       - number of iterations of execution
- */
-void fftwf_openmp_many_waveinp(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
-    
-  if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
-    throw "Invalid value, should be >=1!";
-
-  // Initialising Threads
-  int threads_ok = fftwf_init_threads(); 
-  if(threads_ok == 0)
-    throw "Something went wrong with Multithreaded FFTW! Exiting... \n";
-
-  // All subsequent plans will now use nthreads
-  fftwf_plan_with_nthreads((int)nthreads);
-
-  // Allocating input and verification arrays
-  size_t data_sz = how_many * N * N * N;
-  fftwf_complex *fftw_data = fftwf_alloc_complex(data_sz);
-  fftwf_complex *verify_data = fftwf_alloc_complex(data_sz);
-
-  // Setting direction of FFT for the plan
-  int direction = FFTW_FORWARD;
-  int direction_inv = FFTW_BACKWARD;
-  if(inverse){
-    direction = FFTW_BACKWARD;
-    direction_inv = FFTW_FORWARD;
-  }
-
-  // Parameters for planning
-  const int n[3] = {N, N, N};
-  int idist = N * N * N, odist = N * N * N;
-  int istride = 1, ostride = 1;
-  const int *inembed = n, *onembed = n;
-  const unsigned fftw_plan = FFTW_PLAN;
-  switch(fftw_plan){
-    case FFTW_MEASURE:  cout << "FFTW Plan: Measure\n";
-                        break;
-    case FFTW_ESTIMATE: cout << "FFTW Plan: Estimate\n";
-                        break;
-    case FFTW_PATIENT:  cout << "FFTW Plan: Patient\n";
-                        break;
-    case FFTW_EXHAUSTIVE: cout << "FFTW Plan: Exhaustive\n";
-                        break;
-    default: throw "Incorrect plan\n";
-            break;
-  }
-
-  plan_verify = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_ESTIMATE);
-  
-  // Import wisdom from filename
-  int wis_status = 0;
-  fftwf_forget_wisdom();
-
-  wis_status = fftwf_import_wisdom_from_filename(wisfile.c_str());
-  if(wis_status == 0) // could not import wisdom
-    cout << "-- Cannot import wisdom from " << wisfile << endl;
-  else if((wis_status == 0) && (fftw_plan == FFTW_WISDOM_ONLY)){
-    cleanup_openmp(fftw_data, verify_data);
-    throw "Plan should use imported wisdom. Cannot import. Quitting\n";
-  }
-  else                 
-    cout << "-- Importing wisdom from " << wisfile << endl;
-
-  // Make Plan
-  double plan_start = getTimeinMilliSec();
-
-  plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
-
-  double plan_time = getTimeinMilliSec() - plan_start;
-
-  if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY)){
-    // i.e., wisdom is not imported
-    int exp_stat = fftwf_export_wisdom_to_filename(wisfile.c_str()); 
-    if(exp_stat == 0)
-      cout << "-- Could not export wisdom file to " << wisfile.c_str() << endl;
-    else
-      cout << "-- Exporting wisdom file to " << wisfile.c_str() << endl;
-  }
-  else
-    cout << "Not exporting any wisdom\n";
-
-
-  /* every iteration: FFT followed by inverse for verification */
-  double start = 0.0, stop = 0.0, exec_diff = 0.0;
-  double exec_t[iter];
-  cout << "Iteration: ";
-  double test_res = 0.0;
-  for(size_t it = 0; it < iter; it++){
-    cout << it << ", ";
-
-    // Get new data every iteration on the same allocation 
-    get_data_wave(fftw_data, verify_data, N, how_many);
-
-    start = getTimeinMilliSec();
-    fftwf_execute(plan);
-    stop = getTimeinMilliSec();
-
-    fftwf_execute(plan_verify);
-
-    bool status = verify_fftw(fftw_data, verify_data, N, how_many);
-    if(!status){
-      cleanup_openmp(fftw_data, verify_data);
-      throw "Error in Transformation\n";
+    // Subtract by 1 to get the right index into the array because of [0..]
+    Q1_val = exec_t[Q1 - 1];
+    median = exec_t[Q2 - 1];
+    if((iter % 2 == 0) && (iter > 2)){
+      nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2-1, exec_t.end());
+      median = (median + exec_t[Q2]) / 2.0;
     }
-
-    exec_t[it] = stop - start;
-    exec_diff += stop - start;
-
+    Q3_val = exec_t[Q3-1];
   }
-  cout << endl;
 
   double mean = exec_diff / iter;
   double variance = 0.0;
@@ -879,11 +676,6 @@ void fftwf_openmp_many_waveinp(unsigned N, unsigned how_many, unsigned nthreads,
   fftwf_flops(plan, &add, &mul, &fma);
   flops = add + mul + fma;
 
-  cout << "Printing individual runtimes:\n";
-  for(unsigned i = 0; i < iter; i++)
-    printf(" %u: %lfms\n", i, exec_t[i]);
-  cout << endl;
-
   cout << "\nMeasurements\n" << "--------------------------\n";
   cout << "FFT Size            : " << N << "^3\n";
   cout << "Threads             : " << nthreads << endl;
@@ -893,6 +685,11 @@ void fftwf_openmp_many_waveinp(unsigned N, unsigned how_many, unsigned nthreads,
   cout << "Runtime per batch   : " << (mean / how_many) << " ms\n";
   cout << "SD                  : " << sd << " ms\n";
   cout << "Throughput          : " << (flops * 1e-9) << " GFLOPs\n";
+  if(iter > 2){
+    cout << "Q1                  : " << std::fixed << Q1_val << " ms\n";
+    cout << "Median              : " << std::fixed << median << " ms\n";
+    cout << "Q3                  : " << std::fixed << Q3_val << " ms\n";
+  }
   cout << "Plan Time           : " << plan_time * 1e-3<< " sec\n";
 
   cleanup_openmp(fftw_data, verify_data);
