@@ -29,13 +29,15 @@ static void cleanup_openmp(fftwf_complex *fftw_data, fftwf_complex *verify_data)
  * \param fftw_data   : pointer to 3d number of sp points for FFTW
  * \param verify_data : pointer to 3d number of sp points for verification
  * \param N           : number of points in each dimension
+ * \param dim         : number of dimensions
  * \param how_many    : number of batched implementations of FFTW
  */
-void get_data(fftwf_complex *fftw_data, fftwf_complex *verify_data, size_t N, unsigned how_many){
+void get_data(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned dim, unsigned how_many){
 
   float re_val = 0.0f, img_val = 0.0f;
+  const unsigned num = pow(N, dim);
 
-  for(unsigned i = 0; i < how_many * N * N * N; i++){
+  for(unsigned i = 0; i < how_many * num; i++){
     re_val = ((float) rand() / (RAND_MAX));
     img_val = ((float) rand() / (RAND_MAX));
 
@@ -96,13 +98,15 @@ void get_data_wave(fftwf_complex *fftw_data, fftwf_complex *verify_data,size_t N
  * \param  iter       - number of iterations of execution
  * \param  wisfile    - path to wisdom file
  */
-void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
+void fftwf_openmp_many(unsigned N, unsigned dim, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile){
     
-  if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
-    throw "Invalid value, should be >=1!";
+  if ( (how_many == 0) || (nthreads == 0) || (iter == 0) | (dim > 3))
+    throw "Invalid values!";
+
+  const unsigned num = pow(N, dim);
 
   // Initialising Threads
-  int threads_ok = fftwf_init_threads(); 
+  const int threads_ok = fftwf_init_threads(); 
   if(threads_ok == 0)
     throw "Something went wrong with Multithreaded FFTW! Exiting... \n";
 
@@ -110,7 +114,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   fftwf_plan_with_nthreads((int)nthreads);
 
   // Allocating input and verification arrays
-  size_t data_sz = how_many * N * N * N;
+  const size_t data_sz = how_many * num;
   fftwf_complex *fftw_data = fftwf_alloc_complex(data_sz);
   fftwf_complex *verify_data = fftwf_alloc_complex(data_sz);
 
@@ -123,9 +127,12 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   }
 
   // Parameters for planning
-  const int n[3] = {(int)N, (int)N, (int)N};
-  int idist = N * N * N, odist = N * N * N;
-  int istride = 1, ostride = 1;
+  int *n = (int*)calloc(dim , sizeof(int));
+  for(unsigned i = 0; i < dim; i++)
+    n[i] = N;
+
+  const int idist = num, odist = num;
+  const int istride = 1, ostride = 1;
   const int *inembed = n, *onembed = n;
   const unsigned fftw_plan = FFTW_PLAN;
   switch(fftw_plan){
@@ -143,7 +150,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
             break;
   }
 
-  plan_verify = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_ESTIMATE);
+  plan_verify = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction_inv, FFTW_ESTIMATE);
   
   // Import wisdom from filename
   int wis_status = 0;
@@ -165,7 +172,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
 
   // Make Plan
   double plan_start = getTimeinMilliSec();
-  plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
+  plan = fftwf_plan_many_dft(dim, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, fftw_plan);
   double plan_time = getTimeinMilliSec() - plan_start;
   cout << "Planning Completed\n";
 
@@ -192,7 +199,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
     cout << it << ", ";
 #endif
     // Get new data every iteration on the same allocation 
-    get_data(fftw_data, verify_data, N, how_many);
+    get_data(fftw_data, verify_data, N, dim, how_many);
 
     start = getTimeinMilliSec();
     fftwf_execute(plan);
@@ -200,7 +207,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
 
     fftwf_execute(plan_verify);
 
-    bool status = verify_fftw(fftw_data, verify_data, N, how_many);
+    bool status = verify_fftw(fftw_data, verify_data, N, dim, how_many);
     if(!status){
       cleanup_openmp(fftw_data, verify_data);
       throw "Error in Transformation\n";
@@ -263,7 +270,7 @@ void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
   flops = add + mul + fma;
 
   cout << "\nMeasurements\n" << "--------------------------\n";
-  cout << "FFT Size            : " << N << "^3\n";
+  cout << "FFT Size            : " << N << "^"<<dim<<"\n";
   cout << "Threads             : " << nthreads << endl;
   cout << "Batch               : " << how_many << endl;
   cout << "Iterations          : " << iter << endl;
@@ -361,7 +368,7 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
   double plan_start = getTimeinMilliSec();
   plan = fftwf_plan_many_dft(3, n, how_many, fftw_data, inembed, istride, idist, fftw_data, onembed, ostride, odist, direction, FFTW_ESTIMATE);
   double plan_time = getTimeinMilliSec() - plan_start;
-  cout << "Planning Completed\n";
+  cout << "\nPlanning Completed\n";
 
   if(wis_status == 0 && (fftw_plan != FFTW_WISDOM_ONLY) && (fftw_plan != FFTW_ESTIMATE)){
     // i.e., wisdom is not imported
@@ -393,7 +400,7 @@ void fftwf_openmp_many_streamappln(unsigned N, unsigned how_many, unsigned nthre
 #endif
 
     // Get new data every iteration on the same allocation 
-    get_data(fftw_data, verify_data, N, how_many);
+    get_data(fftw_data, verify_data, N, 3, how_many);
 
     for(unsigned i = 0; i < num; i++){
       temp1[i] = ((float) rand() / (RAND_MAX)); 
@@ -592,7 +599,7 @@ void fftwf_openmp_many_conv(unsigned N, unsigned how_many, unsigned nthreads, bo
     filter[i].imag = ((float) rand() / (RAND_MAX)); 
   }
 
-  get_data(fftw_data, verify_data, N, how_many);
+  get_data(fftw_data, verify_data, N, 3, how_many);
 
   /* every iteration: FFT followed by inverse for verification */
   double start = 0.0, stop = 0.0, exec_diff = 0.0;

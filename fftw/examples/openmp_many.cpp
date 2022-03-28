@@ -16,6 +16,7 @@ int main(int argc, char **argv){
 
   options.add_options()
       ("n, num", "Size of FFT dim", cxxopts::value<unsigned>()->default_value("64"))
+      ("d, dim", "Number of dim",cxxopts::value<unsigned>()->default_value("3"))
       ("t, threads", "Number of threads", cxxopts::value<unsigned>()->default_value("1"))
       ("c, batch", "Number of batch", cxxopts::value<unsigned>()->default_value("1"))
       ("i, iter", "Number of iterations", cxxopts::value<unsigned>()->default_value("1"))
@@ -33,6 +34,7 @@ int main(int argc, char **argv){
   }
 
   unsigned N = result["num"].as<unsigned>();
+  unsigned dim = result["dim"].as<unsigned>();
   unsigned nthreads = result["threads"].as<unsigned>();
   unsigned batch = result["batch"].as<unsigned>();
   unsigned iter = result["iter"].as<unsigned>();
@@ -47,7 +49,7 @@ int main(int argc, char **argv){
     switch(expm){
       case 1:{
         cout << "Expm 1: Only FFTW\n";
-        fftwf_openmp_many(N, batch, nthreads, inverse, iter, wisfile);
+        fftwf_openmp_many(N, dim, batch, nthreads, inverse, iter, wisfile);
         break;
       }
       case 2:{

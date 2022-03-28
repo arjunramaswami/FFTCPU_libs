@@ -48,6 +48,6 @@ double moda(unsigned K, unsigned L, unsigned M);
  */
 bool checkStatus(int status);
 
-bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned how_many);
+bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned dim, unsigned how_many);
 
 #endif // HELPER_HPP

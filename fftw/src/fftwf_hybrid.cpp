@@ -331,7 +331,7 @@ void fftwf_hybrid_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
     // verify transformed and original data
     if(myrank == 0){
       if(!noverify){
-        bool status = verify_fftw(total_data, total_verify, N, how_many);
+        bool status = verify_fftw(total_data, total_verify, N, 3, how_many);
         if(!status){
           cerr << "Error in transformation\n";
           cleanup_mpi(per_process_data, verify_per_process);

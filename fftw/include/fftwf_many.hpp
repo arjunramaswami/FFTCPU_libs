@@ -18,13 +18,14 @@ void fftwf_hybrid_many(unsigned N, unsigned how_many, unsigned nthreads, bool in
 /**
  * \brief  OpenMP Multithreaded Single precision FFTW 3D execution
  * \param  N          - Size of one dimension of FFT
+ * \param  dim        - number of dimensions
  * \param  how_many   - number of batches
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform
  * \param  iter       - number of iterations of execution
  * \param  wisfile    - path to wisdom file
  */
-void fftwf_openmp_many(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile);
+void fftwf_openmp_many(unsigned N, unsigned dim, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter, std::string wisfile);
 
 /**
  * \brief  OpenMP Multithreaded Single precision FFTW 3D execution

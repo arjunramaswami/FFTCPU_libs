@@ -20,20 +20,21 @@ using std::fixed;
  * \brief  Verify single precision batched FFT3d computation using FFTW
  * \param  fftw_data   : pointer to 3D number of sp points after FFTW
  * \param  verify_data : pointer to 3D number of sp points for verification
- * \param  N1, N2, N3  : fft size
- * \param  H1, H2, H3  : harmonic to modify frequency of discrete time signal
+ * \param  N           : number of points in a dimension
+ * \param  dim         : number of dimensions
  * \param  how_many    : number of batched implementations of FFTW
  * \return true if successful, false otherwise
  */
-bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned how_many){
+bool verify_fftw(fftwf_complex *fftw_data, fftwf_complex *verify_data, unsigned N, unsigned dim, unsigned how_many){
 
   double magnitude = 0.0, noise = 0.0, mag_sum = 0.0, noise_sum = 0.0;
+  const unsigned num = pow(N, dim);
 
-  for(size_t i = 0; i < how_many * N * N * N; i++){
+  for(size_t i = 0; i < how_many * num; i++){
 
     // FFT -> iFFT is scaled by dimensions (N*N*N)
-    verify_data[i][0] = verify_data[i][0] * N * N * N;
-    verify_data[i][1] = verify_data[i][1] * N * N * N;
+    verify_data[i][0] = verify_data[i][0] * num;
+    verify_data[i][1] = verify_data[i][1] * num;
 
     magnitude = verify_data[i][0] * verify_data[i][0] + \
                       verify_data[i][1] * verify_data[i][1];
