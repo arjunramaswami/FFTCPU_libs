@@ -13,22 +13,22 @@ using std::setprecision;
 using std::fixed;
 
 /**
- * \brief  Verify single precision batched FFT3d computation using FFTW
- * \param  fft_data    : pointer to 3D number of sp points after FFTW
- * \param  verify_data : pointer to 3D number of sp points for verification
- * \param  N           : fft size
- * \param  how_many    : number of batched implementations of FFTW
+ * \brief  Verify single precision batched FFT3d computation using MKL
+ * \param  fft_data    : pointer to FFTW result
+ * \param  verify_data : pointer to original data 
+ * \param  total_num   : total num of points per FFT
+ * \param  how_many    : number of batched implementations 
  * \return true if successful, false otherwise
  */
-bool verify_mkl(MKL_Complex8 *fft_data, MKL_Complex8 *verify_data, unsigned N, unsigned how_many){
+bool verify_mkl(MKL_Complex8 *fft_data, MKL_Complex8 *verify_data, unsigned total_num, unsigned how_many){
 
   double magnitude = 0.0, noise = 0.0, mag_sum = 0.0, noise_sum = 0.0;
 
-  for(size_t i = 0; i < how_many * N * N * N; i++){
+  for(size_t i = 0; i < how_many * total_num; i++){
 
     // FFT -> iFFT is scaled by dimensions (N*N*N)
-    verify_data[i].real = verify_data[i].real * N * N * N;
-    verify_data[i].imag = verify_data[i].imag * N * N * N;
+    verify_data[i].real = verify_data[i].real * total_num;
+    verify_data[i].imag = verify_data[i].imag * total_num;
 
     magnitude = verify_data[i].real * verify_data[i].real + \
                       verify_data[i].imag * verify_data[i].imag;
