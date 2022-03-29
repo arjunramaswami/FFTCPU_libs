@@ -70,3 +70,9 @@ To execute:
 - Runtime of the fft execution. It is measured by timing `DftiComputeForward` routine over a number of iterations, then the following metrics are computed:
   - Average runtime, standard deviation
   - Median, Q1, Q3 : dispersion without outlier influence
+
+## Note
+
+- icc vs gcc: gcc showed a lot more variance in runtime, so icc is recommended.
+- the first run of an mkl fft is atleast 3x slower than the median performance.
+  - Perhaps due to the lack of a specific planning phase
