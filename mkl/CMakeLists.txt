@@ -30,7 +30,8 @@ target_link_libraries(mkl_openmp_many PRIVATE
   OpenMP::OpenMP_CXX
   ${FFTW_FLOAT_LIB}         # fftw3f
   ${FFTW_FLOAT_OPENMP_LIB}  # ffw3f_omp
-  ${BLAS_LIBRARIES}
+  ${BLAS_LIBRARIES}        
+  # libmkl_intel_lp64, libmkl_intel_thread, libmkl_core, libiomp5
   cxxopts
 )
 

@@ -90,8 +90,9 @@ void get_data_wave(fftwf_complex *fftw_data, fftwf_complex *verify_data,size_t N
 }
 
 /**
- * \brief  OpenMP Multithreaded Single precision FFTW 3D execution
+ * \brief  OpenMP Multithreaded Single precision FFTW execution
  * \param  N          - Size of one dimension of FFT
+ * \param  dim        - number of dimensions
  * \param  how_many   - number of batches
  * \param  nthreads   - number of threads
  * \param  inverse    - true if backward transform

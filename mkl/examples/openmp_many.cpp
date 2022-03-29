@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char **argv){
 
-  cxxopts::Options options("FFTW", "Parse FFTW input params");
+  cxxopts::Options options("MKL FFT", "Parse MKL FFT input params");
 
   options.add_options()
       ("n, num", "Size of FFT dim", cxxopts::value<unsigned>()->default_value("64"))

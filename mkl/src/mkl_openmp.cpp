@@ -8,142 +8,6 @@
 #include "helper.hpp"
 using namespace std;
 
-/*
-int main(int argc, const char **argv){
-    int err = 0, where = 0, iter = 1, inverse = 0;
-    int i, j, k;
-    int N1 = 8, N2 = 8, N3 = 8;
-    MKL_LONG status = 0;
-    int thread_id = 0, team = 1; // Multi threaded 
-    
-    int H1 = 1, H2 = 1, H3 = 1;
-
-    // Cmd Line arguments
-    struct argparse_option options[] = {
-        OPT_HELP(),
-        OPT_GROUP("Basic Options"),
-        OPT_INTEGER('m',"n1", &N1, "FFT 1st Dim Size"),
-        OPT_INTEGER('n',"n2", &N2, "FFT 2nd Dim Size"),
-        OPT_INTEGER('p',"n3", &N3, "FFT 3rd Dim Size"),
-        OPT_INTEGER('i',"iter", &iter, "Number of iterations"),
-        OPT_INTEGER('t',"threads", &team, "Num Threads"),
-        OPT_BOOLEAN('b',"inverse", &inverse, "Backward FFT"),
-        OPT_END(),
-    };
-
-    struct argparse argparse;
-    argparse_init(&argparse, options, usage, 0);
-    argparse_describe(&argparse, "Computing FFT3d using MKL", "FFT size is mandatory, default number of iterations is 1");
-    argc = argparse_parse(&argparse, argc, argv);
-
-#if defined(_OPENMP)
-    printf("Total number of threads %d \n", team);
-#endif
-
-    // Print Version of Intel MKL
-    char version[DFTI_VERSION_LENGTH];
-    DftiGetValue(0, DFTI_VERSION, version);
-
-    // Command Line Arguments
-    MKL_LONG dim = 3;
-    MKL_LONG size[3]; size[0] = N1; size[1] = N2; size[2] = N3;
-
-    printf("\n------------------------------------\n");
-    printf("MKL Configuration: \n");
-    printf("------------------------------------\n");
-    printf("MKL VERSION : %s\n", version);
-    printf("\n%sDOUBLE PRECISION COMPLEX 3d FFT\n\n", inverse?"BACKWARD ":"FORWARD ");
-    printf("Parameters: \n");
-    printf("DFTI_DIMENSION      =  3\n");
-    printf("DFTI_PRECISION      = DFTI_DOUBLE \n");
-    printf("DFTI_LENGTHS        = {%i, %i, %i} \n", size[0], size[1], size[2]);
-    printf("DFTI_FORWARD_DOMAIN = DFTI_COMPLEX\n");
-    printf("DFTI_PLACEMENT      = DFTI_INPLACE\n");
-    printf("THREADS             = %i \n", team);
-    printf("------------------------------------\n\n");
-
-    DFTI_DESCRIPTOR_HANDLE ffti_desc_handle = 0;
-
-    status = DftiCreateDescriptor( &ffti_desc_handle, DFTI_DOUBLE, DFTI_COMPLEX, dim, size);
-    error_msg(status);
-
-    status = DftiSetValue(ffti_desc_handle, DFTI_PLACEMENT, DFTI_INPLACE);  // this is the default
-    error_msg(status);
-
-    status = DftiSetValue(ffti_desc_handle, DFTI_THREAD_LIMIT, team);
-    error_msg(status);
-
-    status = DftiCommitDescriptor(ffti_desc_handle);
-    error_msg(status);
-
-    MKL_Complex16 *fft_data = (MKL_Complex16*)mkl_malloc(N1 * N2 * N3 * sizeof(MKL_Complex16), 64);
-    if (fft_data == NULL){
-        printf("Data allocation failed \n");
-        exit(1);
-    }
-
-    double start_fwd = 0.0, stop_fwd = 0.0;
-    double start_bwd = 0.0, stop_bwd = 0.0;
-    double diff_fwd = 0.0, diff_bwd = 0.0;
-
-    for(i = 0; i < iter; i++){
-        if(!inverse){
-            // Computing Forward
-            init(fft_data, N1, N2, N3, H1, H2, H3);
-
-            start_fwd = getTimeinMilliSec();
-            status = DftiComputeForward(ffti_desc_handle, fft_data);
-            stop_fwd = getTimeinMilliSec();
-            error_msg(status);
-
-            status = verify(fft_data, N1, N2, N3, H1, H2, H3);
-            diff_fwd += stop_fwd - start_fwd;
-        }
-        else{
-            // Computing Backward
-            init(fft_data, N1, N2, N3, -H1, -H2, -H3);
-
-            start_bwd = getTimeinMilliSec();
-            status = DftiComputeBackward(ffti_desc_handle, fft_data);
-            stop_bwd = getTimeinMilliSec();
-            error_msg(status);
-
-            status = verify(fft_data, N1, N2, N3, H1, H2, H3);
-
-            diff_bwd += stop_bwd - start_bwd;
-        }
-    }
-
-    if(!inverse){
-        printf("\nForward Transform Performance: \n");
-        compute_metrics(diff_fwd, iter, N1, N2, N3);
-    }
-    else{
-        printf("\nBackward Transform Performance: \n");
-        compute_metrics(diff_bwd, iter, N1, N2, N3);
-    }
-
-#ifdef DEBUG
-    printf("Output Frequencies: \n");
-    for(i = 0; i < N1; i++){
-        for(j = 0; j < N2; j++){
-            for(k = 0; k < N3; k++){
-                where = (i * N1 * N2) + (j * N3) + k;
-                printf(" %d %d %d : fft[%d] = (%lf, %lf)\n", i, j, k, where, fft_data[where].real, fft_data[where].imag);
-            }
-        }
-    }
-#endif
-
-    status = DftiFreeDescriptor(&ffti_desc_handle);
-    error_msg(status);
-
-    // free array
-    mkl_free(fft_data);
-    return 0;
-}
-*/
-
 /**
  * \brief random sp floating points
  * \param fft_data    : pointer to fft array
@@ -168,6 +32,9 @@ void get_data(MKL_Complex8 *fft_data, MKL_Complex8 *verify_data, unsigned N, uns
   }
 }
 
+/**
+ * \brief Output specific error message
+ */
 static void error_msg(MKL_LONG status){
   if(status != DFTI_NO_ERROR){
     char *error_message = DftiErrorMessage(status);
@@ -175,13 +42,22 @@ static void error_msg(MKL_LONG status){
   }
 }
 
+/**
+ * \brief  OpenMP Multithreaded Single precision MKL
+ * \param  N          - Size of one dimension of FFT
+ * \param  dim        - number of dimensions
+ * \param  how_many   - number of batches
+ * \param  nthreads   - number of threads
+ * \param  inverse    - true if backward transform
+ * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
+ */
 void mkl_openmp_many(unsigned N, unsigned dims, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
 
   if ( (how_many == 0) || (nthreads == 0) || (iter == 0) | (dims > 3))
     throw "Invalid value, should be >=1!";
 
   const unsigned num = pow(N, dims);
-  printf("N=%u, dim=%u, Num: %u\n", N, dims, num);
 
   MKL_Complex8 *fft_data = (MKL_Complex8*)mkl_malloc(num * sizeof(MKL_Complex8), 64);
   if (fft_data == NULL)
@@ -191,11 +67,8 @@ void mkl_openmp_many(unsigned N, unsigned dims, unsigned how_many, unsigned nthr
   if (verify_data == NULL)
     throw "FFT verification data allocation failed";
 
-  //MKL_NUM_THREADS = nthreads;
   const MKL_LONG dim = dims;
   MKL_LONG *n = (MKL_LONG*)mkl_calloc(dims, sizeof(MKL_LONG), 64);
-  //const MKL_LONG data_sz[3] = {N, N, N};
-  //MKL_LONG *n = calloc(dim , sizeof(int));
   for(unsigned i = 0; i < dims; i++)
     n[i] = (MKL_LONG)N;
 
@@ -241,12 +114,12 @@ void mkl_openmp_many(unsigned N, unsigned dims, unsigned how_many, unsigned nthr
   }
   cout << endl;
 
-//#ifndef NDEBUG
+#ifndef NDEBUG
   cout << "Printing individual runtimes:\n";
   for(unsigned i = 0; i < iter; i++)
     printf(" %u: %lfms\n", i, exec_t[i]);
   cout << endl;
-//#endif
+#endif
 
   double Q1_val = 0.0, median = 0.0, Q3_val = 0.0;
   if(iter > 2){
@@ -309,6 +182,17 @@ void mkl_openmp_many(unsigned N, unsigned dims, unsigned how_many, unsigned nthr
   mkl_free(verify_data);
 }
 
+/**
+ * \brief  OpenMP Multithreaded Single precision MKL FFT
+ *         Experiment where MKL deals with different data on the every 
+ *         iteration but computes a result at the end of every iteration 
+ * \param  N          - Size of one dimension of FFT
+ * \param  how_many   - number of batches
+ * \param  nthreads   - number of threads
+ * \param  inverse    - true if backward transform
+ * \param  iter       - number of iterations of execution
+ * \param  wisfile    - path to wisdom file
+ */
 void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool inverse, unsigned iter){
 
   if ( (how_many == 0) || (nthreads == 0) || (iter == 0) )
@@ -323,7 +207,6 @@ void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool in
     throw "FFT verification data failed";
 
 
-  //MKL_NUM_THREADS = nthreads;
   const MKL_LONG dim = 3;
   const MKL_LONG n[3] = {N, N, N};
   MKL_LONG status;
@@ -381,12 +264,12 @@ void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool in
   delete[] temp1;
   delete[] temp2;
 
-//#ifndef NDEBUG
+#ifndef NDEBUG
   cout << "Printing individual runtimes:\n";
   for(unsigned i = 0; i < iter; i++)
     printf(" %u: %lfms\n", i, exec_t[i]);
   cout << endl;
-//#endif
+#endif
 
   double Q1_val = 0.0, median = 0.0, Q3_val = 0.0;
   if(iter > 2){
@@ -402,12 +285,12 @@ void mkl_openmp_stream(unsigned N, unsigned how_many, unsigned nthreads, bool in
     nth_element(exec_t.begin() + Q1 + 1, exec_t.begin() + Q2, exec_t.end());
     nth_element(exec_t.begin() + Q2 + 1, exec_t.begin() + Q3, exec_t.end());
 
-//  #ifndef NDEBUG
+#ifndef NDEBUG
     cout << "Printing sorted runtimes:\n";
     for(unsigned i = 0; i < iter; i++)
       printf(" %u: %lfms\n", i, exec_t[i]);
     cout << endl;
-//  #endif
+#endif
 
     // Subtract by 1 to get the right index into the array because of [0..]
     Q1_val = exec_t[Q1 - 1];

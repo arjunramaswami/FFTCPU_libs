@@ -1,6 +1,6 @@
 # FFTW
 
-Here, you find the code along with several helper scripts required to execute and collect performance results of FFT3D using [FFTW](http://www.fftw.org/). FFTW can be executed either using OpenMP multi-threaded only or hybrid (MPI + OpenMP) single precision configurations.
+Here, you find the code along with several helper scripts required to execute and collect performance results of Fast Fourier Transformations using [FFTW](http://www.fftw.org/). FFTW can be executed either using OpenMP multi-threaded only or hybrid (MPI + OpenMP) single precision configurations.
 
 ## Build
 
@@ -44,7 +44,7 @@ make
 
 ## Execution
 
-For: `openmp_many`:
+For `openmp_many`:
 
 ```bash
 Parse FFTW input params
@@ -52,6 +52,7 @@ Usage:
   FFTW [OPTION...]
 
   -n, --num arg         Size of FFT dim (default: 64)
+  -d, --dim arg         Number of dim (default: 3)
   -t, --threads arg     Number of threads (default: 1)
   -c, --batch arg       Number of batch (default: 1)
   -i, --iter arg        Number of iterations (default: 1)
@@ -65,7 +66,16 @@ To execute:
 
 ```bash
 # executing openmp multithreaded FFTW
-./openmp_many --num=64 --threads=36 --iter=100
+./openmp_many --num=64 --dim=3 --threads=36 --iter=100 --expm=1
+```
+
+For `hybrid_many`:
+
+To execute:
+
+```bash
+# executing mpi+openmp FFTW
+mpirun -n 8 ./hybrid_many --num=64 --threads=40 --iter=100
 ```
 
 ## Interpreting Results
@@ -80,7 +90,9 @@ The following metrics are measured:
 
 Runtime is measured for the following:
 
-1. `fftw(f)_execute()` collective routine over a number of iterations, then its average runtime is considered.
+1. `fftw(f)_execute()` collective routine over a number of iterations, then the following metrics are computed: 
+  - Average runtime, standard deviation
+  - Median, Q1, Q3 : dispersion without outlier influence
 
 2. `fftwf_plan_many_dft()` method that creates a plan for the fft configuration.
 
@@ -100,20 +112,26 @@ The console output shows the configuration of execution followed by the followin
 Measurements
 --------------------------
 FFT Size            : 16^3
-Threads             : 40
+Threads             : 36
 Batch               : 1
-Iterations          : 50
-Avg Tot Runtime     : 0.026052 ms
-Runtime per batch   : 0.026052 ms
-SD                  : 0.008196 ms
-Throughput          : 0.000026 GFLOPs
-Plan Time           : 1.226069 sec
+Iterations          : 200
+Avg Tot Runtime     : 0.022922 ms
+Runtime per batch   : 0.022922 ms
+SD                  : 0.005807 ms
+Throughput          : 0.000015 GFLOPs
+Q1                  : 0.015871 ms
+Median              : 0.025729 ms
+Q3                  : 0.026828 ms
+Plan Time           : 0.000067 sec
 ```
 
 ### Note
 
 - Execution and transfer times are measured using `MPI_Wtime()`.
-- Iterations are made on the same input data.
+- Every iteration uses randomised input
+- Multithreaded only FFTW has 3 possible scenarios:
+  - Expm 1: Straight forward FFTW -> iFFTW
+  - Expm 2, 3: FFT output as a sub-function of an overall application.
 
 ## Measurements
 

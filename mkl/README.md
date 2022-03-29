@@ -1,149 +1,72 @@
-# MKL FFT3d
+# MKL FFT
 
-This folder contains the code to execute 3d FFT using MKL. Currently executes
-multi threaded configurations on **double precision floating point** data.  
-
-The program and bash scripts can be used to evaluate and consolidate performance of FFT3d using MKL for different uniform sized transformations. Distinct backward or forward transformations can be executed a number of times to find the average performance using a multithreaded environment.
-
-Link to the official [MKL FFT](https://software.intel.com/en-us/node/521955).
+This folder contains the along with helper scripts required to execute FFT using [MKL](https://software.intel.com/en-us/node/521955). It can be executed for MPI + OpenMP multi-threaded single precision configurations.
 
 ## Builds
 
 ### Prerequisites
 
-`module load intel/20.0.0` : loads icc and mkl libraries. icc version loaded is 19.1.0.166, compatible with gcc 8.3.0
+The following libraries are required to be loaded before building:
+
+- FFTW
+- Intel MKL
+- CMake
 
 ## Target
 
-Double Precision multithreaded MKL FFT3d
+| Target | Description                            |  Linking Libraries
+|:------:|----------------------------------------|---------------------|
+| all         | builds the below binaries     | 
+| openmp_many | single node openmp multi-threaded binary | `lp64, thread, core, libiomp5` |
 
-`make` : creates an executable named `host_dp` in the MKL directory
+### Build Parameters
 
-Compiling with DEBUG macro set say, `make DEBUG=1`, prints data input.
+| Target    | Description                            |
+|:---------:|----------------------------------------|
+| CMAKE_BUILD_TYPE | Debug, Release                  |
+
+#### How to build in Noctua
+
+```bash
+module load devel/CMake
+module load toolchain/intel/2021a
+module load numlib/FFTW/3.3.10-gompi-2021b
+
+mkdir build
+cmake ..
+ccmake .. # to change params in gui
+make 
+```
 
 ## Execution
 
-Running the program with `-h` to print the options available.
-Options:
+For `openmp_many`:
 
 ```bash
-  -m : FFT 1st Dim Size
-  -n : FFT 2nd Dim Size
-  -p : FFT 3rd Dim Size
+Parse FFTW input params
+Usage:
+  FFTW [OPTION...]
 
-  -i : Number of iterations of the FFT computation
-
-  -t : number of threads in a multithreaded execution
-  -b : toggle backward transformation
+  -n, --num arg         Size of FFT dim (default: 64)
+  -d, --dim arg         Number of dim (default: 3)
+  -t, --threads arg     Number of threads (default: 1)
+  -c, --batch arg       Number of batch (default: 1)
+  -i, --iter arg        Number of iterations (default: 1)
+  -b, --inverse         Backward FFT
+  -w, --wisdomfile arg  File to wisdom (default: test.wisdom)
+  -e, --expm arg        Expm number (default: 1)
+  -h, --help            Print usage
 ```
 
-### Example
+To execute:
 
 ```bash
-  module load intel/20.0.0
-  make
-  ./host_dp -m 16 -n 16 -p 16
-  ./host_dp -m 256 -n 256 -p 256 -i 100 -t 20
-  ./host_dp -m 256 -n 256 -p 256 -i 100 -t 20 -b
+# executing openmp multithreaded MKL FFT
+./mkl_openmp_many --num=64 --iter=100 --expm=1
 ```
 
 ## Interpreting Results
 
-The output shows configuration of execution and the series of steps the program
-executes followed by the consolidation of some performance metrics such as:
-
-```bash
-FFT Size    Total Runtime(ms)   Avg Runtime(ms)     Throughput(GFLOPS)
-   32          30.051               0.300               23.51
-```
-
-- FFT Size is the size of the 3d FFT
-- Total Runtime (milliseconds) : total amount of time to execute the given
-  number of iterations.
-- Avg Runtime (milliseconds) : average runtime for a single iteration of execution i.e.,
-  total runtime by the number of iterations
-- Throughput (GFLOPS): Calculated by *3 * 5 * N * logN / (time for one FFT)*, this is not the actual flop count rather an asymptotic measurement using the
-  radix-2 Cooley Tukey algorithm.
-
-### Important Points
-
-- Runtime only measures the walltime of the FFT execution, not the
-  initialization and plan creation. Measured using `clock_gettime` to provide
-  nanosecond resolution.
-- Iterations are made on the same input data, by reinitialization every iteration.
-
-## Results
-
-### Best Runtime and Throughput
-
-| FFT3d Size | Best Runtime (ms) | Throughput (GFLOPS) |
-|:----------:|:-----------------:|:-------------------:|
-|     16     |   0.012           |     19.25           |
-|     32     |   0.056           |     43.58           |
-|     64     |   0.197           |    119.80           |
-|     128    |   1.393           |    158.08           |
-|     256    |    23.19          |     86.80           |
-
-### Speedup with Multithreading
-
-| FFT3d Size | Max Speedup |
-|:----------:|:-----------:|
-|     16     |     1.27    |
-|     32     |     2.24    |
-|     64     |     7.01    |
-|     128    |     12.25   |
-|     256    |     9.83    |
-
-#### Notes
-
-- Better Speedup with increase in FFT size i.e., more data
-- Can one estimate the maximum speedup possible
-
-### Details on execution
-
-The bash file `omp_mkl_fft_run.sh` can be used to execute on NOCTUA cluster :
-```
-sbatch omp_mkl_fft_run.sh <array of sizes of fft3d>
-
-sbatch omp_mkl_fft_run.sh 16 32 64
-```
-
-1. loads `mkl`
-
-2. Sets openmp thread affinity env variables
-
-3. Executes the application using srun on the same node from 1 to 40 threads
-one after another and saves the output in distinct reports only for forward FFTs.
-
-The bash file `create_csv.sh` can be used to create a csv output from the reports generated by the above bash file.
-
-`./create_csv.sh <generated_report> <output.csv>
-
-### Compilation
-
-To compile with Intel OpenMP, link this additional flag `-qopenmp`. These are added to the Makefile.
-
-## Input Data and Validation
-
-Generate a discrete signal of a single specific frequency by creating N<sup>3</sup> discrete points of a cosine and sine wave. Modify the frequency by creating its harmonic (positive multiple of a fundamental frequency) for variations.
-
-Validate by checking the particular frequency's value after transformation.
-
-### Error Bound
-
-Why is the error bound calculated as $5 * \log _{2}(N1*N2*N3) * DBL\_EPLISON$ ?
-
-## Configuring FFT with MKL
-
-- Create descriptor
-  - creates a configuration for the FFT to be computed.
-  - inputs : precision, data type, dim, size
-
-- Set additional configuration values
-  - number of threads, in-place / not in-place placement
-
-- Commit Descriptor
-
-- Initialize input to transform
-
-- Compute either forward or backward transform
+- Runtime of the fft execution. It is measured by timing `DftiComputeForward` routine over a number of iterations, then the following metrics are computed:
+  - Average runtime, standard deviation
+  - Median, Q1, Q3 : dispersion without outlier influence
