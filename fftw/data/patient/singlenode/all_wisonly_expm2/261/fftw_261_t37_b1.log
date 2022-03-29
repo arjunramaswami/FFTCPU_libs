@@ -1,0 +1,24 @@
+Expm 2: Streaming FFTW
+FFTW Plan: Wisdom Only 
+-- Importing wisdom from ../../wisdom/singlenode/all/261/fftw_261_t37_b1.patient
+Planning Completed
+Not exporting any wisdom
+
+
+-- Real : Q1: 50 Q2: 100 Q3: 150
+-- Array: Q1: 49 Q2: 99 Q3: 149
+
+Measurements
+--------------------------
+FFT Size            : 261^3
+Threads             : 37
+Batch               : 1
+Iterations          : 200
+Avg Tot Runtime     : 37.771879 ms
+Runtime per batch   : 37.771879 ms
+SD                  : 11.390156 ms
+Throughput          : 2.162864 GFLOPs
+Q1                  : 35.210724 ms
+Median              : 35.892118 ms
+Q3                  : 36.386806 ms
+Plan Time           : 0.006667 sec
