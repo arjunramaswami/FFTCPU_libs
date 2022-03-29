@@ -34,7 +34,7 @@ do
   do
     # find and create a comma separated string of: Q1, Median, Q3 
     # take the first match because of several matching instances 
-    temp="$(gawk '{if ($0 ~ /Q1/) pat1=$3; if ($0 ~ /Median/) pat2=$3 ; if($0 ~ /Q3  /) pat3=$3}{if (pat1 && pat2 && pat3) print pat1","pat2","pat3}' $file | head -n 1 | tee /dev/tty)"
+    temp="$(gawk '{if ($0 ~ /Q1/) pat1=$3; if ($0 ~ /Median/) pat2=$3; if($0 ~ /Q3  /) pat3=$3; if($0 ~ /Throughput/) pat4=$3;}{if (pat1 && pat2 && pat3 &&pat4) print pat1","pat2","pat3","pat4}' $file | head -n 1 | tee /dev/tty)"
 
     # create newline separated string of all the Q1, med, Q3 found within folder
     quartile="$quartile\n$temp"

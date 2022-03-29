@@ -3,24 +3,23 @@
 #SBATCH --job-name=fftw_openmp
 #SBATCH --partition=long
 #SBATCH --nodes=1
-#SBATCH -t 5-00:00:00
+#SBATCH -t 3-00:00:00
 
 module reset
-module load devel/CMake/3.20.1-GCCcore-10.3.0
-module load toolchain/gompi/2021a
 module load numlib/FFTW/3.3.9-gompi-2021a
 module load toolchain/intel/2021a
+module load devel/CMake/3.20.1-GCCcore-10.3.0
 
-OUTDIR="../../data/patient/singlenode/all"
+OUTDIR="../../data/patient/singlenode/wisonly"
 WISDIR="../../wisdom/singlenode/all"
-ITER=50
+ITER=200
 BATCH=1
 
 echo "SLURM_JOB_ID : $SLURM_JOB_ID"
 echo "Iter         : ${ITER}"
 echo "Batch        : ${BATCH}"
 echo ""
-for arg in {16..30}
+for arg in {403..450}
 do
   echo "FFT Size      : $arg $arg $arg"
   for THREAD in {36..40}
