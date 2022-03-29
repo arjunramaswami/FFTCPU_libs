@@ -11,7 +11,7 @@ The experiments are categorised based on the FFTW plan type:
 
 Other experiments and their respective folders are self-explanatory.
 
-# Environment
+## Environment
 
 - FFTW 3.3.9 with Gcc 10.3.0 and OpenMPI 4.1.1
 - Intel MKL 2021a with icc 2021.2.0
